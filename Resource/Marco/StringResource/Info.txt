@@ -88,6 +88,18 @@ UpperBody_Rifle
 083	cx(50)  / cy(100) 	LTY = 6100	Frames = 7		  Shoot_Down_Another_Right
 084	cx(50)  / cy(100) 	LTY = 6200	Frames = 7		  Shoot_Down_Another_Left
 
+LowerBody
+085	cx(50)  / cy(50) 	LTY = 6300	Frames = 1		  Idle_Right
+086	cx(50)  / cy(50)	LTY = 6350	Frames = 1		  Idle_Left
+087	cx(50)  / cy(50)	LTY = 6400	Frames = 4		  Idle_Cold_Right
+088	cx(50)  / cy(50)	LTY = 6450	Frames = 4		  Idle_Cold_Left
+089	cx(50)  / cy(50)	LTY = 6500	Frames = 12	  Run_Right
+090	cx(50)  / cy(50)	LTY = 6550	Frames = 12	  Run_Left
+091	cx(50)  / cy(50)	LTY = 6600	Frames = 8		  Jump_Normal_Right
+092	cx(50)  / cy(50)	LTY = 6650	Frames = 8		  Jump_Normal_Left
+093	cx(50)  / cy(50)	LTY = 6700	Frames = 6		  Jump_Forward_Right
+094	cx(50)  / cy(50)	LTY = 6750	Frames = 6		  Jump_Forward_Left
+
 
 
 
