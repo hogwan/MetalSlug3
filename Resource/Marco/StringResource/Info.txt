@@ -100,6 +100,9 @@ LowerBody
 093	cx(50)  / cy(50)	LTY = 6700	Frames = 6		  Jump_Forward_Right
 094	cx(50)  / cy(50)	LTY = 6750	Frames = 6		  Jump_Forward_Left
 
+AllBody_Crouch
+
+
 
 
 
