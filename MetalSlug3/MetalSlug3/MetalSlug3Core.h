@@ -13,9 +13,9 @@ public:
 	MetalSlug3Core& operator=(const MetalSlug3Core& _Other) = delete;
 	MetalSlug3Core& operator=(MetalSlug3Core&& _Other) = delete;
 protected:
-	void EngineStart() override;
-	void EngineUpdate() override;
-	void EngineEnd() override;
+	void Start() override;
+	void Update() override;
+	void End() override;
 
 private:
 };

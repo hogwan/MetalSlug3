@@ -8,14 +8,14 @@ MetalSlug3Core::~MetalSlug3Core()
 {
 }
 
-void MetalSlug3Core::EngineStart()
+void MetalSlug3Core::Start()
 {
 }
 
-void MetalSlug3Core::EngineUpdate()
+void MetalSlug3Core::Update()
 {
 }
 
-void MetalSlug3Core::EngineEnd()
+void MetalSlug3Core::End()
 {
 }
