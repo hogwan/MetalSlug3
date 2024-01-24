@@ -100,7 +100,11 @@ LowerBody
 093	cx(50)  / cy(50)	LTY = 6700	Frames = 6		  Jump_Forward_Right
 094	cx(50)  / cy(50)	LTY = 6750	Frames = 6		  Jump_Forward_Left
 
-AllBody_Crouch
+AllBody_Crouch_Pistol
+095	cx(100)  / cy(100)	LTY = 6800	Frames = 3		  Crouch_Pistol_Intro
+096	cx(100)  / cy(100)	LTY = 6900	Frames = 3		  Crouch_Pistol_Outro
+097	cx(100)  / cy(100)	LTY = 7000	Frames = 6		  Crouch_Pistol_Idle_Right
+098	cx(100)  / cy(100)	LTY = 7100	Frames = 6		  Crouch_Pistol_Idle_Left
 
 
 
