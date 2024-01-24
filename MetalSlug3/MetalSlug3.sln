@@ -18,6 +18,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level3", "Level3", "{27088D20-B6CC-426E-A040-B32891085C34}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level4", "Level4", "{22CA94B9-1DAE-47EE-8B68-AAB20A48E3A2}"
+	ProjectSection(SolutionItems) = preProject
+		MetalSlug3\Marco.h = MetalSlug3\Marco.h
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MetalSlug3", "MetalSlug3\MetalSlug3.vcxproj", "{37631609-9A27-4757-AA98-F667421CFC70}"
 EndProject

@@ -1,9 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="MetalSlug3Core.h" />
+    <ClInclude Include="PlayLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="StartLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MetalSlug3Core.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Marco.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MetalSlug3Core.cpp" />
+    <ClCompile Include="PlayLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="StartLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MetalSlug3Core.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Marco.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Level">
+      <UniqueIdentifier>{4ff06e30-dcc8-4da7-95d7-43b06d404e45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{3a70aa96-b91a-4c49-8c69-4d09f965b0a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{50f9e0a5-1cf1-48ad-8379-995adedf2cd0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

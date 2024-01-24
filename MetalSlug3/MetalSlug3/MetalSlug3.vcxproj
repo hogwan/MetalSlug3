@@ -143,13 +143,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Marco.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MetalSlug3Core.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PlayLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="StartLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Marco.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="MetalSlug3Core.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PlayLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="StartLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>

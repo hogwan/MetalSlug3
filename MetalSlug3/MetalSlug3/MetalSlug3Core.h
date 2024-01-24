@@ -13,8 +13,8 @@ public:
 	MetalSlug3Core& operator=(const MetalSlug3Core& _Other) = delete;
 	MetalSlug3Core& operator=(MetalSlug3Core&& _Other) = delete;
 protected:
-	void Start() override;
-	void Update() override;
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
 	void End() override;
 
 private:
