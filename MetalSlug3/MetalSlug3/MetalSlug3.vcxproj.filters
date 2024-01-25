@@ -13,6 +13,12 @@
     <ClInclude Include="Marco.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -25,6 +31,12 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Marco.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
       <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>

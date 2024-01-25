@@ -143,6 +143,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bomb.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Marco.h">
       <SubType>
       </SubType>
@@ -161,6 +169,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bomb.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Marco.cpp">
       <SubType>
       </SubType>
