@@ -63,15 +63,15 @@ UpperBody_Rifle
 058	cx(60)  / cy(60)	 	LTY = 4100		Frames = 6		  KnifeAttack2_Left
 059	cx(50)  / cy(50)	 	LTY = 4200		Frames = 2		  AimUp_NormalToUp_Right
 060	cx(50)  / cy(50)	 	LTY = 4250		Frames = 2		  AimUp_NormalToUp_Left
-061	cx(50)  / cy(50)	 	LTY = 4300		Frames = 2		  AimUp_UpToNormal_Right
-062	cx(50)  / cy(50)	 	LTY = 4350		Frames = 2		  AimUp_UpToNormal_Left
+061	cx(50)  / cy(50)	 		LTY = 4300		Frames = 2		  AimUp_UpToNormal_Right
+062	cx(50)  / cy(50)	 		LTY = 4350		Frames = 2		  AimUp_UpToNormal_Left
 063	cx(50)  / cy(100) 		LTY = 4400		Frames = 10		  AimUp_Right
 064	cx(50)  / cy(100) 		LTY = 4500		Frames = 10		  AimUp_Left
 065	cx(100)  / cy(100) 		LTY = 4600		Frames = 2		  Shoot_Up_HeavyMachineGun_NormalToUp_Right
 066	cx(100)  / cy(100) 		LTY = 4700		Frames = 2		  Shoot_Up_HeavyMachineGun_NormalToUp_Left
 067	cx(100)  / cy(100) 		LTY = 4800		Frames = 2		  Shoot_Up_HeavyMachineGun_UpToNormal_Right
 068	cx(100)  / cy(100) 		LTY = 4900		Frames = 2		  Shoot_Up_HeavyMachineGun_UpToNormal_Left
-069	cx(50)  / cy(100)	 	LTY = 5000		Frames = 4		  Shoot_Up_HeavyMachineGun_Right
+069	cx(50)  / cy(100)	 		LTY = 5000		Frames = 4		  Shoot_Up_HeavyMachineGun_Right
 070	cx(50)  / cy(100) 		LTY = 5100		Frames = 4		  Shoot_Up_HeavyMachineGun_Left
 071	cx(50)  / cy(100) 		LTY = 5200		Frames = 6		  Shoot_Up_Another_Right
 072	cx(50)  / cy(100) 		LTY = 5300		Frames = 6		  Shoot_Up_Another_Left
@@ -221,6 +221,24 @@ Zombie_AllBody
 Zombie_ZArm
 199	cx(50)  / cy(50)		LTY = 17700		Frames = 12		  ZArm_AimForward_Idle_Right
 200	cx(50)  / cy(50)		LTY = 17750		Frames = 12		  ZArm_AimForward_Idle_Left
+201	cx(50)  / cy(50)		LTY = 17800		Frames = 24		  ZArm_AimForward_Walk_Right
+202	cx(50)  / cy(50)		LTY = 17850		Frames = 24		  ZArm_AimForward_Walk_Left
+203	cx(50)  / cy(50)		LTY = 17900		Frames = 16		  ZArm_AimForward_Jump_Right
+204	cx(50)  / cy(50)		LTY = 17950		Frames = 16		  ZArm_AimForward_Jump_Left
+205	cx(50)  / cy(50)		LTY = 18000		Frames = 10		  ZArm_AimForward_Shoot_Right
+206	cx(50)  / cy(50)		LTY = 18050		Frames = 10		  ZArm_AimForward_Shoot_Left
+207	cx(50)  / cy(50)		LTY = 18100		Frames = 2			  ZArm_AimUp_NormalToUp_Right
+208	cx(50)  / cy(50)		LTY = 18150		Frames = 2			  ZArm_AimUp_NormalToUp_Left
+209	cx(50)  / cy(50)		LTY = 18200		Frames = 2			  ZArm_AimUp_UpToNormal_Right
+210	cx(50)  / cy(50)		LTY = 18250		Frames = 2			  ZArm_AimUp_UpToNormal_Left
+211	cx(50)  / cy(50)		LTY = 18300		Frames = 12		  ZArm_AimUp_Idle_Right
+212	cx(50)  / cy(50)		LTY = 18350		Frames = 12		  ZArm_AimUp_Idle_Left
+213	cx(50)  / cy(50)		LTY = 18400		Frames = 24		  ZArm_AimUp_Walk_Right
+214	cx(50)  / cy(50)		LTY = 18450		Frames = 24		  ZArm_AimUp_Walk_Left
+215	cx(50)  / cy(50)		LTY = 18500		Frames = 16		  ZArm_AimUp_Jump_Right
+216	cx(50)  / cy(50)		LTY = 18550		Frames = 16		  ZArm_AimUp_Jump_Left
+217	cx(50)  / cy(60)		LTY = 18600		Frames = 10		  ZArm_AimUp_Shoot_Right
+218	cx(50)  / cy(60)		LTY = 18700		Frames = 10		  ZArm_AimUp_Shoot_Left
 
 
 
