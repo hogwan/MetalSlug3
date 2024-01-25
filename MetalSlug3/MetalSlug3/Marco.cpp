@@ -1,5 +1,7 @@
 #include "Marco.h"
 #include <EngineCore\EngineCore.h>
+#include <EngineBase/EngineTime.h>
+#include <EnginePlatform/EngineInput.h>
 
 Marco::Marco()
 {
