@@ -107,7 +107,44 @@ AllBody_Crouch_Pistol
 098	cx(100)  / cy(100)		LTY = 7100	Frames = 3		  Crouch_Pistol_Outro_Left
 099	cx(100)  / cy(100)		LTY = 7200	Frames = 6		  Crouch_Pistol_Idle_Right
 100	cx(100)  / cy(100)		LTY = 7300	Frames = 6		  Crouch_Pistol_Idle_Left
+101	cx(100)  / cy(100)		LTY = 7400	Frames = 7		  Crouch_Pistol_Move_Right
+102	cx(100)  / cy(100)		LTY = 7500	Frames = 7		  Crouch_Pistol_Move_Left
+103	cx(100)  / cy(100)		LTY = 7600	Frames = 10	  Crouch_Pistol_Shoot_Right
+104	cx(100)  / cy(100)		LTY = 7700	Frames = 10	  Crouch_Pistol_Shoot_Left
+105	cx(100)  / cy(100)		LTY = 7800	Frames = 6		  Crouch_Pistol_AfterShootIdle_Right
+106	cx(100)  / cy(100)		LTY = 7900	Frames = 6		  Crouch_Pistol_AfterShootIdle_Left
+107	cx(100)  / cy(100)		LTY = 8000	Frames = 6		  Crouch_Pistol_Throw_Right
+108	cx(100)  / cy(100)		LTY = 8100	Frames = 6		  Crouch_Pistol_Throw_Left
+109	cx(100)  / cy(100)		LTY = 8000	Frames = 6		  Crouch_Pistol_AfterThrowIdle_Right
+110	cx(100)  / cy(100)		LTY = 8100	Frames = 6		  Crouch_Pistol_AfterThrowIdle_Left
+111	cx(100)  / cy(100)		LTY = 8200	Frames = 7		  Crouch_Pistol_KnifeAttack1_Right
+112	cx(100)  / cy(100)		LTY = 8300	Frames = 7		  Crouch_Pistol_KnifeAttack1_Left
+113	cx(100)  / cy(100)		LTY = 8400	Frames = 6		  Crouch_Pistol_KnifeAttack2_Right
+114	cx(100)  / cy(100)		LTY = 8500	Frames = 6		  Crouch_Pistol_KnifeAttack2_Left
+115	cx(100)  / cy(100)		LTY = 8600	Frames = 8		  Crouch_Pistol_ChangeToPistol_Right
+116	cx(100)  / cy(100)		LTY = 8700	Frames = 8		  Crouch_Pistol_ChangeToPistol_Left
 
+AllBody_Crouch_Rifle
+117	cx(100)  / cy(100)		LTY = 8800		Frames = 3		  Crouch_Rifle_Intro_Right
+118	cx(100)  / cy(100)		LTY = 8900		Frames = 3		  Crouch_Rifle_Intro_Left
+119	cx(100)  / cy(100)		LTY = 9000		Frames = 3		  Crouch_Rifle_Outro_Right
+120	cx(100)  / cy(100)		LTY = 9100		Frames = 3		  Crouch_Rifle_Outro_Left
+121	cx(100)  / cy(100)		LTY = 9200		Frames = 6		  Crouch_Rifle_Idle_Right
+122	cx(100)  / cy(100)		LTY = 9300		Frames = 6		  Crouch_Rifle_Idle_Left
+123	cx(100)  / cy(100)		LTY = 9400		Frames = 7		  Crouch_Rifle_Move_Right
+124	cx(100)  / cy(100)		LTY = 9500		Frames = 7		  Crouch_Rifle_Move_Left
+125	cx(100)  / cy(100)		LTY = 9600		Frames = 10	  Crouch_Rifle_Shoot_Right
+126	cx(100)  / cy(100)		LTY = 9700		Frames = 10	  Crouch_Rifle_Shoot_Left
+127	cx(100)  / cy(100)		LTY = 9800		Frames = 6		  Crouch_Rifle_AfterShootIdle_Right
+128	cx(100)  / cy(100)		LTY = 9900		Frames = 6		  Crouch_Rifle_AfterShootIdle_Left
+129	cx(100)  / cy(100)		LTY = 10000	Frames = 6		  Crouch_Rifle_Throw_Right
+130	cx(100)  / cy(100)		LTY = 10100	Frames = 6		  Crouch_Rifle_Throw_Left
+131	cx(100)  / cy(100)		LTY = 10200	Frames = 6		  Crouch_Rifle_AfterThrowIdle_Right
+132	cx(100)  / cy(100)		LTY = 10300	Frames = 6		  Crouch_Rifle_AfterThrowIdle_Left
+133	cx(100)  / cy(100)		LTY = 10400	Frames = 7		  Crouch_Rifle_KnifeAttack1_Right
+134	cx(100)  / cy(100)		LTY = 10500	Frames = 7		  Crouch_Rifle_KnifeAttack1_Left
+135	cx(100)  / cy(100)		LTY = 10600	Frames = 6		  Crouch_Rifle_KnifeAttack2_Right
+136	cx(100)  / cy(100)		LTY = 10700	Frames = 6		  Crouch_Rifle_KnifeAttack2_Left
 
 
 
