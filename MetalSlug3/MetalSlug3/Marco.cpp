@@ -15,6 +15,7 @@ Marco::~Marco()
 
 void Marco::BeginPlay()
 {
+	int a = 0;
 	SetActorLocation({ 100, 100 });
 	SetActorScale({ 50, 70 });
 }
