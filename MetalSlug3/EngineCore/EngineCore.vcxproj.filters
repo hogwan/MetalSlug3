@@ -10,6 +10,12 @@
     <Filter Include="Object\Actor">
       <UniqueIdentifier>{919c1d97-3923-451c-a3d4-f84965d263ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Component">
+      <UniqueIdentifier>{accca03c-1eac-47cb-b698-2e7ab4143f6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Renderer">
+      <UniqueIdentifier>{ee2d63f2-05b5-497f-b384-b83460aa56a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -27,6 +33,15 @@
     <ClCompile Include="Actor.cpp">
       <Filter>Object\Actor</Filter>
     </ClCompile>
+    <ClCompile Include="ImageRenderer.cpp">
+      <Filter>Object\Component\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ActorComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineCore.h">
@@ -43,6 +58,15 @@
     </ClInclude>
     <ClInclude Include="Actor.h">
       <Filter>Object\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageRenderer.h">
+      <Filter>Object\Component\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorComponent.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneComponent.h">
+      <Filter>Object\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
