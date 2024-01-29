@@ -1,0 +1,27 @@
+UpperBody
+000		RTY : 0      	cx(100) / cy(100)		Frames:6 		Idle_Right
+001		RTY : 100   	cx(100) / cy(100)		Frames:6 		Idle_Left
+002		RTY : 200   cx(100) / cy(100)		Frames:12 		Run_Right
+003		RTY : 300   cx(100) / cy(100)		Frames:12 		Run_Left
+004		RTY : 400   cx(100) / cy(100)		Frames:8 		Jump_Right
+005		RTY : 500   cx(100) / cy(100)		Frames:8 		Jump_Left
+006		RTY : 600   cx(100) / cy(100)		Frames:6 		ForwardJump_Right
+007		RTY : 700   cx(100) / cy(100)		Frames:6 		ForwardJump_Left
+008		RTY : 800   cx(100) / cy(100)		Frames:10 		Shoot_Right
+009		RTY : 900   cx(100) / cy(100)		Frames:10 		Shoot_Left
+010		RTY : 1000   cx(100) / cy(100)		Frames:10 		ForwardJumpShoot_Right
+011		RTY : 1100   cx(100) / cy(100)		Frames:10 		ForwardJumpShoot_Left
+012		RTY : 1200   cx(100) / cy(100)		Frames:6 		Throw_Right
+013		RTY : 1300   cx(100) / cy(100)		Frames:6 		Throw_Left
+014		RTY : 1400   cx(100) / cy(100)		Frames:6 		KnifeAttack1_Right
+015		RTY : 1500   cx(100) / cy(100)		Frames:6 		KnifeAttack1_Left
+016		RTY : 1600   cx(100) / cy(100)		Frames:6 		KnifeAttack2_Right
+017		RTY : 1700   cx(100) / cy(100)		Frames:6 		KnifeAttack2_Left
+018		RTY : 1800   cx(100) / cy(100)		Frames:2 		Aim_Up_NormalToUp_Right
+019		RTY : 1900   cx(100) / cy(100)		Frames:2 		Aim_Up_NormalToUp_Left
+020		RTY : 2000   cx(100) / cy(100)		Frames:2 		Aim_Up_UpToNormal_Right
+021		RTY : 2100   cx(100) / cy(100)		Frames:2 		Aim_Up_UpToNormal_Left
+022		RTY : 2200   cx(100) / cy(100)		Frames:6 		Aim_Up_Right
+023		RTY : 2300   cx(100) / cy(100)		Frames:6 		Aim_Up_Left
+024		RTY : 2400   cx(100) / cy(100)		Frames:10 		AimUpShoot_Right
+025		RTY : 2500   cx(100) / cy(100)		Frames:10 		AimUpShoot_Left
