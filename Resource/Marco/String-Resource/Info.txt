@@ -137,4 +137,38 @@ Rifle
 123		RTY : 12700  cx(100) / cy(100)		Frames:6 		Crouch_KnifeAttack2_Left
 124		RTY : 12800  cx(100) / cy(100)		Frames:6 		Ceremony
 
+Common
+125		RTY : 12900  cx(100) / cy(100)		Frames:6 		AllBody_ElephantSlug_Idle
+126		RTY : 13000  cx(100) / cy(100)		Frames:8 		AllBody_ElephantSlug_Walk
+127		RTY : 13100  cx(100) / cy(100)		Frames:19 		AllBody_Death_Normal_Right
+128		RTY : 13200  cx(100) / cy(100)		Frames:19 		AllBody_Death_Normal_Left
+129		RTY : 13300  cx(100) / cy(100)		Frames:10 		AllBody_Death_InAir_Right
+130		RTY : 13400  cx(100) / cy(100)		Frames:10 		AllBody_Death_InAir_Left
+131		RTY : 13500  cx(100) / cy(100)		Frames:19 		AllBody_Death_ByKnife_Right
+132		RTY : 13600  cx(100) / cy(100)		Frames:19 		AllBody_Death_ByKnife_Left
+
+Zombie
+133		RTY : 13700  cx(100) / cy(100)		Frames:3 		AllBody_TransFormToZombie_Intro_Right
+134		RTY : 13800  cx(100) / cy(100)		Frames:3 		AllBody_TransFormToZombie_Intro_Left
+135		RTY : 13900  cx(100) / cy(100)		Frames:10 		AllBody_TransFormToZombie_Falling_Right
+136		RTY : 14000  cx(100) / cy(100)		Frames:10 		AllBody_TransFormToZombie_Falling_Left
+137		RTY : 14100  cx(100) / cy(300)		Frames:10 		AllBody_TransFormToZombie_Thunder
+138		RTY : 14400  cx(100) / cy(100)		Frames:20 		AllBody_TransFormToZombie_Rising_Right_0
+139		RTY : 14500  cx(100) / cy(100)		Frames:20 		AllBody_TransFormToZombie_Rising_Right_1
+140		RTY : 14600  cx(100) / cy(100)		Frames:8 		AllBody_TransFormToZombie_Rising_Right_2
+141		RTY : 14700  cx(100) / cy(100)		Frames:20 		AllBody_TransFormToZombie_Rising_Left_0
+142		RTY : 14800  cx(100) / cy(100)		Frames:20 		AllBody_TransFormToZombie_Rising_Left_1
+143		RTY : 14900  cx(100) / cy(100)		Frames:8 		AllBody_TransFormToZombie_Rising_Left_2
+144		RTY : 15000  cx(100) / cy(100)		Frames:12 		AllBody_Idle_Right
+145		RTY : 15100  cx(100) / cy(100)		Frames:12 		AllBody_Idle_Left
+146		RTY : 15200  cx(100) / cy(100)		Frames:20 		AllBody_Walk_Right_0
+147		RTY : 15300  cx(100) / cy(100)		Frames:4 		AllBody_Walk_Right_1
+148		RTY : 15400  cx(100) / cy(100)		Frames:20 		AllBody_Walk_Left_0
+149		RTY : 15500  cx(100) / cy(100)		Frames:4 		AllBody_Walk_Left_1
+150		RTY : 15600  cx(100) / cy(100)		Frames:16 		AllBody_Turn_RightToLeft
+151		RTY : 15700  cx(100) / cy(100)		Frames:16 		AllBody_Turn_LeftToRight
+
+
+
+
 
