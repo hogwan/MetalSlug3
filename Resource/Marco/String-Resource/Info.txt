@@ -35,5 +35,6 @@ Pistol
 031		RTY : 3100   cx(100) / cy(100)		Frames:6 		AimDownShoot_Left
 
 Rifle
-
+032		RTY : 3200   cx(100) / cy(100)		Frames:6 		Rifle_Idle_Right
+033		RTY : 3300   cx(100) / cy(100)		Frames:6 		Rifle_Idle_Left
 
