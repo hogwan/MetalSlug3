@@ -37,4 +37,82 @@ Pistol
 Rifle
 032		RTY : 3200   cx(100) / cy(100)		Frames:6 		Rifle_Idle_Right
 033		RTY : 3300   cx(100) / cy(100)		Frames:6 		Rifle_Idle_Left
+034		RTY : 3400   cx(100) / cy(100)		Frames:12 		Rifle_Run_Right
+035		RTY : 3500   cx(100) / cy(100)		Frames:12 		Rifle_Run_Left
+036		RTY : 3600   cx(100) / cy(100)		Frames:8 		Rifle_Jump_Right
+037		RTY : 3700   cx(100) / cy(100)		Frames:8 		Rifle_Jump_Left
+038		RTY : 3800   cx(100) / cy(100)		Frames:6 		Rifle_ForwardJump_Right
+039		RTY : 3900   cx(100) / cy(100)		Frames:6 		Rifle_ForwardJump_Left
+040		RTY : 4000   cx(100) / cy(100)		Frames:4 		Rifle_Shoot_HeavyMacineGun_Right
+041		RTY : 4100   cx(100) / cy(100)		Frames:4 		Rifle_Shoot_HeavyMacineGun_Left
+042		RTY : 4200   cx(100) / cy(100)		Frames:10 		Rifle_Shoot_Another_Right
+043		RTY : 4300   cx(100) / cy(100)		Frames:10 		Rifle_Shoot_Another_Left
+044		RTY : 4400   cx(100) / cy(100)		Frames:6 		Rifle_Throw_Right
+045		RTY : 4500   cx(100) / cy(100)		Frames:6 		Rifle_Throw_Left
+046		RTY : 4600   cx(100) / cy(100)		Frames:6 		Rifle_KnifeAttack1_Right
+047		RTY : 4700   cx(100) / cy(100)		Frames:6 		Rifle_KnifeAttack1_Left
+048		RTY : 4800   cx(100) / cy(100)		Frames:6 		Rifle_KnifeAttack2_Right
+049		RTY : 4900   cx(100) / cy(100)		Frames:6 		Rifle_KnifeAttack2_Left
+050		RTY : 5000   cx(100) / cy(100)		Frames:2 		Rifle_Aim_NormalToUp_Right
+051		RTY : 5100   cx(100) / cy(100)		Frames:2 		Rifle_Aim_NormalToUp_Left
+052		RTY : 5200   cx(100) / cy(100)		Frames:2 		Rifle_Aim_UpToNormal_Right
+053		RTY : 5300   cx(100) / cy(100)		Frames:2 		Rifle_Aim_UpToNormal_Left
+054		RTY : 5400   cx(100) / cy(100)		Frames:6 		Rifle_AimUp_Right
+055		RTY : 5500   cx(100) / cy(100)		Frames:6 		Rifle_AimUp_Left
+056		RTY : 5600   cx(150) / cy(150)		Frames:4 		Rifle_AimUpShoot_HeavyMachineGun_Right
+057		RTY : 5750   cx(150) / cy(150)		Frames:4 		Rifle_AimUpShoot_HeavyMachineGun_Left
+058		RTY : 5900   cx(100) / cy(100)		Frames:6 		Rifle_AimUpShoot_Another_Right
+059		RTY : 6000   cx(100) / cy(100)		Frames:6 		Rifle_AimUpShoot_Another_Left
+060		RTY : 6100   cx(100) / cy(100)		Frames:2 		Rifle_AimUpShoot_NormalToUp_HeavyMachineGun_Right
+061		RTY : 6200   cx(100) / cy(100)		Frames:2 		Rifle_AimUpShoot_NormalToUp_HeavyMachineGun_Left
+062		RTY : 6300   cx(100) / cy(100)		Frames:2 		Rifle_AimUpShoot_UpToNormal_HeavyMachineGun_Right
+063		RTY : 6400   cx(100) / cy(100)		Frames:2 		Rifle_AimUpShoot_UpToNormal_HeavyMachineGun_Left
+064		RTY : 6500   cx(100) / cy(100)		Frames:3 		Rifle_Aim_NormalToDown_Right
+065		RTY : 6600   cx(100) / cy(100)		Frames:3 		Rifle_Aim_NormalToDown_Left
+066		RTY : 6700   cx(100) / cy(100)		Frames:3 		Rifle_Aim_DownToNormal_Right
+067		RTY : 6800   cx(100) / cy(100)		Frames:3 		Rifle_Aim_DownToNormal_Left
+068		RTY : 6900   cx(150) / cy(150)		Frames:4 		Rifle_AimDownShoot_HeavyMachineGun_Right
+069		RTY : 7050   cx(150) / cy(150)		Frames:4 		Rifle_AimDownShoot_HeavyMachineGun_Left
+070		RTY : 7200   cx(100) / cy(100)		Frames:7 		Rifle_AimDownShoot_Another_Right
+071		RTY : 7300   cx(100) / cy(100)		Frames:7 		Rifle_AimDownShoot_Another_Left
+072		RTY : 7400   cx(100) / cy(100)		Frames:2 		Rifle_AimDownShoot_NormalToDown_HeavyMachineGun_Right
+073		RTY : 7500   cx(100) / cy(100)		Frames:2 		Rifle_AimDownShoot_NormalToDown_HeavyMachineGun_Left
+074		RTY : 7600   cx(100) / cy(100)		Frames:2 		Rifle_AimDownShoot_DownToNormal_HeavyMachineGun_Right
+075		RTY : 7700   cx(100) / cy(100)		Frames:2 		Rifle_AimDownShoot_DownToNormal_HeavyMachineGun_Left
+
+LowerBody
+076		RTY : 7800   cx(100) / cy(100)		Frames:1 		Idle_Right
+077		RTY : 7900   cx(100) / cy(100)		Frames:1 		Idle_Left
+078		RTY : 8000   cx(100) / cy(100)		Frames:12 		Run_Right
+079		RTY : 8100   cx(100) / cy(100)		Frames:12 		Run_Left
+080		RTY : 8200   cx(100) / cy(100)		Frames:8 		Jump_Right
+081		RTY : 8300   cx(100) / cy(100)		Frames:8 		Jump_Left
+082		RTY : 8400   cx(100) / cy(100)		Frames:6 		ForwardJump_Right
+083		RTY : 8500   cx(100) / cy(100)		Frames:6 		ForwardJump_Left
+
+AllBody
+
+Pistol
+084		RTY : 8600   cx(100) / cy(300)		Frames:7 		Spawn
+085		RTY : 8900   cx(100) / cy(100)		Frames:7 		Kick_Right
+086		RTY : 9000   cx(100) / cy(100)		Frames:7 		Kick_Left
+087		RTY : 9100   cx(100) / cy(100)		Frames:3 		Crouch_Intro_Right
+088		RTY : 9200   cx(100) / cy(100)		Frames:3 		Crouch_Intro_Left
+089		RTY : 9300   cx(100) / cy(100)		Frames:3 		Crouch_Outro_Right
+090		RTY : 9400   cx(100) / cy(100)		Frames:3 		Crouch_Outro_Left
+091		RTY : 9500   cx(100) / cy(100)		Frames:4 		Crouch_Idle_Right
+092		RTY : 9600   cx(100) / cy(100)		Frames:4 		Crouch_Idle_Left
+093		RTY : 9700   cx(100) / cy(100)		Frames:7 		Crouch_Move_Right
+094		RTY : 9800   cx(100) / cy(100)		Frames:7 		Crouch_Move_Left
+095		RTY : 9900   cx(100) / cy(100)		Frames:10 		Crouch_Shoot_Right
+096		RTY : 10000  cx(100) / cy(100)		Frames:10 		Crouch_Shoot_Left
+097		RTY : 10100  cx(100) / cy(100)		Frames:6 		Crouch_Throw_Right
+098		RTY : 10200  cx(100) / cy(100)		Frames:6 		Crouch_Throw_Left
+099		RTY : 10300  cx(100) / cy(100)		Frames:7 		Crouch_KnifeAttack1_Right
+100		RTY : 10400  cx(100) / cy(100)		Frames:7 		Crouch_KnifeAttack1_Left
+101		RTY : 10500  cx(100) / cy(100)		Frames:6 		Crouch_KnifeAttack2_Right
+102		RTY : 10600  cx(100) / cy(100)		Frames:6 		Crouch_KnifeAttack2_Left
+103		RTY : 10700  cx(100) / cy(100)		Frames:6 		Ceremony
+
+
 
