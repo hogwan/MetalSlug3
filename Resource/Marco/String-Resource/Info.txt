@@ -1,4 +1,6 @@
 UpperBody
+
+Pistol
 000		RTY : 0      	cx(100) / cy(100)		Frames:6 		Idle_Right
 001		RTY : 100   	cx(100) / cy(100)		Frames:6 		Idle_Left
 002		RTY : 200   cx(100) / cy(100)		Frames:12 		Run_Right
@@ -25,3 +27,13 @@ UpperBody
 023		RTY : 2300   cx(100) / cy(100)		Frames:6 		Aim_Up_Left
 024		RTY : 2400   cx(100) / cy(100)		Frames:10 		AimUpShoot_Right
 025		RTY : 2500   cx(100) / cy(100)		Frames:10 		AimUpShoot_Left
+026		RTY : 2600   cx(100) / cy(100)		Frames:3 		Aim_NormalToDown_Right
+027		RTY : 2700   cx(100) / cy(100)		Frames:3 		Aim_NormalToDown_Left
+028		RTY : 2800   cx(100) / cy(100)		Frames:3 		Aim_DownToNormal_Right
+029		RTY : 2900   cx(100) / cy(100)		Frames:3 		Aim_DownToNormal_Left
+030		RTY : 3000   cx(100) / cy(100)		Frames:6 		AimDownShoot_Right
+031		RTY : 3100   cx(100) / cy(100)		Frames:6 		AimDownShoot_Left
+
+Rifle
+
+
