@@ -16,6 +16,9 @@
     <Filter Include="Object\Component\Renderer">
       <UniqueIdentifier>{ee2d63f2-05b5-497f-b384-b83460aa56a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{70bcbba5-36e9-4175-b8c4-f498c6746062}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -42,6 +45,12 @@
     <ClCompile Include="SceneComponent.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
+    <ClCompile Include="EngineResourcesManager.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineCore.h">
@@ -67,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="SceneComponent.h">
       <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineResourcesManager.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
