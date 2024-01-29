@@ -195,7 +195,11 @@ Zombie
 177		RTY : 18300  cx(100) / cy(100)		Frames:20 		AllBody_Death_Left_0
 178		RTY : 18400  cx(100) / cy(100)		Frames:20 		AllBody_Death_Left_1
 179		RTY : 18500  cx(100) / cy(100)		Frames:20 		AllBody_Death_Left_2
-1780		RTY : 18600  cx(100) / cy(100)		Frames:20 		AllBody_Death_Left_3
+180		RTY : 18600  cx(100) / cy(100)		Frames:20 		AllBody_Death_Left_3
+181		RTY : 18700  cx(200) / cy(200)		Frames:10 		AllBody_Death_InAir_Right_0
+182		RTY : 18900  cx(200) / cy(200)		Frames:5 		AllBody_Death_InAir_Right_1
+183		RTY : 19100  cx(200) / cy(200)		Frames:10 		AllBody_Death_InAir_Left_0
+184		RTY : 19300  cx(200) / cy(200)		Frames:5 		AllBody_Death_InAir_Left_1
 
 
 
