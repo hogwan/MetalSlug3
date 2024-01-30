@@ -13,14 +13,14 @@ ABullet::~ABullet()
 
 void ABullet::BeginPlay()
 {
-	SetActorScale({ 20, 10 });
+	{
+		UImageRenderer* Renderer = CreateImageRenderer(-10);
+		Renderer->SetImageToScale("Tool_Bomb_Right_0.bmp");
+	}
 }
 
 void ABullet::Tick(float _DeltaTime)
 {
 	AddActorLocation(Dir * Speed * _DeltaTime);
 
-	HDC WindowDC = GEngine->MainWindow.GetWindowDC();
-	FTransform Trans = GetTransform();
-	Rectangle(WindowDC, Trans.iLeft(), Trans.iTop(), Trans.iRight(), Trans.iBottom());
 }

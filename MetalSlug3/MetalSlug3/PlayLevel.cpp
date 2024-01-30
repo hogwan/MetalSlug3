@@ -15,17 +15,17 @@ PlayLevel::~PlayLevel()
 void PlayLevel::BeginPlay()
 {
 	UEngineDirectory NewPath;
-	NewPath;
 	NewPath.MoveParent();
-	NewPath;
-	NewPath.MoveParent();
-	NewPath;
-	NewPath.Move("Resource");
-	NewPath;
-	NewPath.Move("Marco");
-	NewPath;
+	NewPath.Move("TestResource");
 
 	std::list<UEngineFile> AllFileList = NewPath.AllFile({ ".png", ".bmp" }, true);
 	
+	for (UEngineFile& File : AllFileList)
+	{
+		std::string FullPath = File.GetFullPath();
+		// 싱글톤 잊지 말라고 일부러 GetInst를 사용하겠습니다.
+		UEngineResourcesManager::GetInst().LoadImg(FullPath);
+	}
+
 	SpawnActor<Marco>();
 }

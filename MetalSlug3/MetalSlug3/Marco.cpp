@@ -15,9 +15,20 @@ Marco::~Marco()
 
 void Marco::BeginPlay()
 {
-	int a = 0;
+	{
+		UpperBodyRenderer = CreateImageRenderer(0);
+		UpperBodyRenderer->SetPosition({ 0, -25 });
+		UpperBodyRenderer->SetImageToScale("UpperBody_Idle_Right_0.bmp");
+		// BodyRenderer->SetScale({ 80, 80 });
+	}
+
+
+	{
+		LowerBodyRenderer = CreateImageRenderer(0);
+		LowerBodyRenderer->SetPosition({ 0, 30 });
+		LowerBodyRenderer->SetImageToScale("LowerBody_Idle_Right_0.bmp");
+	}
 	SetActorLocation({ 100, 100 });
-	SetActorScale({ 50, 70 });
 }
 
 void Marco::Tick(float _DeltaTime)
@@ -57,18 +68,13 @@ void Marco::Tick(float _DeltaTime)
 
 	if (true == EngineInput::IsDown('D'))
 	{
-		ABomb* NewBomb= GetWorld()->SpawnActor<ABomb>();
+		ABomb* NewBomb = GetWorld()->SpawnActor<ABomb>();
 		NewBomb->SetActorLocation(GetActorLocation());
 		NewBomb->SetDir(FVector::Right);
 	}
 
-
-
-
-	HDC WindowDC = GEngine->MainWindow.GetWindowDC();
-	FTransform Trans = GetTransform();
-	Rectangle(WindowDC, Trans.iLeft(), Trans.iTop(), Trans.iRight(), Trans.iBottom());
 }
+
 
 void Marco::Jump()
 {

@@ -19,6 +19,8 @@ protected:
 	void Jump();
 
 private:
-
+	UImageRenderer* UpperBodyRenderer;
+	UImageRenderer* LowerBodyRenderer;
+	UImageRenderer* AllBodyRenderer;
 };
 
