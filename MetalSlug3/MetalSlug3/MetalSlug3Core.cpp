@@ -13,7 +13,7 @@ MetalSlug3Core::~MetalSlug3Core()
 void MetalSlug3Core::BeginPlay()
 {
 	// "Title Level" + "을 만들다가 에러가 났습니다";
-
+	MainWindow.SetWindowScale({ 800,600 });
 	CreateLevel<StartLevel>("StartLevel");
 	CreateLevel<PlayLevel>("PlayLevel");
 

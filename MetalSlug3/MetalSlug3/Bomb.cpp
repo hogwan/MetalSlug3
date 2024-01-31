@@ -13,7 +13,9 @@ void ABomb::BeginPlay()
 {
 	{
 		UImageRenderer* Renderer = CreateImageRenderer(-10);
-		Renderer->SetImageToScale("Tool_Bomb_Right_0.bmp");
+		Renderer->SetImage("Tool_Bomb_Right_0.bmp");
+		Renderer->SetTransform({ {0,0},{50,50} });
+		Renderer->SetImageCuttingTransform({ {0,0}, {50, 50} });
 	}
 }
 void ABomb::Tick(float _DeltaTime)

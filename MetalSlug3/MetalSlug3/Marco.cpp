@@ -19,18 +19,20 @@ Marco::~Marco()
 
 void Marco::BeginPlay()
 {
+	//배경색 153,217,234
 	{
-		UpperBodyRenderer = CreateImageRenderer(0);
-		UpperBodyRenderer->SetPosition({ 0, -25 });
-		UpperBodyRenderer->SetImageToScale("UpperBody_Idle_Right_0.bmp");
-		// BodyRenderer->SetScale({ 80, 80 });
+		UpperBodyRenderer = CreateImageRenderer(1);
+		UpperBodyRenderer->SetImage("UpperBody_Idle_Right_0.bmp");
+		UpperBodyRenderer->SetTransform({ { 0,-25 }, { 100, 100 } });
+		UpperBodyRenderer->SetImageCuttingTransform({ {0,0}, {100, 100} });
 	}
 
 
 	{
 		LowerBodyRenderer = CreateImageRenderer(0);
-		LowerBodyRenderer->SetPosition({ 0, 30 });
-		LowerBodyRenderer->SetImageToScale("LowerBody_Idle_Right_0.bmp");
+		LowerBodyRenderer->SetImage("LowerBody_Idle_Right_0.bmp");
+		LowerBodyRenderer->SetTransform({ { 0,50 }, { 100, 100 } });
+		LowerBodyRenderer->SetImageCuttingTransform({ {0,0}, {100, 100} });
 	}
 	SetActorLocation({ 100, 100 });
 }
@@ -96,7 +98,7 @@ void Marco::Tick(float _DeltaTime)
 
 
 	////////////////////////////////////////////////////////
-	//                랜더상태처리                            //
+	//                랜더상태처리(애니메이션)            //
 	////////////////////////////////////////////////////////
 
 

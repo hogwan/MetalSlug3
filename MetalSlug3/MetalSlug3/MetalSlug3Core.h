@@ -1,6 +1,6 @@
 #pragma once
 #include <EngineCore/EngineCore.h>
-class MetalSlug3Core : public EngineCore
+class MetalSlug3Core : public UEngineCore
 {
 public:
 	// constructor destructor
