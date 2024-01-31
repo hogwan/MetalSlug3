@@ -16,11 +16,18 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-	void Jump();
 
 private:
 	UImageRenderer* UpperBodyRenderer;
 	UImageRenderer* LowerBodyRenderer;
 	UImageRenderer* AllBodyRenderer;
+	UImageRenderer* ZombieArmRenderer;
+
+	int UpdateStatus;
+	int RenderStatus;
+
+	int Dir;
+	bool InAir;
+	bool EquipRifle;
 };
 

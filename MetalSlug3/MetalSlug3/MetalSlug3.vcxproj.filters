@@ -10,14 +10,17 @@
     <ClInclude Include="MetalSlug3Core.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Marco.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Bomb.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Marco.h">
+      <Filter>Object\Marco</Filter>
+    </ClInclude>
+    <ClInclude Include="MarcoStatus.h">
+      <Filter>Object\Marco</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -30,14 +33,14 @@
     <ClCompile Include="MetalSlug3Core.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Marco.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Marco.cpp">
+      <Filter>Object\Marco</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +52,9 @@
     </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{50f9e0a5-1cf1-48ad-8379-995adedf2cd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Marco">
+      <UniqueIdentifier>{e92d751d-3ed7-4c0c-8a1a-8023c1ff2528}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
