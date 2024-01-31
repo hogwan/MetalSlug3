@@ -39,24 +39,24 @@ void Marco::Tick(float _DeltaTime)
 {
 	if (true == EngineInput::IsPress(VK_LEFT))
 	{
-		UpdateStatus |= (1 << Move);
+		UpdateStatus |= Move;
 		AddActorLocation(FVector::Left * 500.0f * _DeltaTime);
 	}
 
 	if (true == EngineInput::IsPress(VK_RIGHT))
 	{
-		UpdateStatus |= (1 << Move);
+		UpdateStatus |= Move;
 		AddActorLocation(FVector::Right * 500.0f * _DeltaTime);
 	}
 
 	if (true == EngineInput::IsPress(VK_UP))
 	{
-		UpdateStatus |= (1 << AimingUp);
+		UpdateStatus |= AimingUp;
 	}
 
 	if (true == EngineInput::IsPress(VK_DOWN))
 	{
-		if (UpdateStatus & (1 << InAir))
+		if (InAir)
 		{
 			UpdateStatus |= AimingDown;
 		}
@@ -96,10 +96,9 @@ void Marco::Tick(float _DeltaTime)
 
 
 	////////////////////////////////////////////////////////
-	//                랜더처리                            //
+	//                랜더상태처리                            //
 	////////////////////////////////////////////////////////
 
 
-	UpdateStatus = 0
-
+	UpdateStatus = 0;
 }
