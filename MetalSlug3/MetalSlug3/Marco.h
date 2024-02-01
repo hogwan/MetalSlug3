@@ -22,6 +22,8 @@ private:
 	UImageRenderer* LowerBodyRenderer;
 	UImageRenderer* AllBodyRenderer;
 	UImageRenderer* ZombieArmRenderer;
+	UImageRenderer* ZombieLaunchEffectRenderer;
+	UImageRenderer* ZombieProjectileRenderer;
 
 	int UpdateStatus;
 	int RenderStatus;

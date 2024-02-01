@@ -191,7 +191,7 @@ public:
 	static const Color8Bit Green;
 	static const Color8Bit Blue;
 	static const Color8Bit White;
-
+	//¹è°æ»ö 153,217,234
 	union
 	{
 		struct

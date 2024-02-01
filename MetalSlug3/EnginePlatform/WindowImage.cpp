@@ -307,6 +307,7 @@ void UWindowImage::TransCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 		MsgBoxAssert(GetName() + "이미지 정보의 인덱스를 오버하여 사용했습니다");
 	}
 
+
 	FTransform& ImageTrans = _CopyImage->Infos[_Index].CuttingTrans;
 
 	int RenderLeft = _Trans.iLeft();
