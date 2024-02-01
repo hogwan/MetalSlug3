@@ -151,6 +151,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="CreateMarcoAnimation.h" />
     <ClInclude Include="Marco.h">
       <SubType>
       </SubType>

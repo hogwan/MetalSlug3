@@ -27,9 +27,10 @@ void PlayLevel::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(FullPath);
 	}
 
-	UEngineResourcesManager::GetInst().CuttingImage("002_UpperBody_Run_Right.png", 20, 1);
-	UEngineResourcesManager::GetInst().CuttingImage("078_LowerBody_Run_Right.png", 20, 1);
-
+	UEngineResourcesManager::GetInst().CuttingImage("Marco_face-Resource.png", 20, 195);
+	UEngineResourcesManager::GetInst().CuttingImage("Exception1_150by150_HeavyMacineGun_JumpUpDownShoot.png", 4, 4);
+	UEngineResourcesManager::GetInst().CuttingImage("Exception2_100by300_SpawnAndThunder.png", 10, 2);
+	UEngineResourcesManager::GetInst().CuttingImage("Exception3_200by200_ZombieDeathInAir.png", 10, 4);
 
 	SpawnActor<Marco>();
 }

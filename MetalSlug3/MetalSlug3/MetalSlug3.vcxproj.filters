@@ -22,6 +22,9 @@
     <ClInclude Include="MarcoStatus.h">
       <Filter>Object\Marco</Filter>
     </ClInclude>
+    <ClInclude Include="CreateMarcoAnimation.h">
+      <Filter>Object\Marco</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
