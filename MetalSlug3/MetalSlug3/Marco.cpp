@@ -215,80 +215,119 @@ void Marco::BeginPlay()
 
 	CreateMarcoAnimation;
 
-	UpperBodyRenderer->ChangeAnimation("Pistol_Shoot_Right");
-	LowerBodyRenderer->ChangeAnimation("LowerBody_Run_Right");
-	UpperBodyRenderer->ActiveOff();
-	LowerBodyRenderer->ActiveOff();
+	UpperBodyRenderer->ChangeAnimation("Pistol_Idle_Right");
+	LowerBodyRenderer->ChangeAnimation("LowerBody_Idle_Right");
+
 	AllBodyRenderer->ChangeAnimation("Zombie_AllBody_Vomit_Right");
 	ZombieLaunchEffectRenderer->ChangeAnimation("Zombie_AllBody_Vomit_LaunchEffect_Right");
 	ZombieProjectileRenderer->ChangeAnimation("Zombie_AllBody_Vomit_ProjectileEffect_Right");
+
+	AllBodyRenderer->ActiveOff();
+	ZombieLaunchEffectRenderer->ActiveOff();
+	ZombieProjectileRenderer->ActiveOff();
+
 	SetActorLocation({ 100, 100 });
 }
 
 void Marco::Tick(float _DeltaTime)
 {
-	if (true == EngineInput::IsPress(VK_LEFT))
+	FVector CurPos = GetActorLocation();
+	if (true == EngineInput::IsDown(VK_LEFT))
 	{
-		UpdateStatus |= Move;
-		AddActorLocation(FVector::Left * 300.0f * _DeltaTime);
+		Dir = FVector::Left;
+		isRight = false;
+		LowerBodyRenderer->ChangeAnimation("LowerBody_Run_Left");
+	}
+	if (true == EngineInput::IsPress(VK_LEFT))
+	{	
+		AddActorLocation(Dir * Speed * _DeltaTime);
+	}
+	if (true == EngineInput::IsUp(VK_LEFT))
+	{
+		LowerBodyRenderer->ChangeAnimation("LowerBody_Idle_Left");
 	}
 
+
+	if (true == EngineInput::IsDown(VK_RIGHT))
+	{
+		Dir = FVector::Right;
+		isRight = true;
+		LowerBodyRenderer->ChangeAnimation("LowerBody_Run_Right");
+	}
 	if (true == EngineInput::IsPress(VK_RIGHT))
 	{
-		UpdateStatus |= Move;
-		AddActorLocation(FVector::Right * 300.0f * _DeltaTime);
+		AddActorLocation(Dir * Speed * _DeltaTime);
+	}
+	if (true == EngineInput::IsUp(VK_RIGHT))
+	{
+		LowerBodyRenderer->ChangeAnimation("LowerBody_Idle_Right");
 	}
 
+	if (true == EngineInput::IsDown(VK_UP))
+	{
+	}
 	if (true == EngineInput::IsPress(VK_UP))
 	{
-		UpdateStatus |= AimingUp;
+	}
+	if (true == EngineInput::IsUp(VK_UP))
+	{
 	}
 
+	if (true == EngineInput::IsDown(VK_DOWN))
+	{
+	}
 	if (true == EngineInput::IsPress(VK_DOWN))
 	{
-		if (InAir)
-		{
-			UpdateStatus |= AimingDown;
-		}
-		else
-		{
-			UpdateStatus |= Crouch;
-		}
 	}
+	if (true == EngineInput::IsUp(VK_DOWN))
+	{
+	}
+
 
 	if (true == EngineInput::IsDown('A'))
 	{
-		UpdateStatus |= Attack;
-
-		ABullet* NewBullet = GetWorld()->SpawnActor<ABullet>();
-		FVector SpawnLocation = GetActorLocation() + FVector{ 70.0f,-10.f,0.f,0.f };
-		NewBullet->SetActorLocation(SpawnLocation);
-		NewBullet->SetDir(FVector::Right);
+		Shoot();
 	}
 
 	if (true == EngineInput::IsDown('S'))
 	{
-		if (!InAir)
+		if (true == EngineInput::IsPress(VK_RIGHT))
 		{
-			InAir = true;
-			//점프
+			LowerBodyRenderer->ChangeAnimation("LowerBody_ForwardJump_Right");
 		}
+		else if (true == EngineInput::IsPress(VK_LEFT))
+		{
+			LowerBodyRenderer->ChangeAnimation("LowerBody_ForwardJump_Left");
+		}
+		else
+		{
+			if (isRight)
+			{
+				LowerBodyRenderer->ChangeAnimation("LowerBody_Jump_Right");
+			}
+			else
+			{
+				LowerBodyRenderer->ChangeAnimation("LowerBody_Jump_Left");
+			}
+		}
+		Jump();
 	}
 
 	if (true == EngineInput::IsDown('D'))
 	{
-		UpdateStatus |= Throwing;
-		//폭탄던지기
-		ABomb* NewBomb = GetWorld()->SpawnActor<ABomb>();
-		NewBomb->SetActorLocation(GetActorLocation());
-		NewBomb->SetDir(FVector::Right);
+		Throw();
 	}
 
+}
 
-	////////////////////////////////////////////////////////
-	//                랜더상태처리(애니메이션)            //
-	////////////////////////////////////////////////////////
+void Marco::Shoot()
+{
+}
 
+void Marco::Jump()
+{
+}
 
-	UpdateStatus = 0;
+void Marco::Throw()
+{
 }

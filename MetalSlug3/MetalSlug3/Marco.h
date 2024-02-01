@@ -25,11 +25,13 @@ private:
 	UImageRenderer* ZombieLaunchEffectRenderer;
 	UImageRenderer* ZombieProjectileRenderer;
 
-	int UpdateStatus;
-	int RenderStatus;
+	void Shoot();
+	void Jump();
+	void Throw();
 
-	int Dir;
-	bool InAir;
-	bool EquipRifle;
+	bool isRight = true;
+
+	FVector Dir = FVector::Zero;
+	float Speed = 300.0f;
 };
 
