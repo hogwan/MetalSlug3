@@ -17,5 +17,5 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 	LeakCheck;
 	MetalSlug3Core NewUserCore = MetalSlug3Core();
-	UEngineCore::EngineStart(hInstance, &NewUserCore);
+	NewUserCore.EngineStart(hInstance);
 }

@@ -1,6 +1,7 @@
 #include "MetalSlug3Core.h"
 #include "StartLevel.h"
 #include "PlayLevel.h"
+#include <EngineCore\EngineResourcesManager.h>
 
 MetalSlug3Core::MetalSlug3Core()
 {
@@ -19,6 +20,7 @@ void MetalSlug3Core::BeginPlay()
 
 	ChangeLevel("PlayLevel");
 
+	
 }
 
 void MetalSlug3Core::Tick(float _DeltaTime)

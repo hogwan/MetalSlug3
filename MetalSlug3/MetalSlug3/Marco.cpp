@@ -21,10 +21,12 @@ void Marco::BeginPlay()
 {
 	//¹è°æ»ö 153,217,234
 	{
-		UpperBodyRenderer = CreateImageRenderer(1);
-		UpperBodyRenderer->SetImage("UpperBody_Idle_Right_0.bmp");
-		UpperBodyRenderer->SetTransform({ { 0,-25 }, { 100, 100 } });
+		UpperBodyRenderer = CreateImageRenderer();
+		UpperBodyRenderer->SetImage("002_UpperBody_Run_Right.png");
+		UpperBodyRenderer->SetTransform({ {0,-35}, {100, 100} });
 		UpperBodyRenderer->SetImageCuttingTransform({ {0,0}, {100, 100} });
+		UpperBodyRenderer->CreateAnimation("Run_Right", "002_UpperBody_Run_Right.png", 0, 11, 0.08f, true);
+		UpperBodyRenderer->ChangeAnimation("Run_Right");
 	}
 
 
@@ -33,6 +35,8 @@ void Marco::BeginPlay()
 		LowerBodyRenderer->SetImage("LowerBody_Idle_Right_0.bmp");
 		LowerBodyRenderer->SetTransform({ { 0,50 }, { 100, 100 } });
 		LowerBodyRenderer->SetImageCuttingTransform({ {0,0}, {100, 100} });
+		LowerBodyRenderer->CreateAnimation("LowerBody_Run_Right", "078_LowerBody_Run_Right.png", 0, 11, 0.08f, true);
+		LowerBodyRenderer->ChangeAnimation("LowerBody_Run_Right");
 	}
 	SetActorLocation({ 100, 100 });
 }
@@ -42,13 +46,13 @@ void Marco::Tick(float _DeltaTime)
 	if (true == EngineInput::IsPress(VK_LEFT))
 	{
 		UpdateStatus |= Move;
-		AddActorLocation(FVector::Left * 500.0f * _DeltaTime);
+		AddActorLocation(FVector::Left * 300.0f * _DeltaTime);
 	}
 
 	if (true == EngineInput::IsPress(VK_RIGHT))
 	{
 		UpdateStatus |= Move;
-		AddActorLocation(FVector::Right * 500.0f * _DeltaTime);
+		AddActorLocation(FVector::Right * 300.0f * _DeltaTime);
 	}
 
 	if (true == EngineInput::IsPress(VK_UP))

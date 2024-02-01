@@ -27,5 +27,9 @@ void PlayLevel::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(FullPath);
 	}
 
+	UEngineResourcesManager::GetInst().CuttingImage("002_UpperBody_Run_Right.png", 20, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("078_LowerBody_Run_Right.png", 20, 1);
+
+
 	SpawnActor<Marco>();
 }
