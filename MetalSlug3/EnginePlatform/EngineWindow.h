@@ -44,6 +44,8 @@ public:
 		return Scale;
 	}
 
+	FVector GetMousePosition();
+
 protected:
 
 private:
@@ -63,6 +65,7 @@ private:
 	UWindowImage* BackBufferImage = nullptr;
 	// 이미지가 2개다 이미지는 버퍼라는 개념으로도 부른다. => 더블버퍼링이라는 이름인 겁니다.
 	FVector Scale;
+	FVector Position;
 
 };
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 struct float4
 {
@@ -71,6 +72,11 @@ public:
 
 
 public:
+	std::string ToString()
+	{
+		return "[X : " + std::to_string(X) + " Y : " + std::to_string(Y) + " Z : " + std::to_string(Z) + " W : " + std::to_string(W) + "]";
+	}
+
 	float4 Half2D()
 	{
 		return { hX(), hY() };
@@ -169,11 +175,6 @@ public:
 		Result.Y -= _Other.Y;
 		Result.Z -= _Other.Z;
 		return Result;
-	}
-
-	bool operator==(const float4& _Other)
-	{
-		return X == _Other.X && Y == _Other.Y && Z == _Other.Z && W == _Other.W;
 	}
 
 	float4& operator-=(const float4& _Other)
