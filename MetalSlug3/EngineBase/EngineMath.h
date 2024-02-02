@@ -171,6 +171,11 @@ public:
 		return Result;
 	}
 
+	bool operator==(const float4& _Other)
+	{
+		return X == _Other.X && Y == _Other.Y && Z == _Other.Z && W == _Other.W;
+	}
+
 	float4& operator-=(const float4& _Other)
 	{
 		X -= _Other.X;

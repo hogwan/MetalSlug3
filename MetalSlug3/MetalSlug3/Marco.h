@@ -30,6 +30,8 @@ private:
 	float Speed = 300.0f;
 	float InAir_Speed = 100.0f;
 	float Crouch_Speed = 50.0f;
+
+	bool IsZombie = false;
 	bool InAir = false;
 	bool IsRifle = false;
 	bool IsHeavyMachineGun = false;
