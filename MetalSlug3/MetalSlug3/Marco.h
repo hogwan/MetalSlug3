@@ -18,13 +18,12 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* UpperBodyRenderer;
-	UImageRenderer* LowerBodyRenderer;
-	UImageRenderer* AllBodyRenderer;
-	UImageRenderer* ZombieArmRenderer;
-	UImageRenderer* ZombieLaunchEffectRenderer;
-	UImageRenderer* ZombieProjectileRenderer;
-
+	UImageRenderer* UpperBodyRenderer = nullptr;
+	UImageRenderer* LowerBodyRenderer = nullptr;
+	UImageRenderer* AllBodyRenderer = nullptr;
+	UImageRenderer* ZombieArmRenderer = nullptr;
+	UImageRenderer* ZombieLaunchEffectRenderer = nullptr;
+	UImageRenderer* ZombieProjectileRenderer = nullptr;
 
 	FVector MoveDir = FVector::Zero;
 	FVector ShootDir = FVector::Right;
