@@ -66,8 +66,8 @@ UpperBodyRenderer->CreateAnimation("Rifle_AimUpShoot_NormalToUp_HeavyMachineGun_
 UpperBodyRenderer->CreateAnimation("Rifle_AimUpShoot_NormalToUp_HeavyMachineGun_Left", "Marco_face-Resource.png", 1240, 1241, 0.08f, true);\
 UpperBodyRenderer->CreateAnimation("Rifle_AimUpShoot_UpToNormal_HeavyMachineGun_Right", "Marco_face-Resource.png", 1260, 1261, 0.08f, true);\
 UpperBodyRenderer->CreateAnimation("Rifle_AimUpShoot_UpToNormal_HeavyMachineGun_Left", "Marco_face-Resource.png", 1280, 1281, 0.08f, true);\
-UpperBodyRenderer->CreateAnimation("Rifle_Aim_NormalToDown_Right", "Marco_face-Resource.png", 1300, 1302, 0.08f, true);\
-UpperBodyRenderer->CreateAnimation("Rifle_Aim_NormalToDown_Left", "Marco_face-Resource.png", 1320, 1322, 0.08f, true);\
+UpperBodyRenderer->CreateAnimation("Rifle_Aim_NormalToDown_Right", "Marco_face-Resource.png", 1300, 1302, 0.08f, false);\
+UpperBodyRenderer->CreateAnimation("Rifle_Aim_NormalToDown_Left", "Marco_face-Resource.png", 1320, 1322, 0.08f, false);\
 UpperBodyRenderer->CreateAnimation("Rifle_Aim_DownToNormal_Right", "Marco_face-Resource.png", 1340, 1342, 0.08f, true);\
 UpperBodyRenderer->CreateAnimation("Rifle_Aim_DownToNormal_Left", "Marco_face-Resource.png", 1360, 1362, 0.08f, true);\
 UpperBodyRenderer->CreateAnimation("Rifle_AimDownShoot_HeavyMachineGun_Right", "Exception1_150by150_HeavyMacineGun_JumpUpDownShoot.png", 8, 11, 0.08f, true);\

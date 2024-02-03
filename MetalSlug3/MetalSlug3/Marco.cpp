@@ -445,15 +445,15 @@ void Marco::RightKeyUpLogic(float _DeltaTime)
 	{
 		if ((PrevRenderState & CROUCH) && !(PrevRenderState & AIMUP))
 		{
-			if (false == EngineInput::IsPress(VK_RIGHT))
+			if (false == EngineInput::IsPress(VK_LEFT))
 			{
 				if (IsRifle)
 				{
-					AllBodyRenderer->ChangeAnimation("Rifle_Crouch_Idle_Left");
+					AllBodyRenderer->ChangeAnimation("Rifle_Crouch_Idle_Right");
 				}
 				else
 				{
-					AllBodyRenderer->ChangeAnimation("Pistol_Crouch_Idle_Left");
+					AllBodyRenderer->ChangeAnimation("Pistol_Crouch_Idle_Right");
 				}
 			}
 			else
@@ -540,22 +540,22 @@ void Marco::UpKeyDownLogic(float _DeltaTime)
 	{
 		if (IsRifle)
 		{
-			if (PrevMoveDir.X < 0.0f)
+			if (PrevMoveDir.X < 0.0f || MoveDir.X < 0.0f)
 			{
 				UpperBodyRenderer->ChangeAnimation("Rifle_AimUp_Left");
 			}
-			else if (PrevMoveDir.X > 0.0f)
+			else if (PrevMoveDir.X > 0.0f || MoveDir.X > 0.0f)
 			{
 				UpperBodyRenderer->ChangeAnimation("Rifle_AimUp_Right");
 			}
 		}
 		else
 		{
-			if (PrevMoveDir.X < 0.0f)
+			if (PrevMoveDir.X < 0.0f || MoveDir.X < 0.0f)
 			{
 				UpperBodyRenderer->ChangeAnimation("Pistol_Aim_Up_Left");
 			}
-			else if (PrevMoveDir.X > 0.0f)
+			else if (PrevMoveDir.X > 0.0f || MoveDir.X > 0.0f)
 			{
 				UpperBodyRenderer->ChangeAnimation("Pistol_Aim_Up_Right");
 			}
@@ -572,22 +572,22 @@ void Marco::UpKeyUpLogic(float _DeltaTime)
 {
 	if (IsRifle)
 	{
-		if (PrevMoveDir.X < 0.0f)
+		if (PrevMoveDir.X < 0.0f || MoveDir.X < 0.0f)
 		{
 			UpperBodyRenderer->ChangeAnimation("Rifle_Idle_Left");
 		}
-		else if (PrevMoveDir.X > 0.0f)
+		else if (PrevMoveDir.X > 0.0f || MoveDir.X > 0.0f)
 		{
 			UpperBodyRenderer->ChangeAnimation("Rifle_Idle_Right");
 		}
 	}
 	else
 	{
-		if (PrevMoveDir.X < 0.0f)
+		if (PrevMoveDir.X < 0.0f || MoveDir.X < 0.0f)
 		{
 			UpperBodyRenderer->ChangeAnimation("Pistol_Idle_Left");
 		}
-		else if (PrevMoveDir.X > 0.0f)
+		else if (PrevMoveDir.X > 0.0f || MoveDir.X > 0.0f)
 		{
 			UpperBodyRenderer->ChangeAnimation("Pistol_Idle_Right");
 		}
@@ -596,11 +596,43 @@ void Marco::UpKeyUpLogic(float _DeltaTime)
 
 void Marco::DownKeyDownLogic(float _DeltaTime)
 {
-	
+	if (InAir)
+	{
+		if (IsRifle)
+		{
+			if (PrevMoveDir.X < 0.0f || MoveDir.X < 0.0f)
+			{
+				UpperBodyRenderer->ChangeAnimation("Rifle_Aim_NormalToDown_Left");
+			}
+			else if (PrevMoveDir.X > 0.0f || MoveDir.X > 0.0f)
+			{
+				UpperBodyRenderer->ChangeAnimation("Rifle_Aim_NormalToDown_Right");
+			}
+		}
+		else
+		{
+			if (PrevMoveDir.X < 0.0f || MoveDir.X < 0.0f)
+			{
+				UpperBodyRenderer->ChangeAnimation("Pistol_Aim_NormalToDown_Left");
+			}
+			else if (PrevMoveDir.X > 0.0f || MoveDir.X > 0.0f)
+			{
+				UpperBodyRenderer->ChangeAnimation("Pistol_Aim_NormalToDown_Right");
+			}
+		}
+	}
+	else
+	{
+		
+	}
 }
 
 void Marco::DownKeyPressLogic(float _DeltaTime)
 {
+	if (InAir)
+	{
+		ShootDir = FVector::Down;
+	}
 }
 
 void Marco::DownKeyUpLogic(float _DeltaTime)
