@@ -26,8 +26,11 @@ private:
 	UImageRenderer* ZombieProjectileRenderer;
 
 
-	FVector Dir = FVector::Zero;
-	float Speed = 300.0f;
+	FVector MoveDir = FVector::Zero;
+	FVector ShootDir = FVector::Right;
+	FVector PrevMoveDir = FVector::Right;
+
+	float Run_Speed = 300.0f;
 	float InAir_Speed = 100.0f;
 	float Crouch_Speed = 50.0f;
 
@@ -38,7 +41,6 @@ private:
 
 	int RenderState = 0;
 	int PrevRenderState = 0;
-
 
 	void LeftKeyDownLogic(float _DeltaTime);
 	void LeftKeyPressLogic(float _DeltaTime);
