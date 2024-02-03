@@ -829,4 +829,56 @@ void Marco::Jump()
 
 void Marco::Throw()
 {
+	if (IsRifle)
+	{
+
+		if (RenderState & CROUCH)
+		{
+			if (PrevMoveDir.X < 0.0f || MoveDir.X < 0.0f)
+			{
+				AllBodyRenderer->ChangeAnimation("Rifle_Crouch_Throw_Left");
+			}
+			else if (PrevMoveDir.X > 0.0f || MoveDir.X > 0.0f)
+			{
+				AllBodyRenderer->ChangeAnimation("Rifle_Crouch_Throw_Right");
+			}
+		}
+		else
+		{
+			if (PrevMoveDir.X < 0.0f || MoveDir.X < 0.0f)
+			{
+				UpperBodyRenderer->ChangeAnimation("Rifle_Throw_Left");
+			}
+			else if (PrevMoveDir.X > 0.0f || MoveDir.X > 0.0f)
+			{
+				UpperBodyRenderer->ChangeAnimation("Rifle_Throw_Right");
+			}
+		}
+		
+	}
+	else
+	{
+		if (RenderState & CROUCH)
+		{
+			if (PrevMoveDir.X < 0.0f || MoveDir.X < 0.0f)
+			{
+				AllBodyRenderer->ChangeAnimation("Pistol_Crouch_Throw_Left");
+			}
+			else if (PrevMoveDir.X > 0.0f || MoveDir.X > 0.0f)
+			{
+				AllBodyRenderer->ChangeAnimation("Pistol_Crouch_Throw_Right");
+			}
+		}
+		else
+		{
+			if (PrevMoveDir.X < 0.0f || MoveDir.X < 0.0f)
+			{
+				UpperBodyRenderer->ChangeAnimation("Pistol_Throw_Left");
+			}
+			else if (PrevMoveDir.X > 0.0f || MoveDir.X > 0.0f)
+			{
+				UpperBodyRenderer->ChangeAnimation("Pistol_Throw_Right");
+			}
+		}
+	}
 }
