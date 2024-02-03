@@ -158,8 +158,8 @@ void Marco::Tick(float _DeltaTime)
 	if (RenderState & CROUCH || IsZombie)
 	{
 		AllBodyRenderer->ActiveOn();
-		ZombieLaunchEffectRenderer->ActiveOn();
-		ZombieProjectileRenderer->ActiveOn();
+		ZombieLaunchEffectRenderer->ActiveOff();
+		ZombieProjectileRenderer->ActiveOff();
 
 		UpperBodyRenderer->ActiveOff();
 		LowerBodyRenderer->ActiveOff();
@@ -194,9 +194,13 @@ void Marco::LeftKeyDownLogic(float _DeltaTime)
 {
 	PrevMoveDir = MoveDir;
 	MoveDir += FVector::Left;
-	if(!InAir)
+	if (InAir)
 	{
-		if (PrevRenderState & CROUCH)
+
+	}
+	else
+	{
+		if ((PrevRenderState & CROUCH) && !(PrevRenderState & AIMUP))
 		{
 			if (IsRifle)
 			{
@@ -207,10 +211,21 @@ void Marco::LeftKeyDownLogic(float _DeltaTime)
 				AllBodyRenderer->ChangeAnimation("Pistol_Crouch_Move_Left");
 			}
 		}
+		else if (!(PrevRenderState & CROUCH) && (PrevRenderState & AIMUP))
+		{
+			LowerBodyRenderer->ChangeAnimation("LowerBody_Run_Left");
+			if (IsRifle)
+			{
+				UpperBodyRenderer->ChangeAnimation("Rifle_AimUp_Left");
+			}
+			else
+			{
+				UpperBodyRenderer->ChangeAnimation("Pistol_Aim_Up_Left");
+			}
+		}
 		else
 		{
 			LowerBodyRenderer->ChangeAnimation("LowerBody_Run_Left");
-			if (!(PrevRenderState & AIMUP))
 			{
 				if (IsRifle)
 				{
@@ -250,7 +265,7 @@ void Marco::LeftKeyUpLogic(float _DeltaTime)
 	MoveDir -= FVector::Left;
 	if (!InAir)
 	{
-		if (PrevRenderState & CROUCH)
+		if ((PrevRenderState & CROUCH) && !(PrevRenderState & AIMUP))
 		{
 			if (false == EngineInput::IsPress(VK_RIGHT))
 			{
@@ -272,6 +287,33 @@ void Marco::LeftKeyUpLogic(float _DeltaTime)
 				else
 				{
 					AllBodyRenderer->ChangeAnimation("Pistol_Crouch_Move_Right");
+				}
+			}
+		}
+		else if (!(PrevRenderState & CROUCH) && (PrevRenderState & AIMUP))
+		{
+			if (false == EngineInput::IsPress(VK_RIGHT))
+			{
+				LowerBodyRenderer->ChangeAnimation("LowerBody_Idle_Left");
+				if (IsRifle)
+				{
+					UpperBodyRenderer->ChangeAnimation("Rifle_AimUp_Left");
+				}
+				else
+				{
+					UpperBodyRenderer->ChangeAnimation("Pistol_Aim_Up_Left");
+				}
+			}
+			else
+			{
+				LowerBodyRenderer->ChangeAnimation("LowerBody_Run_Right");
+				if (IsRifle)
+				{
+					UpperBodyRenderer->ChangeAnimation("Rifle_AimUp_Right");
+				}
+				else
+				{
+					UpperBodyRenderer->ChangeAnimation("Pistol_Aim_Up_Right");
 				}
 			}
 		}
@@ -310,9 +352,13 @@ void Marco::RightKeyDownLogic(float _DeltaTime)
 {
 	PrevMoveDir = MoveDir;
 	MoveDir += FVector::Right;
-	if (!InAir)
+	if (InAir)
 	{
-		if (PrevRenderState & CROUCH)
+
+	}
+	else
+	{
+		if ((PrevRenderState & CROUCH) && !(PrevRenderState & AIMUP))
 		{
 			if (IsRifle)
 			{
@@ -323,10 +369,21 @@ void Marco::RightKeyDownLogic(float _DeltaTime)
 				AllBodyRenderer->ChangeAnimation("Pistol_Crouch_Move_Right");
 			}
 		}
+		else if (!(PrevRenderState & CROUCH) && (PrevRenderState & AIMUP))
+		{
+			LowerBodyRenderer->ChangeAnimation("LowerBody_Run_Right");
+			if (IsRifle)
+			{
+				UpperBodyRenderer->ChangeAnimation("Rifle_AimUp_Right");
+			}
+			else
+			{
+				UpperBodyRenderer->ChangeAnimation("Pistol_Aim_Up_Right");
+			}
+		}
 		else
 		{
 			LowerBodyRenderer->ChangeAnimation("LowerBody_Run_Right");
-			if (!(PrevRenderState & AIMUP))
 			{
 				if (IsRifle)
 				{
@@ -335,17 +392,6 @@ void Marco::RightKeyDownLogic(float _DeltaTime)
 				else
 				{
 					UpperBodyRenderer->ChangeAnimation("Pistol_Run_Right");
-				}
-			}
-			else
-			{
-				if (IsRifle)
-				{
-					UpperBodyRenderer->ChangeAnimation("Rifle_AimUp_Right");
-				}
-				else
-				{
-					UpperBodyRenderer->ChangeAnimation("Pistol_Aim_Up_Right");
 				}
 			}
 		}
@@ -375,30 +421,61 @@ void Marco::RightKeyUpLogic(float _DeltaTime)
 {
 	PrevMoveDir = MoveDir;
 	MoveDir -= FVector::Right;
-	if (!InAir)
+	if (InAir)
 	{
-		if (PrevRenderState & CROUCH)
+
+	}
+	else
+	{
+		if ((PrevRenderState & CROUCH) && !(PrevRenderState & AIMUP))
 		{
-			if (false == EngineInput::IsPress(VK_LEFT))
+			if (false == EngineInput::IsPress(VK_RIGHT))
 			{
 				if (IsRifle)
 				{
-					AllBodyRenderer->ChangeAnimation("Rifle_Crouch_Idle_Right");
+					AllBodyRenderer->ChangeAnimation("Rifle_Crouch_Idle_Left");
 				}
 				else
 				{
-					AllBodyRenderer->ChangeAnimation("Pistol_Crouch_Idle_Right");
+					AllBodyRenderer->ChangeAnimation("Pistol_Crouch_Idle_Left");
 				}
 			}
 			else
 			{
 				if (IsRifle)
 				{
-					AllBodyRenderer->ChangeAnimation("Rifle_Crouch_Move_Left");
+					AllBodyRenderer->ChangeAnimation("Rifle_Crouch_Move_Right");
 				}
 				else
 				{
-					AllBodyRenderer->ChangeAnimation("Pistol_Crouch_Move_Left");
+					AllBodyRenderer->ChangeAnimation("Pistol_Crouch_Move_Right");
+				}
+			}
+		}
+		else if (!(PrevRenderState & CROUCH) && (PrevRenderState & AIMUP))
+		{
+			if (false == EngineInput::IsPress(VK_LEFT))
+			{
+				LowerBodyRenderer->ChangeAnimation("LowerBody_Idle_Right");
+				if (IsRifle)
+				{
+					UpperBodyRenderer->ChangeAnimation("Rifle_AimUp_Right");
+				}
+				else
+				{
+					UpperBodyRenderer->ChangeAnimation("Pistol_Aim_Up_Right");
+				}
+			}
+			else
+			{
+				LowerBodyRenderer->ChangeAnimation("LowerBody_Run_Left");
+				if (IsRifle)
+				{
+					UpperBodyRenderer->ChangeAnimation("Rifle_AimUp_Left");
+				}
+				else
+				{
+					UpperBodyRenderer->ChangeAnimation("Pistol_Aim_Up_Left");
 				}
 			}
 		}
