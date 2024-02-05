@@ -31,6 +31,7 @@ void CharacterSelect::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(FullPath);
 	}
 
+	SpawnActor<Panel>();
 	SpawnActor<MarcoPhoto>();
 
 }

@@ -16,8 +16,8 @@ void MarcoPhoto::BeginPlay()
 {
 	ThisRenderer = CreateImageRenderer(5);
 	ThisRenderer->SetImage("MarcoPocus.png");
-	ThisRenderer->SetTransform({ {0,0} , {64, 120} });
-	SetActorLocation({ 400.0f, 300.0f });
+	ThisRenderer->SetTransform({ {0,0} , {170, 325} });
+	SetActorLocation({ 130.0f, 300.0f });
 	
 
 
