@@ -31,9 +31,6 @@
     <ClInclude Include="MarcoPhoto.h">
       <Filter>Object\CharacterSelect</Filter>
     </ClInclude>
-    <ClInclude Include="SoliderSelect.h">
-      <Filter>Object\CharacterSelect</Filter>
-    </ClInclude>
     <ClInclude Include="P1.h">
       <Filter>Object\CharacterSelect</Filter>
     </ClInclude>
@@ -61,9 +58,6 @@
       <Filter>Object\CharacterSelect</Filter>
     </ClCompile>
     <ClCompile Include="MarcoPhoto.cpp">
-      <Filter>Object\CharacterSelect</Filter>
-    </ClCompile>
-    <ClCompile Include="SoliderSelect.cpp">
       <Filter>Object\CharacterSelect</Filter>
     </ClCompile>
     <ClCompile Include="P1.cpp">

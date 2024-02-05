@@ -5,7 +5,6 @@
 #include "MarcoPhoto.h"
 #include "P1.h"
 #include "Panel.h"
-#include "SoliderSelect.h"
 
 CharacterSelect::CharacterSelect()
 {
@@ -30,6 +29,8 @@ void CharacterSelect::BeginPlay()
 		// 싱글톤 잊지 말라고 일부러 GetInst를 사용하겠습니다.
 		UEngineResourcesManager::GetInst().LoadImg(FullPath);
 	}
+
+	UEngineResourcesManager::GetInst().CuttingImage("MarcoSelectedAnim.png", 2, 1);
 
 	SpawnActor<Panel>();
 	SpawnActor<MarcoPhoto>();

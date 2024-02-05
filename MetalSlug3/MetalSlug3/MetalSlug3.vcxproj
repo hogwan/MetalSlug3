@@ -181,10 +181,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="SoliderSelect.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bomb.cpp">
@@ -220,10 +216,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="SoliderSelect.cpp">
       <SubType>
       </SubType>
     </ClCompile>

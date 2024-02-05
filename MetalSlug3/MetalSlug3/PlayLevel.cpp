@@ -17,6 +17,7 @@ void PlayLevel::BeginPlay()
 	UEngineDirectory NewPath;
 	NewPath.MoveParent();
 	NewPath.Move("MT3Resource");
+	NewPath.Move("PlayLevel");
 
 	std::list<UEngineFile> AllFileList = NewPath.AllFile({ ".png", ".bmp" }, true);
 	
