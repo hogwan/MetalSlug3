@@ -19,5 +19,7 @@ public:
 
 private:
 	UImageRenderer* ThisRenderer = nullptr;
+	bool isEntered = false;
+	float NextTime = 3.0f;
 };
 

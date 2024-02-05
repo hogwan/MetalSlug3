@@ -27,8 +27,21 @@ void MarcoPhoto::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
-	if (true == EngineInput::IsDown(VK_RETURN))
+	if (NextTime < 0.0f)
 	{
-		ThisRenderer->ChangeAnimation("Marco_Selected");
+		GEngine->ChangeLevel("Play");
+	}
+
+	if (isEntered)
+	{
+		NextTime -= _DeltaTime;
+	}
+	else
+	{
+		if (true == EngineInput::IsDown(VK_RETURN))
+		{
+			ThisRenderer->ChangeAnimation("Marco_Selected");
+			isEntered = true;
+		}
 	}
 }
