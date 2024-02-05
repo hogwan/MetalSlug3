@@ -1,5 +1,5 @@
 #include "MetalSlug3Core.h"
-#include "StartLevel.h"
+#include "CharacterSelect.h"
 #include "PlayLevel.h"
 #include <EngineCore\EngineResourcesManager.h>
 
@@ -15,11 +15,10 @@ void MetalSlug3Core::BeginPlay()
 {
 	// "Title Level" + "을 만들다가 에러가 났습니다";
 	MainWindow.SetWindowScale({ 800,600 });
-	CreateLevel<StartLevel>("StartLevel");
-	CreateLevel<PlayLevel>("PlayLevel");
+	CreateLevel<CharacterSelect>("CharacterSelect");
+	//CreateLevel<PlayLevel>("Play");
 
-	ChangeLevel("PlayLevel");
-
+	ChangeLevel("CharacterSelect");
 	
 }
 

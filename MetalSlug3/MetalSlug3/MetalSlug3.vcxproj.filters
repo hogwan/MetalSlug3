@@ -4,9 +4,6 @@
     <ClInclude Include="PlayLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="StartLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="MetalSlug3Core.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -25,12 +22,24 @@
     <ClInclude Include="CreateMarcoAnimation.h">
       <Filter>Object\Marco</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterSelect.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Panel.h">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="MarcoPhoto.h">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="SoliderSelect.h">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="P1.h">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="StartLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="MetalSlug3Core.cpp">
@@ -45,6 +54,21 @@
     <ClCompile Include="Marco.cpp">
       <Filter>Object\Marco</Filter>
     </ClCompile>
+    <ClCompile Include="CharacterSelect.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Panel.cpp">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="MarcoPhoto.cpp">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="SoliderSelect.cpp">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="P1.cpp">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -58,6 +82,9 @@
     </Filter>
     <Filter Include="Object\Marco">
       <UniqueIdentifier>{e92d751d-3ed7-4c0c-8a1a-8023c1ff2528}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\CharacterSelect">
+      <UniqueIdentifier>{2214c0ae-f3dc-465b-a7f8-66fc247c589c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
