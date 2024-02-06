@@ -2,13 +2,6 @@
 #include <EngineCore\Actor.h>
 #include "ContentsHelper.h"
 
-enum class PlayState
-{
-	Idle,
-	Move,
-	Jump,
-};
-
 enum class BodyRenderer
 {
 	UpperBody,
@@ -40,13 +33,26 @@ protected:
 	void GravityCheck(float _DeltaTime);
 	// 각 상태마다 언제나 가장 위에 실행되어야 한다.
 	void DirCheck(BodyRenderer BodyRendererType);
+	void GunCheck(BodyRenderer BodyRendererType);
 
 	void AddDirectionName(std::string& CurAnimName);
-	void AddRifleName(std::string& CurAnimName);
+	void AddGunTypeName(std::string& CurAnimName);
 
-	PlayState State = PlayState::Idle;
+	EPlayState State = EPlayState::Idle;
 	EActorDir DirState = EActorDir::Right;
 	EGunType GunType = EGunType::Pistol;
+
+	void StateChange(EPlayState _State);
+	void FreeMove(float _DeltaTime);
+	void CameraFreeMove(float _DeltaTime);
+	
+	void Idle(float _DeltaTime);
+	void Move(float _DeltaTime);
+	void Jump(float _DeltaTime);
+
+	void IdleStart();
+	void MoveStart();
+	void JumpStart();
 private:
 	std::vector<UImageRenderer*> Renderer;
 
@@ -69,10 +75,7 @@ private:
 
 	void StateUpdate(float _DeltaTime);
 
-	void Idle(float _DeltaTime);
-	void Move(float _DeltaTime);
-	void Jump(float _DeltaTime);
-
+	float FreeMoveSpeed = 1000.0f;
 
 	float Gravity = 500.0f;
 

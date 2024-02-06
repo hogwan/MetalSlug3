@@ -7,12 +7,6 @@
     <ClInclude Include="MetalSlug3Core.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Bomb.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="Marco.h">
       <Filter>Object\Marco</Filter>
     </ClInclude>
@@ -34,6 +28,15 @@
     <ClInclude Include="ContentsHelper.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGroundMap.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -41,12 +44,6 @@
     </ClCompile>
     <ClCompile Include="MetalSlug3Core.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Bomb.cpp">
-      <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="Marco.cpp">
       <Filter>Object\Marco</Filter>
@@ -66,6 +63,15 @@
     <ClCompile Include="ContentsHelper.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGroundMap.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -82,6 +88,9 @@
     </Filter>
     <Filter Include="Object\CharacterSelect">
       <UniqueIdentifier>{2214c0ae-f3dc-465b-a7f8-66fc247c589c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Projectile">
+      <UniqueIdentifier>{454ad945-6453-4b4f-9e6b-9b8a4893c9dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
