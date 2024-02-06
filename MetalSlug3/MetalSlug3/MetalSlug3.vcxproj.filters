@@ -16,9 +16,6 @@
     <ClInclude Include="Marco.h">
       <Filter>Object\Marco</Filter>
     </ClInclude>
-    <ClInclude Include="MarcoStatus.h">
-      <Filter>Object\Marco</Filter>
-    </ClInclude>
     <ClInclude Include="CreateMarcoAnimation.h">
       <Filter>Object\Marco</Filter>
     </ClInclude>
@@ -33,6 +30,9 @@
     </ClInclude>
     <ClInclude Include="P1.h">
       <Filter>Object\CharacterSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsHelper.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="P1.cpp">
       <Filter>Object\CharacterSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsHelper.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

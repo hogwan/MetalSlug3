@@ -155,6 +155,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ContentsHelper.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="CreateMarcoAnimation.h" />
     <ClInclude Include="Marco.h">
       <SubType>
@@ -164,7 +168,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="MarcoStatus.h" />
     <ClInclude Include="MetalSlug3Core.h">
       <SubType>
       </SubType>
@@ -192,6 +195,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="CharacterSelect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ContentsHelper.cpp">
       <SubType>
       </SubType>
     </ClCompile>

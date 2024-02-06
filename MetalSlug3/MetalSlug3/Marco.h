@@ -1,5 +1,24 @@
 #pragma once
 #include <EngineCore\Actor.h>
+#include "ContentsHelper.h"
+
+enum class PlayState
+{
+	Idle,
+	Move,
+	Jump,
+};
+
+enum class BodyRenderer
+{
+	UpperBody,
+	LowerBody,
+	AllBody,
+	ZombieArm,
+	ZombieLaunchEffect,
+	ZombieProjectile,
+};
+
 class Marco : public AActor
 {
 public:
@@ -17,13 +36,21 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	// 상태 보조 함수
+	void GravityCheck(float _DeltaTime);
+	// 각 상태마다 언제나 가장 위에 실행되어야 한다.
+	void DirCheck(BodyRenderer BodyRendererType);
+
+	void AddDirectionName(std::string& CurAnimName);
+	void AddRifleName(std::string& CurAnimName);
+
+	PlayState State = PlayState::Idle;
+	EActorDir DirState = EActorDir::Right;
+	EGunType GunType = EGunType::Pistol;
 private:
-	UImageRenderer* UpperBodyRenderer = nullptr;
-	UImageRenderer* LowerBodyRenderer = nullptr;
-	UImageRenderer* AllBodyRenderer = nullptr;
-	UImageRenderer* ZombieArmRenderer = nullptr;
-	UImageRenderer* ZombieLaunchEffectRenderer = nullptr;
-	UImageRenderer* ZombieProjectileRenderer = nullptr;
+	std::vector<UImageRenderer*> Renderer;
+
+	std::string CurAnimationName = "None";
 
 	FVector MoveDir = FVector::Zero;
 	FVector ShootDir = FVector::Right;
@@ -35,30 +62,19 @@ private:
 
 	bool IsZombie = false;
 	bool InAir = false;
-	bool IsRifle = false;
 	bool IsHeavyMachineGun = false;
 
 	int RenderState = 0;
 	int PrevRenderState = 0;
 
-	void LeftKeyDownLogic(float _DeltaTime);
-	void LeftKeyPressLogic(float _DeltaTime);
-	void LeftKeyUpLogic(float _DeltaTime);
+	void StateUpdate(float _DeltaTime);
 
-	void RightKeyDownLogic(float _DeltaTime);
-	void RightKeyPressLogic(float _DeltaTime);
-	void RightKeyUpLogic(float _DeltaTime);
+	void Idle(float _DeltaTime);
+	void Move(float _DeltaTime);
+	void Jump(float _DeltaTime);
 
-	void UpKeyDownLogic(float _DeltaTime);
-	void UpKeyPressLogic(float _DeltaTime);
-	void UpKeyUpLogic(float _DeltaTime);
 
-	void DownKeyDownLogic(float _DeltaTime);
-	void DownKeyPressLogic(float _DeltaTime);
-	void DownKeyUpLogic(float _DeltaTime);
+	float Gravity = 500.0f;
 
-	void Shoot();
-	void Jump();
-	void Throw();
 };
 
