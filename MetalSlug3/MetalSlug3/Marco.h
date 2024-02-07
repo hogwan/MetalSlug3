@@ -129,16 +129,19 @@ private:
 	float InAir_Speed = 100.0f;
 	float Crouch_Speed = 50.0f;
 
-	float Pistol_Shoot_CoolTime = 0.05f;
+	float Pistol_Shoot_CoolTime = 0.1f;
 	float Pistol_Shoot_AccTime = 0.0f;
-	float Pistol_Shoot_EndTime = 0.3f;
+	float Pistol_Shoot_EndTime = 0.8f;
 
-	float Throw_CoolTime = 0.08f;
+	float Throw_CoolTime = 0.1f;
 	float Throw_AccTime = 0.0f;
-	float Throw_EndTime = 0.2f;
+	float Throw_EndTime = 0.8f;
 	int RemainBomb = 0;
 
 	float AimNormalToUp_AccTime = 0.0f;
-	float AimNormalToUp_Delay = 0.1f;
+	float AimNormalToUp_Delay = 0.05f;
+
+	float AimNormalToDown_AccTime = 0.0f;
+	float AimNormalToDown_Delay = 0.05f;
 };
 

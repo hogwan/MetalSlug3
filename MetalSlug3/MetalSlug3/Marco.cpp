@@ -319,21 +319,6 @@ void Marco::UpperStateChange(UpperBodyState _UpperState)
 		case UpperBodyState::ForwardJump:
 			UpperForwardJumpStart();
 			break;
-		case UpperBodyState::Shoot:
-			UpperShootStart();
-			break;
-		case UpperBodyState::ForwardJumpShoot:
-			UpperForwardJumpShootStart();
-			break;
-		case UpperBodyState::Throw:
-			UpperThrowStart();
-			break;
-		case UpperBodyState::KnifeAttack1:
-			UpperKnifeAttack1Start();
-			break;
-		case UpperBodyState::KnifeAttack2:
-			UpperKnifeAttack2Start();
-			break;
 		case UpperBodyState::AimNormalToUp:
 			UpperAimNormalToUpStart();
 			break;
@@ -343,21 +328,42 @@ void Marco::UpperStateChange(UpperBodyState _UpperState)
 		case UpperBodyState::AimUp:
 			UpperAimUpStart();
 			break;
-		case UpperBodyState::AimUpShoot:
-			UpperAimUpShootStart();
-			break;
 		case UpperBodyState::AimNormalToDown:
 			UpperAimNormalToDownStart();
 			break;
 		case UpperBodyState::AimDownToNormal:
 			UpperAimDownToNormalStart();
 			break;
-		case UpperBodyState::AimDownShoot:
-			UpperAimDownShootStart();
-			break;
 		default:
 			break;
 		}
+	}
+
+	switch (_UpperState)
+	{
+	case UpperBodyState::Shoot:
+		UpperShootStart();
+		break;
+	case UpperBodyState::ForwardJumpShoot:
+		UpperForwardJumpShootStart();
+		break;
+	case UpperBodyState::Throw:
+		UpperThrowStart();
+		break;
+	case UpperBodyState::KnifeAttack1:
+		UpperKnifeAttack1Start();
+		break;
+	case UpperBodyState::KnifeAttack2:
+		UpperKnifeAttack2Start();
+		break;
+	case UpperBodyState::AimUpShoot:
+		UpperAimUpShootStart();
+		break;
+	case UpperBodyState::AimDownShoot:
+		UpperAimDownShootStart();
+		break;
+	default:
+		break;
 	}
 
 	UpperState = _UpperState;
@@ -393,8 +399,6 @@ void Marco::AllBodyStateChange(AllBodyState _State)
 
 void Marco::UpperIdle(float _DeltaTime)
 {
-	std::string GunCheckedName = GunCheck(BodyRenderer::UpperBody, CurUpperBodyName);
-	DirCheck(BodyRenderer::UpperBody, GunCheckedName);
 	if (
 		true == EngineInput::IsPress(VK_LEFT) ||
 		true == EngineInput::IsPress(VK_RIGHT)
@@ -500,8 +504,6 @@ void Marco::UpperMove(float _DeltaTime)
 
 void Marco::UpperJump(float _DeltaTime)
 {
-	std::string GunCheckedName = GunCheck(BodyRenderer::UpperBody, CurUpperBodyName);
-	DirCheck(BodyRenderer::UpperBody, GunCheckedName);
 
 	if (InAir)
 	{
@@ -544,8 +546,6 @@ void Marco::UpperJump(float _DeltaTime)
 
 void Marco::UpperForwardJump(float _DeltaTime)
 {
-	std::string GunCheckedName = GunCheck(BodyRenderer::UpperBody, CurUpperBodyName);
-	DirCheck(BodyRenderer::UpperBody, GunCheckedName);
 	if (InAir)
 	{
 		if (true == EngineInput::IsPress(VK_UP))
@@ -590,6 +590,26 @@ void Marco::UpperShoot(float _DeltaTime)
 	Pistol_Shoot_AccTime += _DeltaTime;
 	if (Pistol_Shoot_AccTime > Pistol_Shoot_CoolTime)
 	{
+		if (
+			true == EngineInput::IsPress(VK_LEFT) &&
+			DirState == EActorDir::Right
+			)
+		{
+			Pistol_Shoot_AccTime = 0.0;
+			UpperStateChange(UpperBodyState::Move);
+			return;
+		}
+
+		if (
+			true == EngineInput::IsPress(VK_RIGHT) &&
+			DirState == EActorDir::Left
+			)
+		{
+			Pistol_Shoot_AccTime = 0.0;
+			UpperStateChange(UpperBodyState::Move);
+			return;
+		}
+
 		if (true == EngineInput::IsPress(VK_UP))
 		{
 			Pistol_Shoot_AccTime = 0.0f;
@@ -728,6 +748,26 @@ void Marco::UpperThrow(float _DeltaTime)
 		}
 
 		if (
+			true == EngineInput::IsPress(VK_LEFT) &&
+			DirState == EActorDir::Right
+			)
+		{
+			Throw_AccTime = 0.0;
+			UpperStateChange(UpperBodyState::Move);
+			return;
+		}
+
+		if (
+			true == EngineInput::IsPress(VK_RIGHT) &&
+			DirState == EActorDir::Left
+			)
+		{
+			Throw_AccTime = 0.0;
+			UpperStateChange(UpperBodyState::Move);
+			return;
+		}
+
+		if (
 			true == EngineInput::IsDown('A') ||
 			true == EngineInput::IsDown('a')
 			)
@@ -742,7 +782,7 @@ void Marco::UpperThrow(float _DeltaTime)
 			true == EngineInput::IsDown('d')
 			)
 		{
-			if (RemainBomb >= 2)
+			if (RemainBomb < 2)
 			{
 				Throw_AccTime = 0.0f;
 				UpperStateChange(UpperBodyState::Throw);
@@ -840,6 +880,16 @@ void Marco::UpperAimUp(float _DeltaTime)
 		)
 	{
 		UpperStateChange(UpperBodyState::AimUpShoot);
+		return;
+	}
+
+	if (
+		true == EngineInput::IsDown('D') ||
+		true == EngineInput::IsDown('d')
+		)
+	{
+		UpperStateChange(UpperBodyState::Throw);
+		return;
 	}
 
 
@@ -847,18 +897,151 @@ void Marco::UpperAimUp(float _DeltaTime)
 
 void Marco::UpperAimUpShoot(float _DeltaTime)
 {
+	Pistol_Shoot_AccTime += _DeltaTime;
+	if (Pistol_Shoot_AccTime > Pistol_Shoot_CoolTime)
+	{
+
+		if (true == EngineInput::IsFree(VK_UP))
+		{
+			UpperStateChange(UpperBodyState::AimUp);
+		}
+
+		if (
+			true == EngineInput::IsDown('A') ||
+			true == EngineInput::IsDown('a')
+			)
+		{
+			Pistol_Shoot_AccTime = 0.0f;
+			UpperStateChange(UpperBodyState::AimUpShoot);
+			return;
+		}
+
+		if (
+			true == EngineInput::IsDown('D') ||
+			true == EngineInput::IsDown('d')
+			)
+		{
+			Pistol_Shoot_AccTime = 0.0f;
+			UpperStateChange(UpperBodyState::Throw);
+			return;
+		}
+	}
+
+	if (Pistol_Shoot_AccTime > Pistol_Shoot_EndTime)
+	{
+		Pistol_Shoot_AccTime = 0.0f;
+		UpperStateChange(UpperBodyState::AimUp);
+		return;
+	}
 }
 
 void Marco::UpperAimNormalToDown(float _DeltaTime)
 {
+	if (InAir)
+	{
+		if (true == EngineInput::IsFree(VK_DOWN))
+		{
+			UpperStateChange(UpperBodyState::AimDownToNormal);
+		}
+
+		if (
+			true == EngineInput::IsDown('A') ||
+			true == EngineInput::IsDown('a')
+			)
+		{
+			Pistol_Shoot_AccTime = 0.0f;
+			UpperStateChange(UpperBodyState::AimDownShoot);
+			return;
+		}
+
+		if (
+			true == EngineInput::IsDown('D') ||
+			true == EngineInput::IsDown('d')
+			)
+		{
+			Pistol_Shoot_AccTime = 0.0f;
+			UpperStateChange(UpperBodyState::Throw);
+			return;
+		}
+		
+	}
+	else
+	{
+		UpperStateChange(UpperBodyState::Idle);
+	}
 }
 
 void Marco::UpperAimDownToNormal(float _DeltaTime)
 {
+	if (InAir)
+	{
+		if (true == EngineInput::IsPress(VK_DOWN))
+		{
+			UpperStateChange(UpperBodyState::AimNormalToDown);
+		}
+
+		if (
+			true == EngineInput::IsDown('A') ||
+			true == EngineInput::IsDown('a')
+			)
+		{
+			UpperStateChange(UpperBodyState::Shoot);
+			return;
+		}
+
+		if (
+			true == EngineInput::IsDown('D') ||
+			true == EngineInput::IsDown('d')
+			)
+		{
+			Pistol_Shoot_AccTime = 0.0f;
+			UpperStateChange(UpperBodyState::Throw);
+			return;
+		}
+
+	}
+	else
+	{
+		UpperStateChange(UpperBodyState::Idle);
+	}
 }
 
 void Marco::UpperAimDownShoot(float _DeltaTime)
 {
+	if (InAir)
+	{
+		Pistol_Shoot_AccTime += _DeltaTime;
+		if (Pistol_Shoot_AccTime > Pistol_Shoot_CoolTime)
+		{
+
+			if (
+				true == EngineInput::IsDown('A') ||
+				true == EngineInput::IsDown('a')
+				)
+			{
+				Pistol_Shoot_AccTime = 0.0f;
+				UpperStateChange(UpperBodyState::AimDownShoot);
+				return;
+			}
+
+			if (
+				true == EngineInput::IsDown('D') ||
+				true == EngineInput::IsDown('d')
+				)
+			{
+				Pistol_Shoot_AccTime = 0.0f;
+				UpperStateChange(UpperBodyState::Throw);
+				return;
+			}
+		}
+
+		if (Pistol_Shoot_AccTime > Pistol_Shoot_EndTime)
+		{
+			Pistol_Shoot_AccTime = 0.0f;
+			UpperStateChange(UpperBodyState::AimNormalToDown);
+			return;
+		}
+	}
 }
 
 
@@ -940,6 +1123,7 @@ void Marco::UpperAimUpStart()
 
 void Marco::UpperAimUpShootStart()
 {
+	//SpawnActor<Bullet>
 	CurUpperBodyName = "UpperBody_AimUpShoot";
 	UpperStart();
 }
@@ -958,6 +1142,7 @@ void Marco::UpperAimDownToNormalStart()
 
 void Marco::UpperAimDownShootStart()
 {
+	//SpawnActor<Bullet>
 	CurUpperBodyName = "UpperBody_AimDownShoot";
 	UpperStart();
 }
@@ -966,7 +1151,9 @@ void Marco::UpperStart()
 {
 	std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
 	std::string AddedDirectionName = AddDirectionName(AddedGunTypeName);
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName);
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName,true);
+	std::string GunCheckedName = GunCheck(BodyRenderer::UpperBody, CurUpperBodyName);
+	DirCheck(BodyRenderer::UpperBody, GunCheckedName);
 }
 
 void Marco::LowerIdle(float _DeltaTime)
@@ -1053,7 +1240,6 @@ void Marco::LowerMove(float _DeltaTime)
 
 void Marco::LowerJump(float _DeltaTime)
 {
-	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
 	GravityCheck(_DeltaTime);
 	if (InAir)
 	{
@@ -1078,7 +1264,6 @@ void Marco::LowerJump(float _DeltaTime)
 
 void Marco::LowerForwardJump(float _DeltaTime)
 {
-	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
 	GravityCheck(_DeltaTime);
 	if (InAir)
 	{
