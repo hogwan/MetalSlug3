@@ -1,8 +1,8 @@
 #pragma once
 
 #define CreateMarcoAnimation \
-Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_Idle_Right", "Marco_face-Resource.png", 0, 5, 0.08f, true);\
-Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_Idle_Left", "Marco_face-Resource.png", 20, 25, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Idle_Right", "Marco_face-Resource.png", 0, 5, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Idle_Left", "Marco_face-Resource.png", 20, 25, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_Run_Right", "Marco_face-Resource.png", 40, 51, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_Run_Left", "Marco_face-Resource.png", 60, 71, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_Jump_Right", "Marco_face-Resource.png", 80, 87, 0.08f, true);\
@@ -34,8 +34,8 @@ Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_Aim
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_AimDownShoot_Right", "Marco_face-Resource.png", 600, 605, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_AimDownShoot_Left", "Marco_face-Resource.png", 620, 625, 0.08f, true);\
 \
-Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Rifle_Idle_Right", "Marco_face-Resource.png", 640, 645, 0.08f, true);\
-Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Rifle_Idle_Left", "Marco_face-Resource.png", 660, 665, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Rifle_UpperBody_Idle_Right", "Marco_face-Resource.png", 640, 645, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Rifle_UpperBody_Idle_Left", "Marco_face-Resource.png", 660, 665, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Rifle_Run_Right", "Marco_face-Resource.png", 680, 691, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Rifle_Run_Left", "Marco_face-Resource.png", 700, 711, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Rifle_Jump_Right", "Marco_face-Resource.png", 720, 727, 0.08f, true);\

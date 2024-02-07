@@ -57,7 +57,7 @@ void Marco::BeginPlay()
 
 	CreateMarcoAnimation;
 
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation("Pistol_Idle_Right");
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation("Pistol_UpperBody_Idle_Right");
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation("LowerBody_Idle_Right");
 
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation("Zombie_AllBody_Vomit_Right");
@@ -88,7 +88,7 @@ void Marco::GravityCheck(float _DeltaTime)
 	}
 }
 
-void Marco::DirCheck(BodyRenderer BodyRendererType)
+std::string Marco::DirCheck(BodyRenderer _BodyRendererType, std::string _Name)
 {
 	EActorDir Dir = DirState;
 	if (EngineInput::IsPress(VK_LEFT))
@@ -103,18 +103,19 @@ void Marco::DirCheck(BodyRenderer BodyRendererType)
 	if (Dir != DirState)
 	{
 		DirState = Dir;
-		AddDirectionName(CurAnimationName);
-		Renderer[static_cast<int>(BodyRendererType)]->ChangeAnimation(CurAnimationName);
+		std::string ChangeName = AddDirectionName(_Name);
+		Renderer[static_cast<int>(_BodyRendererType)]->ChangeAnimation(ChangeName);
 	}
+
+	return AddDirectionName(_Name);
 }
 
-void Marco::GunCheck(BodyRenderer BodyRendererType)
+std::string Marco::GunCheck(BodyRenderer BodyRendererType, std::string _Name)
 {
-	AddGunTypeName(CurAnimationName);
-	Renderer[static_cast<int>(BodyRendererType)]->ChangeAnimation(CurAnimationName);
+	return AddGunTypeName(_Name);
 }
 
-void Marco::AddDirectionName(std::string& CurAnimName)
+std::string Marco::AddDirectionName(std::string _Name)
 {
 	std::string DirName = "";
 
@@ -130,10 +131,11 @@ void Marco::AddDirectionName(std::string& CurAnimName)
 		break;
 	}
 
-	CurAnimName += DirName;
+	_Name += DirName;
+	return _Name;
 }
 
-void Marco::AddGunTypeName(std::string& CurAnimName)
+std::string Marco::AddGunTypeName(std::string _Name)
 {
 	std::string AddGunType = "";
 
@@ -149,7 +151,8 @@ void Marco::AddGunTypeName(std::string& CurAnimName)
 		break;
 	}
 
-	CurAnimName = AddGunType + CurAnimName;
+	_Name = AddGunType + _Name;
+	return _Name;
 }
 
 void Marco::StateChange(EPlayState _State)
@@ -272,6 +275,7 @@ void Marco::Idle(float _DeltaTime)
 	GravityCheck(_DeltaTime);
 }
 
+
 void Marco::Move(float _DeltaTime)
 {
 }
@@ -282,6 +286,18 @@ void Marco::Jump(float _DeltaTime)
 
 void Marco::IdleStart()
 {
+	CurUpperBodyName = "UpperBody_Idle";
+	CurLowerBodyName = "LowerBody_Idle";
+	std::string UpperTempName = CurUpperBodyName;
+	std::string LowerTempName = CurLowerBodyName;
+	std::string AddedGunTypeUpperName = AddGunTypeName(UpperTempName);
+	std::string AddedDirectionUpperName = AddDirectionName(AddedGunTypeUpperName);
+	std::string AddedDirectionLowerName = AddDirectionName(LowerTempName);
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionUpperName);
+	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(AddedDirectionLowerName);
+	std::string GunCheckedName = GunCheck(BodyRenderer::UpperBody, CurUpperBodyName);
+	std::string DirectionCheckedUpperName = DirCheck(BodyRenderer::UpperBody, GunCheckedName);
+	std::string DirectionCheckedLowerName = DirCheck(BodyRenderer::LowerBody , CurLowerBodyName);
 }
 
 void Marco::MoveStart()

@@ -32,13 +32,13 @@ protected:
 	// 상태 보조 함수
 	void GravityCheck(float _DeltaTime);
 	// 각 상태마다 언제나 가장 위에 실행되어야 한다.
-	void DirCheck(BodyRenderer BodyRendererType);
-	void GunCheck(BodyRenderer BodyRendererType);
+	std::string DirCheck(BodyRenderer _BodyRendererType, std::string _Name);
+	std::string GunCheck(BodyRenderer _BodyRendererType, std::string _Name);
 
-	void AddDirectionName(std::string& CurAnimName);
-	void AddGunTypeName(std::string& CurAnimName);
+	std::string AddDirectionName(std::string _CurAnimName);
+	std::string AddGunTypeName(std::string _CurAnimName);
 
-	EPlayState State = EPlayState::Idle;
+	EPlayState State = EPlayState::Move;
 	EActorDir DirState = EActorDir::Right;
 	EGunType GunType = EGunType::Pistol;
 
@@ -56,7 +56,8 @@ protected:
 private:
 	std::vector<UImageRenderer*> Renderer;
 
-	std::string CurAnimationName = "None";
+	std::string CurUpperBodyName = "None";
+	std::string CurLowerBodyName = "None";
 
 	FVector MoveDir = FVector::Zero;
 	FVector ShootDir = FVector::Right;
