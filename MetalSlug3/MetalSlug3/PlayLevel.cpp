@@ -30,10 +30,9 @@ void PlayLevel::BeginPlay()
 		UEngineResourcesManager::GetInst().LoadImg(FullPath);
 	}
 
-	UEngineResourcesManager::GetInst().CuttingImage("Marco_face-Resource.png", 20, 195);
-	UEngineResourcesManager::GetInst().CuttingImage("Exception1_150by150_HeavyMacineGun_JumpUpDownShoot.png", 4, 4);
-	UEngineResourcesManager::GetInst().CuttingImage("Exception2_100by300_SpawnAndThunder.png", 10, 2);
-	UEngineResourcesManager::GetInst().CuttingImage("Exception3_200by200_ZombieDeathInAir.png", 10, 4);
+	UEngineResourcesManager::GetInst().CuttingImage("Marco_Pistol_UpperBody.png", 44, 10);
+	UEngineResourcesManager::GetInst().CuttingImage("Marco_LowerBody_Left.png", 3, 10);
+	UEngineResourcesManager::GetInst().CuttingImage("Marco_LowerBody_Right.png", 3, 10);
 
 	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("State2Map.png");

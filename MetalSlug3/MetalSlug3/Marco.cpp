@@ -18,10 +18,10 @@ Marco::~Marco()
 
 void Marco::BeginPlay()
 {
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Player));          // UpperBody
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Player));          // LowerBody
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Player));          // AllBody
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Player));          //ZombieArm
+	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::UpperBody));          // UpperBody
+	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::LowerBody));          // LowerBody
+	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::AllBody));          // AllBody
+	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::ZombieArm));          //ZombieArm
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieLaunchEffect
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieProjectile
 
@@ -389,6 +389,26 @@ void Marco::LowerJump(float _DeltaTime)
 
 void Marco::LowerForwardJump(float _DeltaTime)
 {
+	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
+	GravityCheck(_DeltaTime);
+	if (InAir)
+	{
+		FVector MovePos = FVector::Zero;
+		if (EngineInput::IsPress(VK_LEFT))
+		{
+			MovePos += FVector::Left * _DeltaTime * InAir_Speed;
+		}
+
+		if (EngineInput::IsPress(VK_RIGHT))
+		{
+			MovePos += FVector::Right * _DeltaTime * InAir_Speed;
+		}
+		AddActorLocation(MovePos);
+	}
+	else
+	{
+		LowerStateChange(LowerBodyState::Idle);
+	}
 }
 
 void Marco::LowerIdleStart()
@@ -411,6 +431,8 @@ void Marco::LowerJumpStart()
 
 void Marco::LowerForwardJumpStart()
 {
+	CurLowerBodyName = "LowerBody_ForwardJump";
+	LowerStart();
 }
 
 void Marco::LowerStart()

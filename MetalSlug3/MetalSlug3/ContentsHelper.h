@@ -7,8 +7,12 @@ enum MT3RenderOrder
 {
 	Map,
 	Monster,
-	Player,
 	Projectile,
+	ZombieArm,
+	AllBody,
+	LowerBody,
+	UpperBody,
+
 };
 
 enum class EActorDir
