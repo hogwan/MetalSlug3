@@ -115,7 +115,7 @@ private:
 
 
 	bool IsZombie = false;
-	bool InAir = true;
+	bool InAir = false;
 	bool IsHeavyMachineGun = false;
 
 	int RenderState = 0;
@@ -143,5 +143,8 @@ private:
 
 	float AimNormalToDown_AccTime = 0.0f;
 	float AimNormalToDown_Delay = 0.05f;
+
+	float AimDownToNormal_AccTime = 0.0f;
+	float AimDownToNormal_Delay = 0.05f;
 };
 
