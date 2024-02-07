@@ -38,21 +38,35 @@ protected:
 	std::string AddDirectionName(std::string _CurAnimName);
 	std::string AddGunTypeName(std::string _CurAnimName);
 
-	EPlayState State = EPlayState::Move;
+	UpperBodyState UpperState = UpperBodyState::Idle;
+	LowerBodyState LowerState = LowerBodyState::Idle;
+	AllBodyState AllState = AllBodyState::None;
 	EActorDir DirState = EActorDir::Right;
 	EGunType GunType = EGunType::Pistol;
 
-	void StateChange(EPlayState _State);
 	void FreeMove(float _DeltaTime);
 	void CameraFreeMove(float _DeltaTime);
-	
-	void Idle(float _DeltaTime);
-	void Move(float _DeltaTime);
-	void Jump(float _DeltaTime);
 
-	void IdleStart();
-	void MoveStart();
-	void JumpStart();
+	void UpperStateUpdate(float _DeltaTime);
+	void LowerStateUpdate(float _DeltaTime);
+	void AllBodyStateUpdate(float _DeltaTime);
+
+	void UpperStateChange(UpperBodyState _State);
+	void LowerStateChange(LowerBodyState _State);
+	void AllBodyStateChange(AllBodyState _State);
+
+	void LowerIdle(float _DeltaTime);
+	void LowerMove(float _DeltaTime);
+	void LowerJump(float _DeltaTime);
+	void LowerForwardJump(float _DeltaTime);
+
+	void LowerIdleStart();
+	void LowerMoveStart();
+	void LowerJumpStart();
+	void LowerForwardJumpStart();
+	void LowerStart();
+	
+	
 private:
 	std::vector<UImageRenderer*> Renderer;
 
@@ -74,10 +88,8 @@ private:
 	int RenderState = 0;
 	int PrevRenderState = 0;
 
-	void StateUpdate(float _DeltaTime);
 
 	float FreeMoveSpeed = 1000.0f;
-
 	float Gravity = 500.0f;
 
 };

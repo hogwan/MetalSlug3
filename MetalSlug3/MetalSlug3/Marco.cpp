@@ -70,13 +70,17 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->ActiveOff();
 
 	SetActorLocation({ 400, 300 });
-	StateChange(EPlayState::Idle);
+	UpperStateChange(UpperBodyState::Idle);
+	LowerStateChange(LowerBodyState::Idle);
+	AllBodyStateChange(AllBodyState::None);
 }
 
 
 void Marco::Tick(float _DeltaTime)
 {
-	StateUpdate(_DeltaTime);
+	UpperStateUpdate(_DeltaTime);
+	LowerStateUpdate(_DeltaTime);
+	AllBodyStateUpdate(_DeltaTime);
 }
 
 void Marco::GravityCheck(float _DeltaTime)
@@ -155,53 +159,7 @@ std::string Marco::AddGunTypeName(std::string _Name)
 	return _Name;
 }
 
-void Marco::StateChange(EPlayState _State)
-{
-	if (State != _State)
-	{
-		switch (_State)
-		{
-		case EPlayState::Idle:
-			IdleStart();
-			break;
-		case EPlayState::Move:
-			MoveStart();
-			break;
-		case EPlayState::Jump:
-			JumpStart();
-			break;
-		default:
-			break;
-		}
-	}
 
-	State = _State;
-}
-
-void Marco::StateUpdate(float _DeltaTime)
-{
-	switch (State)
-	{
-	case EPlayState::CameraFreeMove:
-		CameraFreeMove(_DeltaTime);
-		break;
-	case EPlayState::FreeMove:
-		FreeMove(_DeltaTime);
-		break;
-	case EPlayState::Idle:
-		Idle(_DeltaTime);
-		break;
-	case EPlayState::Move:
-		Move(_DeltaTime);
-		break;
-	case EPlayState::Jump:
-		Jump(_DeltaTime);
-		break;
-	
-	default:
-		break;
-	}
-}
 void Marco::CameraFreeMove(float _DeltaTime)
 {
 	if (EngineInput::IsPress(VK_LEFT))
@@ -229,7 +187,9 @@ void Marco::CameraFreeMove(float _DeltaTime)
 
 	if (EngineInput::IsDown('2'))
 	{
-		StateChange(EPlayState::Idle);
+		UpperStateChange(UpperBodyState::Idle);
+		LowerStateChange(LowerBodyState::Idle);
+		AllBodyStateChange(AllBodyState::None);
 	}
 }
 void Marco::FreeMove(float _DeltaTime)
@@ -261,49 +221,203 @@ void Marco::FreeMove(float _DeltaTime)
 
 	if (EngineInput::IsDown('1'))
 	{
-		StateChange(EPlayState::Idle);
+		UpperStateChange(UpperBodyState::Idle);
+		LowerStateChange(LowerBodyState::Idle);
+		AllBodyStateChange(AllBodyState::None);
 	}
 }
-
-void Marco::Idle(float _DeltaTime)
+void Marco::UpperStateUpdate(float _DeltaTime)
 {
-	if (true == EngineInput::IsDown('1'))
+}
+void Marco::LowerStateUpdate(float _DeltaTime)
+{
+	switch (LowerState)
 	{
-		StateChange(EPlayState::FreeMove);
+	case LowerBodyState::Idle:
+		LowerIdle(_DeltaTime);
+		break;
+	case LowerBodyState::Move:
+		LowerMove(_DeltaTime);
+		break;
+	case LowerBodyState::Jump:
+		LowerJump(_DeltaTime);
+		break;
+	case LowerBodyState::ForwardJump:
+		LowerForwardJump(_DeltaTime);
+		break;
+	default:
+		break;
+	}
+}
+void Marco::AllBodyStateUpdate(float _DeltaTime)
+{
+}
+void Marco::UpperStateChange(UpperBodyState _State)
+{
+}
+void Marco::LowerStateChange(LowerBodyState _LowerState)
+{
+	if (LowerState != _LowerState)
+	{
+		switch (_LowerState)
+		{
+		case LowerBodyState::Idle:
+			LowerIdleStart();
+			break;
+		case LowerBodyState::Move:
+			LowerMoveStart();
+			break;
+		case LowerBodyState::Jump:
+			LowerJumpStart();
+			break;
+		case LowerBodyState::ForwardJump:
+			LowerForwardJumpStart();
+			break;
+		default:
+			break;
+		}
+	}
+
+	LowerState = _LowerState;
+}
+void Marco::AllBodyStateChange(AllBodyState _State)
+{
+}
+
+void Marco::LowerIdle(float _DeltaTime)
+{
+	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
+	GravityCheck(_DeltaTime);
+	if (
+		true == EngineInput::IsPress(VK_LEFT) ||
+		true == EngineInput::IsPress(VK_RIGHT)
+		)
+	{
+		LowerStateChange(LowerBodyState::Move);
 		return;
 	}
+
+	if (
+		true == EngineInput::IsDown('S') || 
+		true == EngineInput::IsDown('s')
+		)
+	{
+		LowerStateChange(LowerBodyState::Jump);
+	}
+
+	if (true == EngineInput::IsPress(VK_DOWN))
+	{
+		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+	}
+
+}
+
+void Marco::LowerMove(float _DeltaTime)
+{
+	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
 	GravityCheck(_DeltaTime);
+
+	if (true == EngineInput::IsFree(VK_LEFT) && EngineInput::IsFree(VK_RIGHT))
+	{
+		LowerStateChange(LowerBodyState::Idle);
+		return;
+	}
+
+	FVector MovePos = FVector::Zero;
+	if (EngineInput::IsPress(VK_LEFT))
+	{
+		MovePos += FVector::Left * _DeltaTime * Run_Speed;
+	}
+
+	if (EngineInput::IsPress(VK_RIGHT))
+	{
+		MovePos += FVector::Right * _DeltaTime * Run_Speed;
+	}
+
+	if (
+		true == EngineInput::IsDown('S') ||
+		true == EngineInput::IsDown('s')
+		)
+	{
+		LowerStateChange(LowerBodyState::ForwardJump);
+	}
+
+	FVector CheckPos = GetActorLocation();
+	switch (DirState)
+	{
+	case EActorDir::Left:
+		CheckPos.X -= 30;
+		break;
+	case EActorDir::Right:
+		CheckPos.X += 30;
+		break;
+	default:
+		break;
+	}
+	CheckPos.Y -= 30;
+	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
+	if (Color != Color8Bit(255, 0, 255, 0))
+	{
+		AddActorLocation(MovePos);
+		GetWorld()->AddCameraPos(MovePos);
+	}
 }
 
+void Marco::LowerJump(float _DeltaTime)
+{
+	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
+	GravityCheck(_DeltaTime);
+	if (InAir)
+	{
+		FVector MovePos = FVector::Zero;
+		if (EngineInput::IsPress(VK_LEFT))
+		{
+			MovePos += FVector::Left * _DeltaTime * InAir_Speed;
+		}
 
-void Marco::Move(float _DeltaTime)
+		if (EngineInput::IsPress(VK_RIGHT))
+		{
+			MovePos += FVector::Right * _DeltaTime * InAir_Speed;
+		}
+		AddActorLocation(MovePos);
+	}
+	else
+	{
+		LowerStateChange(LowerBodyState::Idle);
+	}
+}
+
+void Marco::LowerForwardJump(float _DeltaTime)
 {
 }
 
-void Marco::Jump(float _DeltaTime)
+void Marco::LowerIdleStart()
 {
-}
-
-void Marco::IdleStart()
-{
-	CurUpperBodyName = "UpperBody_Idle";
 	CurLowerBodyName = "LowerBody_Idle";
-	std::string UpperTempName = CurUpperBodyName;
-	std::string LowerTempName = CurLowerBodyName;
-	std::string AddedGunTypeUpperName = AddGunTypeName(UpperTempName);
-	std::string AddedDirectionUpperName = AddDirectionName(AddedGunTypeUpperName);
-	std::string AddedDirectionLowerName = AddDirectionName(LowerTempName);
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionUpperName);
-	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(AddedDirectionLowerName);
-	std::string GunCheckedName = GunCheck(BodyRenderer::UpperBody, CurUpperBodyName);
-	std::string DirectionCheckedUpperName = DirCheck(BodyRenderer::UpperBody, GunCheckedName);
-	std::string DirectionCheckedLowerName = DirCheck(BodyRenderer::LowerBody , CurLowerBodyName);
+	LowerStart();
 }
 
-void Marco::MoveStart()
+void Marco::LowerMoveStart()
+{
+	CurLowerBodyName = "LowerBody_Move";
+	LowerStart();
+}
+
+void Marco::LowerJumpStart()
+{
+	CurLowerBodyName = "LowerBody_Jump";
+	LowerStart();
+}
+
+void Marco::LowerForwardJumpStart()
 {
 }
 
-void Marco::JumpStart()
+void Marco::LowerStart()
 {
+	std::string AddedDirectionName = AddDirectionName(CurLowerBodyName);
+	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(AddedDirectionName);
+	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
 }
+
+

@@ -23,7 +23,7 @@ enum class EGunType
 	Rifle,
 };
 
-enum class EPlayState
+enum class UpperBodyState
 {
 	None,
 	CameraFreeMove,
@@ -31,6 +31,32 @@ enum class EPlayState
 	Idle,
 	Move,
 	Jump,
+	ForwardJump,
+	AimUp,
+	AimDown,
+	AimNormalToUp,
+	AimUpToNormal,
+	Shoot,
+	Throw,
+};
+
+enum class LowerBodyState
+{
+	None,
+	Idle,
+	Move,
+	Jump,
+	ForwardJump,
+};
+
+enum class AllBodyState
+{
+	None,
+	Crouch_Idle,
+	Crouch_Move,
+	Crouch_Shoot,
+	Crouch_Throw,
+
 };
 
 class UContentsHelper
