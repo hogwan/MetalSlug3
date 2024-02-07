@@ -31,8 +31,7 @@ void PlayLevel::BeginPlay()
 	}
 
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_Pistol_UpperBody.png", 44, 10);
-	UEngineResourcesManager::GetInst().CuttingImage("Marco_LowerBody_Left.png", 3, 10);
-	UEngineResourcesManager::GetInst().CuttingImage("Marco_LowerBody_Right.png", 3, 10);
+	UEngineResourcesManager::GetInst().CuttingImage("Marco_LowerBody.png", 6, 10);
 
 	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("State2Map.png");
