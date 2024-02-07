@@ -25,6 +25,7 @@ enum class EGunType
 {
 	Pistol,
 	Rifle,
+	HeavyMachineGun,
 };
 
 enum class UpperBodyState
@@ -36,12 +37,18 @@ enum class UpperBodyState
 	Move,
 	Jump,
 	ForwardJump,
-	AimUp,
-	AimDown,
+	Shoot,
+	ForwardJumpShoot,
+	Throw,
+	KnifeAttack1,
+	KnifeAttack2,
 	AimNormalToUp,
 	AimUpToNormal,
-	Shoot,
-	Throw,
+	AimUp,
+	AimUpShoot,
+	AimNormalToDown,
+	AimDownToNormal,
+	AimDownShoot,
 };
 
 enum class LowerBodyState

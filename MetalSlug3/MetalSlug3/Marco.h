@@ -55,6 +55,42 @@ protected:
 	void LowerStateChange(LowerBodyState _State);
 	void AllBodyStateChange(AllBodyState _State);
 
+	void UpperIdle(float _DeltaTime);
+	void UpperMove(float _DeltaTime);
+	void UpperJump(float _DeltaTime);
+	void UpperForwardJump(float _DeltaTime);
+	void UpperShoot(float _DeltaTime);
+	void UpperForwardJumpShoot(float _DeltaTime);
+	void UpperThrow(float _DeltaTime);
+	void UpperKnifeAttack1(float _DeltaTime);
+	void UpperKnifeAttack2(float _DeltaTime);
+	void UpperAimNormalToUp(float _DeltaTime);
+	void UpperAimUpToNormal(float _DeltaTime);
+	void UpperAimUp(float _DeltaTime);
+	void UpperAimUpShoot(float _DeltaTime);
+	void UpperAimNormalToDown(float _DeltaTime);
+	void UpperAimDownToNormal(float _DeltaTime);
+	void UpperAimDownShoot(float _DeltaTime);
+
+	void UpperIdleStart();
+	void UpperMoveStart();
+	void UpperJumpStart();
+	void UpperForwardJumpStart();
+	void UpperShootStart();
+	void UpperForwardJumpShootStart();
+	void UpperThrowStart();
+	void UpperKnifeAttack1Start();
+	void UpperKnifeAttack2Start();
+	void UpperAimNormalToUpStart();
+	void UpperAimUpToNormalStart();
+	void UpperAimUpStart();
+	void UpperAimUpShootStart();
+	void UpperAimNormalToDownStart();
+	void UpperAimDownToNormalStart();
+	void UpperAimDownShootStart();
+	void UpperStart();
+
+
 	void LowerIdle(float _DeltaTime);
 	void LowerMove(float _DeltaTime);
 	void LowerJump(float _DeltaTime);
@@ -77,9 +113,6 @@ private:
 	FVector ShootDir = FVector::Right;
 	FVector PrevMoveDir = FVector::Right;
 
-	float Run_Speed = 300.0f;
-	float InAir_Speed = 100.0f;
-	float Crouch_Speed = 50.0f;
 
 	bool IsZombie = false;
 	bool InAir = true;
@@ -92,5 +125,20 @@ private:
 	float FreeMoveSpeed = 1000.0f;
 	float Gravity = 500.0f;
 
+	float Run_Speed = 300.0f;
+	float InAir_Speed = 100.0f;
+	float Crouch_Speed = 50.0f;
+
+	float Pistol_Shoot_CoolTime = 0.05f;
+	float Pistol_Shoot_AccTime = 0.0f;
+	float Pistol_Shoot_EndTime = 0.3f;
+
+	float Throw_CoolTime = 0.08f;
+	float Throw_AccTime = 0.0f;
+	float Throw_EndTime = 0.2f;
+	int RemainBomb = 0;
+
+	float AimNormalToUp_AccTime = 0.0f;
+	float AimNormalToUp_Delay = 0.1f;
 };
 
