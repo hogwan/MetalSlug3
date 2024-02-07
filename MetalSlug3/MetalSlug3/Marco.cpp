@@ -26,12 +26,12 @@ void Marco::BeginPlay()
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieProjectile
 
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ {0,0}, {200, 200} });
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ {0,-24}, {200, 200} });
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetImageCuttingTransform({ {0,0}, {200, 200} });
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransColor({ 0,0,0,255 });
 
-	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetImage("Marco_face-Resource.png");
-	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransform({ {0,16}, {200, 200} });
+	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetImage("Marco_LowerBody.png");
+	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransform({ {0,0}, {200, 200} });
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetImageCuttingTransform({ {0,0}, {200, 200} });
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransColor({ 0,0,0,255 });
 
@@ -59,10 +59,6 @@ void Marco::BeginPlay()
 
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation("Pistol_UpperBody_Idle_Right");
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation("LowerBody_Idle_Right");
-
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation("Pistol_UpperBody_Idle_Right");
-	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ChangeAnimation("Pistol_UpperBody_Idle_Right");
-	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->ChangeAnimation("Pistol_UpperBody_Idle_Right");
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();

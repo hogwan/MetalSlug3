@@ -70,8 +70,8 @@ protected:
 private:
 	std::vector<UImageRenderer*> Renderer;
 
-	std::string CurUpperBodyName = "None";
-	std::string CurLowerBodyName = "None";
+	std::string CurUpperBodyName = "UpperBody_Idle";
+	std::string CurLowerBodyName = "LowerBody_Idle";
 
 	FVector MoveDir = FVector::Zero;
 	FVector ShootDir = FVector::Right;
@@ -82,7 +82,7 @@ private:
 	float Crouch_Speed = 50.0f;
 
 	bool IsZombie = false;
-	bool InAir = false;
+	bool InAir = true;
 	bool IsHeavyMachineGun = false;
 
 	int RenderState = 0;
