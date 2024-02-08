@@ -37,12 +37,14 @@ protected:
 
 	std::string AddDirectionName(std::string _CurAnimName);
 	std::string AddGunTypeName(std::string _CurAnimName);
+	void GunTypeShootCheck();
+	void GunTypeAccTimeUpdate(float _AccTime);
 
 	UpperBodyState UpperState = UpperBodyState::Idle;
 	LowerBodyState LowerState = LowerBodyState::Idle;
 	AllBodyState AllState = AllBodyState::None;
 	EActorDir DirState = EActorDir::Right;
-	EGunType GunType = EGunType::Pistol;
+	EGunType GunType = EGunType::Rifle;
 
 	void FreeMove(float _DeltaTime);
 	void CameraFreeMove(float _DeltaTime);
@@ -194,6 +196,14 @@ private:
 	float Pistol_Shoot_AccTime = 0.0f;
 	float Pistol_Shoot_EndTime = 0.8f;
 
+	float Rifle_Shoot_AccTime = 0.0f;
+	float Rifle_Shoot_CoolTime = 0.35f;
+	float Rifle_Shoot_EndTime = 0.4f;
+
+	float HeavyMachineGun_Shoot_AccTime = 0.0f;
+	float HeavyMachineGun_Shoot_CoolTime = 0.3f;
+	float HeavyMachineGun_Shoot_EndTime = 0.35f;
+
 	float Throw_CoolTime = 0.1f;
 	float Throw_AccTime = 0.0f;
 	float Throw_EndTime = 0.8f;
@@ -210,5 +220,10 @@ private:
 
 	float CrouchIntro_AccTime = 0.0f;
 	float CrouchIntro_Delay = 0.05f;
+
+	float* AccTime = nullptr;
+	float* CoolTime = nullptr;
+	float* EndTime = nullptr;
+
 };
 
