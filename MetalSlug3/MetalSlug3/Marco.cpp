@@ -1550,12 +1550,21 @@ void Marco::AllCrouch_Intro(float _DeltaTime)
 	CrouchIntro_AccTime += _DeltaTime;
 	if (CrouchIntro_AccTime > CrouchIntro_Delay)
 	{
+		CrouchIntro_AccTime = 0.0f;
 		AllStateChange(AllBodyState::Crouch_Idle);
 	}
 }
 
 void Marco::AllCrouch_Outro(float _DeltaTime)
 {
+	CrouchIntro_AccTime += _DeltaTime;
+	if (CrouchIntro_AccTime > CrouchIntro_Delay)
+	{
+		CrouchIntro_AccTime = 0.0f;
+		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
+		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
+	}
 }
 
 void Marco::AllCrouch_Idle(float _DeltaTime)
@@ -1624,6 +1633,8 @@ void Marco::AllCrouch_IntroStart()
 
 void Marco::AllCrouch_OutroStart()
 {
+	CurAllBodyName = "AllBody_Crouch_Outro";
+	AllStart();
 }
 
 void Marco::AllCrouch_IdleStart()
