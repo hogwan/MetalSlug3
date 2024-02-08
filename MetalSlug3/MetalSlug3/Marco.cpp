@@ -68,7 +68,7 @@ void Marco::BeginPlay()
 	SetActorLocation({ 400, 300 });
 	UpperStateChange(UpperBodyState::Idle);
 	LowerStateChange(LowerBodyState::Idle);
-	AllBodyStateChange(AllBodyState::None);
+	AllStateChange(AllBodyState::None);
 }
 
 
@@ -184,7 +184,7 @@ void Marco::CameraFreeMove(float _DeltaTime)
 	{
 		UpperStateChange(UpperBodyState::Idle);
 		LowerStateChange(LowerBodyState::Idle);
-		AllBodyStateChange(AllBodyState::None);
+		AllStateChange(AllBodyState::None);
 	}
 }
 void Marco::FreeMove(float _DeltaTime)
