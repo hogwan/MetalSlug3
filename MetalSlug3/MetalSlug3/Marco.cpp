@@ -218,7 +218,7 @@ void Marco::FreeMove(float _DeltaTime)
 	{
 		UpperStateChange(UpperBodyState::Idle);
 		LowerStateChange(LowerBodyState::Idle);
-		AllBodyStateChange(AllBodyState::None);
+		AllStateChange(AllBodyState::None);
 	}
 }
 void Marco::UpperStateUpdate(float _DeltaTime)
@@ -299,6 +299,89 @@ void Marco::LowerStateUpdate(float _DeltaTime)
 }
 void Marco::AllBodyStateUpdate(float _DeltaTime)
 {
+	switch (AllState)
+	{
+	case AllBodyState::Crouch_Intro:
+		AllCrouch_Intro(_DeltaTime);
+		break;
+	case AllBodyState::Crouch_Outro:
+		AllCrouch_Outro(_DeltaTime);
+		break;
+	case AllBodyState::Crouch_Idle:
+		AllCrouch_Idle(_DeltaTime);
+		break;
+	case AllBodyState::Crouch_Move:
+		AllCrouch_Move(_DeltaTime);
+		break;
+	case AllBodyState::Crouch_Shoot_HeavyMachineGun:
+		AllCrouch_HeavyMachineGun_Shoot(_DeltaTime);
+		break;
+	case AllBodyState::Crouch_Shoot:
+		AllCrouch_Shoot(_DeltaTime);
+		break;
+	case AllBodyState::Crouch_Throw:
+		AllCrouch_Throw(_DeltaTime);
+		break;
+	case AllBodyState::Crouch_KnifeAttack1:
+		AllCrouch_KnifeAttack1(_DeltaTime);
+		break;
+	case AllBodyState::Crouch_KnifeAttack2:
+		AllCrouch_KnifeAttack2(_DeltaTime);
+		break;
+	case AllBodyState::Ceremony:
+		AllCeremony(_DeltaTime);
+		break;
+	case AllBodyState::ElephantSlug_Idle:
+		AllElephantSlug_Idle(_DeltaTime);
+		break;
+	case AllBodyState::ElephantSlug_Move:
+		AllElephantSlug_Move(_DeltaTime);
+		break;
+	case AllBodyState::Death:
+		AllDeath(_DeltaTime);
+		break;
+	case AllBodyState::DeathInAir:
+		AllDeathInAir(_DeltaTime);
+		break;
+	case AllBodyState::DeathByKnife:
+		AllDeathByKnife(_DeltaTime);
+		break;
+	case AllBodyState::TransformToZombie_Intro:
+		Zombie_AllTransformToZombie_Intro(_DeltaTime);
+		break;
+	case AllBodyState::TransformToZombie_Falling:
+		Zombie_AllTransformToZombie_Falling(_DeltaTime);
+		break;
+	case AllBodyState::TransformToZombie_Rising:
+		Zombie_AllTransformToZombie_Rising(_DeltaTime);
+		break;
+	case AllBodyState::Zombie_Idle:
+		Zombie_AllIdle(_DeltaTime);
+		break;
+	case AllBodyState::Zombie_Move:
+		Zombie_AllMove(_DeltaTime);
+		break;
+	case AllBodyState::Zombie_Turn:
+		Zombie_AllTurn(_DeltaTime);
+		break;
+	case AllBodyState::Zombie_AimupTurn:
+		Zombie_AllAimupTurn(_DeltaTime);
+		break;
+	case AllBodyState::Zombie_Jump:
+		Zombie_AllJump(_DeltaTime);
+		break;
+	case AllBodyState::Zombie_Vomit:
+		Zombie_AllVomit(_DeltaTime);
+		break;
+	case AllBodyState::Zombie_Death:
+		Zombie_AllDeath(_DeltaTime);
+		break;
+	case AllBodyState::Zombie_DeathInAir:
+		Zombie_AllIdle(_DeltaTime);
+		break;
+	default:
+		break;
+	}
 }
 void Marco::UpperStateChange(UpperBodyState _UpperState)
 {
@@ -396,26 +479,91 @@ void Marco::AllStateChange(AllBodyState _AllState)
 {
 	if (AllState != _AllState)
 	{
-		switch (_AllState)
+		switch (AllState)
 		{
-		case AllBodyState::Idle:
-			LowerIdleStart();
+		case AllBodyState::Crouch_Intro:
+			AllCrouch_IntroStart();
 			break;
-		case LowerBodyState::Move:
-			LowerMoveStart();
+		case AllBodyState::Crouch_Outro:
+			AllCrouch_OutroStart();
 			break;
-		case LowerBodyState::Jump:
-			LowerJumpStart();
+		case AllBodyState::Crouch_Idle:
+			AllCrouch_IdleStart();
 			break;
-		case LowerBodyState::ForwardJump:
-			LowerForwardJumpStart();
+		case AllBodyState::Crouch_Move:
+			AllCrouch_MoveStart();
+			break;
+		case AllBodyState::Crouch_Shoot_HeavyMachineGun:
+			AllCrouch_HeavyMachineGun_ShootStart();
+			break;
+		case AllBodyState::Crouch_Shoot:
+			AllCrouch_ShootStart();
+			break;
+		case AllBodyState::Crouch_Throw:
+			AllCrouch_ThrowStart();
+			break;
+		case AllBodyState::Crouch_KnifeAttack1:
+			AllCrouch_KnifeAttack1Start();
+			break;
+		case AllBodyState::Crouch_KnifeAttack2:
+			AllCrouch_KnifeAttack2Start();
+			break;
+		case AllBodyState::Ceremony:
+			AllCeremonyStart();
+			break;
+		case AllBodyState::ElephantSlug_Idle:
+			AllElephantSlug_IdleStart();
+			break;
+		case AllBodyState::ElephantSlug_Move:
+			AllElephantSlug_MoveStart();
+			break;
+		case AllBodyState::Death:
+			AllDeathStart();
+			break;
+		case AllBodyState::DeathInAir:
+			AllDeathInAirStart();
+			break;
+		case AllBodyState::DeathByKnife:
+			AllDeathByKnifeStart();
+			break;
+		case AllBodyState::TransformToZombie_Intro:
+			Zombie_AllTransformToZombie_IntroStart();
+			break;
+		case AllBodyState::TransformToZombie_Falling:
+			Zombie_AllTransformToZombie_FallingStart();
+			break;
+		case AllBodyState::TransformToZombie_Rising:
+			Zombie_AllTransformToZombie_RisingStart();
+			break;
+		case AllBodyState::Zombie_Idle:
+			Zombie_AllIdleStart();
+			break;
+		case AllBodyState::Zombie_Move:
+			Zombie_AllMoveStart();
+			break;
+		case AllBodyState::Zombie_Turn:
+			Zombie_AllTurnStart();
+			break;
+		case AllBodyState::Zombie_AimupTurn:
+			Zombie_AllAimupTurnStart();
+			break;
+		case AllBodyState::Zombie_Jump:
+			Zombie_AllJumpStart();
+			break;
+		case AllBodyState::Zombie_Vomit:
+			Zombie_AllVomitStart();
+			break;
+		case AllBodyState::Zombie_Death:
+			Zombie_AllDeathStart();
+			break;
+		case AllBodyState::Zombie_DeathInAir:
+			Zombie_AllIdleStart();
 			break;
 		default:
 			break;
 		}
 	}
-
-	LowerState = _LowerState;
+	AllState = _AllState;
 }
 
 void Marco::UpperIdle(float _DeltaTime)
@@ -453,7 +601,7 @@ void Marco::UpperIdle(float _DeltaTime)
 		{
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
-			AllBodyStateChange
+			AllStateChange(AllBodyState::Crouch_Intro);
 			return;
 		}
 
@@ -527,6 +675,8 @@ void Marco::UpperMove(float _DeltaTime)
 	if (true == EngineInput::IsPress(VK_DOWN))
 	{
 		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+		AllStateChange(AllBodyState::Crouch_Intro);
 		return;
 	}
 
@@ -704,6 +854,14 @@ void Marco::UpperShoot(float _DeltaTime)
 		}
 		else
 		{
+			if (true == EngineInput::IsPress(VK_DOWN))
+			{
+				Pistol_Shoot_AccTime = 0.0f;
+				Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
+				Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+				AllStateChange(AllBodyState::Crouch_Intro);
+				return;
+			}
 			
 			if (
 				true == EngineInput::IsDown('S') ||
@@ -849,6 +1007,15 @@ void Marco::UpperThrow(float _DeltaTime)
 		}
 		else
 		{
+			if (true == EngineInput::IsPress(VK_DOWN))
+			{
+				Throw_AccTime = 0.0f;
+				Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
+				Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+				AllStateChange(AllBodyState::Crouch_Intro);
+				return;
+			}
+
 			if (
 				true == EngineInput::IsPress(VK_LEFT) ||
 				true == EngineInput::IsPress(VK_RIGHT)
@@ -1380,6 +1547,11 @@ void Marco::AllSpawn(float _DeltaTime)
 
 void Marco::AllCrouch_Intro(float _DeltaTime)
 {
+	CrouchIntro_AccTime += _DeltaTime;
+	if (CrouchIntro_AccTime > CrouchIntro_Delay)
+	{
+		AllStateChange(AllBodyState::Crouch_Idle);
+	}
 }
 
 void Marco::AllCrouch_Outro(float _DeltaTime)
@@ -1398,6 +1570,10 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 {
 }
 
+void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
+{
+}
+
 void Marco::AllCrouch_Throw(float _DeltaTime)
 {
 }
@@ -1410,7 +1586,7 @@ void Marco::AllCrouch_KnifeAttack2(float _DeltaTime)
 {
 }
 
-void Marco::AllCrouch_Ceremony(float _DeltaTime)
+void Marco::AllCeremony(float _DeltaTime)
 {
 }
 
@@ -1426,20 +1602,24 @@ void Marco::AllDeathByKnife(float _DeltaTime)
 {
 }
 
-void Marco::ElephantSlug_Idle(float _DeltaTime)
+void Marco::AllElephantSlug_Idle(float _DeltaTime)
 {
 }
 
-void Marco::ElephantSlug_Move(float _DeltaTime)
+void Marco::AllElephantSlug_Move(float _DeltaTime)
 {
 }
 
 void Marco::AllSpawnStart()
 {
+	CurAllBodyName = "AllBody_Spawn";
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(CurAllBodyName);
 }
 
 void Marco::AllCrouch_IntroStart()
 {
+	CurAllBodyName = "AllBody_Crouch_Intro";
+	AllStart();
 }
 
 void Marco::AllCrouch_OutroStart()
@@ -1458,6 +1638,10 @@ void Marco::AllCrouch_ShootStart()
 {
 }
 
+void Marco::AllCrouch_HeavyMachineGun_ShootStart()
+{
+}
+
 void Marco::AllCrouch_ThrowStart()
 {
 }
@@ -1470,7 +1654,7 @@ void Marco::AllCrouch_KnifeAttack2Start()
 {
 }
 
-void Marco::AllCrouch_CeremonyStart()
+void Marco::AllCeremonyStart()
 {
 }
 
@@ -1486,12 +1670,21 @@ void Marco::AllDeathByKnifeStart()
 {
 }
 
-void Marco::ElephantSlug_IdleStart()
+void Marco::AllElephantSlug_IdleStart()
 {
 }
 
-void Marco::ElephantSlug_Movestart()
+void Marco::AllElephantSlug_MoveStart()
 {
+}
+
+void Marco::AllStart()
+{
+	std::string AddedGunTypeName = AddGunTypeName(CurAllBodyName);
+	std::string DirectedName = AddDirectionName(AddedGunTypeName);
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName);
+	std::string GunCheckedName = AddGunTypeName(CurAllBodyName);
+	DirCheck(BodyRenderer::AllBody, GunCheckedName);
 }
 
 void Marco::Zombie_AllTransformToZombie_Intro(float _DeltaTime)
@@ -1579,5 +1772,9 @@ void Marco::Zombie_AllDeathStart()
 }
 
 void Marco::Zombie_AllDeathInAirStart()
+{
+}
+
+void Marco::ZombieStart()
 {
 }

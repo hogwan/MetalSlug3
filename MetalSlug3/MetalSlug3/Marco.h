@@ -108,15 +108,16 @@ protected:
 	void AllCrouch_Idle(float _DeltaTime);
 	void AllCrouch_Move(float _DeltaTime);
 	void AllCrouch_Shoot(float _DeltaTime);
+	void AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime);
 	void AllCrouch_Throw(float _DeltaTime);
 	void AllCrouch_KnifeAttack1(float _DeltaTime);
 	void AllCrouch_KnifeAttack2(float _DeltaTime);
-	void AllCrouch_Ceremony(float _DeltaTime);
+	void AllCeremony(float _DeltaTime);
 	void AllDeath(float _DeltaTime);
 	void AllDeathInAir(float _DeltaTime);
 	void AllDeathByKnife(float _DeltaTime);
-	void ElephantSlug_Idle(float _DeltaTime);
-	void ElephantSlug_Move(float _DeltaTime);
+	void AllElephantSlug_Idle(float _DeltaTime);
+	void AllElephantSlug_Move(float _DeltaTime);
 
 	void AllSpawnStart();
 	void AllCrouch_IntroStart();
@@ -124,15 +125,17 @@ protected:
 	void AllCrouch_IdleStart();
 	void AllCrouch_MoveStart();
 	void AllCrouch_ShootStart();
+	void AllCrouch_HeavyMachineGun_ShootStart();
 	void AllCrouch_ThrowStart();
 	void AllCrouch_KnifeAttack1Start();
 	void AllCrouch_KnifeAttack2Start();
-	void AllCrouch_CeremonyStart();
+	void AllCeremonyStart();
 	void AllDeathStart();
 	void AllDeathInAirStart();
 	void AllDeathByKnifeStart();
-	void ElephantSlug_IdleStart();
-	void ElephantSlug_Movestart();
+	void AllElephantSlug_IdleStart();
+	void AllElephantSlug_MoveStart();
+	void AllStart();
 
 
 	void Zombie_AllTransformToZombie_Intro(float _DeltaTime);
@@ -158,12 +161,14 @@ protected:
 	void Zombie_AllVomitStart();
 	void Zombie_AllDeathStart();
 	void Zombie_AllDeathInAirStart();
+	void ZombieStart();
 	
 private:
 	std::vector<UImageRenderer*> Renderer;
 
 	std::string CurUpperBodyName = "UpperBody_Idle";
 	std::string CurLowerBodyName = "LowerBody_Idle";
+	std::string CurAllBodyName = "Crouch_Idle";
 
 	FVector MoveDir = FVector::Zero;
 	FVector ShootDir = FVector::Right;
@@ -202,5 +207,8 @@ private:
 
 	float AimDownToNormal_AccTime = 0.0f;
 	float AimDownToNormal_Delay = 0.05f;
+
+	float CrouchIntro_AccTime = 0.0f;
+	float CrouchIntro_Delay = 0.05f;
 };
 

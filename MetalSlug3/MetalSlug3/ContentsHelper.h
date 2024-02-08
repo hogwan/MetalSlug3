@@ -74,7 +74,7 @@ enum class AllBodyState
 	Crouch_KnifeAttack2,
 	Ceremony,
 	ElephantSlug_Idle,
-	ElephantSlug_Walk,
+	ElephantSlug_Move,
 	Death,
 	DeathInAir,
 	DeathByKnife,
