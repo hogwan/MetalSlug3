@@ -38,7 +38,7 @@ void MarcoPhoto::Tick(float _DeltaTime)
 	}
 	else
 	{
-		if (true == EngineInput::IsDown(VK_RETURN))
+		if (true == UEngineInput::IsDown(VK_RETURN))
 		{
 			ThisRenderer->ChangeAnimation("Marco_Selected");
 			isEntered = true;

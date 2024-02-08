@@ -33,7 +33,7 @@ void ABackGroundMap::Tick(float _DeltaTime)
 
 
 
-	if (EngineInput::IsDown('O'))
+	if (UEngineInput::IsDown('O'))
 	{
 		SwitchDebug();
 	}

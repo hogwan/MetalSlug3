@@ -85,11 +85,11 @@ void Marco::GravityCheck(float _DeltaTime)
 std::string Marco::DirCheck(BodyRenderer _BodyRendererType, std::string _Name)
 {
 	EActorDir Dir = DirState;
-	if (EngineInput::IsPress(VK_LEFT))
+	if (UEngineInput::IsPress(VK_LEFT))
 	{
 		Dir = EActorDir::Left;
 	}
-	if (EngineInput::IsPress(VK_RIGHT))
+	if (UEngineInput::IsPress(VK_RIGHT))
 	{
 		Dir = EActorDir::Right;
 	}
@@ -151,30 +151,30 @@ std::string Marco::AddGunTypeName(std::string _Name)
 
 void Marco::CameraFreeMove(float _DeltaTime)
 {
-	if (EngineInput::IsPress(VK_LEFT))
+	if (UEngineInput::IsPress(VK_LEFT))
 	{
 		GetWorld()->AddCameraPos(FVector::Left * _DeltaTime * 500.0f);
 		// AddActorLocation(FVector::Left * _DeltaTime * 500.0f);
 	}
 
-	if (EngineInput::IsPress(VK_RIGHT))
+	if (UEngineInput::IsPress(VK_RIGHT))
 	{
 		GetWorld()->AddCameraPos(FVector::Right * _DeltaTime * 500.0f);
 	}
 
-	if (EngineInput::IsPress(VK_UP))
+	if (UEngineInput::IsPress(VK_UP))
 	{
 		GetWorld()->AddCameraPos(FVector::Up * _DeltaTime * 500.0f);
 		// AddActorLocation(FVector::Up * _DeltaTime * 500.0f);
 	}
 
-	if (EngineInput::IsPress(VK_DOWN))
+	if (UEngineInput::IsPress(VK_DOWN))
 	{
 		GetWorld()->AddCameraPos(FVector::Down * _DeltaTime * 500.0f);
 		// AddActorLocation(FVector::Down * _DeltaTime * 500.0f);
 	}
 
-	if (EngineInput::IsDown('2'))
+	if (UEngineInput::IsDown('2'))
 	{
 		UpperStateChange(UpperBodyState::Idle);
 		LowerStateChange(LowerBodyState::Idle);
@@ -185,22 +185,22 @@ void Marco::FreeMove(float _DeltaTime)
 {
 	FVector MovePos;
 
-	if (EngineInput::IsPress(VK_LEFT))
+	if (UEngineInput::IsPress(VK_LEFT))
 	{
 		MovePos += FVector::Left * _DeltaTime * FreeMoveSpeed;
 	}
 
-	if (EngineInput::IsPress(VK_RIGHT))
+	if (UEngineInput::IsPress(VK_RIGHT))
 	{
 		MovePos += FVector::Right * _DeltaTime * FreeMoveSpeed;
 	}
 
-	if (EngineInput::IsPress(VK_UP))
+	if (UEngineInput::IsPress(VK_UP))
 	{
 		MovePos += FVector::Up * _DeltaTime * FreeMoveSpeed;
 	}
 
-	if (EngineInput::IsPress(VK_DOWN))
+	if (UEngineInput::IsPress(VK_DOWN))
 	{
 		MovePos += FVector::Down * _DeltaTime * FreeMoveSpeed;
 	}
@@ -208,7 +208,7 @@ void Marco::FreeMove(float _DeltaTime)
 	AddActorLocation(MovePos);
 	GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, GetActorLocation().Y - 300.0f });
 
-	if (EngineInput::IsDown('1'))
+	if (UEngineInput::IsDown('1'))
 	{
 		UpperStateChange(UpperBodyState::Idle);
 		LowerStateChange(LowerBodyState::Idle);
@@ -566,7 +566,7 @@ void Marco::UpperIdle(float _DeltaTime)
 	DirCheck(BodyRenderer::UpperBody, GunCheckedName);
 	if (InAir)
 	{
-		if (true == EngineInput::IsPress(VK_DOWN))
+		if (true == UEngineInput::IsPress(VK_DOWN))
 		{
 			UpperStateChange(UpperBodyState::AimNormalToDown);
 			return;
@@ -575,23 +575,23 @@ void Marco::UpperIdle(float _DeltaTime)
 	else
 	{
 		if (
-			true == EngineInput::IsPress(VK_LEFT) &&
-			true == EngineInput::IsPress(VK_RIGHT)
+			true == UEngineInput::IsPress(VK_LEFT) &&
+			true == UEngineInput::IsPress(VK_RIGHT)
 			)
 		{
 			return;
 		}
 
 		if (
-			true == EngineInput::IsPress(VK_LEFT) ||
-			true == EngineInput::IsPress(VK_RIGHT)
+			true == UEngineInput::IsPress(VK_LEFT) ||
+			true == UEngineInput::IsPress(VK_RIGHT)
 			)
 		{
 			UpperStateChange(UpperBodyState::Move);
 			return;
 		}
 
-		if (true == EngineInput::IsPress(VK_DOWN))
+		if (true == UEngineInput::IsPress(VK_DOWN))
 		{
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
@@ -600,8 +600,8 @@ void Marco::UpperIdle(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('S') ||
-			true == EngineInput::IsDown('s')
+			true == UEngineInput::IsDown('S') ||
+			true == UEngineInput::IsDown('s')
 			)
 		{
 			UpperStateChange(UpperBodyState::Jump);
@@ -609,7 +609,7 @@ void Marco::UpperIdle(float _DeltaTime)
 		}
 	}
 
-	if (true == EngineInput::IsPress(VK_UP))
+	if (true == UEngineInput::IsPress(VK_UP))
 	{
 		UpperStateChange(UpperBodyState::AimNormalToUp);
 		return;
@@ -617,8 +617,8 @@ void Marco::UpperIdle(float _DeltaTime)
 
 
 	if (
-		true == EngineInput::IsDown('A') ||
-		true == EngineInput::IsDown('a')
+		true == UEngineInput::IsDown('A') ||
+		true == UEngineInput::IsDown('a')
 		)
 	{
 		UpperStateChange(UpperBodyState::Shoot);
@@ -627,8 +627,8 @@ void Marco::UpperIdle(float _DeltaTime)
 
 
 	if (
-		true == EngineInput::IsDown('D') ||
-		true == EngineInput::IsDown('d')
+		true == UEngineInput::IsDown('D') ||
+		true == UEngineInput::IsDown('d')
 		)
 	{
 		UpperStateChange(UpperBodyState::Throw);
@@ -643,8 +643,8 @@ void Marco::UpperMove(float _DeltaTime)
 	DirCheck(BodyRenderer::UpperBody, GunCheckedName);
 
 	if (
-		true == EngineInput::IsPress(VK_LEFT) &&
-		true == EngineInput::IsPress(VK_RIGHT)
+		true == UEngineInput::IsPress(VK_LEFT) &&
+		true == UEngineInput::IsPress(VK_RIGHT)
 		)
 	{
 		UpperStateChange(UpperBodyState::Idle);
@@ -652,21 +652,21 @@ void Marco::UpperMove(float _DeltaTime)
 	}
 
 	if (
-		false == EngineInput::IsPress(VK_LEFT) &&
-		false == EngineInput::IsPress(VK_RIGHT)
+		false == UEngineInput::IsPress(VK_LEFT) &&
+		false == UEngineInput::IsPress(VK_RIGHT)
 		)
 	{
 		UpperStateChange(UpperBodyState::Idle);
 		return;
 	}
 
-	if (true == EngineInput::IsPress(VK_UP))
+	if (true == UEngineInput::IsPress(VK_UP))
 	{
 		UpperStateChange(UpperBodyState::AimNormalToUp);
 		return;
 	}
 
-	if (true == EngineInput::IsPress(VK_DOWN))
+	if (true == UEngineInput::IsPress(VK_DOWN))
 	{
 		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
@@ -675,8 +675,8 @@ void Marco::UpperMove(float _DeltaTime)
 	}
 
 	if (
-		true == EngineInput::IsDown('A') ||
-		true == EngineInput::IsDown('a')
+		true == UEngineInput::IsDown('A') ||
+		true == UEngineInput::IsDown('a')
 		)
 	{
 		UpperStateChange(UpperBodyState::Shoot);
@@ -684,8 +684,8 @@ void Marco::UpperMove(float _DeltaTime)
 	}
 
 	if (
-		true == EngineInput::IsDown('S') ||
-		true == EngineInput::IsDown('s')
+		true == UEngineInput::IsDown('S') ||
+		true == UEngineInput::IsDown('s')
 		)
 	{
 		UpperStateChange(UpperBodyState::ForwardJump);
@@ -693,8 +693,8 @@ void Marco::UpperMove(float _DeltaTime)
 	}
 
 	if (
-		true == EngineInput::IsDown('D') ||
-		true == EngineInput::IsDown('d')
+		true == UEngineInput::IsDown('D') ||
+		true == UEngineInput::IsDown('d')
 		)
 	{
 		UpperStateChange(UpperBodyState::Throw);
@@ -707,21 +707,21 @@ void Marco::UpperJump(float _DeltaTime)
 
 	if (InAir)
 	{
-		if (true == EngineInput::IsPress(VK_UP))
+		if (true == UEngineInput::IsPress(VK_UP))
 		{
 			UpperStateChange(UpperBodyState::AimNormalToUp);
 			return;
 		}
 
-		if (true == EngineInput::IsPress(VK_DOWN))
+		if (true == UEngineInput::IsPress(VK_DOWN))
 		{
 			UpperStateChange(UpperBodyState::AimNormalToDown);
 			return;
 		}
 
 		if (
-			true == EngineInput::IsDown('A') ||
-			true == EngineInput::IsDown('a')
+			true == UEngineInput::IsDown('A') ||
+			true == UEngineInput::IsDown('a')
 			)
 		{
 			UpperStateChange(UpperBodyState::Shoot);
@@ -729,8 +729,8 @@ void Marco::UpperJump(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('D') ||
-			true == EngineInput::IsDown('d')
+			true == UEngineInput::IsDown('D') ||
+			true == UEngineInput::IsDown('d')
 			)
 		{
 			UpperStateChange(UpperBodyState::Throw);
@@ -748,21 +748,21 @@ void Marco::UpperForwardJump(float _DeltaTime)
 {
 	if (InAir)
 	{
-		if (true == EngineInput::IsPress(VK_UP))
+		if (true == UEngineInput::IsPress(VK_UP))
 		{
 			UpperStateChange(UpperBodyState::AimNormalToUp);
 			return;
 		}
 
-		if (true == EngineInput::IsPress(VK_DOWN))
+		if (true == UEngineInput::IsPress(VK_DOWN))
 		{
 			UpperStateChange(UpperBodyState::AimNormalToDown);
 			return;
 		}
 
 		if (
-			true == EngineInput::IsDown('A') ||
-			true == EngineInput::IsDown('a')
+			true == UEngineInput::IsDown('A') ||
+			true == UEngineInput::IsDown('a')
 			)
 		{
 			UpperStateChange(UpperBodyState::ForwardJumpShoot);
@@ -770,8 +770,8 @@ void Marco::UpperForwardJump(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('D') ||
-			true == EngineInput::IsDown('d')
+			true == UEngineInput::IsDown('D') ||
+			true == UEngineInput::IsDown('d')
 			)
 		{
 			UpperStateChange(UpperBodyState::Throw);
@@ -820,7 +820,7 @@ void Marco::UpperShoot(float _DeltaTime)
 	if (*AccTime > *CoolTime)
 	{
 		if (
-			true == EngineInput::IsPress(VK_LEFT) &&
+			true == UEngineInput::IsPress(VK_LEFT) &&
 			DirState == EActorDir::Right
 			)
 		{
@@ -830,7 +830,7 @@ void Marco::UpperShoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsPress(VK_RIGHT) &&
+			true == UEngineInput::IsPress(VK_RIGHT) &&
 			DirState == EActorDir::Left
 			)
 		{
@@ -839,7 +839,7 @@ void Marco::UpperShoot(float _DeltaTime)
 			return;
 		}
 
-		if (true == EngineInput::IsPress(VK_UP))
+		if (true == UEngineInput::IsPress(VK_UP))
 		{
 			*AccTime = 0.0f;
 			UpperStateChange(UpperBodyState::AimNormalToUp);
@@ -847,8 +847,8 @@ void Marco::UpperShoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('A') ||
-			true == EngineInput::IsDown('a')
+			true == UEngineInput::IsDown('A') ||
+			true == UEngineInput::IsDown('a')
 			)
 		{
 			*AccTime = 0.0f;
@@ -857,8 +857,8 @@ void Marco::UpperShoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('D') ||
-			true == EngineInput::IsDown('d')
+			true == UEngineInput::IsDown('D') ||
+			true == UEngineInput::IsDown('d')
 			)
 		{
 			*AccTime = 0.0f;
@@ -868,7 +868,7 @@ void Marco::UpperShoot(float _DeltaTime)
 
 		if (InAir)
 		{
-			if (true == EngineInput::IsPress(VK_DOWN))
+			if (true == UEngineInput::IsPress(VK_DOWN))
 			{
 				*AccTime = 0.0f;
 				UpperStateChange(UpperBodyState::AimNormalToDown);
@@ -877,7 +877,7 @@ void Marco::UpperShoot(float _DeltaTime)
 		}
 		else
 		{
-			if (true == EngineInput::IsPress(VK_DOWN))
+			if (true == UEngineInput::IsPress(VK_DOWN))
 			{
 				*AccTime = 0.0f;
 				Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
@@ -887,8 +887,8 @@ void Marco::UpperShoot(float _DeltaTime)
 			}
 			
 			if (
-				true == EngineInput::IsDown('S') ||
-				true == EngineInput::IsDown('s')
+				true == UEngineInput::IsDown('S') ||
+				true == UEngineInput::IsDown('s')
 				)
 			{
 				*AccTime = 0.0f;
@@ -914,14 +914,14 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 		*AccTime += _DeltaTime;
 		if (AccTime > CoolTime)
 		{
-			if (true == EngineInput::IsPress(VK_UP))
+			if (true == UEngineInput::IsPress(VK_UP))
 			{
 				*AccTime = 0.0f;
 				UpperStateChange(UpperBodyState::AimNormalToUp);
 				return;
 			}
 
-			if (true == EngineInput::IsPress(VK_DOWN))
+			if (true == UEngineInput::IsPress(VK_DOWN))
 			{
 				*AccTime = 0.0f;
 				UpperStateChange(UpperBodyState::AimNormalToDown);
@@ -929,8 +929,8 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 			}
 
 			if (
-				true == EngineInput::IsDown('A') ||
-				true == EngineInput::IsDown('a')
+				true == UEngineInput::IsDown('A') ||
+				true == UEngineInput::IsDown('a')
 				)
 			{
 				*AccTime = 0.0f;
@@ -939,8 +939,8 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 			}
 
 			if (
-				true == EngineInput::IsDown('D') ||
-				true == EngineInput::IsDown('d')
+				true == UEngineInput::IsDown('D') ||
+				true == UEngineInput::IsDown('d')
 				)
 			{
 				*AccTime = 0.0f;
@@ -969,7 +969,7 @@ void Marco::UpperThrow(float _DeltaTime)
 	Throw_AccTime += _DeltaTime;
 	if (Throw_AccTime > Throw_CoolTime)
 	{
-		if (true == EngineInput::IsPress(VK_UP))
+		if (true == UEngineInput::IsPress(VK_UP))
 		{
 			Throw_AccTime = 0.0f;
 			UpperStateChange(UpperBodyState::AimNormalToUp);
@@ -977,7 +977,7 @@ void Marco::UpperThrow(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsPress(VK_LEFT) &&
+			true == UEngineInput::IsPress(VK_LEFT) &&
 			DirState == EActorDir::Right
 			)
 		{
@@ -987,7 +987,7 @@ void Marco::UpperThrow(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsPress(VK_RIGHT) &&
+			true == UEngineInput::IsPress(VK_RIGHT) &&
 			DirState == EActorDir::Left
 			)
 		{
@@ -997,8 +997,8 @@ void Marco::UpperThrow(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('A') ||
-			true == EngineInput::IsDown('a')
+			true == UEngineInput::IsDown('A') ||
+			true == UEngineInput::IsDown('a')
 			)
 		{
 			Throw_AccTime = 0.0f;
@@ -1007,8 +1007,8 @@ void Marco::UpperThrow(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('D') ||
-			true == EngineInput::IsDown('d')
+			true == UEngineInput::IsDown('D') ||
+			true == UEngineInput::IsDown('d')
 			)
 		{
 			if (RemainBomb < 2)
@@ -1021,7 +1021,7 @@ void Marco::UpperThrow(float _DeltaTime)
 
 		if (InAir)
 		{
-			if (true == EngineInput::IsPress(VK_DOWN))
+			if (true == UEngineInput::IsPress(VK_DOWN))
 			{
 				Throw_AccTime = 0.0f;
 				UpperStateChange(UpperBodyState::AimNormalToDown);
@@ -1031,7 +1031,7 @@ void Marco::UpperThrow(float _DeltaTime)
 		}
 		else
 		{
-			if (true == EngineInput::IsPress(VK_DOWN))
+			if (true == UEngineInput::IsPress(VK_DOWN))
 			{
 				Throw_AccTime = 0.0f;
 				Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
@@ -1041,8 +1041,8 @@ void Marco::UpperThrow(float _DeltaTime)
 			}
 
 			if (
-				true == EngineInput::IsPress(VK_LEFT) ||
-				true == EngineInput::IsPress(VK_RIGHT)
+				true == UEngineInput::IsPress(VK_LEFT) ||
+				true == UEngineInput::IsPress(VK_RIGHT)
 				)
 			{
 				Throw_AccTime = 0.0f;
@@ -1050,8 +1050,8 @@ void Marco::UpperThrow(float _DeltaTime)
 				return;
 			}
 			if (
-				true == EngineInput::IsDown('S') ||
-				true == EngineInput::IsDown('s')
+				true == UEngineInput::IsDown('S') ||
+				true == UEngineInput::IsDown('s')
 				)
 			{
 				Throw_AccTime = 0.0f;
@@ -1106,15 +1106,15 @@ void Marco::UpperAimUp(float _DeltaTime)
 	std::string GunCheckedName = GunCheck(BodyRenderer::UpperBody, CurUpperBodyName);
 	DirCheck(BodyRenderer::UpperBody, GunCheckedName);
 
-	if (true == EngineInput::IsFree(VK_UP))
+	if (true == UEngineInput::IsFree(VK_UP))
 	{
 		UpperStateChange(UpperBodyState::AimUpToNormal);
 		return;
 	}
 
 	if (
-		true == EngineInput::IsDown('A') ||
-		true == EngineInput::IsDown('a')
+		true == UEngineInput::IsDown('A') ||
+		true == UEngineInput::IsDown('a')
 		)
 	{
 		UpperStateChange(UpperBodyState::AimUpShoot);
@@ -1122,8 +1122,8 @@ void Marco::UpperAimUp(float _DeltaTime)
 	}
 
 	if (
-		true == EngineInput::IsDown('D') ||
-		true == EngineInput::IsDown('d')
+		true == UEngineInput::IsDown('D') ||
+		true == UEngineInput::IsDown('d')
 		)
 	{
 		UpperStateChange(UpperBodyState::Throw);
@@ -1140,15 +1140,15 @@ void Marco::UpperAimUpShoot(float _DeltaTime)
 	if (*AccTime > *CoolTime)
 	{
 
-		if (true == EngineInput::IsFree(VK_UP))
+		if (true == UEngineInput::IsFree(VK_UP))
 		{
 			*AccTime = 0.0f;
 			UpperStateChange(UpperBodyState::AimUp);
 		}
 
 		if (
-			true == EngineInput::IsDown('A') ||
-			true == EngineInput::IsDown('a')
+			true == UEngineInput::IsDown('A') ||
+			true == UEngineInput::IsDown('a')
 			)
 		{
 			*AccTime = 0.0f;
@@ -1157,8 +1157,8 @@ void Marco::UpperAimUpShoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('D') ||
-			true == EngineInput::IsDown('d')
+			true == UEngineInput::IsDown('D') ||
+			true == UEngineInput::IsDown('d')
 			)
 		{
 			*AccTime = 0.0f;
@@ -1179,14 +1179,14 @@ void Marco::UpperAimNormalToDown(float _DeltaTime)
 {
 	if (InAir)
 	{
-		if (true == EngineInput::IsFree(VK_DOWN))
+		if (true == UEngineInput::IsFree(VK_DOWN))
 		{
 			UpperStateChange(UpperBodyState::AimDownToNormal);
 		}
 
 		if (
-			true == EngineInput::IsDown('A') ||
-			true == EngineInput::IsDown('a')
+			true == UEngineInput::IsDown('A') ||
+			true == UEngineInput::IsDown('a')
 			)
 		{
 			UpperStateChange(UpperBodyState::AimDownShoot);
@@ -1194,8 +1194,8 @@ void Marco::UpperAimNormalToDown(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('D') ||
-			true == EngineInput::IsDown('d')
+			true == UEngineInput::IsDown('D') ||
+			true == UEngineInput::IsDown('d')
 			)
 		{
 			UpperStateChange(UpperBodyState::Throw);
@@ -1239,8 +1239,8 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 		{
 
 			if (
-				true == EngineInput::IsDown('A') ||
-				true == EngineInput::IsDown('a')
+				true == UEngineInput::IsDown('A') ||
+				true == UEngineInput::IsDown('a')
 				)
 			{
 				*AccTime = 0.0f;
@@ -1249,8 +1249,8 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 			}
 
 			if (
-				true == EngineInput::IsDown('D') ||
-				true == EngineInput::IsDown('d')
+				true == UEngineInput::IsDown('D') ||
+				true == UEngineInput::IsDown('d')
 				)
 			{
 				*AccTime = 0.0f;
@@ -1258,7 +1258,7 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 				return;
 			}
 
-			if (true == EngineInput::IsFree(VK_DOWN))
+			if (true == UEngineInput::IsFree(VK_DOWN))
 			{
 				*AccTime = 0.0f;
 				UpperStateChange(UpperBodyState::AimDownToNormal);
@@ -1392,16 +1392,16 @@ void Marco::LowerIdle(float _DeltaTime)
 	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
 	GravityCheck(_DeltaTime);
 	if (
-		true == EngineInput::IsPress(VK_LEFT) &&
-		true == EngineInput::IsPress(VK_RIGHT)
+		true == UEngineInput::IsPress(VK_LEFT) &&
+		true == UEngineInput::IsPress(VK_RIGHT)
 		)
 	{
 		return;
 	}
 
 	if (
-		true == EngineInput::IsPress(VK_LEFT) ||
-		true == EngineInput::IsPress(VK_RIGHT)
+		true == UEngineInput::IsPress(VK_LEFT) ||
+		true == UEngineInput::IsPress(VK_RIGHT)
 		)
 	{
 		LowerStateChange(LowerBodyState::Move);
@@ -1409,15 +1409,15 @@ void Marco::LowerIdle(float _DeltaTime)
 	}
 
 	if (
-		true == EngineInput::IsDown('S') || 
-		true == EngineInput::IsDown('s')
+		true == UEngineInput::IsDown('S') || 
+		true == UEngineInput::IsDown('s')
 		)
 	{
 		LowerStateChange(LowerBodyState::Jump);
 		return;
 	}
 
-	if (true == EngineInput::IsPress(VK_DOWN))
+	if (true == UEngineInput::IsPress(VK_DOWN))
 	{
 		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
 		return;
@@ -1431,8 +1431,8 @@ void Marco::LowerMove(float _DeltaTime)
 	GravityCheck(_DeltaTime);
 
 	if (
-		true == EngineInput::IsPress(VK_LEFT) &&
-		true == EngineInput::IsPress(VK_RIGHT)
+		true == UEngineInput::IsPress(VK_LEFT) &&
+		true == UEngineInput::IsPress(VK_RIGHT)
 		)
 	{
 		LowerStateChange(LowerBodyState::Idle);
@@ -1440,8 +1440,8 @@ void Marco::LowerMove(float _DeltaTime)
 	}
 
 	if (
-		false == EngineInput::IsPress(VK_LEFT) && 
-		false == EngineInput::IsPress(VK_RIGHT)
+		false == UEngineInput::IsPress(VK_LEFT) && 
+		false == UEngineInput::IsPress(VK_RIGHT)
 		)
 	{
 		LowerStateChange(LowerBodyState::Idle);
@@ -1449,19 +1449,19 @@ void Marco::LowerMove(float _DeltaTime)
 	}
 
 	FVector MovePos = FVector::Zero;
-	if (EngineInput::IsPress(VK_LEFT))
+	if (UEngineInput::IsPress(VK_LEFT))
 	{
 		MovePos += FVector::Left * _DeltaTime * Run_Speed;
 	}
 
-	if (EngineInput::IsPress(VK_RIGHT))
+	if (UEngineInput::IsPress(VK_RIGHT))
 	{
 		MovePos += FVector::Right * _DeltaTime * Run_Speed;
 	}
 
 	if (
-		true == EngineInput::IsDown('S') ||
-		true == EngineInput::IsDown('s')
+		true == UEngineInput::IsDown('S') ||
+		true == UEngineInput::IsDown('s')
 		)
 	{
 		LowerStateChange(LowerBodyState::ForwardJump);
@@ -1495,12 +1495,12 @@ void Marco::LowerJump(float _DeltaTime)
 	if (InAir)
 	{
 		FVector MovePos = FVector::Zero;
-		if (EngineInput::IsPress(VK_LEFT))
+		if (UEngineInput::IsPress(VK_LEFT))
 		{
 			MovePos += FVector::Left * _DeltaTime * InAir_Speed;
 		}
 
-		if (EngineInput::IsPress(VK_RIGHT))
+		if (UEngineInput::IsPress(VK_RIGHT))
 		{
 			MovePos += FVector::Right * _DeltaTime * InAir_Speed;
 		}
@@ -1519,12 +1519,12 @@ void Marco::LowerForwardJump(float _DeltaTime)
 	if (InAir)
 	{
 		FVector MovePos = FVector::Zero;
-		if (EngineInput::IsPress(VK_LEFT))
+		if (UEngineInput::IsPress(VK_LEFT))
 		{
 			MovePos += FVector::Left * _DeltaTime * InAir_Speed;
 		}
 
-		if (EngineInput::IsPress(VK_RIGHT))
+		if (UEngineInput::IsPress(VK_RIGHT))
 		{
 			MovePos += FVector::Right * _DeltaTime * InAir_Speed;
 		}
@@ -1602,15 +1602,15 @@ void Marco::AllCrouch_Outro(float _DeltaTime)
 
 void Marco::AllCrouch_Idle(float _DeltaTime)
 {
-	if (true == EngineInput::IsFree(VK_DOWN))
+	if (true == UEngineInput::IsFree(VK_DOWN))
 	{
 		AllStateChange(AllBodyState::Crouch_Outro);
 		return;
 	}
 
 	if (
-		true == EngineInput::IsPress(VK_RIGHT) ||
-		true == EngineInput::IsPress(VK_LEFT)
+		true == UEngineInput::IsPress(VK_RIGHT) ||
+		true == UEngineInput::IsPress(VK_LEFT)
 		)
 	{
 		AllStateChange(AllBodyState::Crouch_Move);
@@ -1618,8 +1618,8 @@ void Marco::AllCrouch_Idle(float _DeltaTime)
 	}
 
 	if (
-		true == EngineInput::IsDown('A') ||
-		true == EngineInput::IsDown('a')
+		true == UEngineInput::IsDown('A') ||
+		true == UEngineInput::IsDown('a')
 		)
 	{
 		AllStateChange(AllBodyState::Crouch_Shoot);
@@ -1627,8 +1627,8 @@ void Marco::AllCrouch_Idle(float _DeltaTime)
 	}
 
 	if (
-		true == EngineInput::IsDown('S') ||
-		true == EngineInput::IsDown('s')
+		true == UEngineInput::IsDown('S') ||
+		true == UEngineInput::IsDown('s')
 		)
 	{
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
@@ -1640,8 +1640,8 @@ void Marco::AllCrouch_Idle(float _DeltaTime)
 	}
 
 	if (
-		true == EngineInput::IsDown('D') ||
-		true == EngineInput::IsDown('d')
+		true == UEngineInput::IsDown('D') ||
+		true == UEngineInput::IsDown('d')
 		)
 	{
 		AllStateChange(AllBodyState::Crouch_Throw);
@@ -1651,15 +1651,15 @@ void Marco::AllCrouch_Idle(float _DeltaTime)
 
 void Marco::AllCrouch_Move(float _DeltaTime)
 {
-	if (true == EngineInput::IsFree(VK_DOWN))
+	if (true == UEngineInput::IsFree(VK_DOWN))
 	{
 		AllStateChange(AllBodyState::Crouch_Outro);
 		return;
 	}
 
 	if (
-		false == EngineInput::IsPress(VK_RIGHT) &&
-		false == EngineInput::IsPress(VK_LEFT)
+		false == UEngineInput::IsPress(VK_RIGHT) &&
+		false == UEngineInput::IsPress(VK_LEFT)
 		)
 	{
 		AllStateChange(AllBodyState::Crouch_Idle);
@@ -1667,8 +1667,8 @@ void Marco::AllCrouch_Move(float _DeltaTime)
 	}
 
 	if (
-		true == EngineInput::IsDown('A') ||
-		true == EngineInput::IsDown('a')
+		true == UEngineInput::IsDown('A') ||
+		true == UEngineInput::IsDown('a')
 		)
 	{
 		AllStateChange(AllBodyState::Crouch_Shoot);
@@ -1676,8 +1676,8 @@ void Marco::AllCrouch_Move(float _DeltaTime)
 	}
 
 	if (
-		true == EngineInput::IsDown('S') ||
-		true == EngineInput::IsDown('s')
+		true == UEngineInput::IsDown('S') ||
+		true == UEngineInput::IsDown('s')
 		)
 	{
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
@@ -1689,8 +1689,8 @@ void Marco::AllCrouch_Move(float _DeltaTime)
 	}
 
 	if (
-		true == EngineInput::IsDown('D') ||
-		true == EngineInput::IsDown('d')
+		true == UEngineInput::IsDown('D') ||
+		true == UEngineInput::IsDown('d')
 		)
 	{
 		AllStateChange(AllBodyState::Crouch_Throw);
@@ -1704,7 +1704,7 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 	*AccTime += _DeltaTime;
 	if (*AccTime > *CoolTime)
 	{
-		if (true == EngineInput::IsFree(VK_DOWN))
+		if (true == UEngineInput::IsFree(VK_DOWN))
 		{
 			*AccTime = 0.0f;
 			AllStateChange(AllBodyState::Crouch_Outro);
@@ -1712,8 +1712,8 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsPress(VK_RIGHT) ||
-			true == EngineInput::IsPress(VK_LEFT)
+			true == UEngineInput::IsPress(VK_RIGHT) ||
+			true == UEngineInput::IsPress(VK_LEFT)
 			)
 		{
 			*AccTime = 0.0f;
@@ -1722,8 +1722,8 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('A') ||
-			true == EngineInput::IsDown('a')
+			true == UEngineInput::IsDown('A') ||
+			true == UEngineInput::IsDown('a')
 			)
 		{
 			*AccTime = 0.0f;
@@ -1732,8 +1732,8 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('S') ||
-			true == EngineInput::IsDown('s')
+			true == UEngineInput::IsDown('S') ||
+			true == UEngineInput::IsDown('s')
 			)
 		{
 			*AccTime = 0.0f;
@@ -1746,8 +1746,8 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('D') ||
-			true == EngineInput::IsDown('d')
+			true == UEngineInput::IsDown('D') ||
+			true == UEngineInput::IsDown('d')
 			)
 		{
 			*AccTime = 0.0f;
@@ -1770,7 +1770,7 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 	*AccTime += _DeltaTime;
 	if (*AccTime > *CoolTime)
 	{
-		if (true == EngineInput::IsFree(VK_DOWN))
+		if (true == UEngineInput::IsFree(VK_DOWN))
 		{
 			*AccTime = 0.0f;
 			AllStateChange(AllBodyState::Crouch_Outro);
@@ -1778,8 +1778,8 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsPress(VK_RIGHT) ||
-			true == EngineInput::IsPress(VK_LEFT)
+			true == UEngineInput::IsPress(VK_RIGHT) ||
+			true == UEngineInput::IsPress(VK_LEFT)
 			)
 		{
 			*AccTime = 0.0f;
@@ -1788,8 +1788,8 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('A') ||
-			true == EngineInput::IsDown('a')
+			true == UEngineInput::IsDown('A') ||
+			true == UEngineInput::IsDown('a')
 			)
 		{
 			*AccTime = 0.0f;
@@ -1798,8 +1798,8 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('S') ||
-			true == EngineInput::IsDown('s')
+			true == UEngineInput::IsDown('S') ||
+			true == UEngineInput::IsDown('s')
 			)
 		{
 			*AccTime = 0.0f;
@@ -1812,8 +1812,8 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('D') ||
-			true == EngineInput::IsDown('d')
+			true == UEngineInput::IsDown('D') ||
+			true == UEngineInput::IsDown('d')
 			)
 		{
 			*AccTime = 0.0f;
@@ -1835,7 +1835,7 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 	Throw_AccTime += _DeltaTime;
 	if (Throw_AccTime > Throw_CoolTime)
 	{
-		if (true == EngineInput::IsFree(VK_DOWN))
+		if (true == UEngineInput::IsFree(VK_DOWN))
 		{
 			Throw_AccTime = 0.0f;
 			AllStateChange(AllBodyState::Crouch_Outro);
@@ -1843,8 +1843,8 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsPress(VK_RIGHT) ||
-			true == EngineInput::IsPress(VK_LEFT)
+			true == UEngineInput::IsPress(VK_RIGHT) ||
+			true == UEngineInput::IsPress(VK_LEFT)
 			)
 		{
 			Throw_AccTime = 0.0f;
@@ -1853,8 +1853,8 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('A') ||
-			true == EngineInput::IsDown('a')
+			true == UEngineInput::IsDown('A') ||
+			true == UEngineInput::IsDown('a')
 			)
 		{
 			Throw_AccTime = 0.0f;
@@ -1863,8 +1863,8 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('S') ||
-			true == EngineInput::IsDown('s')
+			true == UEngineInput::IsDown('S') ||
+			true == UEngineInput::IsDown('s')
 			)
 		{
 			Throw_AccTime = 0.0f;
@@ -1877,8 +1877,8 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsDown('D') ||
-			true == EngineInput::IsDown('d')
+			true == UEngineInput::IsDown('D') ||
+			true == UEngineInput::IsDown('d')
 			)
 		{
 			Throw_AccTime = 0.0f;
@@ -1927,8 +1927,8 @@ void Marco::AllDeathByKnife(float _DeltaTime)
 void Marco::AllElephantSlug_Idle(float _DeltaTime)
 {
 	if (
-		true == EngineInput::IsPress(VK_RIGHT) ||
-		true == EngineInput::IsPress(VK_LEFT)
+		true == UEngineInput::IsPress(VK_RIGHT) ||
+		true == UEngineInput::IsPress(VK_LEFT)
 		)
 	{
 		AllStateChange(AllBodyState::ElephantSlug_Move);
@@ -1938,8 +1938,8 @@ void Marco::AllElephantSlug_Idle(float _DeltaTime)
 void Marco::AllElephantSlug_Move(float _DeltaTime)
 {
 	if (
-		false == EngineInput::IsPress(VK_RIGHT) &&
-		false == EngineInput::IsPress(VK_LEFT)
+		false == UEngineInput::IsPress(VK_RIGHT) &&
+		false == UEngineInput::IsPress(VK_LEFT)
 		)
 	{
 		AllStateChange(AllBodyState::ElephantSlug_Idle);
