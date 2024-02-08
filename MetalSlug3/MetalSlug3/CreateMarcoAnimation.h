@@ -87,7 +87,40 @@ Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_
 Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_Idle_Left", "Marco_LowerBody.png", 30, 30, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_Move_Left", "Marco_LowerBody.png", 31, 42, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_Jump_Left", "Marco_LowerBody.png", 43, 50, 0.08f, false);\
-Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_ForwardJump_Left", "Marco_LowerBody.png", 51, 56, 0.08f, false);
+Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_ForwardJump_Left", "Marco_LowerBody.png", 51, 56, 0.08f, false);\
+\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Intro_Right", "Marco_AllBody.png", 0, 2, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Outro_Right", "Marco_AllBody.png", 3, 5, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Idle_Right", "Marco_AllBody.png", 6, 11, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Move_Right", "Marco_AllBody.png", 12, 18, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Shoot_Right", "Marco_AllBody.png", 19, 28, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Throw_Right", "Marco_AllBody.png", 29, 34, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_KnifeAttack1_Right", "Marco_AllBody.png", 35, 41, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_KnifeAttack2_Right", "Marco_AllBody.png", 42, 47, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Ceremony", "Marco_AllBody.png", 48, 53, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_Intro_Right", "Marco_AllBody.png", 54, 56, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_Outro_Right", "Marco_AllBody.png", 57, 59, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_Idle_Right", "Marco_AllBody.png", 60, 65, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_Move_Right", "Marco_AllBody.png", 66, 72, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("HeavyMacineGun_AllBody_Crouch_Shoot_Right", "Marco_AllBody.png", 73, 76, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_Shoot_Right", "Marco_AllBody.png", 77, 86, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_Throw_Right", "Marco_AllBody.png", 87, 92, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_KnifeAttack1_Right", "Marco_AllBody.png", 93, 99, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_KnifeAttack2_Right", "Marco_AllBody.png", 100, 105, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Ceremony", "Marco_AllBody.png", 106, 111, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("AllBody_ElephantSlug_Idle", "Marco_AllBody.png", 112, 117, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("AllBody_ElephantSlug_Move", "Marco_AllBody.png", 118, 125, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("AllBody_Death_Right", "Marco_AllBody.png", 118, 125, 0.08f, true);\
+
+
+
+
+
+
+
+
+
+
 
 
 

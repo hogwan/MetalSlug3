@@ -2007,27 +2007,33 @@ void Marco::AllCrouch_KnifeAttack2Start()
 void Marco::AllCeremonyStart()
 {
 	CurAllBodyName = "AllBody_Ceremony";
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(CurAllBodyName);
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(AddGunTypeName(CurAllBodyName));
 }
 
 void Marco::AllDeathStart()
 {
 	//AddForce
 	CurAllBodyName = "AllBody_Death";
-	AllStart();
+	std::string DirectedName = AddDirectionName(CurAllBodyName);
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName, true);
+	DirCheck(BodyRenderer::AllBody, CurAllBodyName);
 }
 
 void Marco::AllDeathInAirStart()
 {
 	//AddForce
 	CurAllBodyName = "AllBody_DeathInAir";
-	AllStart();
+	std::string DirectedName = AddDirectionName(CurAllBodyName);
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName, true);
+	DirCheck(BodyRenderer::AllBody, CurAllBodyName);
 }
 
 void Marco::AllDeathByKnifeStart()
 {
 	CurAllBodyName = "AllBody_DeathByKnife";
-	AllStart();
+	std::string DirectedName = AddDirectionName(CurAllBodyName);
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName, true);
+	DirCheck(BodyRenderer::AllBody, CurAllBodyName);
 }
 
 void Marco::AllElephantSlug_IdleStart()
