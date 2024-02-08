@@ -1718,7 +1718,7 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsPress(VK_RIGHT) &&
+			true == EngineInput::IsPress(VK_RIGHT) ||
 			true == EngineInput::IsPress(VK_LEFT)
 			)
 		{
@@ -1784,7 +1784,7 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 		}
 
 		if (
-			true == EngineInput::IsPress(VK_RIGHT) &&
+			true == EngineInput::IsPress(VK_RIGHT) ||
 			true == EngineInput::IsPress(VK_LEFT)
 			)
 		{
@@ -1834,19 +1834,81 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 		AllStateChange(AllBodyState::Crouch_Idle);
 		return;
 	}
-	}
 }
 
 void Marco::AllCrouch_Throw(float _DeltaTime)
 {
+	Throw_AccTime += _DeltaTime;
+	if (Throw_AccTime > Throw_CoolTime)
+	{
+		if (true == EngineInput::IsFree(VK_DOWN))
+		{
+			Throw_AccTime = 0.0f;
+			AllStateChange(AllBodyState::Crouch_Outro);
+			return;
+		}
+
+		if (
+			true == EngineInput::IsPress(VK_RIGHT) ||
+			true == EngineInput::IsPress(VK_LEFT)
+			)
+		{
+			Throw_AccTime = 0.0f;
+			AllStateChange(AllBodyState::Crouch_Move);
+			return;
+		}
+
+		if (
+			true == EngineInput::IsDown('A') ||
+			true == EngineInput::IsDown('a')
+			)
+		{
+			Throw_AccTime = 0.0f;
+			AllStateChange(AllBodyState::Crouch_Shoot);
+			return;
+		}
+
+		if (
+			true == EngineInput::IsDown('S') ||
+			true == EngineInput::IsDown('s')
+			)
+		{
+			Throw_AccTime = 0.0f;
+			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
+			UpperStateChange(UpperBodyState::Jump);
+			LowerStateChange(LowerBodyState::Jump);
+			return;
+		}
+
+		if (
+			true == EngineInput::IsDown('D') ||
+			true == EngineInput::IsDown('d')
+			)
+		{
+			Throw_AccTime = 0.0f;
+			AllStateChange(AllBodyState::Crouch_Throw);
+			return;
+		}
+	}
+
+	if (Throw_AccTime > Throw_EndTime)
+	{
+		Throw_AccTime = 0.0f;
+		AllStateChange(AllBodyState::Crouch_Idle);
+		return;
+	}
 }
 
 void Marco::AllCrouch_KnifeAttack1(float _DeltaTime)
 {
+	//콜라이더
 }
 
 void Marco::AllCrouch_KnifeAttack2(float _DeltaTime)
 {
+	//콜라이더
 }
 
 void Marco::AllCeremony(float _DeltaTime)
@@ -1855,22 +1917,39 @@ void Marco::AllCeremony(float _DeltaTime)
 
 void Marco::AllDeath(float _DeltaTime)
 {
+	Destroy(5.0f);
 }
 
 void Marco::AllDeathInAir(float _DeltaTime)
 {
+	Destroy(5.0f);
 }
 
 void Marco::AllDeathByKnife(float _DeltaTime)
 {
+	Destroy(5.0f);
 }
 
 void Marco::AllElephantSlug_Idle(float _DeltaTime)
 {
+	if (
+		true == EngineInput::IsPress(VK_RIGHT) ||
+		true == EngineInput::IsPress(VK_LEFT)
+		)
+	{
+		AllStateChange(AllBodyState::ElephantSlug_Move);
+	}
 }
 
 void Marco::AllElephantSlug_Move(float _DeltaTime)
 {
+	if (
+		false == EngineInput::IsPress(VK_RIGHT) &&
+		false == EngineInput::IsPress(VK_LEFT)
+		)
+	{
+		AllStateChange(AllBodyState::ElephantSlug_Idle);
+	}
 }
 
 void Marco::AllSpawnStart()
@@ -1917,38 +1996,54 @@ void Marco::AllCrouch_HeavyMachineGun_ShootStart()
 
 void Marco::AllCrouch_ThrowStart()
 {
+	CurAllBodyName = "AllBody_Crouch_Throw";
+	AllStart();
 }
 
 void Marco::AllCrouch_KnifeAttack1Start()
 {
+	//콜라이더
 }
 
 void Marco::AllCrouch_KnifeAttack2Start()
 {
+	//콜라이더
 }
 
 void Marco::AllCeremonyStart()
 {
+	CurAllBodyName = "AllBody_Ceremony";
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(CurAllBodyName);
 }
 
 void Marco::AllDeathStart()
 {
+	CurAllBodyName = "AllBody_Death";
+	AllStart();
 }
 
 void Marco::AllDeathInAirStart()
 {
+	CurAllBodyName = "AllBody_DeathInAir";
+	AllStart();
 }
 
 void Marco::AllDeathByKnifeStart()
 {
+	CurAllBodyName = "AllBody_DeathByKnife";
+	AllStart();
 }
 
 void Marco::AllElephantSlug_IdleStart()
 {
+	CurAllBodyName = "AllBody_ElephantSlug_Idle";
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(CurAllBodyName);
 }
 
 void Marco::AllElephantSlug_MoveStart()
 {
+	CurAllBodyName = "AllBody_ElephantSlug_Move";
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(CurAllBodyName);
 }
 
 void Marco::AllStart()
