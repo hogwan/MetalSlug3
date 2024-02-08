@@ -148,6 +148,28 @@ std::string Marco::AddGunTypeName(std::string _Name)
 	return _Name;
 }
 
+void Marco::GunTypeShootCheck()
+{
+	switch (GunType)
+	{
+	case EGunType::Pistol:
+		AccTime = &Pistol_Shoot_AccTime;
+		CoolTime = &Pistol_Shoot_CoolTime;
+		EndTime = &Pistol_Shoot_EndTime;
+		break;
+	case EGunType::Rifle:
+		AccTime = &Rifle_Shoot_AccTime;
+		CoolTime = &Rifle_Shoot_CoolTime;
+		EndTime = &Rifle_Shoot_EndTime;
+		break;
+	case EGunType::HeavyMachineGun:
+		AccTime = &HeavyMachineGun_Shoot_AccTime;
+		CoolTime = &HeavyMachineGun_Shoot_CoolTime;
+		EndTime = &HeavyMachineGun_Shoot_EndTime;
+		break;
+	}
+}
+
 
 void Marco::CameraFreeMove(float _DeltaTime)
 {
@@ -219,6 +241,9 @@ void Marco::UpperStateUpdate(float _DeltaTime)
 {
 	switch (UpperState)
 	{
+	case UpperBodyState::None:
+		UpperNone(_DeltaTime);
+		break;
 	case UpperBodyState::Idle:
 		UpperIdle(_DeltaTime);
 		break;
@@ -275,6 +300,9 @@ void Marco::LowerStateUpdate(float _DeltaTime)
 {
 	switch (LowerState)
 	{
+	case LowerBodyState::None:
+		LowerNone(_DeltaTime);
+		break;
 	case LowerBodyState::Idle:
 		LowerIdle(_DeltaTime);
 		break;
@@ -386,6 +414,9 @@ void Marco::UpperStateChange(UpperBodyState _UpperState)
 	{
 		switch (_UpperState)
 		{
+		case UpperBodyState::None:
+			UpperNoneStart();
+			break;
 		case UpperBodyState::Idle:
 			UpperIdleStart();
 			break;
@@ -453,6 +484,9 @@ void Marco::LowerStateChange(LowerBodyState _LowerState)
 	{
 		switch (_LowerState)
 		{
+		case LowerBodyState::None:
+			LowerNoneStart();
+			break;
 		case LowerBodyState::Idle:
 			LowerIdleStart();
 			break;
@@ -568,6 +602,11 @@ void Marco::AllStateChange(AllBodyState _AllState)
 			break;
 	}
 	AllState = _AllState;
+}
+
+void Marco::UpperNone(float _DeltaTime)
+{
+	UpperStateChange(UpperBodyState::Idle);
 }
 
 void Marco::UpperIdle(float _DeltaTime)
@@ -791,33 +830,6 @@ void Marco::UpperForwardJump(float _DeltaTime)
 		UpperStateChange(UpperBodyState::Idle);
 		return;
 	}
-}
-
-void Marco::GunTypeShootCheck()
-{
-	switch (GunType)
-	{
-	case EGunType::Pistol:
-		AccTime = &Pistol_Shoot_AccTime;
-		CoolTime = &Pistol_Shoot_CoolTime;
-		EndTime = &Pistol_Shoot_EndTime;
-		break;
-	case EGunType::Rifle:
-		AccTime = &Rifle_Shoot_AccTime;
-		CoolTime = &Rifle_Shoot_CoolTime;
-		EndTime = &Rifle_Shoot_EndTime;
-		break;
-	case EGunType::HeavyMachineGun:
-		AccTime = &HeavyMachineGun_Shoot_AccTime;
-		CoolTime = &HeavyMachineGun_Shoot_CoolTime;
-		EndTime = &HeavyMachineGun_Shoot_EndTime;
-		break;
-	}
-
-}
-
-void Marco::GunTypeAccTimeUpdate(float _AccTime)
-{
 }
 
 void Marco::UpperShoot(float _DeltaTime)
@@ -1282,6 +1294,10 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 }
 
 
+void Marco::UpperNoneStart()
+{
+	CurUpperBodyName = "None";
+}
 
 void Marco::UpperIdleStart()
 {
@@ -1393,6 +1409,11 @@ void Marco::UpperStart()
 	DirCheck(BodyRenderer::UpperBody, GunCheckedName);
 }
 
+void Marco::LowerNone(float _DeltaTime)
+{
+	LowerStateChange(LowerBodyState::Idle);
+}
+
 void Marco::LowerIdle(float _DeltaTime)
 {
 	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
@@ -1451,6 +1472,12 @@ void Marco::LowerMove(float _DeltaTime)
 		)
 	{
 		LowerStateChange(LowerBodyState::Idle);
+		return;
+	}
+
+	if (true == UEngineInput::IsPress(VK_DOWN))
+	{
+		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
 		return;
 	}
 
@@ -1543,6 +1570,11 @@ void Marco::LowerForwardJump(float _DeltaTime)
 	}
 }
 
+void Marco::LowerNoneStart()
+{
+	CurLowerBodyName = "None";
+}
+
 void Marco::LowerIdleStart()
 {
 	CurLowerBodyName = "LowerBody_Idle";
@@ -1585,6 +1617,8 @@ void Marco::AllNone(float _DeltaTime)
 	if (true == UEngineInput::IsPress(VK_DOWN))
 	{
 		AllStateChange(AllBodyState::Crouch_Intro);
+		UpperStateChange(UpperBodyState::None);
+		LowerStateChange(LowerBodyState::None);
 		return;
 	}
 }

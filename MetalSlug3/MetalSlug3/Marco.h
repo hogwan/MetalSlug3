@@ -38,7 +38,6 @@ protected:
 	std::string AddDirectionName(std::string _CurAnimName);
 	std::string AddGunTypeName(std::string _CurAnimName);
 	void GunTypeShootCheck();
-	void GunTypeAccTimeUpdate(float _AccTime);
 
 	UpperBodyState UpperState = UpperBodyState::Idle;
 	LowerBodyState LowerState = LowerBodyState::Idle;
@@ -57,6 +56,7 @@ protected:
 	void LowerStateChange(LowerBodyState _State);
 	void AllStateChange(AllBodyState _AllState);
 
+	void UpperNone(float _DeltaTime);
 	void UpperIdle(float _DeltaTime);
 	void UpperMove(float _DeltaTime);
 	void UpperJump(float _DeltaTime);
@@ -74,6 +74,7 @@ protected:
 	void UpperAimDownToNormal(float _DeltaTime);
 	void UpperAimDownShoot(float _DeltaTime);
 
+	void UpperNoneStart();
 	void UpperIdleStart();
 	void UpperMoveStart();
 	void UpperJumpStart();
@@ -92,12 +93,13 @@ protected:
 	void UpperAimDownShootStart();
 	void UpperStart();
 
-
+	void LowerNone(float _DeltaTime);
 	void LowerIdle(float _DeltaTime);
 	void LowerMove(float _DeltaTime);
 	void LowerJump(float _DeltaTime);
 	void LowerForwardJump(float _DeltaTime);
 
+	void LowerNoneStart();
 	void LowerIdleStart();
 	void LowerMoveStart();
 	void LowerJumpStart();
