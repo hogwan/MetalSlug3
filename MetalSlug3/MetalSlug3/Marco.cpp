@@ -1552,6 +1552,7 @@ void Marco::AllCrouch_Intro(float _DeltaTime)
 	{
 		CrouchIntro_AccTime = 0.0f;
 		AllStateChange(AllBodyState::Crouch_Idle);
+		return;
 	}
 }
 
@@ -1564,11 +1565,59 @@ void Marco::AllCrouch_Outro(float _DeltaTime)
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
 		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
+		UpperStateChange(UpperBodyState::Idle);
+		LowerStateChange(LowerBodyState::Idle);
+		return;
 	}
 }
 
 void Marco::AllCrouch_Idle(float _DeltaTime)
 {
+	if (true == EngineInput::IsFree(VK_DOWN))
+	{
+		AllStateChange(AllBodyState::Crouch_Outro);
+		return;
+	}
+
+	if (
+		true == EngineInput::IsPress(VK_RIGHT) ||
+		true == EngineInput::IsPress(VK_LEFT)
+		)
+	{
+		AllStateChange(AllBodyState::Crouch_Move);
+		return;
+	}
+
+	if (
+		true == EngineInput::IsDown('A') ||
+		true == EngineInput::IsDown('a')
+		)
+	{
+		AllStateChange(AllBodyState::Crouch_Shoot);
+		return;
+	}
+
+	if (
+		true == EngineInput::IsDown('S') ||
+		true == EngineInput::IsDown('s')
+		)
+	{
+		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
+		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
+		UpperStateChange(UpperBodyState::Jump);
+		LowerStateChange(LowerBodyState::Jump);
+		return;
+	}
+
+	if (
+		true == EngineInput::IsDown('D') ||
+		true == EngineInput::IsDown('d')
+		)
+	{
+		AllStateChange(AllBodyState::Crouch_Throw);
+		return;
+	}
 }
 
 void Marco::AllCrouch_Move(float _DeltaTime)
@@ -1639,6 +1688,8 @@ void Marco::AllCrouch_OutroStart()
 
 void Marco::AllCrouch_IdleStart()
 {
+	CurAllBodyName = "AllBody_Crouch_Idle";
+	AllStart();
 }
 
 void Marco::AllCrouch_MoveStart()
