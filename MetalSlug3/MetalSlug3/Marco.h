@@ -105,6 +105,7 @@ protected:
 	void LowerStart();
 
 	void AllSpawn(float _DeltaTime);
+	void AllNone(float _DeltaTime);
 	void AllCrouch_Intro(float _DeltaTime);
 	void AllCrouch_Outro(float _DeltaTime);
 	void AllCrouch_Idle(float _DeltaTime);
@@ -122,6 +123,7 @@ protected:
 	void AllElephantSlug_Move(float _DeltaTime);
 
 	void AllSpawnStart();
+	void AllNoneStart();
 	void AllCrouch_IntroStart();
 	void AllCrouch_OutroStart();
 	void AllCrouch_IdleStart();
@@ -183,7 +185,6 @@ private:
 
 	int RenderState = 0;
 	int PrevRenderState = 0;
-
 
 	float FreeMoveSpeed = 1000.0f;
 	float Gravity = 500.0f;

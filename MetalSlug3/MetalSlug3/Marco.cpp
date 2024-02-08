@@ -33,8 +33,8 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransform({ {0,0}, {200, 200} });
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransColor({ 0,0,0,255 });
 
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransform({ {150,-150}, {200, 200} });
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetImage("Marco_AllBody.png");
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransform({ {0,0}, {200, 200} });
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetImage("Marco_UpperBody.png");
@@ -295,6 +295,9 @@ void Marco::AllBodyStateUpdate(float _DeltaTime)
 {
 	switch (AllState)
 	{
+	case AllBodyState::None:
+		AllNone(_DeltaTime);
+		break;
 	case AllBodyState::Crouch_Intro:
 		AllCrouch_Intro(_DeltaTime);
 		break;
@@ -473,8 +476,11 @@ void Marco::AllStateChange(AllBodyState _AllState)
 {
 	if (AllState != _AllState)
 	{
-		switch (AllState)
+		switch (_AllState)
 		{
+		case AllBodyState::None:
+			AllNoneStart();
+			break;
 		case AllBodyState::Crouch_Intro:
 			AllCrouch_IntroStart();
 			break;
@@ -486,21 +492,6 @@ void Marco::AllStateChange(AllBodyState _AllState)
 			break;
 		case AllBodyState::Crouch_Move:
 			AllCrouch_MoveStart();
-			break;
-		case AllBodyState::Crouch_Shoot_HeavyMachineGun:
-			AllCrouch_HeavyMachineGun_ShootStart();
-			break;
-		case AllBodyState::Crouch_Shoot:
-			AllCrouch_ShootStart();
-			break;
-		case AllBodyState::Crouch_Throw:
-			AllCrouch_ThrowStart();
-			break;
-		case AllBodyState::Crouch_KnifeAttack1:
-			AllCrouch_KnifeAttack1Start();
-			break;
-		case AllBodyState::Crouch_KnifeAttack2:
-			AllCrouch_KnifeAttack2Start();
 			break;
 		case AllBodyState::Ceremony:
 			AllCeremonyStart();
@@ -557,6 +548,25 @@ void Marco::AllStateChange(AllBodyState _AllState)
 			break;
 		}
 	}
+
+	switch (_AllState)
+	{
+		case AllBodyState::Crouch_Shoot_HeavyMachineGun:
+			AllCrouch_HeavyMachineGun_ShootStart();
+			break;
+		case AllBodyState::Crouch_Shoot:
+			AllCrouch_ShootStart();
+			break;
+		case AllBodyState::Crouch_Throw:
+			AllCrouch_ThrowStart();
+			break;
+		case AllBodyState::Crouch_KnifeAttack1:
+			AllCrouch_KnifeAttack1Start();
+			break;
+		case AllBodyState::Crouch_KnifeAttack2:
+			AllCrouch_KnifeAttack2Start();
+			break;
+	}
 	AllState = _AllState;
 }
 
@@ -595,7 +605,6 @@ void Marco::UpperIdle(float _DeltaTime)
 		{
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
-			AllStateChange(AllBodyState::Crouch_Intro);
 			return;
 		}
 
@@ -670,7 +679,6 @@ void Marco::UpperMove(float _DeltaTime)
 	{
 		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
-		AllStateChange(AllBodyState::Crouch_Intro);
 		return;
 	}
 
@@ -882,7 +890,6 @@ void Marco::UpperShoot(float _DeltaTime)
 				*AccTime = 0.0f;
 				Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 				Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
-				AllStateChange(AllBodyState::Crouch_Intro);
 				return;
 			}
 			
@@ -1036,7 +1043,6 @@ void Marco::UpperThrow(float _DeltaTime)
 				Throw_AccTime = 0.0f;
 				Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 				Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
-				AllStateChange(AllBodyState::Crouch_Intro);
 				return;
 			}
 
@@ -1566,7 +1572,7 @@ void Marco::LowerForwardJumpStart()
 void Marco::LowerStart()
 {
 	std::string AddedDirectionName = AddDirectionName(CurLowerBodyName);
-	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(AddedDirectionName, true);
+	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(AddedDirectionName);
 	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
 }
 
@@ -1574,6 +1580,14 @@ void Marco::AllSpawn(float _DeltaTime)
 {
 }
 
+void Marco::AllNone(float _DeltaTime)
+{
+	if (true == UEngineInput::IsPress(VK_DOWN))
+	{
+		AllStateChange(AllBodyState::Crouch_Intro);
+		return;
+	}
+}
 void Marco::AllCrouch_Intro(float _DeltaTime)
 {
 	CrouchIntro_AccTime += _DeltaTime;
@@ -1594,8 +1608,7 @@ void Marco::AllCrouch_Outro(float _DeltaTime)
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
 		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
-		UpperStateChange(UpperBodyState::Idle);
-		LowerStateChange(LowerBodyState::Idle);
+		AllStateChange(AllBodyState::None);
 		return;
 	}
 }
@@ -1634,8 +1647,6 @@ void Marco::AllCrouch_Idle(float _DeltaTime)
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
 		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
-		UpperStateChange(UpperBodyState::Jump);
-		LowerStateChange(LowerBodyState::Jump);
 		return;
 	}
 
@@ -1683,8 +1694,6 @@ void Marco::AllCrouch_Move(float _DeltaTime)
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
 		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
-		UpperStateChange(UpperBodyState::ForwardJump);
-		LowerStateChange(LowerBodyState::ForwardJump);
 		return;
 	}
 
@@ -1740,8 +1749,6 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
-			UpperStateChange(UpperBodyState::Jump);
-			LowerStateChange(LowerBodyState::Jump);
 			return;
 		}
 
@@ -1806,8 +1813,6 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
-			UpperStateChange(UpperBodyState::Jump);
-			LowerStateChange(LowerBodyState::Jump);
 			return;
 		}
 
@@ -1871,8 +1876,6 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
-			UpperStateChange(UpperBodyState::Jump);
-			LowerStateChange(LowerBodyState::Jump);
 			return;
 		}
 
@@ -1952,6 +1955,11 @@ void Marco::AllSpawnStart()
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(CurAllBodyName);
 }
 
+void Marco::AllNoneStart()
+{
+	CurAllBodyName = "None";
+}
+
 void Marco::AllCrouch_IntroStart()
 {
 	CurAllBodyName = "AllBody_Crouch_Intro";
@@ -2015,7 +2023,7 @@ void Marco::AllDeathStart()
 	//AddForce
 	CurAllBodyName = "AllBody_Death";
 	std::string DirectedName = AddDirectionName(CurAllBodyName);
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName, true);
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName);
 	DirCheck(BodyRenderer::AllBody, CurAllBodyName);
 }
 
@@ -2024,7 +2032,7 @@ void Marco::AllDeathInAirStart()
 	//AddForce
 	CurAllBodyName = "AllBody_DeathInAir";
 	std::string DirectedName = AddDirectionName(CurAllBodyName);
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName, true);
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName);
 	DirCheck(BodyRenderer::AllBody, CurAllBodyName);
 }
 
@@ -2032,7 +2040,7 @@ void Marco::AllDeathByKnifeStart()
 {
 	CurAllBodyName = "AllBody_DeathByKnife";
 	std::string DirectedName = AddDirectionName(CurAllBodyName);
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName, true);
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName);
 	DirCheck(BodyRenderer::AllBody, CurAllBodyName);
 }
 
