@@ -27,32 +27,26 @@ void Marco::BeginPlay()
 
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetImage("Marco_UpperBody.png");
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ {0,-24}, {200, 200} });
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetImageCuttingTransform({ {0,0}, {200, 200} });
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetImage("Marco_LowerBody.png");
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransform({ {0,0}, {200, 200} });
-	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetImageCuttingTransform({ {0,0}, {200, 200} });
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransform({ {0,0}, {200, 200} });
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetImageCuttingTransform({ {0,0}, {200, 200} });
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransform({ {150,-150}, {200, 200} });
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {150,150}, {100, 100} });
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetImageCuttingTransform({ {0,0}, {200, 200} });
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {150,0}, {100, 100} });
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransform({ {150,0}, {100, 100} });
-	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetImageCuttingTransform({ {0,0}, {200, 200} });
+	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransform({ {150,-75}, {100, 100} });
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->SetTransform({ {150,150}, {100, 100} });
-	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->SetImageCuttingTransform({ {0,0}, {200, 200} });
+	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->SetTransform({ {150,-225}, {100, 100} });
 	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->SetTransColor({ 0,0,0,255 });
 
 	CreateMarcoAnimation;
@@ -212,7 +206,7 @@ void Marco::FreeMove(float _DeltaTime)
 	}
 
 	AddActorLocation(MovePos);
-	GetWorld()->SddCameraPos({ GetActorLocation().X - 400.0f, GetActorLocation().Y - 300.0f });
+	GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, GetActorLocation().Y - 300.0f });
 
 	if (EngineInput::IsDown('1'))
 	{
@@ -2018,12 +2012,14 @@ void Marco::AllCeremonyStart()
 
 void Marco::AllDeathStart()
 {
+	//AddForce
 	CurAllBodyName = "AllBody_Death";
 	AllStart();
 }
 
 void Marco::AllDeathInAirStart()
 {
+	//AddForce
 	CurAllBodyName = "AllBody_DeathInAir";
 	AllStart();
 }
