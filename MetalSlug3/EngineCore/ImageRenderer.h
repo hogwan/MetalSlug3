@@ -99,6 +99,7 @@ public:
 		CameraEffect = false;
 	}
 
+	UAnimationInfo* CurAnimation = nullptr;
 protected:
 	void BeginPlay() override;
 
@@ -111,6 +112,5 @@ private:
 	bool CameraEffect = true;
 
 	std::map<std::string, UAnimationInfo> AnimationInfos;
-	UAnimationInfo* CurAnimation = nullptr;
 };
 

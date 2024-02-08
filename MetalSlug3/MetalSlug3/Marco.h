@@ -31,6 +31,7 @@ protected:
 
 	// 상태 보조 함수
 	void GravityCheck(float _DeltaTime);
+	void InAirCheck();
 	// 각 상태마다 언제나 가장 위에 실행되어야 한다.
 	std::string DirCheck(BodyRenderer _BodyRendererType, std::string _Name);
 	std::string GunCheck(BodyRenderer _BodyRendererType, std::string _Name);
@@ -38,6 +39,7 @@ protected:
 	std::string AddDirectionName(std::string _CurAnimName);
 	std::string AddGunTypeName(std::string _CurAnimName);
 	void GunTypeShootCheck();
+	void TriggerDirCheck(BodyRenderer _BodyRenderer, std::string _Name);
 
 	UpperBodyState UpperState = UpperBodyState::Idle;
 	LowerBodyState LowerState = LowerBodyState::Idle;
@@ -189,7 +191,8 @@ private:
 	int PrevRenderState = 0;
 
 	float FreeMoveSpeed = 1000.0f;
-	float Gravity = 500.0f;
+	float Gravity = 20.0f;
+	float FallSpeed = 0.0f;
 
 	float Run_Speed = 300.0f;
 	float InAir_Speed = 100.0f;
