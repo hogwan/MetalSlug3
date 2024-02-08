@@ -63,10 +63,32 @@ enum class LowerBodyState
 enum class AllBodyState
 {
 	None,
+	Crouch_Intro,
+	Crouch_Outro,
 	Crouch_Idle,
 	Crouch_Move,
+	Crouch_Shoot_HeavyMachineGun,
 	Crouch_Shoot,
 	Crouch_Throw,
+	Crouch_KnifeAttack1,
+	Crouch_KnifeAttack2,
+	Ceremony,
+	ElephantSlug_Idle,
+	ElephantSlug_Walk,
+	Death,
+	DeathInAir,
+	DeathByKnife,
+	TransformToZombie_Intro,
+	TransformToZombie_Falling,
+	TransformToZombie_Rising,
+	Zombie_Idle,
+	Zombie_Move,
+	Zombie_Turn,
+	Zombie_AimupTurn,
+	Zombie_Jump,
+	Zombie_Vomit,
+	Zombie_Death,
+	Zombie_DeathInAir,
 
 };
 

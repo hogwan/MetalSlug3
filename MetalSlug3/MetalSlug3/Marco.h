@@ -53,7 +53,7 @@ protected:
 
 	void UpperStateChange(UpperBodyState _State);
 	void LowerStateChange(LowerBodyState _State);
-	void AllBodyStateChange(AllBodyState _State);
+	void AllStateChange(AllBodyState _AllState);
 
 	void UpperIdle(float _DeltaTime);
 	void UpperMove(float _DeltaTime);
@@ -101,7 +101,63 @@ protected:
 	void LowerJumpStart();
 	void LowerForwardJumpStart();
 	void LowerStart();
+
+	void AllSpawn(float _DeltaTime);
+	void AllCrouch_Intro(float _DeltaTime);
+	void AllCrouch_Outro(float _DeltaTime);
+	void AllCrouch_Idle(float _DeltaTime);
+	void AllCrouch_Move(float _DeltaTime);
+	void AllCrouch_Shoot(float _DeltaTime);
+	void AllCrouch_Throw(float _DeltaTime);
+	void AllCrouch_KnifeAttack1(float _DeltaTime);
+	void AllCrouch_KnifeAttack2(float _DeltaTime);
+	void AllCrouch_Ceremony(float _DeltaTime);
+	void AllDeath(float _DeltaTime);
+	void AllDeathInAir(float _DeltaTime);
+	void AllDeathByKnife(float _DeltaTime);
+	void ElephantSlug_Idle(float _DeltaTime);
+	void ElephantSlug_Move(float _DeltaTime);
+
+	void AllSpawnStart();
+	void AllCrouch_IntroStart();
+	void AllCrouch_OutroStart();
+	void AllCrouch_IdleStart();
+	void AllCrouch_MoveStart();
+	void AllCrouch_ShootStart();
+	void AllCrouch_ThrowStart();
+	void AllCrouch_KnifeAttack1Start();
+	void AllCrouch_KnifeAttack2Start();
+	void AllCrouch_CeremonyStart();
+	void AllDeathStart();
+	void AllDeathInAirStart();
+	void AllDeathByKnifeStart();
+	void ElephantSlug_IdleStart();
+	void ElephantSlug_Movestart();
+
+
+	void Zombie_AllTransformToZombie_Intro(float _DeltaTime);
+	void Zombie_AllTransformToZombie_Falling(float _DeltaTime);
+	void Zombie_AllTransformToZombie_Rising(float _DeltaTime);
+	void Zombie_AllIdle(float _DeltaTime);
+	void Zombie_AllMove(float _DeltaTime);
+	void Zombie_AllTurn(float _DeltaTime);
+	void Zombie_AllAimupTurn(float _DeltaTime);
+	void Zombie_AllJump(float _DeltaTime);
+	void Zombie_AllVomit(float _DeltaTime);
+	void Zombie_AllDeath(float _DeltaTime);
+	void Zombie_AllDeathInAir(float _DeltaTime);
 	
+	void Zombie_AllTransformToZombie_IntroStart();
+	void Zombie_AllTransformToZombie_FallingStart();
+	void Zombie_AllTransformToZombie_RisingStart();
+	void Zombie_AllIdleStart();
+	void Zombie_AllMoveStart();
+	void Zombie_AllTurnStart();
+	void Zombie_AllAimupTurnStart();
+	void Zombie_AllJumpStart();
+	void Zombie_AllVomitStart();
+	void Zombie_AllDeathStart();
+	void Zombie_AllDeathInAirStart();
 	
 private:
 	std::vector<UImageRenderer*> Renderer;
