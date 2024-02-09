@@ -1046,12 +1046,12 @@ void Marco::UpperShoot(float _DeltaTime)
 				return;
 			}
 
-			if (*AccTime > *EndTime)
-			{
-				*AccTime = 0.0f;
-				UpperStateChange(UpperBodyState::Idle);
-				return;
-			}
+		}
+		if (*AccTime > *EndTime)
+		{
+			*AccTime = 0.0f;
+			UpperStateChange(UpperBodyState::Idle);
+			return;
 		}
 		if (true == UEngineInput::IsPress(VK_UP))
 		{
