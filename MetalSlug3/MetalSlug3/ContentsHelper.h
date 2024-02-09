@@ -25,7 +25,16 @@ enum class EGunType
 {
 	Pistol,
 	Rifle,
+};
+
+enum class EGunList
+{
+	Pistol,
 	HeavyMachineGun,
+	FlameShot,
+	ShotGun,
+	RocketLauncher,
+	IronLizard,
 };
 
 enum class UpperBodyState
@@ -49,6 +58,10 @@ enum class UpperBodyState
 	AimNormalToDown,
 	AimDownToNormal,
 	AimDownShoot,
+	AimNormalToUpShoot,
+	AimUpToNormalShoot,
+	AimNormalToDownShoot,
+	AimDownToNormalShoot,
 };
 
 enum class LowerBodyState

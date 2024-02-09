@@ -38,6 +38,7 @@ protected:
 
 	std::string AddDirectionName(std::string _CurAnimName);
 	std::string AddGunTypeName(std::string _CurAnimName);
+	void HeavyMachineGunCheckName(std::string& CurAnimName);
 	void GunTypeShootCheck();
 	void TriggerDirCheck(BodyRenderer _BodyRenderer, std::string _Name);
 
@@ -45,7 +46,8 @@ protected:
 	LowerBodyState LowerState = LowerBodyState::Idle;
 	AllBodyState AllState = AllBodyState::None;
 	EActorDir DirState = EActorDir::Right;
-	EGunType GunType = EGunType::Pistol;
+	EGunType GunType = EGunType::Rifle;
+	EGunList Gun = EGunList::HeavyMachineGun;
 
 	void FreeMove(float _DeltaTime);
 	void CameraFreeMove(float _DeltaTime);
@@ -75,6 +77,10 @@ protected:
 	void UpperAimNormalToDown(float _DeltaTime);
 	void UpperAimDownToNormal(float _DeltaTime);
 	void UpperAimDownShoot(float _DeltaTime);
+	void UpperAimNormalToUpShoot(float _DeltaTime);
+	void UpperAimUpToNormalShoot(float _DeltaTime);
+	void UpperAimNormalToDownShoot(float _DeltaTime);
+	void UpperAimDownToNormalShoot(float _DeltaTime);
 
 	void UpperNoneStart();
 	void UpperIdleStart();
@@ -93,6 +99,11 @@ protected:
 	void UpperAimNormalToDownStart();
 	void UpperAimDownToNormalStart();
 	void UpperAimDownShootStart();
+	void UpperAimNormalToUpShootStart();
+	void UpperAimUpToNormalShootStart();
+	void UpperAimNormalToDownShootStart();
+	void UpperAimDownToNormalShootStart();
+
 	void UpperStart();
 
 	void LowerNone(float _DeltaTime);
@@ -191,29 +202,9 @@ private:
 	int PrevRenderState = 0;
 
 	float FreeMoveSpeed = 1000.0f;
-	float Gravity = 20.0f;
+	float Gravity = 50.0f;
 	float FallSpeed = 0.0f;
 
-	float Run_Speed = 300.0f;
-	float InAir_Speed = 100.0f;
-	float Crouch_Speed = 50.0f;
-
-	float Pistol_Shoot_CoolTime = 0.1f;
-	float Pistol_Shoot_AccTime = 0.0f;
-	float Pistol_Shoot_EndTime = 0.8f;
-
-	float Rifle_Shoot_AccTime = 0.0f;
-	float Rifle_Shoot_CoolTime = 0.35f;
-	float Rifle_Shoot_EndTime = 0.4f;
-
-	float HeavyMachineGun_Shoot_AccTime = 0.0f;
-	float HeavyMachineGun_Shoot_CoolTime = 0.3f;
-	float HeavyMachineGun_Shoot_EndTime = 0.35f;
-
-	float Throw_CoolTime = 0.1f;
-	float Throw_AccTime = 0.0f;
-	float Throw_EndTime = 0.8f;
-	int RemainBomb = 0;
 
 	float AimNormalToUp_AccTime = 0.0f;
 	float AimNormalToUp_Delay = 0.05f;
@@ -224,6 +215,15 @@ private:
 	float AimDownToNormal_AccTime = 0.0f;
 	float AimDownToNormal_Delay = 0.05f;
 
+	float AimNormalToUpShoot_AccTime = 0.0f;
+	float AimNormalToUpShoot_Delay = 0.2f;
+
+	float AimNormalToDownShoot_AccTime = 0.0f;
+	float AimNormalToDownShoot_Delay = 0.2f;
+
+	float AimDownToNormalShoot_AccTime = 0.0f;
+	float AimDownToNormalShoot_Delay = 0.2f;
+
 	float CrouchIntro_AccTime = 0.0f;
 	float CrouchIntro_Delay = 0.05f;
 
@@ -231,5 +231,37 @@ private:
 	float* CoolTime = nullptr;
 	float* EndTime = nullptr;
 
+	float Run_Speed = 300.0f;
+	float InAir_Speed = 100.0f;
+	float Crouch_Speed = 50.0f;
+
+	float Pistol_Shoot_CoolTime = 0.1f;
+	float Pistol_Shoot_AccTime = 0.0f;
+	float Pistol_Shoot_EndTime = 0.8f;
+
+	float HeavyMachineGun_Shoot_AccTime = 0.0f;
+	float HeavyMachineGun_Shoot_CoolTime = 0.3f;
+	float HeavyMachineGun_Shoot_EndTime = 0.35f;
+
+	float FlameShot_Shoot_AccTime = 0.0f;
+	float FlameShot_Shoot_CoolTime = 0.35f;
+	float FlameShot_Shoot_EndTime = 0.4f;
+
+	float ShotGun_Shoot_AccTime = 0.0f;
+	float ShotGun_Shoot_CoolTime = 0.3f;
+	float ShotGun_Shoot_EndTime = 0.35f;
+
+	float RocketLauncher_Shoot_AccTime = 0.0f;
+	float RocketLauncher_Shoot_CoolTime = 0.3f;
+	float RocketLauncher_Shoot_EndTime = 0.35f;
+
+	float IronLizard_Shoot_AccTime = 0.0f;
+	float IronLizard_Shoot_CoolTime = 0.3f;
+	float IronLizard_Shoot_EndTime = 0.35f;
+
+	float Throw_CoolTime = 0.1f;
+	float Throw_AccTime = 0.0f;
+	float Throw_EndTime = 0.8f;
+	int RemainBomb = 0;
 };
 
