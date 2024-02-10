@@ -1099,6 +1099,12 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 				UpperStateChange(UpperBodyState::AimNormalToDown);
 				return;
 			}
+			if (true == UEngineInput::IsPress(VK_UP))
+			{
+				*AccTime = 0.0f;
+				UpperStateChange(UpperBodyState::AimNormalToUp);
+				return;
+			}
 			if (
 				true == UEngineInput::IsDown('A') ||
 				true == UEngineInput::IsDown('a')
@@ -1244,6 +1250,14 @@ void Marco::UpperKnifeAttack2(float _DeltaTime)
 
 void Marco::UpperAimNormalToUp(float _DeltaTime)
 {
+	if (
+		true == UEngineInput::IsDown('a') ||
+		true == UEngineInput::IsDown('A')
+		)
+	{
+		UpperStateChange(UpperBodyState::AimUpShoot);
+		return;
+	}
 	AimNormalToUp_AccTime += _DeltaTime;
 	if (AimNormalToUp_AccTime > AimNormalToUp_Delay)
 	{
@@ -1255,6 +1269,14 @@ void Marco::UpperAimNormalToUp(float _DeltaTime)
 
 void Marco::UpperAimUpToNormal(float _DeltaTime)
 {
+	if (
+		true == UEngineInput::IsDown('a') ||
+		true == UEngineInput::IsDown('A')
+		)
+	{
+		UpperStateChange(UpperBodyState::Shoot);
+		return;
+	}
 	AimNormalToUp_AccTime += _DeltaTime;
 	if (AimNormalToUp_AccTime > AimNormalToUp_Delay)
 	{
