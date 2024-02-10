@@ -240,8 +240,8 @@ private:
 	float Pistol_Shoot_EndTime = 0.8f;
 
 	float HeavyMachineGun_Shoot_AccTime = 0.0f;
-	float HeavyMachineGun_Shoot_CoolTime = 0.3f;
-	float HeavyMachineGun_Shoot_EndTime = 0.35f;
+	float HeavyMachineGun_Shoot_CoolTime = 0.14f;
+	float HeavyMachineGun_Shoot_EndTime = 0.28f;
 
 	float FlameShot_Shoot_AccTime = 0.0f;
 	float FlameShot_Shoot_CoolTime = 0.35f;
