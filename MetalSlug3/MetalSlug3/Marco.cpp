@@ -26,15 +26,15 @@ void Marco::BeginPlay()
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieProjectile
 
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ {0,-24}, {200, 200} });
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ {0,-23}, {527.27273f, 527.27273f} });
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetImage("Marco_LowerBody.png");
-	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransform({ {0,0}, {200, 200} });
+	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransform({ {0,0}, {527.27273f, 527.27273f} });
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetImage("Marco_AllBody.png");
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransform({ {0,0}, {200, 200} });
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransform({ {0,0}, {527.27273f, 527.27273f} });
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetImage("Marco_UpperBody.png");
@@ -59,7 +59,7 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ActiveOff();
 	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->ActiveOff();
 
-	SetActorLocation({ 400, 300 });
+	SetActorLocation({ 50, 450 });
 	UpperStateChange(UpperBodyState::Idle);
 	LowerStateChange(LowerBodyState::Idle);
 	AllStateChange(AllBodyState::None);
@@ -1135,6 +1135,7 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 
 void Marco::UpperThrow(float _DeltaTime)
 {
+	GunTypeShootCheck();
 	*AccTime += _DeltaTime;
 	if (*AccTime > *CoolTime)
 	{
@@ -1631,7 +1632,10 @@ void Marco::UpperForwardJumpShootStart()
 {
 	//SpawnActor<Bullet>
 	CurUpperBodyName = "UpperBody_ForwardJumpShoot";
-	UpperStart();
+	std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
+	HeavyMachineGunCheckName(AddedGunTypeName);
+	std::string AddedDirectionName = AddDirectionName(AddedGunTypeName);
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true);
 }
 
 void Marco::UpperThrowStart()

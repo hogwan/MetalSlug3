@@ -37,6 +37,9 @@
     <ClInclude Include="BackGroundMap.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="TestLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -71,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="BackGroundMap.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TestLevel.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

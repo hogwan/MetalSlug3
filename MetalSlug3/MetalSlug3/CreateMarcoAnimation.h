@@ -1,8 +1,8 @@
 #pragma once
 
 #define CreateMarcoAnimation \
-Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Idle_Right", "Marco_UpperBody.png", 0, 5, 0.08f, true);\
-Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Move_Right", "Marco_UpperBody.png", 6, 17, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Idle_Right", "Marco_UpperBody.png", 0, 5, 0.12f, true);\
+Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Move_Right", "Marco_UpperBody.png", 6, 17, 0.05f, true);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Jump_Right", "Marco_UpperBody.png", 18, 25, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_ForwardJump_Right", "Marco_UpperBody.png", 26, 31, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Shoot_Right", "Marco_UpperBody.png", 32, 41, 0.08f, false);\
@@ -84,12 +84,12 @@ Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("HeavyMachi
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("HeavyMachineGun_UpperBody_AimDownToNormalShoot_Left", "Marco_UpperBody.png", 429, 430, 0.08f, false);\
 \
 Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_Idle_Right", "Marco_LowerBody.png", 0, 0, 0.08f, true);\
-Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_Move_Right", "Marco_LowerBody.png", 1, 12, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_Move_Right", "Marco_LowerBody.png", 1, 12, 0.05f, true);\
 Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_Jump_Right", "Marco_LowerBody.png", 13, 20, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_ForwardJump_Right", "Marco_LowerBody.png", 21, 26, 0.08f, false);\
 \
 Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_Idle_Left", "Marco_LowerBody.png", 30, 30, 0.08f, true);\
-Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_Move_Left", "Marco_LowerBody.png", 31, 42, 0.08f, true);\
+Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_Move_Left", "Marco_LowerBody.png", 31, 42, 0.05f, true);\
 Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_Jump_Left", "Marco_LowerBody.png", 43, 50, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_ForwardJump_Left", "Marco_LowerBody.png", 51, 56, 0.08f, false);\
 \

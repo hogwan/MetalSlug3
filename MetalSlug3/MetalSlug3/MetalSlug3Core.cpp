@@ -1,6 +1,7 @@
 #include "MetalSlug3Core.h"
 #include "CharacterSelect.h"
 #include "PlayLevel.h"
+#include "TestLevel.h"
 #include <EngineCore\EngineResourcesManager.h>
 
 MetalSlug3Core::MetalSlug3Core()
@@ -17,8 +18,9 @@ void MetalSlug3Core::BeginPlay()
 	MainWindow.SetWindowScale({ 800,600 });
 	CreateLevel<CharacterSelect>("CharacterSelect");
 	CreateLevel<PlayLevel>("Play");
+	CreateLevel<TestLevel>("Test");
 
-	ChangeLevel("Play");
+	ChangeLevel("Test");
 	
 }
 
