@@ -26,27 +26,27 @@ void Marco::BeginPlay()
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieProjectile
 
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ {0,-23}, {527.27273f, 527.27273f} });
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetImage("Marco_LowerBody.png");
-	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransform({ {0,0}, {527.27273f, 527.27273f} });
+	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransform({ {0,0}, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetImage("Marco_AllBody.png");
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransform({ {0,0}, {527.27273f, 527.27273f} });
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransform({ {0,0}, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {150,0}, {100, 100} });
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {150,0}, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransform({ {150,-75}, {100, 100} });
+	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransform({ {150,-75}, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->SetTransform({ {150,-225}, {100, 100} });
+	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->SetTransform({ {150,-225}, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->SetTransColor({ 0,0,0,255 });
 
 	CreateMarcoAnimation;
@@ -1107,7 +1107,7 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 				std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
 				HeavyMachineGunCheckName(AddedGunTypeName);
 				TriggerDirCheck(BodyRenderer::UpperBody, AddedGunTypeName);
-				UpperStateChange(UpperBodyState::Shoot);
+				UpperStateChange(UpperBodyState::ForwardJumpShoot);
 				return;
 			}
 
@@ -1810,6 +1810,7 @@ void Marco::LowerMove(float _DeltaTime)
 		true == UEngineInput::IsPress(VK_RIGHT)
 		)
 	{
+		Reset_UpperBodySyncro();
 		LowerStateChange(LowerBodyState::Idle);
 		return;
 	}
@@ -1819,6 +1820,7 @@ void Marco::LowerMove(float _DeltaTime)
 		false == UEngineInput::IsPress(VK_RIGHT)
 		)
 	{
+		Reset_UpperBodySyncro();
 		LowerStateChange(LowerBodyState::Idle);
 		return;
 	}
@@ -1909,6 +1911,7 @@ void Marco::LowerJump(float _DeltaTime)
 	else
 	{
 		DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
+		Reset_UpperBodySyncro();
 		LowerStateChange(LowerBodyState::Idle);
 		return;
 	}
@@ -1952,6 +1955,7 @@ void Marco::LowerForwardJump(float _DeltaTime)
 	else
 	{
 		DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
+		Reset_UpperBodySyncro();
 		LowerStateChange(LowerBodyState::Idle);
 		return;
 	}
@@ -1970,6 +1974,7 @@ void Marco::LowerIdleStart()
 
 void Marco::LowerMoveStart()
 {
+	Moving_UpperBodySyncro();
 	CurLowerBodyName = "LowerBody_Move";
 	LowerStart();
 }
@@ -1979,6 +1984,7 @@ void Marco::LowerJumpStart()
 	//addforce
 	AddActorLocation({ 0.0f, -3.0f });
 	FallSpeed = -500.0f;
+	Jumping_UpperBodySyncro();
 	CurLowerBodyName = "LowerBody_Jump";
 	LowerStart();
 }
@@ -1988,6 +1994,7 @@ void Marco::LowerForwardJumpStart()
 	//addforce
 	AddActorLocation({ 0.0f, -3.0f });
 	FallSpeed = -500.0f;
+	ForwardJumping_UpperBodySyncro();
 	CurLowerBodyName = "LowerBody_ForwardJump";
 	LowerStart();
 }
@@ -2588,4 +2595,21 @@ void Marco::Zombie_AllDeathInAirStart()
 
 void Marco::ZombieStart()
 {
+}
+
+void Marco::Moving_UpperBodySyncro()
+{
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition + Moving_UpperBodyOffset, MarcoSize });
+}
+void Marco::Jumping_UpperBodySyncro()
+{
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition + Juming_UpperBodyOffset, MarcoSize });
+}
+void Marco::ForwardJumping_UpperBodySyncro()
+{
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition + ForwardJumping_UpperBodyOffset, MarcoSize });
+}
+void Marco::Reset_UpperBodySyncro()
+{
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition, MarcoSize });
 }

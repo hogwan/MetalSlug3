@@ -202,7 +202,7 @@ private:
 	int PrevRenderState = 0;
 
 	float FreeMoveSpeed = 1000.0f;
-	float Gravity = 500.0f;
+	float Gravity = 800.0f;
 	float FallSpeed = 0.0f;
 
 
@@ -263,5 +263,17 @@ private:
 	float Throw_AccTime = 0.0f;
 	float Throw_EndTime = 0.8f;
 	int RemainBomb = 0;
+
+	FVector MarcoUpperBodyPosition = { 0.0f,-23.0f };
+	FVector MarcoSize = { 527.27273f, 527.27273f };
+	FVector Moving_UpperBodyOffset = { 0.0f,-6.0f };
+	FVector Juming_UpperBodyOffset = { -4.0f,-17.0f };
+	FVector ForwardJumping_UpperBodyOffset = { 10.0f ,-10.0f };
+
+	void Moving_UpperBodySyncro();
+	void Jumping_UpperBodySyncro();
+	void ForwardJumping_UpperBodySyncro();
+	void Reset_UpperBodySyncro();
+
 };
 
