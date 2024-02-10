@@ -46,8 +46,8 @@ protected:
 	LowerBodyState LowerState = LowerBodyState::Idle;
 	AllBodyState AllState = AllBodyState::None;
 	EActorDir DirState = EActorDir::Right;
-	EGunType GunType = EGunType::Rifle;
-	EGunList Gun = EGunList::HeavyMachineGun;
+	EGunType GunType = EGunType::Pistol;
+	EGunList Gun = EGunList::Pistol;
 
 	void FreeMove(float _DeltaTime);
 	void CameraFreeMove(float _DeltaTime);

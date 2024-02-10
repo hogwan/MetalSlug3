@@ -45,7 +45,7 @@ Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("HeavyMachi
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Idle_Left", "Marco_UpperBody.png", 220, 225, 0.12f, true);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Move_Left", "Marco_UpperBody.png", 226, 237, 0.05f, true);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Jump_Left", "Marco_UpperBody.png", 238, 245, 0.08f, false);\
-Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_ForwardJump_Left", "Marco_UpperBody.png", 246, 251, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_ForwardJump_Left", "Marco_UpperBody.png", 246, 251, 0.12f, false);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Shoot_Left", "Marco_UpperBody.png", 252, 261, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_ForwardJumpShoot_Left", "Marco_UpperBody.png", 262, 271, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::UpperBody)]->CreateAnimation("Pistol_UpperBody_Throw_Left", "Marco_UpperBody.png", 272, 277, 0.08f, false);\
