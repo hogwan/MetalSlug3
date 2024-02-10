@@ -207,13 +207,13 @@ private:
 
 
 	float AimNormalToUp_AccTime = 0.0f;
-	float AimNormalToUp_Delay = 0.05f;
+	float AimNormalToUp_Delay = 0.16f;
 
 	float AimNormalToDown_AccTime = 0.0f;
-	float AimNormalToDown_Delay = 0.05f;
+	float AimNormalToDown_Delay = 0.16f;
 
 	float AimDownToNormal_AccTime = 0.0f;
-	float AimDownToNormal_Delay = 0.05f;
+	float AimDownToNormal_Delay = 0.16f;
 
 	float AimNormalToUpShoot_AccTime = 0.0f;
 	float AimNormalToUpShoot_Delay = 0.2f;

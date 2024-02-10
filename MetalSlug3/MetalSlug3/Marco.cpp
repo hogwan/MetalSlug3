@@ -68,6 +68,7 @@ void Marco::BeginPlay()
 
 void Marco::Tick(float _DeltaTime)
 {
+	GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, 0.0f });
 	InAirCheck();
 	UpperStateUpdate(_DeltaTime);
 	LowerStateUpdate(_DeltaTime);
@@ -1868,7 +1869,6 @@ void Marco::LowerMove(float _DeltaTime)
 	if (Color != Color8Bit(255, 0, 255, 0))
 	{
 		AddActorLocation(MovePos);
-		GetWorld()->AddCameraPos(MovePos);
 	}
 }
 
