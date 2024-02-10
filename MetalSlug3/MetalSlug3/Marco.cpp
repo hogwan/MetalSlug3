@@ -110,6 +110,17 @@ std::string Marco::DirCheck(BodyRenderer _BodyRendererType, std::string _Name)
 	}
 
 	EActorDir Dir = DirState;
+	if (Dir == EActorDir::Left)
+	{
+		Juming_UpperBodyOffset = Juming_UpperBodyOffset_Left;
+		ForwardJumping_UpperBodyOffset = ForwardJumping_UpperBodyOffset_Left;
+	}
+	else if (Dir == EActorDir::Right)
+	{
+		Juming_UpperBodyOffset = Juming_UpperBodyOffset_Right;
+		ForwardJumping_UpperBodyOffset = ForwardJumping_UpperBodyOffset_Right;
+	}
+
 	if (!InAir)
 	{
 		if (UEngineInput::IsPress(VK_LEFT))
