@@ -202,7 +202,7 @@ private:
 	int PrevRenderState = 0;
 
 	float FreeMoveSpeed = 1000.0f;
-	float Gravity = 50.0f;
+	float Gravity = 500.0f;
 	float FallSpeed = 0.0f;
 
 

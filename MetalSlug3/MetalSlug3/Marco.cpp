@@ -1977,6 +1977,8 @@ void Marco::LowerMoveStart()
 void Marco::LowerJumpStart()
 {
 	//addforce
+	AddActorLocation({ 0.0f, -3.0f });
+	FallSpeed = -500.0f;
 	CurLowerBodyName = "LowerBody_Jump";
 	LowerStart();
 }
@@ -1985,7 +1987,7 @@ void Marco::LowerForwardJumpStart()
 {
 	//addforce
 	AddActorLocation({ 0.0f, -3.0f });
-	FallSpeed = -100.0f;
+	FallSpeed = -500.0f;
 	CurLowerBodyName = "LowerBody_ForwardJump";
 	LowerStart();
 }
