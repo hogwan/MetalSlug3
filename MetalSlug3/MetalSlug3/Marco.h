@@ -268,7 +268,7 @@ private:
 	FVector MarcoSize = { 527.27273f, 527.27273f };
 	FVector Moving_UpperBodyOffset = { 0.0f,-6.0f };
 	FVector Juming_UpperBodyOffset = { -4.0f,-17.0f };
-	FVector ForwardJumping_UpperBodyOffset = { 10.0f ,-10.0f };
+	FVector ForwardJumping_UpperBodyOffset = { -9.0f ,-14.0f };
 
 	void Moving_UpperBodySyncro();
 	void Jumping_UpperBodySyncro();
