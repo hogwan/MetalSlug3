@@ -908,10 +908,7 @@ void Marco::UpperIdle(float _DeltaTime)
 			return;
 		}
 
-		if (
-			true == UEngineInput::IsDown('S') ||
-			true == UEngineInput::IsDown('s')
-			)
+		if (InAir)
 		{
 			UpperStateChange(UpperBodyState::Jump);
 			return;
@@ -983,10 +980,7 @@ void Marco::UpperMove(float _DeltaTime)
 			return;
 		}
 
-		if (
-			true == UEngineInput::IsDown('S') ||
-			true == UEngineInput::IsDown('s')
-			)
+		if (InAir)
 		{
 			UpperStateChange(UpperBodyState::ForwardJump);
 			return;
@@ -1185,10 +1179,7 @@ void Marco::UpperShoot(float _DeltaTime)
 				return;
 			}
 
-			if (
-				true == UEngineInput::IsDown('S') ||
-				true == UEngineInput::IsDown('s')
-				)
+			if (InAir)
 			{
 				*AccTime = 0.0f;
 				UpperStateChange(UpperBodyState::Jump);
@@ -1389,10 +1380,7 @@ void Marco::UpperThrow(float _DeltaTime)
 				return;
 			}
 
-			if (
-				true == UEngineInput::IsDown('S') ||
-				true == UEngineInput::IsDown('s')
-				)
+			if (InAir)
 			{
 				*AccTime = 0.0f;
 				UpperStateChange(UpperBodyState::Jump);
@@ -1585,10 +1573,7 @@ void Marco::UpperAimUpShoot(float _DeltaTime)
 		DirCheck(BodyRenderer::UpperBody, GunCheckedName);
 		if (*AccTime > *CoolTime)
 		{
-			if (
-				true == UEngineInput::IsDown('S') ||
-				true == UEngineInput::IsDown('s')
-				)
+			if (InAir)
 			{
 				*AccTime = 0.0f;
 				UpperStateChange(UpperBodyState::Jump);
@@ -2003,10 +1988,7 @@ void Marco::LowerIdle(float _DeltaTime)
 		return;
 	}
 
-	if (
-		true == UEngineInput::IsDown('S') || 
-		true == UEngineInput::IsDown('s')
-		)
+	if (InAir)
 	{
 		LowerStateChange(LowerBodyState::Jump);
 		return;
@@ -2062,10 +2044,7 @@ void Marco::LowerMove(float _DeltaTime)
 		MovePos += FVector::Right * _DeltaTime * Run_Speed;
 	}
 
-	if (
-		true == UEngineInput::IsDown('S') ||
-		true == UEngineInput::IsDown('s')
-		)
+	if (InAir)
 	{
 		LowerStateChange(LowerBodyState::ForwardJump);
 		return;
@@ -2254,10 +2233,7 @@ void Marco::AllCrouch_Idle(float _DeltaTime)
 		return;
 	}
 
-	if (
-		true == UEngineInput::IsDown('S') ||
-		true == UEngineInput::IsDown('s')
-		)
+	if (InAir)
 	{
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
@@ -2303,10 +2279,7 @@ void Marco::AllCrouch_Move(float _DeltaTime)
 		return;
 	}
 
-	if (
-		true == UEngineInput::IsDown('S') ||
-		true == UEngineInput::IsDown('s')
-		)
+	if (InAir)
 	{
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
@@ -2358,10 +2331,7 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 			return;
 		}
 
-		if (
-			true == UEngineInput::IsDown('S') ||
-			true == UEngineInput::IsDown('s')
-			)
+		if (InAir)
 		{
 			*AccTime = 0.0f;
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
@@ -2424,10 +2394,7 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 			return;
 		}
 
-		if (
-			true == UEngineInput::IsDown('S') ||
-			true == UEngineInput::IsDown('s')
-			)
+		if (InAir)
 		{
 			*AccTime = 0.0f;
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
@@ -2489,10 +2456,7 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 			return;
 		}
 
-		if (
-			true == UEngineInput::IsDown('S') ||
-			true == UEngineInput::IsDown('s')
-			)
+		if (InAir)
 		{
 			Throw_AccTime = 0.0f;
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
@@ -2778,12 +2742,8 @@ void Marco::Zombie_AllIdle(float _DeltaTime)
 	DirCheck(BodyRenderer::AllBody, CurAllBodyName);
 
 
-	if (
-		true == UEngineInput::IsDown('S') ||
-		true == UEngineInput::IsDown('s')
-		)
+	if (InAir)
 	{
-		AddActorLocation({ 0.0f, -10.0f });
 		AllStateChange(AllBodyState::Zombie_Jump);
 		return;
 	}
@@ -2830,12 +2790,8 @@ void Marco::Zombie_AllMove(float _DeltaTime)
 		return;
 	}
 
-	if (
-		true == UEngineInput::IsDown('S') ||
-		true == UEngineInput::IsDown('s')
-		)
+	if (InAir)
 	{
-		AddActorLocation({ 0.0f, -10.0f });
 		AllStateChange(AllBodyState::Zombie_Jump);
 		return;
 	}
@@ -2983,7 +2939,7 @@ void Marco::Zombie_AllVomitStart()
 
 void Marco::Zombie_AllDeathStart()
 {
-	CurAllBodyName = "Zombie_AllBody_DeathInAir";
+	CurAllBodyName = "Zombie_AllBody_Death";
 	ZombieStart();
 }
 
