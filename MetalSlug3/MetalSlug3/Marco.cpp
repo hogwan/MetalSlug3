@@ -70,6 +70,7 @@ void Marco::Tick(float _DeltaTime)
 {
 	GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, 0.0f });
 	InAirCheck();
+	DeathCheck();
 	GravityCheck(_DeltaTime);
 
 	UpperStateUpdate(_DeltaTime);
@@ -107,7 +108,7 @@ void Marco::DeathCheck()
 {
 	if (IsZombie)
 	{
-		//if(좀비 DNA 피격 시)
+		//if(좀비 DNA 피격 시) || (TrueDamaged)
 		if (
 			true == UEngineInput::IsDown('Q') ||
 			true == UEngineInput::IsDown('q')
@@ -127,9 +128,13 @@ void Marco::DeathCheck()
 				return;
 			}
 		}
-		else //s
+		//좀비 DNA없는 것에 피격 시 무시
+		else if (
+			true == UEngineInput::IsDown('w') ||
+			true == UEngineInput::IsDown('W')
+			)
 		{
-
+			return;
 		}
 	}
 	else
@@ -144,9 +149,37 @@ void Marco::DeathCheck()
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
 			AllStateChange(AllBodyState::TransformToZombie_Intro);
+			return;
+		}
+		//else if(좀비 DNA없는 것에 피격시) || TrueDamaged
+		else if (
+			true == UEngineInput::IsDown('w') ||
+			true == UEngineInput::IsDown('W')
+			)
+		{
+			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+			if (InAir)
+			{
+				AllStateChange(AllBodyState::DeathInAir);
+				return;
+			}
+			else
+			{
+				if (true) //칼에 피격시
+				{
+					AllStateChange(AllBodyState::DeathByKnife);
+					return;
+				}
+				else
+				{
+					AllStateChange(AllBodyState::Death);
+					return;
+				}
+			}
 		}
 
-		//else if(좀비 DNA없는 것에 피격시) 
 	}
 }
 
