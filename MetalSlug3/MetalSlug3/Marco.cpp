@@ -69,6 +69,10 @@ void Marco::BeginPlay()
 void Marco::Tick(float _DeltaTime)
 {
 	GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, 0.0f });
+	if (!IsDeath)
+	{
+		PhysicUpdate(_DeltaTime);
+	}
 	InAirCheck();
 	DeathCheck();
 	GravityCheck(_DeltaTime);
@@ -185,15 +189,31 @@ void Marco::DeathCheck()
 
 void Marco::PhysicUpdate(float _DeltaTime)
 {
-	if (true == UEngineInput::IsPress(VK_LEFT) &&
-		false == UEngineInput::IsPress(VK_RIGHT))
+	FVector MoveDir = FVector::Zero;
+	switch (DirState)
 	{
-		AddActorLocation({ MoveDir.X * Move_Speed * _DeltaTime, 0.0f });
+	case EActorDir::Left:
+		MoveDir = FVector::Left;
+		break;
+	case EActorDir::Right:
+		MoveDir = FVector::Right;
+		break;
+	Default:
+		break;
 	}
-	else if (false == UEngineInput::IsPress(VK_LEFT)&&
-			 true == UEngineInput::IsPress(VK_RIGHT))
+
+	if (!CrouchShooting)
 	{
-		AddActorLocation({ MoveDir.X * Move_Speed * _DeltaTime, 0.0f });
+		if (true == UEngineInput::IsPress(VK_LEFT) &&
+			false == UEngineInput::IsPress(VK_RIGHT))
+		{
+			AddActorLocation({ MoveDir.X * Move_Speed * _DeltaTime, 0.0f });
+		}
+		else if (false == UEngineInput::IsPress(VK_LEFT)&&
+				 true == UEngineInput::IsPress(VK_RIGHT))
+		{
+			AddActorLocation({ MoveDir.X * Move_Speed * _DeltaTime, 0.0f });
+		}
 	}
 
 	if (!InAir)
@@ -201,10 +221,11 @@ void Marco::PhysicUpdate(float _DeltaTime)
 		if (true == UEngineInput::IsDown('S') ||
 			true == UEngineInput::IsDown('s'))
 		{
-			AddActorLocation({ 0.0f, 3.0f });
-			FallSpeed = 100.0f;
+			AddActorLocation({ 0.0f, -10.0f });
+			FallSpeed = -300.0f;
 		}
 	}
+
 }
 
 std::string Marco::DirCheck(BodyRenderer _BodyRendererType, std::string _Name)
@@ -2071,6 +2092,7 @@ void Marco::LowerJump(float _DeltaTime)
 	}
 	else
 	{
+		Move_Speed = Run_Speed;
 		DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
 		Reset_UpperBodySyncro();
 		LowerStateChange(LowerBodyState::Idle);
@@ -2103,6 +2125,7 @@ void Marco::LowerForwardJump(float _DeltaTime)
 	}
 	else
 	{
+		Move_Speed = Run_Speed;
 		DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
 		Reset_UpperBodySyncro();
 		LowerStateChange(LowerBodyState::Idle);
@@ -2130,6 +2153,7 @@ void Marco::LowerMoveStart()
 
 void Marco::LowerJumpStart()
 {
+	Move_Speed = InAir_Speed;
 	Jumping_UpperBodySyncro();
 	CurLowerBodyName = "LowerBody_Jump";
 	LowerStart();
@@ -2137,6 +2161,7 @@ void Marco::LowerJumpStart()
 
 void Marco::LowerForwardJumpStart()
 {
+	Move_Speed = InAir_Speed;
 	ForwardJumping_UpperBodySyncro();
 	CurLowerBodyName = "LowerBody_ForwardJump";
 	LowerStart();
@@ -2164,6 +2189,7 @@ void Marco::AllNone(float _DeltaTime)
 }
 void Marco::AllCrouch_Intro(float _DeltaTime)
 {
+	Move_Speed = Crouch_Speed;
 	CrouchIntro_AccTime += _DeltaTime;
 	if (CrouchIntro_AccTime > CrouchIntro_Delay)
 	{
@@ -2175,6 +2201,7 @@ void Marco::AllCrouch_Intro(float _DeltaTime)
 
 void Marco::AllCrouch_Outro(float _DeltaTime)
 {
+	Move_Speed = Run_Speed;
 	CrouchIntro_AccTime += _DeltaTime;
 	if (CrouchIntro_AccTime > CrouchIntro_Delay)
 	{
@@ -2194,6 +2221,14 @@ void Marco::AllCrouch_Idle(float _DeltaTime)
 	if (true == UEngineInput::IsFree(VK_DOWN))
 	{
 		AllStateChange(AllBodyState::Crouch_Outro);
+		return;
+	}
+
+	if (
+		true == UEngineInput::IsPress(VK_RIGHT) &&
+		true == UEngineInput::IsPress(VK_LEFT)
+		)
+	{
 		return;
 	}
 
@@ -2291,6 +2326,7 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 	*AccTime += _DeltaTime;
 	if (*AccTime > *CoolTime)
 	{
+		CrouchShooting = false;
 		if (true == UEngineInput::IsFree(VK_DOWN))
 		{
 			*AccTime = 0.0f;
@@ -2343,6 +2379,7 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 
 	if (*AccTime > *EndTime)
 	{
+		CrouchShooting = false;
 		*AccTime = 0.0f;
 		AllStateChange(AllBodyState::Crouch_Idle);
 		return;
@@ -2355,6 +2392,7 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 	*AccTime += _DeltaTime;
 	if (*AccTime > *CoolTime)
 	{
+		CrouchShooting = false;
 		if (true == UEngineInput::IsFree(VK_DOWN))
 		{
 			*AccTime = 0.0f;
@@ -2407,6 +2445,7 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 
 	if (*AccTime > *EndTime)
 	{
+		CrouchShooting = false;
 		*AccTime = 0.0f;
 		AllStateChange(AllBodyState::Crouch_Idle);
 		return;
@@ -2418,6 +2457,7 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 	Throw_AccTime += _DeltaTime;
 	if (Throw_AccTime > Throw_CoolTime)
 	{
+		CrouchShooting = false;
 		if (true == UEngineInput::IsFree(VK_DOWN))
 		{
 			Throw_AccTime = 0.0f;
@@ -2470,6 +2510,7 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 
 	if (Throw_AccTime > Throw_EndTime)
 	{
+		CrouchShooting = false;
 		Throw_AccTime = 0.0f;
 		AllStateChange(AllBodyState::Crouch_Idle);
 		return;
@@ -2568,6 +2609,7 @@ void Marco::AllCrouch_MoveStart()
 
 void Marco::AllCrouch_ShootStart()
 {
+	CrouchShooting = true;
 	CurAllBodyName = "AllBody_Crouch_Shoot";
 	std::string AddedGunTypeName = AddGunTypeName(CurAllBodyName);
 	HeavyMachineGunCheckName(AddedGunTypeName);
@@ -2577,12 +2619,14 @@ void Marco::AllCrouch_ShootStart()
 
 void Marco::AllCrouch_HeavyMachineGun_ShootStart()
 {
+	CrouchShooting = true;
 	CurAllBodyName = "AllBody_Crouch_Shoot";
 	AllStart();
 }
 
 void Marco::AllCrouch_ThrowStart()
 {
+	CrouchShooting = true;
 	CurAllBodyName = "AllBody_Crouch_Throw";
 	AllStart();
 }

@@ -194,7 +194,6 @@ private:
 	std::string CurLowerBodyName = "LowerBody_Idle";
 	std::string CurAllBodyName = "Crouch_Idle";
 
-	FVector MoveDir = FVector::Zero;
 	FVector ShootDir = FVector::Right;
 	FVector PrevMoveDir = FVector::Right;
 
@@ -204,12 +203,13 @@ private:
 
 	bool InAir = false;
 	bool IsHeavyMachineGun = false;
+	bool CrouchShooting = false;
 
 	int RenderState = 0;
 	int PrevRenderState = 0;
 
 	float FreeMoveSpeed = 1000.0f;
-	float Gravity = 800.0f;
+	float Gravity = 300.0f;
 	float FallSpeed = 0.0f;
 
 
