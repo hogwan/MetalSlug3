@@ -821,7 +821,7 @@ void Marco::AllStateChange(AllBodyState _AllState)
 			Zombie_AllDeathStart();
 			break;
 		case AllBodyState::Zombie_DeathInAir:
-			Zombie_AllIdleStart();
+			Zombie_AllDeathInAirStart();
 			break;
 		default:
 			break;
@@ -2983,7 +2983,7 @@ void Marco::Zombie_AllVomitStart()
 
 void Marco::Zombie_AllDeathStart()
 {
-	CurAllBodyName = "Zombie_AllBody_Death";
+	CurAllBodyName = "Zombie_AllBody_DeathInAir";
 	ZombieStart();
 }
 
