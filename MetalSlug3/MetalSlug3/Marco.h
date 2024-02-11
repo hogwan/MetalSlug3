@@ -31,10 +31,10 @@ protected:
 
 	// 상태 보조 함수
 	void GravityCheck(float _DeltaTime);
-	void CollisionCheck(float _DeltaTime);
 	void InAirCheck();
-	void LiveUpdate();
-	void DeathUpdate();
+	void DeathCheck();
+	void PhysicUpdate(float _DeltaTime);
+
 	// 각 상태마다 언제나 가장 위에 실행되어야 한다.
 	std::string DirCheck(BodyRenderer _BodyRendererType, std::string _Name);
 	std::string GunCheck(BodyRenderer _BodyRendererType, std::string _Name);
@@ -58,10 +58,12 @@ protected:
 	void UpperStateUpdate(float _DeltaTime);
 	void LowerStateUpdate(float _DeltaTime);
 	void AllBodyStateUpdate(float _DeltaTime);
+	void ZombieArmStateUpdate(float _DeltaTime);
 
 	void UpperStateChange(UpperBodyState _State);
 	void LowerStateChange(LowerBodyState _State);
 	void AllStateChange(AllBodyState _AllState);
+	void ZombieArmStateChange(ZombieArmState _State);
 
 	void UpperNone(float _DeltaTime);
 	void UpperIdle(float _DeltaTime);
@@ -198,6 +200,8 @@ private:
 
 
 	bool IsZombie = false;
+	bool IsDeath = false;
+
 	bool InAir = false;
 	bool IsHeavyMachineGun = false;
 
@@ -234,9 +238,14 @@ private:
 	float* CoolTime = nullptr;
 	float* EndTime = nullptr;
 
+	float Move_Speed = Run_Speed;
 	float Run_Speed = 300.0f;
 	float InAir_Speed = 100.0f;
 	float Crouch_Speed = 50.0f;
+	float Zombie_Speed = 75.0f;
+
+	float JumpForce = 100.0f;
+	float ZombieJumpForce = 50.0f;
 
 	float Pistol_Shoot_CoolTime = 0.1f;
 	float Pistol_Shoot_AccTime = 0.0f;

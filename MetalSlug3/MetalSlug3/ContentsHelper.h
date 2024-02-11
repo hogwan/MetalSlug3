@@ -105,6 +105,19 @@ enum class AllBodyState
 
 };
 
+enum class ZombieArmState
+{
+	None,
+	Idle,
+	Move,
+	Shoot,
+	JumpShoot,
+	AimUpShoot,
+	AimUpToNormal,
+	AimNormalToUp,
+	AimUp,
+};
+
 class UContentsHelper
 {
 public:

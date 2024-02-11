@@ -70,9 +70,13 @@ void Marco::Tick(float _DeltaTime)
 {
 	GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, 0.0f });
 	InAirCheck();
+	GravityCheck(_DeltaTime);
+
 	UpperStateUpdate(_DeltaTime);
 	LowerStateUpdate(_DeltaTime);
 	AllBodyStateUpdate(_DeltaTime);
+	ZombieArmStateUpdate(_DeltaTime);
+
 }
 
 void Marco::GravityCheck(float _DeltaTime)
@@ -89,11 +93,6 @@ void Marco::GravityCheck(float _DeltaTime)
 	}
 }
 
-void Marco::CollisionCheck(float _DeltaTime)
-{
-	
-}
-
 void Marco::InAirCheck()
 {
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
@@ -104,12 +103,75 @@ void Marco::InAirCheck()
 	else InAir = true;
 }
 
-void Marco::LiveUpdate()
+void Marco::DeathCheck()
 {
+	if (IsZombie)
+	{
+		//if(좀비 DNA 피격 시)
+		if (
+			true == UEngineInput::IsDown('Q') ||
+			true == UEngineInput::IsDown('q')
+			)
+		{
+			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+			if (InAir)
+			{
+				AllStateChange(AllBodyState::Zombie_DeathInAir);
+				return;
+			}
+			else
+			{
+				AllStateChange(AllBodyState::Zombie_Death);
+				return;
+			}
+		}
+		else //s
+		{
+
+		}
+	}
+	else
+	{
+		//if(좀비 DNA 피격 시)
+		if (
+			true == UEngineInput::IsDown('Q') ||
+			true == UEngineInput::IsDown('q')
+			)
+		{
+			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+			AllStateChange(AllBodyState::TransformToZombie_Intro);
+		}
+
+		//else if(좀비 DNA없는 것에 피격시) 
+	}
 }
 
-void Marco::DeathUpdate()
+void Marco::PhysicUpdate(float _DeltaTime)
 {
+	if (true == UEngineInput::IsPress(VK_LEFT) &&
+		false == UEngineInput::IsPress(VK_RIGHT))
+	{
+		AddActorLocation({ MoveDir.X * Move_Speed * _DeltaTime, 0.0f });
+	}
+	else if (false == UEngineInput::IsPress(VK_LEFT)&&
+			 true == UEngineInput::IsPress(VK_RIGHT))
+	{
+		AddActorLocation({ MoveDir.X * Move_Speed * _DeltaTime, 0.0f });
+	}
+
+	if (!InAir)
+	{
+		if (true == UEngineInput::IsDown('S') ||
+			true == UEngineInput::IsDown('s'))
+		{
+			AddActorLocation({ 0.0f, 3.0f });
+			FallSpeed = 100.0f;
+		}
+	}
 }
 
 std::string Marco::DirCheck(BodyRenderer _BodyRendererType, std::string _Name)
@@ -518,6 +580,9 @@ void Marco::AllBodyStateUpdate(float _DeltaTime)
 		break;
 	}
 }
+void Marco::ZombieArmStateUpdate(float _DeltaTime)
+{
+}
 void Marco::UpperStateChange(UpperBodyState _UpperState)
 {
 	if (UpperState != _UpperState)
@@ -724,6 +789,10 @@ void Marco::AllStateChange(AllBodyState _AllState)
 			break;
 	}
 	AllState = _AllState;
+}
+
+void Marco::ZombieArmStateChange(ZombieArmState _State)
+{
 }
 
 void Marco::UpperNone(float _DeltaTime)
