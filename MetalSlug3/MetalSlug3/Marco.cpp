@@ -69,7 +69,7 @@ void Marco::BeginPlay()
 void Marco::Tick(float _DeltaTime)
 {
 	GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, 0.0f });
-	if (!IsDeath)
+	if (Physic)
 	{
 		PhysicUpdate(_DeltaTime);
 	}
@@ -77,10 +77,16 @@ void Marco::Tick(float _DeltaTime)
 	DeathCheck();
 	GravityCheck(_DeltaTime);
 
-	UpperStateUpdate(_DeltaTime);
-	LowerStateUpdate(_DeltaTime);
 	AllBodyStateUpdate(_DeltaTime);
-	ZombieArmStateUpdate(_DeltaTime);
+	if (!IsZombie)
+	{
+		UpperStateUpdate(_DeltaTime);
+		LowerStateUpdate(_DeltaTime);
+	}
+	else
+	{
+		ZombieArmStateUpdate(_DeltaTime);
+	}
 
 }
 
@@ -118,6 +124,7 @@ void Marco::DeathCheck()
 			true == UEngineInput::IsDown('q')
 			)
 		{
+			PhysicOff();
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
@@ -149,6 +156,7 @@ void Marco::DeathCheck()
 			true == UEngineInput::IsDown('q')
 			)
 		{
+			PhysicOff();
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
@@ -161,6 +169,7 @@ void Marco::DeathCheck()
 			true == UEngineInput::IsDown('W')
 			)
 		{
+			PhysicOff();
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
@@ -189,30 +198,17 @@ void Marco::DeathCheck()
 
 void Marco::PhysicUpdate(float _DeltaTime)
 {
-	FVector MoveDir = FVector::Zero;
-	switch (DirState)
-	{
-	case EActorDir::Left:
-		MoveDir = FVector::Left;
-		break;
-	case EActorDir::Right:
-		MoveDir = FVector::Right;
-		break;
-	Default:
-		break;
-	}
-
 	if (!CrouchShooting)
 	{
 		if (true == UEngineInput::IsPress(VK_LEFT) &&
 			false == UEngineInput::IsPress(VK_RIGHT))
 		{
-			AddActorLocation({ MoveDir.X * Move_Speed * _DeltaTime, 0.0f });
+			AddActorLocation({ FVector::Left.X * Move_Speed * _DeltaTime, 0.0f });
 		}
 		else if (false == UEngineInput::IsPress(VK_LEFT)&&
 				 true == UEngineInput::IsPress(VK_RIGHT))
 		{
-			AddActorLocation({ MoveDir.X * Move_Speed * _DeltaTime, 0.0f });
+			AddActorLocation({ FVector::Right.X * Move_Speed * _DeltaTime, 0.0f });
 		}
 	}
 
@@ -2694,26 +2690,109 @@ void Marco::AllStart()
 
 void Marco::Zombie_AllTransformToZombie_Intro(float _DeltaTime)
 {
+	if (!InAir)
+	{
+		AllStateChange(AllBodyState::TransformToZombie_Falling);
+		return;
+	}
 }
 
 void Marco::Zombie_AllTransformToZombie_Falling(float _DeltaTime)
 {
+	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->Indexs.size() - 1;
+	int CurFlame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
+
+	if (LastIndex == static_cast<size_t>(CurFlame))
+	{
+		AllStateChange(AllBodyState::TransformToZombie_Rising);
+		return;
+	}
 }
 
 void Marco::Zombie_AllTransformToZombie_Rising(float _DeltaTime)
 {
+	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->Indexs.size() - 1;
+	int CurFlame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
+
+	if (LastIndex == static_cast<size_t>(CurFlame))
+	{
+		PhysicOn();
+		AllStateChange(AllBodyState::Zombie_Idle);
+		return;
+	}
 }
 
 void Marco::Zombie_AllIdle(float _DeltaTime)
 {
+	if (
+		true == UEngineInput::IsPress(VK_RIGHT) &&
+		true == UEngineInput::IsPress(VK_LEFT)
+		)
+	{
+		return;
+	}
+	if (
+		true == UEngineInput::IsPress(VK_RIGHT) &&
+		(EActorDir::Left == DirState)
+		)
+	{
+		AllStateChange(AllBodyState::Zombie_Turn);
+		return;
+	}
+
+	if (
+		true == UEngineInput::IsPress(VK_LEFT) &&
+		(EActorDir::Right == DirState)
+		)
+	{
+		AllStateChange(AllBodyState::Zombie_Turn);
+		return;
+	}
+
+
+	if (
+		true == UEngineInput::IsPress(VK_RIGHT) ||
+		true == UEngineInput::IsPress(VK_LEFT)
+		)
+	{
+		AllStateChange(AllBodyState::Zombie_Move);
+		return;
+	}
 }
 
 void Marco::Zombie_AllMove(float _DeltaTime)
 {
+	if (
+		true == UEngineInput::IsPress(VK_RIGHT) &&
+		true == UEngineInput::IsPress(VK_LEFT)
+		)
+	{
+		AllStateChange(AllBodyState::Zombie_Idle);
+		return;
+	}
+
+	if (
+		true == UEngineInput::IsFree(VK_RIGHT) &&
+		true == UEngineInput::IsFree(VK_LEFT)
+		)
+	{
+		AllStateChange(AllBodyState::Zombie_Idle);
+		return;
+	}
 }
 
 void Marco::Zombie_AllTurn(float _DeltaTime)
 {
+	PhysicOff();
+	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->Indexs.size() - 1;
+	int CurFlame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
+
+	if (LastIndex == static_cast<size_t>(CurFlame))
+	{
+		PhysicOn();
+		AllStateChange(AllBodyState::Zombie_Idle);
+		return;
+	}
 }
 
 void Marco::Zombie_AllAimupTurn(float _DeltaTime)
@@ -2738,26 +2817,39 @@ void Marco::Zombie_AllDeathInAir(float _DeltaTime)
 
 void Marco::Zombie_AllTransformToZombie_IntroStart()
 {
+	CurAllBodyName = "Zombie_AllBody_TransformToZombie_Intro";
+	ZombieStart();
 }
 
 void Marco::Zombie_AllTransformToZombie_FallingStart()
 {
+	CurAllBodyName = "Zombie_AllBody_TransformToZombie_Falling";
+	ZombieStart();
 }
 
 void Marco::Zombie_AllTransformToZombie_RisingStart()
 {
+	CurAllBodyName = "Zombie_AllBody_TransformToZombie_Rising";
+	ZombieStart();
 }
 
 void Marco::Zombie_AllIdleStart()
 {
+	Move_Speed = Zombie_Speed;
+	CurAllBodyName = "Zombie_AllBody_Idle";
+	ZombieStart();
 }
 
 void Marco::Zombie_AllMoveStart()
 {
+	CurAllBodyName = "Zombie_AllBody_Move";
+	ZombieStart();
 }
 
 void Marco::Zombie_AllTurnStart()
 {
+	CurAllBodyName = "Zombie_AllBody_Turn";
+	ZombieStart();
 }
 
 void Marco::Zombie_AllAimupTurnStart()
@@ -2782,7 +2874,10 @@ void Marco::Zombie_AllDeathInAirStart()
 
 void Marco::ZombieStart()
 {
+	std::string DirectedName = AddDirectionName(CurAllBodyName);
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName);
 }
+
 
 void Marco::Moving_UpperBodySyncro()
 {

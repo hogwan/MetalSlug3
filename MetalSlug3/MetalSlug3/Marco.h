@@ -204,6 +204,17 @@ private:
 	bool InAir = false;
 	bool IsHeavyMachineGun = false;
 	bool CrouchShooting = false;
+	bool Physic = true;
+
+	inline void PhysicOn()
+	{
+		Physic = true;
+	}
+
+	inline void PhysicOff()
+	{
+		Physic = false;
+	}
 
 	int RenderState = 0;
 	int PrevRenderState = 0;
@@ -238,7 +249,7 @@ private:
 	float* CoolTime = nullptr;
 	float* EndTime = nullptr;
 
-	float Move_Speed = Run_Speed;
+	float Move_Speed = 300.0f;
 	float Run_Speed = 300.0f;
 	float InAir_Speed = 100.0f;
 	float Crouch_Speed = 50.0f;

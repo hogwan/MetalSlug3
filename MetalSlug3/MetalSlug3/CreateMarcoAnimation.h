@@ -117,6 +117,7 @@ Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("AllBody_Elep
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("AllBody_Death_Right", "Marco_AllBody.png", 126, 144, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("AllBody_DeathInAir_Right", "Marco_AllBody.png", 145, 154, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("AllBody_DeathByKnife_Right", "Marco_AllBody.png", 155, 173, 0.08f, false);\
+\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_TransformToZombie_Intro_Right", "Marco_AllBody.png", 174, 176, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_TransformToZombie_Falling_Right", "Marco_AllBody.png", 177, 186, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_TransformToZombie_Rising_Right", "Marco_AllBody.png", 187, 234, 0.08f, false);\
@@ -149,6 +150,7 @@ Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBod
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("AllBody_Death_Left", "Marco_AllBody.png", 596, 614, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("AllBody_DeathInAir_Left", "Marco_AllBody.png", 615, 624, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("AllBody_DeathByKnife_Left", "Marco_AllBody.png", 625, 643, 0.08f, false);\
+\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_TransformToZombie_Intro_Left", "Marco_AllBody.png", 644, 646, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_TransformToZombie_Falling_Left", "Marco_AllBody.png", 647, 656, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_TransformToZombie_Rising_Left", "Marco_AllBody.png", 657, 704, 0.08f, false);\
