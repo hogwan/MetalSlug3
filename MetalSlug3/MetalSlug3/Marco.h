@@ -31,7 +31,10 @@ protected:
 
 	// 상태 보조 함수
 	void GravityCheck(float _DeltaTime);
+	void CollisionCheck(float _DeltaTime);
 	void InAirCheck();
+	void LiveUpdate();
+	void DeathUpdate();
 	// 각 상태마다 언제나 가장 위에 실행되어야 한다.
 	std::string DirCheck(BodyRenderer _BodyRendererType, std::string _Name);
 	std::string GunCheck(BodyRenderer _BodyRendererType, std::string _Name);
@@ -46,8 +49,8 @@ protected:
 	LowerBodyState LowerState = LowerBodyState::Idle;
 	AllBodyState AllState = AllBodyState::None;
 	EActorDir DirState = EActorDir::Right;
-	EGunType GunType = EGunType::Pistol;
-	EGunList Gun = EGunList::Pistol;
+	EGunType GunType = EGunType::Rifle;
+	EGunList Gun = EGunList::HeavyMachineGun;
 
 	void FreeMove(float _DeltaTime);
 	void CameraFreeMove(float _DeltaTime);
