@@ -33,7 +33,7 @@ protected:
 	void GravityCheck(float _DeltaTime);
 	void InAirCheck();
 	void DeathCheck();
-	void PhysicUpdate(float _DeltaTime);
+	void ManipulateUpdate(float _DeltaTime);
 
 	// 각 상태마다 언제나 가장 위에 실행되어야 한다.
 	std::string DirCheck(BodyRenderer _BodyRendererType, std::string _Name);
@@ -204,16 +204,16 @@ private:
 	bool InAir = false;
 	bool IsHeavyMachineGun = false;
 	bool CrouchShooting = false;
-	bool Physic = true;
+	bool Manipulate = true;
 
-	inline void PhysicOn()
+	inline void ManipulateOn()
 	{
-		Physic = true;
+		Manipulate = true;
 	}
 
-	inline void PhysicOff()
+	inline void ManipulateOff()
 	{
-		Physic = false;
+		Manipulate = false;
 	}
 
 	int RenderState = 0;
