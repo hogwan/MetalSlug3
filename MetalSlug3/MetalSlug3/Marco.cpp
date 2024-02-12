@@ -3334,6 +3334,9 @@ void Marco::ZombieArm_Shoot(float _DeltaTime)
 	{
 		*AccTime = 0.0f;
 		ZombieArmStateChange(ZombieArmState::Idle);
+		int BodyFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CurAnimation->CurFrame = BodyFrame;
+		
 		return;
 	}
 }
@@ -3374,6 +3377,8 @@ void Marco::ZombieArm_Shoot_AimUp(float _DeltaTime)
 	{
 		*AccTime = 0.0f;
 		ZombieArmStateChange(ZombieArmState::Idle_AimUp);
+		int BodyFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CurAnimation->CurFrame = BodyFrame;
 		return;
 	}
 }
