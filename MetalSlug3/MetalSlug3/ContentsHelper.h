@@ -109,13 +109,15 @@ enum class ZombieArmState
 {
 	None,
 	Idle,
+	Idle_AimUp,
 	Move,
-	Shoot,
-	JumpShoot,
-	AimUpShoot,
-	AimUpToNormal,
+	Move_AimUp,
+	Jump,
+	Jump_AimUp,
 	AimNormalToUp,
-	AimUp,
+	AimUpToNormal,
+	Shoot,
+	Shoot_AimUp,
 };
 
 class UContentsHelper

@@ -48,6 +48,7 @@ protected:
 	UpperBodyState UpperState = UpperBodyState::Idle;
 	LowerBodyState LowerState = LowerBodyState::Idle;
 	AllBodyState AllState = AllBodyState::None;
+	ZombieArmState ZArmState = ZombieArmState::None;
 	EActorDir DirState = EActorDir::Right;
 	EGunType GunType = EGunType::Rifle;
 	EGunList Gun = EGunList::HeavyMachineGun;
@@ -186,6 +187,31 @@ protected:
 	void Zombie_AllDeathStart();
 	void Zombie_AllDeathInAirStart();
 	void ZombieStart();
+
+	void ZombieArm_None(float _DeltaTime);
+	void ZombieArm_Idle(float _DeltaTime);
+	void ZombieArm_Idle_AimUp(float _DeltaTime);
+	void ZombieArm_Move(float _DeltaTime);
+	void ZombieArm_Move_AimUp(float _DeltaTime);
+	void ZombieArm_Jump(float _DeltaTime);
+	void ZombieArm_Jump_AimUp(float _DeltaTime);
+	void ZombieArm_Shoot(float _DeltaTime);
+	void ZombieArm_Shoot_AimUp(float _DeltaTime);
+	void ZombieArm_AimNormalToUp(float _DeltaTime);
+	void ZombieArm_AimUpToNormal(float _DeltaTime);
+
+	void ZombieArm_NoneStart();
+	void ZombieArm_IdleStart();
+	void ZombieArm_Idle_AimUpStart();
+	void ZombieArm_MoveStart();
+	void ZombieArm_Move_AimUpStart();
+	void ZombieArm_JumpStart();
+	void ZombieArm_Jump_AimUpStart();
+	void ZombieArm_ShootStart();
+	void ZombieArm_Shoot_AimUpStart();
+	void ZombieArm_AimNormalToUpStart();
+	void ZombieArm_AimUpToNormalStart();
+	void ZombieArmStart();
 	
 private:
 	std::vector<UImageRenderer*> Renderer;
@@ -193,6 +219,7 @@ private:
 	std::string CurUpperBodyName = "UpperBody_Idle";
 	std::string CurLowerBodyName = "LowerBody_Idle";
 	std::string CurAllBodyName = "Crouch_Idle";
+	std::string CurZArmName = "ZombieArm_Idle";
 
 	FVector ShootDir = FVector::Right;
 	FVector PrevMoveDir = FVector::Right;
@@ -258,9 +285,9 @@ private:
 	float JumpForce = 100.0f;
 	float ZombieJumpForce = 50.0f;
 
-	float Pistol_Shoot_CoolTime = 0.1f;
+	float Pistol_Shoot_CoolTime = 0.2f;
 	float Pistol_Shoot_AccTime = 0.0f;
-	float Pistol_Shoot_EndTime = 0.8f;
+	float Pistol_Shoot_EndTime = 0.3f;
 
 	float HeavyMachineGun_Shoot_AccTime = 0.0f;
 	float HeavyMachineGun_Shoot_CoolTime = 0.14f;

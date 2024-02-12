@@ -38,7 +38,7 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetImage("Marco_ZombieArm.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {150,0}, MarcoSize });
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {50,-50},{MarcoSize.X/2.0f,MarcoSize.Y/2.0f} });
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetImage("Marco_UpperBody.png");
@@ -63,6 +63,7 @@ void Marco::BeginPlay()
 	UpperStateChange(UpperBodyState::Idle);
 	LowerStateChange(LowerBodyState::Idle);
 	AllStateChange(AllBodyState::None);
+	ZombieArmStateChange(ZombieArmState::None);
 }
 
 
@@ -640,6 +641,44 @@ void Marco::AllBodyStateUpdate(float _DeltaTime)
 }
 void Marco::ZombieArmStateUpdate(float _DeltaTime)
 {
+	switch (ZArmState)
+	{
+	case ZombieArmState::None:
+		ZombieArm_None(_DeltaTime);
+		break;
+	case ZombieArmState::Idle:
+		ZombieArm_Idle(_DeltaTime);
+		break;
+	case ZombieArmState::Idle_AimUp:
+		ZombieArm_Idle_AimUp(_DeltaTime);
+		break;
+	case ZombieArmState::Move:
+		ZombieArm_Move(_DeltaTime);
+		break;
+	case ZombieArmState::Move_AimUp:
+		ZombieArm_Move_AimUp(_DeltaTime);
+		break;
+	case ZombieArmState::Jump:
+		ZombieArm_Jump(_DeltaTime);
+		break;
+	case ZombieArmState::Jump_AimUp:
+		ZombieArm_Jump_AimUp(_DeltaTime);
+		break;
+	case ZombieArmState::Shoot:
+		ZombieArm_Shoot(_DeltaTime);
+		break;
+	case ZombieArmState::Shoot_AimUp:
+		ZombieArm_Shoot_AimUp(_DeltaTime);
+		break;
+	case ZombieArmState::AimNormalToUp:
+		ZombieArm_AimNormalToUp(_DeltaTime);
+		break;
+	case ZombieArmState::AimUpToNormal:
+		ZombieArm_AimUpToNormal(_DeltaTime);
+		break;
+	default:
+		break;
+	}
 }
 void Marco::UpperStateChange(UpperBodyState _UpperState)
 {
@@ -851,6 +890,61 @@ void Marco::AllStateChange(AllBodyState _AllState)
 
 void Marco::ZombieArmStateChange(ZombieArmState _State)
 {
+	if (ZArmState != _State)
+	{
+		switch (_State)
+		{
+		case ZombieArmState::None:
+			ZombieArm_NoneStart();
+			break;
+		case ZombieArmState::Idle:
+			ZombieArm_IdleStart();
+			break;
+		case ZombieArmState::Idle_AimUp:
+			ZombieArm_Idle_AimUpStart();
+			break;
+		case ZombieArmState::Move:
+			ZombieArm_MoveStart();
+			break;
+		case ZombieArmState::Move_AimUp:
+			ZombieArm_Move_AimUpStart();
+			break;
+		case ZombieArmState::Jump:
+			ZombieArm_JumpStart();
+			break;
+		case ZombieArmState::Jump_AimUp:
+			ZombieArm_Jump_AimUpStart();
+			break;
+		case ZombieArmState::Shoot:
+			ZombieArm_ShootStart();
+			break;
+		case ZombieArmState::Shoot_AimUp:
+			ZombieArm_Shoot_AimUpStart();
+			break;
+		case ZombieArmState::AimNormalToUp:
+			ZombieArm_AimNormalToUpStart();
+			break;
+		case ZombieArmState::AimUpToNormal:
+			ZombieArm_AimUpToNormalStart();
+			break;
+		default:
+			break;
+		}
+	}
+
+	switch (_State)
+	{
+	case ZombieArmState::Shoot:
+		ZombieArm_ShootStart();
+		break;
+	case ZombieArmState::Shoot_AimUp:
+		ZombieArm_Shoot_AimUpStart();
+		break;
+	default:
+		break;
+	}
+
+	ZArmState = _State;
 }
 
 void Marco::UpperNone(float _DeltaTime)
@@ -2689,6 +2783,9 @@ void Marco::Zombie_AllTransformToZombie_Rising(float _DeltaTime)
 	if (LastIndex == static_cast<size_t>(CurFlame))
 	{
 		ManipulateOn();
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
+		GunType = EGunType::Pistol;
+		Gun = EGunList::Pistol;
 		AllStateChange(AllBodyState::Zombie_Idle);
 		return;
 	}
@@ -2816,7 +2913,7 @@ void Marco::Zombie_AllTurn(float _DeltaTime)
 	if (LastIndex == static_cast<size_t>(CurFlame))
 	{
 		ManipulateOn();
-		//Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
 		DirCheck(BodyRenderer::AllBody, CurAllBodyName);
 		AllStateChange(AllBodyState::Zombie_Idle);
 		return;
@@ -2834,7 +2931,7 @@ void Marco::Zombie_AllAimupTurn(float _DeltaTime)
 	if (LastIndex == static_cast<size_t>(CurFlame))
 	{
 		ManipulateOn();
-		//Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
 		DirCheck(BodyRenderer::AllBody, CurAllBodyName);
 		AllStateChange(AllBodyState::Zombie_Idle);
 		return;
@@ -2843,7 +2940,6 @@ void Marco::Zombie_AllAimupTurn(float _DeltaTime)
 
 void Marco::Zombie_AllJump(float _DeltaTime)
 {
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
 	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->Indexs.size() - 1;
 	int CurFlame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
 
@@ -2865,7 +2961,7 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 	if (LastIndex == static_cast<size_t>(CurFlame))
 	{
 		ManipulateOn();
-		//Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
 		AllStateChange(AllBodyState::Zombie_Idle);
 		return;
 	}
@@ -2873,11 +2969,13 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 
 void Marco::Zombie_AllDeath(float _DeltaTime)
 {
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
 	ManipulateOff();
 }
 
 void Marco::Zombie_AllDeathInAir(float _DeltaTime)
 {
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
 	ManipulateOff();
 }
 
@@ -2953,6 +3051,412 @@ void Marco::ZombieStart()
 {
 	std::string DirectedName = AddDirectionName(CurAllBodyName);
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName);
+}
+
+void Marco::ZombieArm_None(float _DeltaTime)
+{
+	ZombieArmStateChange(ZombieArmState::Idle);
+	return;
+}
+
+void Marco::ZombieArm_Idle(float _DeltaTime)
+{
+	if (InAir)
+	{
+		ZombieArmStateChange(ZombieArmState::Jump);
+		return;
+	}
+	DirCheck(BodyRenderer::ZombieArm, CurZArmName);
+	if (
+		true == UEngineInput::IsPress(VK_LEFT) &&
+		true == UEngineInput::IsPress(VK_RIGHT)
+		)
+	{
+		return;
+	}
+	if (
+		true == UEngineInput::IsPress(VK_LEFT) ||
+		true == UEngineInput::IsPress(VK_RIGHT)
+		)
+	{
+		ZombieArmStateChange(ZombieArmState::Move);
+		return;
+	}
+
+	if (true == UEngineInput::IsPress(VK_UP))
+	{
+		ZombieArmStateChange(ZombieArmState::AimNormalToUp);
+		return;
+	}
+
+	if (true == UEngineInput::IsDown('A') ||
+		true == UEngineInput::IsDown('a'))
+	{
+		ZombieArmStateChange(ZombieArmState::Shoot);
+		return;
+	}
+
+	if (true == UEngineInput::IsDown('S') ||
+		true == UEngineInput::IsDown('s'))
+	{
+		ZombieArmStateChange(ZombieArmState::Jump);
+		return;
+	}
+}
+
+void Marco::ZombieArm_Idle_AimUp(float _DeltaTime)
+{
+	if (InAir)
+	{
+		ZombieArmStateChange(ZombieArmState::Jump_AimUp);
+		return;
+	}
+
+	DirCheck(BodyRenderer::ZombieArm, CurZArmName);
+	if (
+		true == UEngineInput::IsPress(VK_LEFT) &&
+		true == UEngineInput::IsPress(VK_RIGHT)
+		)
+	{
+		return;
+	}
+	if (true == UEngineInput::IsFree(VK_UP))
+	{
+		ZombieArmStateChange(ZombieArmState::AimUpToNormal);
+		return;
+	}
+	if (
+		true == UEngineInput::IsPress(VK_LEFT) ||
+		true == UEngineInput::IsPress(VK_RIGHT)
+		)
+	{
+		ZombieArmStateChange(ZombieArmState::Move_AimUp);
+		return;
+	}
+
+
+	if (true == UEngineInput::IsDown('A') ||
+		true == UEngineInput::IsDown('a'))
+	{
+		ZombieArmStateChange(ZombieArmState::Shoot_AimUp);
+		return;
+	}
+
+	if (true == UEngineInput::IsDown('S') ||
+		true == UEngineInput::IsDown('s'))
+	{
+		ZombieArmStateChange(ZombieArmState::Jump_AimUp);
+		return;
+	}
+}
+
+void Marco::ZombieArm_Move(float _DeltaTime)
+{
+	if (InAir)
+	{
+		ZombieArmStateChange(ZombieArmState::Jump);
+		return;
+	}
+
+	DirCheck(BodyRenderer::ZombieArm, CurZArmName);
+	if (
+		true == UEngineInput::IsPress(VK_LEFT) &&
+		true == UEngineInput::IsPress(VK_RIGHT)
+		)
+	{
+		ZombieArmStateChange(ZombieArmState::Idle);
+		return;
+	}
+	if (
+		true == UEngineInput::IsFree(VK_LEFT) &&
+		true == UEngineInput::IsFree(VK_RIGHT)
+		)
+	{
+		ZombieArmStateChange(ZombieArmState::Idle);
+		return;
+	}
+	if (true == UEngineInput::IsPress(VK_UP))
+	{
+		ZombieArmStateChange(ZombieArmState::AimNormalToUp);
+		return;
+	}
+	if (true == UEngineInput::IsDown('A') ||
+		true == UEngineInput::IsDown('a'))
+	{
+		ZombieArmStateChange(ZombieArmState::Shoot);
+		return;
+	}
+
+	if (true == UEngineInput::IsDown('S') ||
+		true == UEngineInput::IsDown('s'))
+	{
+		ZombieArmStateChange(ZombieArmState::Jump);
+		return;
+	}
+}
+
+void Marco::ZombieArm_Move_AimUp(float _DeltaTime)
+{
+	if (InAir)
+	{
+		ZombieArmStateChange(ZombieArmState::Jump_AimUp);
+		return;
+	}
+
+	DirCheck(BodyRenderer::ZombieArm, CurZArmName);
+	if (
+		true == UEngineInput::IsPress(VK_LEFT) &&
+		true == UEngineInput::IsPress(VK_RIGHT)
+		)
+	{
+		ZombieArmStateChange(ZombieArmState::Idle_AimUp);
+		return;
+	}
+	if (
+		true == UEngineInput::IsFree(VK_LEFT) &&
+		true == UEngineInput::IsFree(VK_RIGHT)
+		)
+	{
+		ZombieArmStateChange(ZombieArmState::Idle_AimUp);
+		return;
+	}
+	if (true == UEngineInput::IsFree(VK_UP))
+	{
+		ZombieArmStateChange(ZombieArmState::AimUpToNormal);
+		return;
+	}
+	if (true == UEngineInput::IsDown('A') ||
+		true == UEngineInput::IsDown('a'))
+	{
+		ZombieArmStateChange(ZombieArmState::Shoot_AimUp);
+		return;
+	}
+
+	if (true == UEngineInput::IsDown('S') ||
+		true == UEngineInput::IsDown('s'))
+	{
+		ZombieArmStateChange(ZombieArmState::Jump);
+		return;
+	}
+}
+
+void Marco::ZombieArm_Jump(float _DeltaTime)
+{
+	if (!InAir)
+	{
+		ZombieArmStateChange(ZombieArmState::Idle);
+		return;
+	}
+
+	if (true == UEngineInput::IsPress(VK_UP))
+	{
+		ZombieArmStateChange(ZombieArmState::AimNormalToUp);
+		return;
+	}
+
+	if (true == UEngineInput::IsDown('A') ||
+		true == UEngineInput::IsDown('a'))
+	{
+		ZombieArmStateChange(ZombieArmState::Shoot);
+		return;
+	}
+}
+
+void Marco::ZombieArm_Jump_AimUp(float _DeltaTime)
+{
+	if (!InAir)
+	{
+		ZombieArmStateChange(ZombieArmState::Idle_AimUp);
+		return;
+	}
+
+	if (true == UEngineInput::IsFree(VK_UP))
+	{
+		ZombieArmStateChange(ZombieArmState::AimUpToNormal);
+		return;
+	}
+
+	if (true == UEngineInput::IsDown('A') ||
+		true == UEngineInput::IsDown('a'))
+	{
+		ZombieArmStateChange(ZombieArmState::Shoot_AimUp);
+		return;
+	}
+}
+
+void Marco::ZombieArm_Shoot(float _DeltaTime)
+{
+	GunTypeShootCheck();
+	*AccTime += _DeltaTime;
+	if (!InAir)
+	{
+		DirCheck(BodyRenderer::ZombieArm, CurZArmName);
+	}
+
+	if (*AccTime > *CoolTime)
+	{
+		if(true == UEngineInput::IsPress(VK_UP))
+		{
+			*AccTime = 0.0f;
+			ZombieArmStateChange(ZombieArmState::AimNormalToUp);
+			return;
+		}
+		if(true == UEngineInput::IsDown('A') ||
+			true == UEngineInput::IsDown('a'))
+		{
+			*AccTime = 0.0f;
+			ZombieArmStateChange(ZombieArmState::Shoot);
+			return;
+		}
+		if (InAir)
+		{
+			*AccTime = 0.0f;
+			ZombieArmStateChange(ZombieArmState::Jump);
+			return;
+		}
+
+	}
+	if (*AccTime > *EndTime)
+	{
+		*AccTime = 0.0f;
+		ZombieArmStateChange(ZombieArmState::Idle);
+		return;
+	}
+}
+
+void Marco::ZombieArm_Shoot_AimUp(float _DeltaTime)
+{
+	GunTypeShootCheck();
+	*AccTime += _DeltaTime;
+	if (!InAir)
+	{
+		DirCheck(BodyRenderer::ZombieArm, CurZArmName);
+	}
+	if (*AccTime > *CoolTime)
+	{
+		if (true == UEngineInput::IsFree(VK_UP))
+		{
+			*AccTime = 0.0f;
+			ZombieArmStateChange(ZombieArmState::AimUpToNormal);
+			return;
+		}
+		if (true == UEngineInput::IsDown('A') ||
+			true == UEngineInput::IsDown('a'))
+		{
+			*AccTime = 0.0f;
+			ZombieArmStateChange(ZombieArmState::Shoot_AimUp);
+			return;
+		}
+		if (true == UEngineInput::IsPress('S') ||
+			true == UEngineInput::IsPress('s'))
+		{
+			*AccTime = 0.0f;
+			ZombieArmStateChange(ZombieArmState::Jump_AimUp);
+			return;
+		}
+
+	}
+	if (*AccTime > *EndTime)
+	{
+		*AccTime = 0.0f;
+		ZombieArmStateChange(ZombieArmState::Idle_AimUp);
+		return;
+	}
+}
+
+void Marco::ZombieArm_AimNormalToUp(float _DeltaTime)
+{
+	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CurAnimation->Indexs.size() - 1;
+	int CurFlame = Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CurAnimation->CurFrame;
+
+	if (LastIndex == static_cast<size_t>(CurFlame))
+	{
+		ZombieArmStateChange(ZombieArmState::Idle_AimUp);
+		return;
+	}
+}
+
+void Marco::ZombieArm_AimUpToNormal(float _DeltaTime)
+{
+	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CurAnimation->Indexs.size() - 1;
+	int CurFlame = Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CurAnimation->CurFrame;
+
+	if (LastIndex == static_cast<size_t>(CurFlame))
+	{
+		ZombieArmStateChange(ZombieArmState::Idle);
+		return;
+	}
+}
+
+void Marco::ZombieArm_NoneStart()
+{
+	CurZArmName = "ZombieArm_None";
+}
+
+void Marco::ZombieArm_IdleStart()
+{
+	CurZArmName = "ZombieArm_Idle";
+	ZombieArmStart();
+}
+
+void Marco::ZombieArm_Idle_AimUpStart()
+{
+	CurZArmName = "ZombieArm_Idle_AimUp";
+	ZombieArmStart();
+}
+
+void Marco::ZombieArm_MoveStart()
+{
+	CurZArmName = "ZombieArm_Move";
+	ZombieArmStart();
+}
+
+void Marco::ZombieArm_Move_AimUpStart()
+{
+	CurZArmName = "ZombieArm_Move_AimUp";
+	ZombieArmStart();
+}
+
+void Marco::ZombieArm_JumpStart()
+{
+	CurZArmName = "ZombieArm_Jump";
+	ZombieArmStart();
+}
+
+void Marco::ZombieArm_Jump_AimUpStart()
+{
+	CurZArmName = "ZombieArm_Jump_AimUp";
+	ZombieArmStart();
+}
+
+void Marco::ZombieArm_ShootStart()
+{
+	CurZArmName = "ZombieArm_Shoot";
+	ZombieArmStart();
+}
+
+void Marco::ZombieArm_Shoot_AimUpStart()
+{
+	CurZArmName = "ZombieArm_Shoot_AimUp";
+	ZombieArmStart();
+}
+
+void Marco::ZombieArm_AimNormalToUpStart()
+{
+	CurZArmName = "ZombieArm_AimNormalToUp";
+	ZombieArmStart();
+}
+
+void Marco::ZombieArm_AimUpToNormalStart()
+{
+	CurZArmName = "ZombieArm_AimUpToNormal";
+	ZombieArmStart();
+}
+
+void Marco::ZombieArmStart()
+{
+	std::string DirectedName = AddDirectionName(CurZArmName);
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true);
 }
 
 
