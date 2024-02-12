@@ -38,7 +38,7 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetImage("Marco_ZombieArm.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {50,-50} ,MarcoSize });
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {10,-60} ,MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetImage("Marco_UpperBody.png");
@@ -67,13 +67,16 @@ void Marco::BeginPlay()
 
 
 	UImageRenderer* TestRenderer1 = CreateImageRenderer(MT3RenderOrder::AllBody);
-	//UImageRenderer* TestRenderer2 = CreateImageRenderer(MT3RenderOrder::ZombieArm);
+	UImageRenderer* TestRenderer2 = CreateImageRenderer(MT3RenderOrder::ZombieArm);
 
 	TestRenderer1->SetImage("Marco_AllBody.png");
-	TestRenderer1->SetTransform({ {100,0}, MarcoSize });
+	TestRenderer1->SetTransform({ {200,0}, MarcoSize });
 	TestRenderer1->CreateAnimation("Test1", "Marco_AllBody.png", 235, 235, 0.08f, true);
 	TestRenderer1->ChangeAnimation("Test1");
-	//TestRenderer2->SetImage("Marco_ZombieArm.png")
+	TestRenderer2->SetImage("Marco_ZombieArm.png");
+	TestRenderer2->SetTransform({ {210,-60}, MarcoSize });
+	TestRenderer2->CreateAnimation("Test2", "Marco_ZombieArm.png", 0, 0, 0.08f, true);
+	TestRenderer2->ChangeAnimation("Test2");
 
 }
 
