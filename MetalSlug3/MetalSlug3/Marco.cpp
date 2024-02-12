@@ -37,7 +37,7 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransform({ {0,0}, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransColor({ 0,0,0,255 });
 
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetImage("Marco_UpperBody.png");
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetImage("Marco_ZombieArm.png");
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {150,0}, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransColor({ 0,0,0,255 });
 
