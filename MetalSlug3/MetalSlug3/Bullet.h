@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore\Actor.h>
+#include "ContentsHelper.h"
 
 // Ό³Έν :
 class ABullet : public AActor
@@ -24,8 +25,8 @@ protected:
 	void Tick(float _DeltaTime) override;
 	void BeginPlay() override;
 
-private:
 	FVector Dir = FVector::Zero;
-	float Speed = 400.0f;
+	float Speed = 1000.0f;
+	UImageRenderer* Renderer = nullptr;
 };
 

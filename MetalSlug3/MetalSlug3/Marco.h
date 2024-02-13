@@ -281,8 +281,8 @@ private:
 	float Throw_AccTime = 0.0f;
 	int RemainBomb = 0;
 
-	FVector MarcoUpperBodyposition = { 0.0f, 0.0f };
-	FVector MarcoDefaultUpperBodyPosition = { 0.0f,-23.0f };
+	FVector MarcoUpperBodyOffset = { 0.0f, 0.0f };
+	FVector MarcoDefaultUpperBodyOffset = { 0.0f,-23.0f };
 	FVector MarcoSize = { 527.27273f, 527.27273f };
 	FVector Juming_UpperBodyOffset = { -4.0f,-17.0f };
 	FVector ForwardJumping_UpperBodyOffset = { -9.0f ,-14.0f };
@@ -293,11 +293,13 @@ private:
 	FVector ZombieArm_Offset_Right = { 10,-60 };
 	FVector ZombieArm_Offset_Left = { -10,-60 };
 
-	FVector Standing_BulletSpawnOffset;
+	FVector Standing_BulletSpawnOffset = { 0,-45 };
+	FVector AimUp_BulletSpawnOffset = { 0,-75 };
 	FVector Crouching_BulletSpawnOffset;
-	FVector AimUp_BulletSpawnOffset;
-	FVector BulletSpawnOffset_Right;
-	FVector BulletSpawnOffset_Left;
+	FVector BulletSpawnOffset_Right = { 75,0 };
+	FVector BulletSpawnOffset_Left = { -75,0 };
+	FVector AimUpBulletSpawnOffset_Right = { 10,0 };
+	FVector AimUpBulletSpawnOffset_Left = { -10,0 };
 
 	void Jumping_UpperBodySyncro();
 	void ForwardJumping_UpperBodySyncro();

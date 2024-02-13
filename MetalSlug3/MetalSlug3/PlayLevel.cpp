@@ -39,7 +39,5 @@ void PlayLevel::BeginPlay()
 	Map->SetMapImage("State2Map.png");
 	Map->SetColMapImage("Stage2Map_Col.png");
 
-
-
 	SpawnActor<Marco>();
 }
