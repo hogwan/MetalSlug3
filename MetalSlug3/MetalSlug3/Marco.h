@@ -49,8 +49,8 @@ protected:
 	AllBodyState AllState = AllBodyState::None;
 	ZombieArmState ZArmState = ZombieArmState::None;
 	EActorDir DirState = EActorDir::Right;
-	EGunType GunType = EGunType::Pistol;
-	EGunList Gun = EGunList::Pistol;
+	EGunType GunType = EGunType::Rifle;
+	EGunList Gun = EGunList::HeavyMachineGun;
 
 	void FreeMove(float _DeltaTime);
 	void CameraFreeMove(float _DeltaTime);
@@ -294,6 +294,7 @@ private:
 	FVector ZombieArm_Offset_Left = { -10,-60 };
 
 	FVector Standing_BulletSpawnOffset = { 0,-47 };
+	FVector Standing_RifleBulletSpawnOffset = { 0,-37 };
 	FVector Crouching_BulletSpawnOffset = { 0, -43 };
 	FVector AimUp_BulletSpawnOffset_Right = { 2,-75 };
 	FVector AimUp_BulletSpawnOffset_Left = { 0,-75 };
@@ -306,5 +307,7 @@ private:
 	void ForwardJumping_UpperBodySyncro();
 	void Reset_UpperBodySyncro();
 	void ZombieArm_Syncro();
+
+	int HeavyMachineGun_PrevFrame = -1;
 };
 

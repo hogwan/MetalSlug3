@@ -106,7 +106,7 @@ Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBod
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_Outro_Right", "Marco_AllBody.png", 57, 59, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_Idle_Right", "Marco_AllBody.png", 60, 65, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_Move_Right", "Marco_AllBody.png", 66, 72, 0.08f, true);\
-Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("HeavyMachineGun_AllBody_Crouch_Shoot_Right", "Marco_AllBody.png", 73, 76, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("HeavyMachineGun_AllBody_Crouch_Shoot_Right", "Marco_AllBody.png", 73, 76, 0.07f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_Shoot_Right", "Marco_AllBody.png", 77, 86, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_Throw_Right", "Marco_AllBody.png", 87, 92, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Rifle_AllBody_Crouch_KnifeAttack1_Right", "Marco_AllBody.png", 93, 99, 0.08f, false);\

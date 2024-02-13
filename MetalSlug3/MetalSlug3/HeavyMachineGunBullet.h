@@ -1,15 +1,21 @@
 #pragma once
-class HeavyMachineGunBullet
+#include "Bullet.h"
+class AHeavyMachineGunBullet
+	: public ABullet
 {
 public:
 	// constructor destructor
-	HeavyMachineGunBullet();
-	~HeavyMachineGunBullet();
+	AHeavyMachineGunBullet();
+	~AHeavyMachineGunBullet();
 
 	// delete Function
-	HeavyMachineGunBullet(const HeavyMachineGunBullet& _Other) = delete;
-	HeavyMachineGunBullet(HeavyMachineGunBullet&& _Other) noexcept = delete;
-	HeavyMachineGunBullet& operator=(const HeavyMachineGunBullet& _Other) = delete;
-	HeavyMachineGunBullet& operator=(HeavyMachineGunBullet&& _Other) = delete;
+	AHeavyMachineGunBullet(const AHeavyMachineGunBullet& _Other) = delete;
+	AHeavyMachineGunBullet(AHeavyMachineGunBullet&& _Other) noexcept = delete;
+	AHeavyMachineGunBullet& operator=(const AHeavyMachineGunBullet& _Other) = delete;
+	AHeavyMachineGunBullet& operator=(AHeavyMachineGunBullet&& _Other) = delete;
+
+protected:
+	void Tick(float _DeltaTime) override;
+	void BeginPlay() override;
 };
 
