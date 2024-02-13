@@ -1545,10 +1545,8 @@ void Marco::UpperAimNormalToUp(float _DeltaTime)
 		UpperStateChange(UpperBodyState::AimUpShoot);
 		return;
 	}
-	AimNormalToUp_AccTime += _DeltaTime;
-	if (AimNormalToUp_AccTime > AimNormalToUp_Delay)
+	if(Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
 	{
-		AimNormalToUp_AccTime = 0.0f;
 		UpperStateChange(UpperBodyState::AimUp);
 		return;
 	}
@@ -1564,10 +1562,8 @@ void Marco::UpperAimUpToNormal(float _DeltaTime)
 		UpperStateChange(UpperBodyState::Shoot);
 		return;
 	}
-	AimNormalToUp_AccTime += _DeltaTime;
-	if (AimNormalToUp_AccTime > AimNormalToUp_Delay)
+	if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
 	{
-		AimNormalToUp_AccTime = 0.0f;
 		UpperStateChange(UpperBodyState::Idle);
 		return;
 	}
@@ -1863,10 +1859,8 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 
 void Marco::UpperAimNormalToUpShoot(float _DeltaTime)
 {
-	AimNormalToUpShoot_AccTime += _DeltaTime;
-	if (AimNormalToUpShoot_AccTime > AimNormalToUpShoot_Delay)
+	if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
 	{
-		AimNormalToUpShoot_AccTime = 0.0f;
 		UpperStateChange(UpperBodyState::AimUpShoot);
 		return;
 	}
@@ -1874,10 +1868,8 @@ void Marco::UpperAimNormalToUpShoot(float _DeltaTime)
 
 void Marco::UpperAimUpToNormalShoot(float _DeltaTime)
 {
-	AimNormalToUpShoot_AccTime += _DeltaTime;
-	if (AimNormalToUpShoot_AccTime > AimNormalToUpShoot_Delay)
+	if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
 	{
-		AimNormalToUpShoot_AccTime = 0.0f;
 		UpperStateChange(UpperBodyState::Idle);
 		return;
 	}
@@ -1885,10 +1877,8 @@ void Marco::UpperAimUpToNormalShoot(float _DeltaTime)
 
 void Marco::UpperAimNormalToDownShoot(float _DeltaTime)
 {
-	AimNormalToDownShoot_AccTime += _DeltaTime;
-	if (AimNormalToDownShoot_AccTime > AimNormalToDownShoot_Delay)
+	if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
 	{
-		AimNormalToDownShoot_AccTime = 0.0f;
 		UpperStateChange(UpperBodyState::AimDownShoot);
 		return;
 	}
@@ -1896,10 +1886,8 @@ void Marco::UpperAimNormalToDownShoot(float _DeltaTime)
 
 void Marco::UpperAimDownToNormalShoot(float _DeltaTime)
 {
-	AimNormalToDownShoot_AccTime += _DeltaTime;
-	if (AimNormalToDownShoot_AccTime > AimNormalToDownShoot_Delay)
+	if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
 	{
-		AimNormalToDownShoot_AccTime = 0.0f;
 		UpperStateChange(UpperBodyState::Idle);
 		return;
 	}
@@ -2284,10 +2272,8 @@ void Marco::AllNone(float _DeltaTime)
 void Marco::AllCrouch_Intro(float _DeltaTime)
 {
 	Move_Speed = Crouch_Speed;
-	CrouchIntro_AccTime += _DeltaTime;
-	if (CrouchIntro_AccTime > CrouchIntro_Delay)
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
-		CrouchIntro_AccTime = 0.0f;
 		AllStateChange(AllBodyState::Crouch_Idle);
 		return;
 	}
@@ -2296,10 +2282,8 @@ void Marco::AllCrouch_Intro(float _DeltaTime)
 void Marco::AllCrouch_Outro(float _DeltaTime)
 {
 	Move_Speed = Run_Speed;
-	CrouchIntro_AccTime += _DeltaTime;
-	if (CrouchIntro_AccTime > CrouchIntro_Delay)
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
-		CrouchIntro_AccTime = 0.0f;
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
 		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();

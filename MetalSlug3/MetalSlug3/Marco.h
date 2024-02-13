@@ -248,28 +248,6 @@ private:
 	float Gravity = 300.0f;
 	float FallSpeed = 0.0f;
 
-
-	float AimNormalToUp_AccTime = 0.0f;
-	float AimNormalToUp_Delay = 0.16f;
-
-	float AimNormalToDown_AccTime = 0.0f;
-	float AimNormalToDown_Delay = 0.16f;
-
-	float AimDownToNormal_AccTime = 0.0f;
-	float AimDownToNormal_Delay = 0.16f;
-
-	float AimNormalToUpShoot_AccTime = 0.0f;
-	float AimNormalToUpShoot_Delay = 0.2f;
-
-	float AimNormalToDownShoot_AccTime = 0.0f;
-	float AimNormalToDownShoot_Delay = 0.2f;
-
-	float AimDownToNormalShoot_AccTime = 0.0f;
-	float AimDownToNormalShoot_Delay = 0.2f;
-
-	float CrouchIntro_AccTime = 0.0f;
-	float CrouchIntro_Delay = 0.05f;
-
 	float* AccTime = nullptr;
 	float* CoolTime = nullptr;
 	float* EndTime = nullptr;
