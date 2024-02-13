@@ -328,8 +328,5 @@ private:
 	void Jumping_UpperBodySyncro();
 	void ForwardJumping_UpperBodySyncro();
 	void Reset_UpperBodySyncro();
-
-	void ZombieArm_Syncro();
-
 };
 
