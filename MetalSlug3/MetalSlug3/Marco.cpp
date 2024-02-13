@@ -1642,6 +1642,10 @@ void Marco::UpperAimUpShoot(float _DeltaTime)
 			UpperStateChange(UpperBodyState::AimUpToNormalShoot);
 			return;
 		}
+
+		*AccTime = 0.0f;
+		UpperStateChange(UpperBodyState::AimUpToNormal);
+		return;
 	}
 
 	*AccTime += _DeltaTime;
@@ -1808,6 +1812,12 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 				UpperStateChange(UpperBodyState::AimDownToNormalShoot);
 				return;
 			}
+			if (true == UEngineInput::IsFree(VK_DOWN))
+			{
+				*AccTime = 0.0f;
+				UpperStateChange(UpperBodyState::AimDownToNormal);
+				return;
+			}
 		}
 	}
 
@@ -1838,13 +1848,6 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 				std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
 				TriggerDirCheck(BodyRenderer::UpperBody, AddedGunTypeName);
 				UpperStateChange(UpperBodyState::Throw);
-				return;
-			}
-
-			if (true == UEngineInput::IsFree(VK_DOWN))
-			{
-				*AccTime = 0.0f;
-				UpperStateChange(UpperBodyState::AimDownToNormal);
 				return;
 			}
 		}
@@ -3421,6 +3424,7 @@ void Marco::ZombieArm_ShootStart()
 {
 	CurZArmName = "ZombieArm_Shoot";
 	std::string DirectedName = AddDirectionName(CurZArmName);
+	ZombieArm_Syncro();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true);
 }
 
@@ -3428,6 +3432,7 @@ void Marco::ZombieArm_Shoot_AimUpStart()
 {
 	CurZArmName = "ZombieArm_Shoot_AimUp";
 	std::string DirectedName = AddDirectionName(CurZArmName);
+	ZombieArm_Syncro();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true);
 }
 
@@ -3435,6 +3440,7 @@ void Marco::ZombieArm_AimNormalToUpStart()
 {
 	CurZArmName = "ZombieArm_AimNormalToUp";
 	std::string DirectedName = AddDirectionName(CurZArmName);
+	ZombieArm_Syncro();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, false);
 }
 
@@ -3442,12 +3448,14 @@ void Marco::ZombieArm_AimUpToNormalStart()
 {
 	CurZArmName = "ZombieArm_AimUpToNormal";
 	std::string DirectedName = AddDirectionName(CurZArmName);
+	ZombieArm_Syncro();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, false);
 }
 
 void Marco::ZombieArmStart()
 {
 	std::string DirectedName = AddDirectionName(CurZArmName);
+	ZombieArm_Syncro();
 	int BodyFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
 	float BodyTime = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationTime();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true, BodyFrame, BodyTime);
@@ -3469,4 +3477,16 @@ void Marco::ForwardJumping_UpperBodySyncro()
 void Marco::Reset_UpperBodySyncro()
 {
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition, MarcoSize });
+}
+
+void Marco::ZombieArm_Syncro()
+{
+	if (DirState == EActorDir::Left)
+	{
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ ZombieArm_Offset_Left, MarcoSize });
+	}
+	else if (DirState == EActorDir::Right)
+	{
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ ZombieArm_Offset_Right, MarcoSize });
+	}
 }
