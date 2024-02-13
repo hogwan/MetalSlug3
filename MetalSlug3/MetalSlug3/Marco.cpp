@@ -38,9 +38,9 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetImage("Marco_ZombieArm.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {10,-60} ,MarcoSize });
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {0.0f,0.0f} ,MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransColor({ 0,0,0,255 });
-
+	
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetImage("Marco_UpperBody.png");
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransform({ {150,-75}, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransColor({ 0,0,0,255 });
@@ -3420,32 +3420,37 @@ void Marco::ZombieArm_Jump_AimUpStart()
 void Marco::ZombieArm_ShootStart()
 {
 	CurZArmName = "ZombieArm_Shoot";
-	ZombieArmStart();
+	std::string DirectedName = AddDirectionName(CurZArmName);
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true);
 }
 
 void Marco::ZombieArm_Shoot_AimUpStart()
 {
 	CurZArmName = "ZombieArm_Shoot_AimUp";
-	ZombieArmStart();
+	std::string DirectedName = AddDirectionName(CurZArmName);
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true);
 }
 
 void Marco::ZombieArm_AimNormalToUpStart()
 {
 	CurZArmName = "ZombieArm_AimNormalToUp";
-	ZombieArmStart();
+	std::string DirectedName = AddDirectionName(CurZArmName);
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, false);
 }
 
 void Marco::ZombieArm_AimUpToNormalStart()
 {
 	CurZArmName = "ZombieArm_AimUpToNormal";
-	ZombieArmStart();
+	std::string DirectedName = AddDirectionName(CurZArmName);
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, false);
 }
 
 void Marco::ZombieArmStart()
 {
 	std::string DirectedName = AddDirectionName(CurZArmName);
 	int BodyFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true,BodyFrame);
+	int BodyTime = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationTime();
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true, BodyFrame, BodyTime);
 }
 
 
@@ -3464,12 +3469,4 @@ void Marco::ForwardJumping_UpperBodySyncro()
 void Marco::Reset_UpperBodySyncro()
 {
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition, MarcoSize });
-}
-void Marco::ZombieArm_RightSyncro()
-{
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ ZombieArm_Offset_Right ,MarcoSize });
-}
-void Marco::ZombieArm_LeftSyncro()
-{
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ ZombieArm_Offset_Left, MarcoSize });
 }
