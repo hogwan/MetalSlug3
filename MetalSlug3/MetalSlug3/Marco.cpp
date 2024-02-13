@@ -38,7 +38,7 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetImage("Marco_ZombieArm.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {0.0f,0.0f} ,MarcoSize });
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {10,-60} ,MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransColor({ 0,0,0,255 });
 	
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetImage("Marco_UpperBody.png");
@@ -287,7 +287,7 @@ std::string Marco::DirCheck(BodyRenderer _BodyRendererType, std::string _Name)
 		DirState = Dir;
 		std::string ChangeName = AddDirectionName(_Name);
 		int PrevFrame = Renderer[static_cast<int>(_BodyRendererType)]->GetCurAnimationFrame();
-		int PrevTime = Renderer[static_cast<int>(_BodyRendererType)]->GetCurAnimationTime();
+		float PrevTime = Renderer[static_cast<int>(_BodyRendererType)]->GetCurAnimationTime();
 		Renderer[static_cast<int>(_BodyRendererType)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 	}
 	return AddDirectionName(_Name);
@@ -399,7 +399,7 @@ void Marco::TriggerDirCheck(BodyRenderer _BodyRenderer, std::string _Name)
 
 	std::string ChangeName = AddDirectionName(_Name);
 	int PrevFrame = Renderer[static_cast<int>(_BodyRenderer)]->GetCurAnimationFrame();
-	int PrevTime = Renderer[static_cast<int>(_BodyRenderer)]->GetCurAnimationTime();
+	float PrevTime = Renderer[static_cast<int>(_BodyRenderer)]->GetCurAnimationTime();
 	Renderer[static_cast<int>(_BodyRenderer)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 }
 
@@ -2168,7 +2168,7 @@ void Marco::LowerJump(float _DeltaTime)
 		{
 			std::string ChangeName = AddDirectionName(CurLowerBodyName);
 			int PrevFrame = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationFrame();
-			int PrevTime = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationTime();
+			float PrevTime = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationTime();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 		}
 
@@ -2177,7 +2177,7 @@ void Marco::LowerJump(float _DeltaTime)
 		{
 			std::string ChangeName = AddDirectionName(CurLowerBodyName);
 			int PrevFrame = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationFrame();
-			int PrevTime = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationTime();
+			float PrevTime = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationTime();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 		}
 	}
@@ -2201,7 +2201,7 @@ void Marco::LowerForwardJump(float _DeltaTime)
 		{
 			std::string ChangeName = AddDirectionName(CurLowerBodyName);
 			int PrevFrame = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationFrame();
-			int PrevTime = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationTime();
+			float PrevTime = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationTime();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 		}
 
@@ -2210,7 +2210,7 @@ void Marco::LowerForwardJump(float _DeltaTime)
 		{
 			std::string ChangeName = AddDirectionName(CurLowerBodyName);
 			int PrevFrame = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationFrame();
-			int PrevTime = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationTime();
+			float PrevTime = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationTime();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 		}
 	}
@@ -3449,7 +3449,7 @@ void Marco::ZombieArmStart()
 {
 	std::string DirectedName = AddDirectionName(CurZArmName);
 	int BodyFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
-	int BodyTime = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationTime();
+	float BodyTime = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationTime();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true, BodyFrame, BodyTime);
 }
 

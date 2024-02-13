@@ -283,7 +283,7 @@ private:
 	float JumpForce = 100.0f;
 	float ZombieJumpForce = 50.0f;
 
-	float Pistol_Shoot_CoolTime = 0.2f;
+	float Pistol_Shoot_CoolTime = 0.1f;
 	float Pistol_Shoot_AccTime = 0.0f;
 	float Pistol_Shoot_EndTime = 0.3f;
 
