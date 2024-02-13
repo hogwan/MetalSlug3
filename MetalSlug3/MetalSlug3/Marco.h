@@ -293,13 +293,14 @@ private:
 	FVector ZombieArm_Offset_Right = { 10,-60 };
 	FVector ZombieArm_Offset_Left = { -10,-60 };
 
-	FVector Standing_BulletSpawnOffset = { 0,-45 };
-	FVector AimUp_BulletSpawnOffset = { 0,-75 };
-	FVector Crouching_BulletSpawnOffset;
+	FVector Standing_BulletSpawnOffset = { 0,-47 };
+	FVector Crouching_BulletSpawnOffset = { 0, -43 };
+	FVector AimUp_BulletSpawnOffset_Right = { 2,-75 };
+	FVector AimUp_BulletSpawnOffset_Left = { 0,-75 };
+	FVector AimDown_BulletSpawnOffset_Right = { 7,-25 };
+	FVector AimDown_BulletSpawnOffset_Left = { -7,-25 };
 	FVector BulletSpawnOffset_Right = { 75,0 };
 	FVector BulletSpawnOffset_Left = { -75,0 };
-	FVector AimUpBulletSpawnOffset_Right = { 10,0 };
-	FVector AimUpBulletSpawnOffset_Left = { -10,0 };
 
 	void Jumping_UpperBodySyncro();
 	void ForwardJumping_UpperBodySyncro();

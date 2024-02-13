@@ -1843,6 +1843,12 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 			}
 		}
 
+		if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
+		{
+			UpperStateChange(UpperBodyState::AimNormalToDown);
+			return;
+		}
+
 	}
 	else
 	{
@@ -2020,15 +2026,15 @@ void Marco::UpperAimUpShootStart()
 	std::string AddedDirectionName = AddDirectionName(AddedGunTypeName);
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true);
 
-	FVector BulletSpawnLocation = MarcoUpperBodyOffset + AimUp_BulletSpawnOffset;
+	FVector BulletSpawnLocation = FVector::Zero;
 	FVector BulletDir = FVector::Zero;
 	if (DirState == EActorDir::Right)
 	{
-		BulletSpawnLocation += AimUpBulletSpawnOffset_Right;
+		BulletSpawnLocation = MarcoUpperBodyOffset + AimUp_BulletSpawnOffset_Right;
 	}
 	else if (DirState == EActorDir::Left)
 	{
-		BulletSpawnLocation += AimUpBulletSpawnOffset_Left;
+		BulletSpawnLocation = MarcoUpperBodyOffset + AimUp_BulletSpawnOffset_Left;
 	}
 
 	BulletDir = FVector::Up;
@@ -2059,6 +2065,24 @@ void Marco::UpperAimDownShootStart()
 	HeavyMachineGunCheckName(AddedGunTypeName);
 	std::string AddedDirectionName = AddDirectionName(AddedGunTypeName);
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true);
+
+	FVector BulletSpawnLocation = FVector::Zero;
+	FVector BulletDir = FVector::Zero;
+	if (DirState == EActorDir::Right)
+	{
+		BulletSpawnLocation = MarcoUpperBodyOffset + AimDown_BulletSpawnOffset_Right;
+	}
+	else if (DirState == EActorDir::Left)
+	{
+		BulletSpawnLocation = MarcoUpperBodyOffset + AimDown_BulletSpawnOffset_Left;
+	}
+
+	BulletDir = FVector::Down;
+
+	ABullet* Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
+	FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
+	Bullet->SetActorLocation(BulletLocation);
+	Bullet->SetDir(BulletDir);
 }
 
 void Marco::UpperAimNormalToUpShootStart()
@@ -2707,6 +2731,24 @@ void Marco::AllCrouch_ShootStart()
 	HeavyMachineGunCheckName(AddedGunTypeName);
 	std::string DirectedName = AddDirectionName(AddedGunTypeName);
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName, true);
+
+	FVector BulletSpawnLocation = Crouching_BulletSpawnOffset;
+	FVector BulletDir = FVector::Zero;
+	if (DirState == EActorDir::Right)
+	{
+		BulletSpawnLocation += BulletSpawnOffset_Right;
+		BulletDir = FVector::Right;
+	}
+	else if (DirState == EActorDir::Left)
+	{
+		BulletSpawnLocation += BulletSpawnOffset_Left;
+		BulletDir = FVector::Left;
+	}
+
+	ABullet* Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
+	FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
+	Bullet->SetActorLocation(BulletLocation);
+	Bullet->SetDir(BulletDir);
 }
 
 void Marco::AllCrouch_HeavyMachineGun_ShootStart()
