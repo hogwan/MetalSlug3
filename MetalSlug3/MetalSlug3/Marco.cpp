@@ -26,7 +26,7 @@ void Marco::BeginPlay()
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieProjectile
 
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition, MarcoSize });
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoDefaultUpperBodyPosition, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransColor({ 0,0,0,255 });
 
 	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->SetImage("Marco_LowerBody.png");
@@ -1925,6 +1925,23 @@ void Marco::UpperShootStart()
 	HeavyMachineGunCheckName(AddedGunTypeName);
 	std::string AddedDirectionName = AddDirectionName(AddedGunTypeName);
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true);
+
+	FVector BulletSpawnLocation = MarcoUpperBodyposition + Standing_BulletSpawnOffset;
+	FVector BulletDir = FVector::Zero;
+	if (DirState == EActorDir::Right)
+	{
+		BulletSpawnLocation += BulletSpawnOffset_Right;
+		BulletDir = FVector::Right;
+	}
+	else if (DirState == EActorDir::Left)
+	{
+		BulletSpawnLocation += BulletSpawnOffset_Left;
+		BulletDir = FVector::Left;
+	}
+
+	ABullet* Bullet = GetWorld()->SpawnActor<ABullet>();
+	Bullet->SetActorLocation(BulletSpawnLocation);
+	Bullet->SetDir(BulletDir);
 }
 
 void Marco::UpperForwardJumpShootStart()
@@ -2222,7 +2239,6 @@ void Marco::LowerIdleStart()
 
 void Marco::LowerMoveStart()
 {
-	Moving_UpperBodySyncro();
 	CurLowerBodyName = "LowerBody_Move";
 	LowerStart();
 }
@@ -2275,6 +2291,7 @@ void Marco::AllCrouch_Intro(float _DeltaTime)
 
 void Marco::AllCrouch_Outro(float _DeltaTime)
 {
+	Reset_UpperBodySyncro();
 	Move_Speed = Run_Speed;
 	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
@@ -3419,22 +3436,20 @@ void Marco::ZombieArmStart()
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true, BodyFrame, BodyTime);
 }
 
-
-void Marco::Moving_UpperBodySyncro()
-{
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition + Moving_UpperBodyOffset, MarcoSize });
-}
 void Marco::Jumping_UpperBodySyncro()
 {
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition + Juming_UpperBodyOffset, MarcoSize });
+	MarcoUpperBodyposition = MarcoDefaultUpperBodyPosition + Juming_UpperBodyOffset;
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyposition, MarcoSize });
 }
 void Marco::ForwardJumping_UpperBodySyncro()
 {
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition + ForwardJumping_UpperBodyOffset, MarcoSize });
+	MarcoUpperBodyposition = MarcoDefaultUpperBodyPosition + ForwardJumping_UpperBodyOffset;
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyposition, MarcoSize });
 }
 void Marco::Reset_UpperBodySyncro()
 {
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition, MarcoSize });
+	MarcoUpperBodyposition = MarcoDefaultUpperBodyPosition;
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyposition, MarcoSize });
 }
 
 void Marco::ZombieArm_Syncro()

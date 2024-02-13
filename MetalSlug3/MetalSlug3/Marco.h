@@ -24,7 +24,6 @@ public:
 	Marco(Marco&& _Other) noexcept = delete;
 	Marco& operator=(const Marco& _Other) = delete;
 	Marco& operator=(Marco&& _Other) = delete;
-
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -50,8 +49,8 @@ protected:
 	AllBodyState AllState = AllBodyState::None;
 	ZombieArmState ZArmState = ZombieArmState::None;
 	EActorDir DirState = EActorDir::Right;
-	EGunType GunType = EGunType::Rifle;
-	EGunList Gun = EGunList::HeavyMachineGun;
+	EGunType GunType = EGunType::Pistol;
+	EGunList Gun = EGunList::Pistol;
 
 	void FreeMove(float _DeltaTime);
 	void CameraFreeMove(float _DeltaTime);
@@ -282,9 +281,9 @@ private:
 	float Throw_AccTime = 0.0f;
 	int RemainBomb = 0;
 
-	FVector MarcoUpperBodyPosition = { 0.0f,-23.0f };
+	FVector MarcoUpperBodyposition = { 0.0f, 0.0f };
+	FVector MarcoDefaultUpperBodyPosition = { 0.0f,-23.0f };
 	FVector MarcoSize = { 527.27273f, 527.27273f };
-	FVector Moving_UpperBodyOffset = { 0.0f,-6.0f };
 	FVector Juming_UpperBodyOffset = { -4.0f,-17.0f };
 	FVector ForwardJumping_UpperBodyOffset = { -9.0f ,-14.0f };
 	FVector Juming_UpperBodyOffset_Right = { -4.0f,-17.0f };
@@ -294,7 +293,12 @@ private:
 	FVector ZombieArm_Offset_Right = { 10,-60 };
 	FVector ZombieArm_Offset_Left = { -10,-60 };
 
-	void Moving_UpperBodySyncro();
+	FVector Standing_BulletSpawnOffset;
+	FVector Crouching_BulletSpawnOffset;
+	FVector AimUp_BulletSpawnOffset;
+	FVector BulletSpawnOffset_Right;
+	FVector BulletSpawnOffset_Left;
+
 	void Jumping_UpperBodySyncro();
 	void ForwardJumping_UpperBodySyncro();
 	void Reset_UpperBodySyncro();
