@@ -66,7 +66,7 @@ void Marco::BeginPlay()
 	ZombieArmStateChange(ZombieArmState::None);
 
 
-	UImageRenderer* TestRenderer1 = CreateImageRenderer(MT3RenderOrder::AllBody);
+	/*UImageRenderer* TestRenderer1 = CreateImageRenderer(MT3RenderOrder::AllBody);
 	UImageRenderer* TestRenderer2 = CreateImageRenderer(MT3RenderOrder::ZombieArm);
 
 	TestRenderer1->SetImage("Marco_AllBody.png");
@@ -76,7 +76,7 @@ void Marco::BeginPlay()
 	TestRenderer2->SetImage("Marco_ZombieArm.png");
 	TestRenderer2->SetTransform({ {210,-60}, MarcoSize });
 	TestRenderer2->CreateAnimation("Test2", "Marco_ZombieArm.png", 0, 0, 0.08f, true);
-	TestRenderer2->ChangeAnimation("Test2");
+	TestRenderer2->ChangeAnimation("Test2");*/
 
 }
 
@@ -286,9 +286,9 @@ std::string Marco::DirCheck(BodyRenderer _BodyRendererType, std::string _Name)
 	{
 		DirState = Dir;
 		std::string ChangeName = AddDirectionName(_Name);
-		int PrevFrame = Renderer[static_cast<int>(_BodyRendererType)]->CurAnimation->CurFrame;
-		Renderer[static_cast<int>(_BodyRendererType)]->ChangeAnimation(ChangeName);
-		Renderer[static_cast<int>(_BodyRendererType)]->CurAnimation->CurFrame = PrevFrame; // 이거 꼭 만들어달라해야함
+		int PrevFrame = Renderer[static_cast<int>(_BodyRendererType)]->GetCurAnimationFrame();
+		int PrevTime = Renderer[static_cast<int>(_BodyRendererType)]->GetCurAnimationTime();
+		Renderer[static_cast<int>(_BodyRendererType)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 	}
 	return AddDirectionName(_Name);
 }
@@ -398,9 +398,9 @@ void Marco::TriggerDirCheck(BodyRenderer _BodyRenderer, std::string _Name)
 	}
 
 	std::string ChangeName = AddDirectionName(_Name);
-	int PrevFrame = Renderer[static_cast<int>(_BodyRenderer)]->CurAnimation->CurFrame;
-	Renderer[static_cast<int>(_BodyRenderer)]->ChangeAnimation(ChangeName);
-	Renderer[static_cast<int>(_BodyRenderer)]->CurAnimation->CurFrame = PrevFrame;
+	int PrevFrame = Renderer[static_cast<int>(_BodyRenderer)]->GetCurAnimationFrame();
+	int PrevTime = Renderer[static_cast<int>(_BodyRenderer)]->GetCurAnimationTime();
+	Renderer[static_cast<int>(_BodyRenderer)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 }
 
 
@@ -2167,18 +2167,18 @@ void Marco::LowerJump(float _DeltaTime)
 			UEngineInput::IsDown('a'))
 		{
 			std::string ChangeName = AddDirectionName(CurLowerBodyName);
-			int PrevFrame = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CurAnimation->CurFrame;
-			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ChangeName);
-			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CurAnimation->CurFrame = PrevFrame;
+			int PrevFrame = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationFrame();
+			int PrevTime = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationTime();
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 		}
 
 		if (UEngineInput::IsDown('D') ||
 			UEngineInput::IsDown('d'))
 		{
 			std::string ChangeName = AddDirectionName(CurLowerBodyName);
-			int PrevFrame = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CurAnimation->CurFrame;
-			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ChangeName);
-			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CurAnimation->CurFrame = PrevFrame;
+			int PrevFrame = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationFrame();
+			int PrevTime = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationTime();
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 		}
 	}
 	else
@@ -2200,18 +2200,18 @@ void Marco::LowerForwardJump(float _DeltaTime)
 			UEngineInput::IsDown('a'))
 		{
 			std::string ChangeName = AddDirectionName(CurLowerBodyName);
-			int PrevFrame = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CurAnimation->CurFrame;
-			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ChangeName);
-			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CurAnimation->CurFrame = PrevFrame;
+			int PrevFrame = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationFrame();
+			int PrevTime = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationTime();
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 		}
 
 		if (UEngineInput::IsDown('D') ||
 			UEngineInput::IsDown('d'))
 		{
 			std::string ChangeName = AddDirectionName(CurLowerBodyName);
-			int PrevFrame = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CurAnimation->CurFrame;
-			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ChangeName);
-			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CurAnimation->CurFrame = PrevFrame;
+			int PrevFrame = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationFrame();
+			int PrevTime = Renderer[static_cast<int>(BodyRenderer::LowerBody)]->GetCurAnimationTime();
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 		}
 	}
 	else
@@ -2779,10 +2779,7 @@ void Marco::Zombie_AllTransformToZombie_Intro(float _DeltaTime)
 
 void Marco::Zombie_AllTransformToZombie_Falling(float _DeltaTime)
 {
-	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->Indexs.size() - 1;
-	int CurFlame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
-
-	if (LastIndex == static_cast<size_t>(CurFlame))
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
 		AllStateChange(AllBodyState::TransformToZombie_Rising);
 		return;
@@ -2791,10 +2788,7 @@ void Marco::Zombie_AllTransformToZombie_Falling(float _DeltaTime)
 
 void Marco::Zombie_AllTransformToZombie_Rising(float _DeltaTime)
 {
-	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->Indexs.size() - 1;
-	int CurFlame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
-
-	if (LastIndex == static_cast<size_t>(CurFlame))
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
 		ManipulateOn();
 		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
@@ -2921,10 +2915,7 @@ void Marco::Zombie_AllTurn(float _DeltaTime)
 {
 	ManipulateOff();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
-	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->Indexs.size() - 1;
-	int CurFlame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
-
-	if (LastIndex == static_cast<size_t>(CurFlame))
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
 		ManipulateOn();
 		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
@@ -2938,11 +2929,7 @@ void Marco::Zombie_AllAimupTurn(float _DeltaTime)
 {
 	ManipulateOff();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
-	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->Indexs.size() - 1;
-	int CurFlame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
-	
-
-	if (LastIndex == static_cast<size_t>(CurFlame))
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
 		ManipulateOn();
 		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
@@ -2954,11 +2941,7 @@ void Marco::Zombie_AllAimupTurn(float _DeltaTime)
 
 void Marco::Zombie_AllJump(float _DeltaTime)
 {
-	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->Indexs.size() - 1;
-	int CurFlame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
-
-
-	if (LastIndex == static_cast<size_t>(CurFlame))
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
 		AllStateChange(AllBodyState::Zombie_Idle);
 		return;
@@ -2969,10 +2952,7 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 {
 	ManipulateOff();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
-	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->Indexs.size() - 1;
-	int CurFlame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
-
-	if (LastIndex == static_cast<size_t>(CurFlame))
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
 		ManipulateOn();
 		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
@@ -3334,9 +3314,6 @@ void Marco::ZombieArm_Shoot(float _DeltaTime)
 	{
 		*AccTime = 0.0f;
 		ZombieArmStateChange(ZombieArmState::Idle);
-		int BodyFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
-		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CurAnimation->CurFrame = BodyFrame;
-		
 		return;
 	}
 }
@@ -3377,18 +3354,13 @@ void Marco::ZombieArm_Shoot_AimUp(float _DeltaTime)
 	{
 		*AccTime = 0.0f;
 		ZombieArmStateChange(ZombieArmState::Idle_AimUp);
-		int BodyFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->CurAnimation->CurFrame;
-		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CurAnimation->CurFrame = BodyFrame;
 		return;
 	}
 }
 
 void Marco::ZombieArm_AimNormalToUp(float _DeltaTime)
 {
-	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CurAnimation->Indexs.size() - 1;
-	int CurFlame = Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CurAnimation->CurFrame;
-
-	if (LastIndex == static_cast<size_t>(CurFlame))
+	if(Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->IsCurAnimationEnd())
 	{
 		ZombieArmStateChange(ZombieArmState::Idle_AimUp);
 		return;
@@ -3397,10 +3369,7 @@ void Marco::ZombieArm_AimNormalToUp(float _DeltaTime)
 
 void Marco::ZombieArm_AimUpToNormal(float _DeltaTime)
 {
-	size_t LastIndex = Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CurAnimation->Indexs.size() - 1;
-	int CurFlame = Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CurAnimation->CurFrame;
-
-	if (LastIndex == static_cast<size_t>(CurFlame))
+	if (Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->IsCurAnimationEnd())
 	{
 		ZombieArmStateChange(ZombieArmState::Idle);
 		return;
@@ -3475,7 +3444,8 @@ void Marco::ZombieArm_AimUpToNormalStart()
 void Marco::ZombieArmStart()
 {
 	std::string DirectedName = AddDirectionName(CurZArmName);
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true);
+	int BodyFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true,BodyFrame);
 }
 
 
@@ -3494,4 +3464,12 @@ void Marco::ForwardJumping_UpperBodySyncro()
 void Marco::Reset_UpperBodySyncro()
 {
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoUpperBodyPosition, MarcoSize });
+}
+void Marco::ZombieArm_RightSyncro()
+{
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ ZombieArm_Offset_Right ,MarcoSize });
+}
+void Marco::ZombieArm_LeftSyncro()
+{
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ ZombieArm_Offset_Left, MarcoSize });
 }

@@ -323,11 +323,16 @@ private:
 	FVector Juming_UpperBodyOffset_Left = { 4.0f,-17.0f };
 	FVector ForwardJumping_UpperBodyOffset_Right = { -9.0f ,-14.0f };
 	FVector ForwardJumping_UpperBodyOffset_Left = { 9.0f ,-14.0f };
+	FVector ZombieArm_Offset_Right = { 10,-60 };
+	FVector ZombieArm_Offset_Left = { -10,-60 };
 
 	void Moving_UpperBodySyncro();
 	void Jumping_UpperBodySyncro();
 	void ForwardJumping_UpperBodySyncro();
 	void Reset_UpperBodySyncro();
+
+	void ZombieArm_RightSyncro();
+	void ZombieArm_LeftSyncro();
 
 };
 
