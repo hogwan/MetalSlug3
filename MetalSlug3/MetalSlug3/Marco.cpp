@@ -354,32 +354,26 @@ void Marco::GunTypeShootCheck()
 	case EGunList::Pistol:
 		AccTime = &Pistol_Shoot_AccTime;
 		CoolTime = &Pistol_Shoot_CoolTime;
-		EndTime = &Pistol_Shoot_EndTime;
 		break;
 	case EGunList::HeavyMachineGun:
 		AccTime = &HeavyMachineGun_Shoot_AccTime;
 		CoolTime = &HeavyMachineGun_Shoot_CoolTime;
-		EndTime = &HeavyMachineGun_Shoot_EndTime;
 		break;
 	case EGunList::FlameShot:
 		AccTime = &FlameShot_Shoot_AccTime;
 		CoolTime = &FlameShot_Shoot_CoolTime;
-		EndTime = &FlameShot_Shoot_EndTime;
 		break;
 	case EGunList::ShotGun:
 		AccTime = &ShotGun_Shoot_AccTime;
 		CoolTime = &ShotGun_Shoot_CoolTime;
-		EndTime = &ShotGun_Shoot_EndTime;
 		break;
 	case EGunList::RocketLauncher:
 		AccTime = &RocketLauncher_Shoot_AccTime;
 		CoolTime = &RocketLauncher_Shoot_CoolTime;
-		EndTime = &RocketLauncher_Shoot_EndTime;
 		break;
 	case EGunList::IronLizard:
 		AccTime = &IronLizard_Shoot_AccTime;
 		CoolTime = &IronLizard_Shoot_CoolTime;
-		EndTime = &IronLizard_Shoot_EndTime;
 		break;
 	default:
 		break;
@@ -1315,7 +1309,7 @@ void Marco::UpperShoot(float _DeltaTime)
 		}
 	}
 
-	if (*AccTime > *EndTime)
+	if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
 	{
 		*AccTime = 0.0f;
 		UpperStateChange(UpperBodyState::Idle);
@@ -1516,7 +1510,7 @@ void Marco::UpperThrow(float _DeltaTime)
 		}
 	}
 
-	if (*AccTime > *EndTime)
+	if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
 	{
 		*AccTime = 0.0f;
 		UpperStateChange(UpperBodyState::Idle);
@@ -1709,7 +1703,7 @@ void Marco::UpperAimUpShoot(float _DeltaTime)
 		}
 	}
 
-	if (*AccTime > *EndTime)
+	if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
 	{
 		*AccTime = 0.0f;
 		UpperStateChange(UpperBodyState::AimUp);
@@ -2398,21 +2392,11 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 	*AccTime += _DeltaTime;
 	if (*AccTime > *CoolTime)
 	{
-		CrouchShooting = false;
 		if (true == UEngineInput::IsFree(VK_DOWN))
 		{
+			CrouchShooting = false;
 			*AccTime = 0.0f;
 			AllStateChange(AllBodyState::Crouch_Outro);
-			return;
-		}
-
-		if (
-			true == UEngineInput::IsPress(VK_RIGHT) ||
-			true == UEngineInput::IsPress(VK_LEFT)
-			)
-		{
-			*AccTime = 0.0f;
-			AllStateChange(AllBodyState::Crouch_Move);
 			return;
 		}
 
@@ -2421,6 +2405,7 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 			true == UEngineInput::IsDown('a')
 			)
 		{
+			CrouchShooting = false;
 			*AccTime = 0.0f;
 			AllStateChange(AllBodyState::Crouch_Shoot);
 			return;
@@ -2428,6 +2413,7 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 
 		if (InAir)
 		{
+			CrouchShooting = false;
 			*AccTime = 0.0f;
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
@@ -2440,13 +2426,14 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 			true == UEngineInput::IsDown('d')
 			)
 		{
+			CrouchShooting = false;
 			*AccTime = 0.0f;
 			AllStateChange(AllBodyState::Crouch_Throw);
 			return;
 		}
 	}
 
-	if (*AccTime > *EndTime)
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
 		CrouchShooting = false;
 		*AccTime = 0.0f;
@@ -2461,29 +2448,21 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 	*AccTime += _DeltaTime;
 	if (*AccTime > *CoolTime)
 	{
-		CrouchShooting = false;
 		if (true == UEngineInput::IsFree(VK_DOWN))
 		{
+			CrouchShooting = false;
 			*AccTime = 0.0f;
 			AllStateChange(AllBodyState::Crouch_Outro);
 			return;
 		}
 
-		if (
-			true == UEngineInput::IsPress(VK_RIGHT) ||
-			true == UEngineInput::IsPress(VK_LEFT)
-			)
-		{
-			*AccTime = 0.0f;
-			AllStateChange(AllBodyState::Crouch_Move);
-			return;
-		}
 
 		if (
 			true == UEngineInput::IsDown('A') ||
 			true == UEngineInput::IsDown('a')
 			)
 		{
+			CrouchShooting = false;
 			*AccTime = 0.0f;
 			AllStateChange(AllBodyState::Crouch_Shoot);
 			return;
@@ -2491,6 +2470,7 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 
 		if (InAir)
 		{
+			CrouchShooting = false;
 			*AccTime = 0.0f;
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
@@ -2503,13 +2483,14 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 			true == UEngineInput::IsDown('d')
 			)
 		{
+			CrouchShooting = false;
 			*AccTime = 0.0f;
 			AllStateChange(AllBodyState::Crouch_Throw);
 			return;
 		}
 	}
 
-	if (*AccTime > *EndTime)
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
 		CrouchShooting = false;
 		*AccTime = 0.0f;
@@ -2523,21 +2504,11 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 	Throw_AccTime += _DeltaTime;
 	if (Throw_AccTime > Throw_CoolTime)
 	{
-		CrouchShooting = false;
 		if (true == UEngineInput::IsFree(VK_DOWN))
 		{
+			CrouchShooting = false;
 			Throw_AccTime = 0.0f;
 			AllStateChange(AllBodyState::Crouch_Outro);
-			return;
-		}
-
-		if (
-			true == UEngineInput::IsPress(VK_RIGHT) ||
-			true == UEngineInput::IsPress(VK_LEFT)
-			)
-		{
-			Throw_AccTime = 0.0f;
-			AllStateChange(AllBodyState::Crouch_Move);
 			return;
 		}
 
@@ -2546,6 +2517,7 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 			true == UEngineInput::IsDown('a')
 			)
 		{
+			CrouchShooting = false;
 			Throw_AccTime = 0.0f;
 			AllStateChange(AllBodyState::Crouch_Shoot);
 			return;
@@ -2553,6 +2525,7 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 
 		if (InAir)
 		{
+			CrouchShooting = false;
 			Throw_AccTime = 0.0f;
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
@@ -2565,13 +2538,14 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 			true == UEngineInput::IsDown('d')
 			)
 		{
+			CrouchShooting = false;
 			Throw_AccTime = 0.0f;
 			AllStateChange(AllBodyState::Crouch_Throw);
 			return;
 		}
 	}
 
-	if (Throw_AccTime > Throw_EndTime)
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
 		CrouchShooting = false;
 		Throw_AccTime = 0.0f;
@@ -3297,7 +3271,7 @@ void Marco::ZombieArm_Shoot(float _DeltaTime)
 		}
 
 	}
-	if (*AccTime > *EndTime)
+	if (Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->IsCurAnimationEnd())
 	{
 		*AccTime = 0.0f;
 		ZombieArmStateChange(ZombieArmState::Idle);
@@ -3337,7 +3311,7 @@ void Marco::ZombieArm_Shoot_AimUp(float _DeltaTime)
 		}
 
 	}
-	if (*AccTime > *EndTime)
+	if (Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->IsCurAnimationEnd())
 	{
 		*AccTime = 0.0f;
 		ZombieArmStateChange(ZombieArmState::Idle_AimUp);

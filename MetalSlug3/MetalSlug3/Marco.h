@@ -50,8 +50,8 @@ protected:
 	AllBodyState AllState = AllBodyState::None;
 	ZombieArmState ZArmState = ZombieArmState::None;
 	EActorDir DirState = EActorDir::Right;
-	EGunType GunType = EGunType::Pistol;
-	EGunList Gun = EGunList::Pistol;
+	EGunType GunType = EGunType::Rifle;
+	EGunList Gun = EGunList::HeavyMachineGun;
 
 	void FreeMove(float _DeltaTime);
 	void CameraFreeMove(float _DeltaTime);
@@ -250,7 +250,6 @@ private:
 
 	float* AccTime = nullptr;
 	float* CoolTime = nullptr;
-	float* EndTime = nullptr;
 
 	float Move_Speed = 300.0f;
 	float Run_Speed = 300.0f;
@@ -263,31 +262,24 @@ private:
 
 	float Pistol_Shoot_CoolTime = 0.1f;
 	float Pistol_Shoot_AccTime = 0.0f;
-	float Pistol_Shoot_EndTime = 0.3f;
 
 	float HeavyMachineGun_Shoot_AccTime = 0.0f;
 	float HeavyMachineGun_Shoot_CoolTime = 0.14f;
-	float HeavyMachineGun_Shoot_EndTime = 0.28f;
 
 	float FlameShot_Shoot_AccTime = 0.0f;
 	float FlameShot_Shoot_CoolTime = 0.35f;
-	float FlameShot_Shoot_EndTime = 0.4f;
 
 	float ShotGun_Shoot_AccTime = 0.0f;
 	float ShotGun_Shoot_CoolTime = 0.3f;
-	float ShotGun_Shoot_EndTime = 0.35f;
 
 	float RocketLauncher_Shoot_AccTime = 0.0f;
 	float RocketLauncher_Shoot_CoolTime = 0.3f;
-	float RocketLauncher_Shoot_EndTime = 0.35f;
 
 	float IronLizard_Shoot_AccTime = 0.0f;
 	float IronLizard_Shoot_CoolTime = 0.3f;
-	float IronLizard_Shoot_EndTime = 0.35f;
 
 	float Throw_CoolTime = 0.1f;
 	float Throw_AccTime = 0.0f;
-	float Throw_EndTime = 0.8f;
 	int RemainBomb = 0;
 
 	FVector MarcoUpperBodyPosition = { 0.0f,-23.0f };
