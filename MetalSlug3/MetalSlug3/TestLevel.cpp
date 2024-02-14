@@ -39,7 +39,5 @@ void TestLevel::BeginPlay()
 	Map->SetMapImage("TestLevelMap.png");
 	Map->SetColMapImage("TestLevelMap.png");
 
-
-
-	UContentsHelper::Player = SpawnActor<Marco>();
+	SpawnActor<Marco>();
 }

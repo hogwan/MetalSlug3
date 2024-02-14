@@ -1,5 +1,7 @@
 #include "Enemy.h"
 #include "ManZombie1.h"
+#include "Marco.h"
+#include "ZombiesProjectile.h"
 
 AManZombie1::AManZombie1()
 {
@@ -15,21 +17,21 @@ void AManZombie1::BeginPlay()
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetImage("ManZombie1.png");
-	Renderer->SetTransform({ {0,0}, {200,200} });
+	Renderer->SetTransform({ {0,0}, {600,600} });
 
-	Renderer->CreateAnimation("Idle_Right", "ManZombie1.png", 0, 6, 0.08f, true);
-	Renderer->CreateAnimation("Move_Right", "ManZombie1.png", 7, 22, 0.08f, true);
-	Renderer->CreateAnimation("Attack_Right", "ManZombie1.png", 23, 42, 0.08f, false);
-	Renderer->CreateAnimation("Stun_Right", "ManZombie1.png", 43, 67, 0.08f, false);
-	Renderer->CreateAnimation("Turn_Right", "ManZombie1.png", 68, 76, 0.08f, false);
-	Renderer->CreateAnimation("Death_Right", "ManZombie1.png", 77, 91, 0.08f, false);
+	Renderer->CreateAnimation("Idle_Right", "ManZombie1.png", 0, 6, 0.1f, true);
+	Renderer->CreateAnimation("Move_Right", "ManZombie1.png", 7, 22, 0.1f, true);
+	Renderer->CreateAnimation("Attack_Right", "ManZombie1.png", 23, 42, 0.1f, false);
+	Renderer->CreateAnimation("Stun_Right", "ManZombie1.png", 43, 67, 0.1f, false);
+	Renderer->CreateAnimation("Turn_Right", "ManZombie1.png", 68, 76, 0.1f, false);
+	Renderer->CreateAnimation("Death_Right", "ManZombie1.png", 77, 91, 0.1f, false);
 	Renderer->CreateAnimation("DeathInFlame_Right", "ManZombie1.png", 92, 118, 0.08f, false);
 
-	Renderer->CreateAnimation("Idle_Left", "ManZombie1.png", 120, 126, 0.08f, true);
-	Renderer->CreateAnimation("Move_Left", "ManZombie1.png", 127, 142, 0.08f, true);
-	Renderer->CreateAnimation("Attack_Left", "ManZombie1.png", 143, 162, 0.08f, false);
-	Renderer->CreateAnimation("Stun_Left", "ManZombie1.png", 163, 187, 0.08f, false);
-	Renderer->CreateAnimation("Turn_Left", "ManZombie1.png", 188, 196, 0.08f, false);
+	Renderer->CreateAnimation("Idle_Left", "ManZombie1.png", 120, 126, 0.1f, true);
+	Renderer->CreateAnimation("Move_Left", "ManZombie1.png", 127, 142, 0.1f, true);
+	Renderer->CreateAnimation("Attack_Left", "ManZombie1.png", 143, 162, 0.1f, false);
+	Renderer->CreateAnimation("Stun_Left", "ManZombie1.png", 163, 187, 0.1f, false);
+	Renderer->CreateAnimation("Turn_Left", "ManZombie1.png", 188, 196, 0.1f, false);
 	Renderer->CreateAnimation("Death_Left", "ManZombie1.png", 197, 211, 0.08f, false);
 	Renderer->CreateAnimation("DeathInFlame_Left", "ManZombie1.png", 212, 238, 0.08f, false);
 
@@ -69,7 +71,7 @@ void AManZombie1::StateUpdate(float _DeltaTime)
 	case EnemyZombieState::Attack:
 		Attack(_DeltaTime);
 		break;
-	Default:
+	default:
 		break;
 	}
 }
@@ -101,10 +103,11 @@ void AManZombie1::StateChange(EnemyZombieState _State)
 		case EnemyZombieState::Attack:
 			AttackStart();
 			break;
-		Default:
+		default:
 			break;
 		}
 	}
+	CurState = _State;
 }
 
 void AManZombie1::None(float _DeltaTime)
@@ -240,9 +243,29 @@ void AManZombie1::Stun(float _DeltaTime)
 
 void AManZombie1::Attack(float _DeltaTime)
 {
-	//if (Renderer->GetCurAnimationFrame() == 5)
+	int CurFrame = Renderer->GetCurAnimationFrame();
+	if (CurFrame == PrevFrame) return;
+	if (CurFrame == 9)
+	{
+		AZombiesProjectile* Projectile = GetWorld()->SpawnActor<AZombiesProjectile>();
+		FVector SpawnLocation = FVector::Zero;
+		if (DirState == EActorDir::Right)
+		{
+			SpawnLocation = GetActorLocation() + ProjectileSpawnOffset_Height + ProjectileSpawnOffset_Right;
+			Projectile->SetDir(FVector::Right);
+		}
+		else if (DirState == EActorDir::Left)
+		{
+			SpawnLocation = GetActorLocation() + ProjectileSpawnOffset_Height + ProjectileSpawnOffset_Left;
+			Projectile->SetDir(FVector::Left);
+		}
+		Projectile->SetActorLocation(SpawnLocation);
+
+		PrevFrame = CurFrame;
+	}
 	if (Renderer->IsCurAnimationEnd())
 	{
+		PrevFrame = -1;
 		StateChange(EnemyZombieState::Idle);
 		return;
 	}
@@ -307,7 +330,7 @@ void AManZombie1::DirCheck(std::string& _Name)
 	case EActorDir::Right:
 		Dir = "_Right";
 		break;
-	Default:
+	default:
 		break;
 	}
 
@@ -360,6 +383,8 @@ bool AManZombie1::WatchPlayer()
 			return true;
 		}
 	}
+
+	return false;
 }
 
 void AManZombie1::GravityCheck(float _DeltaTime)

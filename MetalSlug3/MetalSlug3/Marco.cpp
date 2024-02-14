@@ -20,10 +20,10 @@ Marco::~Marco()
 
 void Marco::BeginPlay()
 {
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Player));          // UpperBody
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Player));          // LowerBody
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Player));          // AllBody
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Player));          //ZombieArm
+	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::UpperBody));          // UpperBody
+	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::LowerBody));          // LowerBody
+	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::AllBody));          // AllBody
+	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::ZombieArm));          //ZombieArm
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieLaunchEffect
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieProjectile
 
@@ -1132,6 +1132,7 @@ void Marco::UpperShoot(float _DeltaTime)
 	
 	if (Gun == EGunList::HeavyMachineGun)
 	{
+		
 		if (true == UEngineInput::IsPress(VK_UP))
 		{
 			HeavyMachineGun_PrevFrame = -1;
@@ -1148,7 +1149,9 @@ void Marco::UpperShoot(float _DeltaTime)
 				return;
 			}
 		}
-
+		std::string GunCheckedName = GunCheck(BodyRenderer::UpperBody, CurUpperBodyName);
+		HeavyMachineGunCheckName(GunCheckedName);
+		DirCheck(BodyRenderer::UpperBody, GunCheckedName);
 		if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
 		{
 			HeavyMachineGun_PrevFrame = -1;
@@ -2732,8 +2735,25 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 {
 	GunTypeShootCheck();
+	if (true == UEngineInput::IsFree(VK_DOWN))
+	{
+		CrouchShooting = false;
+		HeavyMachineGun_PrevFrame = -1;
+		AllStateChange(AllBodyState::Crouch_Outro);
+		return;
+	}
 
 	int CurFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
+	if (CurFrame >= 3)
+	{
+		if (true == UEngineInput::IsPress('A') ||
+			true == UEngineInput::IsPress('a'))
+		{
+			HeavyMachineGun_PrevFrame = -1;
+			AllStateChange(AllBodyState::Crouch_Shoot_HeavyMachineGun);
+			return;
+		}
+	}
 	if (CurFrame != HeavyMachineGun_PrevFrame)
 	{
 		FVector BulletSpawnLocation = Crouching_BulletSpawnOffset;
@@ -2759,23 +2779,6 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 
 	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
-		FVector BulletSpawnLocation = Crouching_BulletSpawnOffset;
-		FVector BulletDir = FVector::Zero;
-		if (DirState == EActorDir::Right)
-		{
-			BulletSpawnLocation += BulletSpawnOffset_Right;
-			BulletDir = FVector::Right;
-		}
-		else if (DirState == EActorDir::Left)
-		{
-			BulletSpawnLocation += BulletSpawnOffset_Left;
-			BulletDir = FVector::Left;
-		}
-
-		ABullet* Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
-		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
-		Bullet->SetActorLocation(BulletLocation);
-		Bullet->SetDir(BulletDir);
 		HeavyMachineGun_PrevFrame = -1;
 		CrouchShooting = false;
 		AllStateChange(AllBodyState::Crouch_Idle);

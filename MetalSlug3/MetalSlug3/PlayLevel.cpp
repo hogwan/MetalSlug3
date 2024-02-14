@@ -38,6 +38,7 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_AllBody.png", 10, 94);
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_ZombieArm.png", 10, 28);
 	UEngineResourcesManager::GetInst().CuttingImage("ManZombie1.png", 10, 24);
+	UEngineResourcesManager::GetInst().CuttingImage("Zombies_Projectile.png", 10, 10);
 	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("BackGround1.png");
 	Map->SetColMapImage("BackGround1_Col.png");

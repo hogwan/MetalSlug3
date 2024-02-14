@@ -199,6 +199,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="TestLevel.h" />
+    <ClInclude Include="ZombiesProjectile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackGroundMap.cpp">
@@ -256,6 +257,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TestLevel.cpp" />
+    <ClCompile Include="ZombiesProjectile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EngineBase\EngineBase.vcxproj">

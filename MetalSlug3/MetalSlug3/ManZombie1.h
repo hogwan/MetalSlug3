@@ -65,5 +65,11 @@ protected:
 	float CurStunGauge = 0.0f;
 	float CoolTime = 1.0f;
 	float AccTime = 0.0f;
-	float MoveSpeed = 200.0f;
+	float MoveSpeed = 50.0f;
+
+	int PrevFrame = -1;
+
+	FVector ProjectileSpawnOffset_Right = { 50,0 };
+	FVector ProjectileSpawnOffset_Left = { -50,0 };
+	FVector ProjectileSpawnOffset_Height = { 0,-110 };
 };

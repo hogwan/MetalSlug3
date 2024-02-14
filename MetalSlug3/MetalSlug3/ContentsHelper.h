@@ -2,14 +2,16 @@
 #include <EngineBase\EngineMath.h>
 #include <EngineCore\EngineCore.h>
 #include <EngineCore\ImageRenderer.h>
-#include "Marco.h"
 
 enum MT3RenderOrder
 {
 	Map,
 	Projectile,
 	Enemy,
-	Player,
+	LowerBody,
+	UpperBody,
+	ZombieArm,
+	AllBody,
 
 };
 
@@ -133,8 +135,7 @@ class UContentsHelper
 {
 public:
 	static UWindowImage* ColMapImage;
-	static Marco* Player;
-
+	static class Marco* Player;
 private:
 	UContentsHelper();
 	~UContentsHelper();

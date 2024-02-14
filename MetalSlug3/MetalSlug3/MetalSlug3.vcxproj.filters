@@ -52,6 +52,9 @@
     <ClInclude Include="ManZombie1.h">
       <Filter>Object\Enemy\ManZombie1</Filter>
     </ClInclude>
+    <ClInclude Include="ZombiesProjectile.h">
+      <Filter>Object\Projectile\ZombieProjectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -101,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="ManZombie1.cpp">
       <Filter>Object\Enemy\ManZombie1</Filter>
+    </ClCompile>
+    <ClCompile Include="ZombiesProjectile.cpp">
+      <Filter>Object\Projectile\ZombieProjectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
