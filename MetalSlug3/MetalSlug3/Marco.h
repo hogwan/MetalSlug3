@@ -245,7 +245,6 @@ private:
 
 	float FreeMoveSpeed = 1000.0f;
 	float Gravity = 300.0f;
-	float FallSpeed = 0.0f;
 
 	float* AccTime = nullptr;
 	float* CoolTime = nullptr;

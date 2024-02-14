@@ -1,9 +1,12 @@
 #pragma once
-#include <EngineCore/Actor.h>
+#include <EngineCore\Actor.h>
+
+
+// Ό³Έν :
 class ABackGroundMap : public AActor
 {
 public:
-	// constructor destructor
+	// constrcuter destructer
 	ABackGroundMap();
 	~ABackGroundMap();
 
@@ -11,20 +14,10 @@ public:
 	ABackGroundMap(const ABackGroundMap& _Other) = delete;
 	ABackGroundMap(ABackGroundMap&& _Other) noexcept = delete;
 	ABackGroundMap& operator=(const ABackGroundMap& _Other) = delete;
-	ABackGroundMap& operator=(ABackGroundMap&& _Other) = delete;
+	ABackGroundMap& operator=(ABackGroundMap&& _Other) noexcept = delete;
 
 	void SetMapImage(std::string_view _MapImageName);
 	void SetColMapImage(std::string_view _MapImageName);
-
-	UImageRenderer* GetRenderer()
-	{
-		return Renderer;
-	}
-
-	UImageRenderer* GetColRenderer()
-	{
-		return ColRenderer;
-	}
 
 	void SwitchDebug();
 

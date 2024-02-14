@@ -112,12 +112,10 @@ void Marco::GravityCheck(float _DeltaTime)
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 	if (Color != Color8Bit(255, 0, 255, 0))
 	{
-		FallSpeed += Gravity * _DeltaTime;
-		AddActorLocation(FVector::Down * _DeltaTime * FallSpeed);
+		AddActorLocation(FVector::Down * _DeltaTime * 300.0f);
 	}
 	else
 	{
-		FallSpeed = 0.0f;
 	}
 }
 
@@ -236,13 +234,11 @@ void Marco::ManipulateUpdate(float _DeltaTime)
 		{
 			if (IsZombie)
 			{
-				AddActorLocation({ 0.0f, -10.0f });
-				FallSpeed = -150.0f;
+				//AddForce()
 			}
 			else
 			{
-				AddActorLocation({ 0.0f, -10.0f });
-				FallSpeed = -300.0f;
+				//AddForce()
 			}
 		}
 	}
@@ -960,6 +956,7 @@ void Marco::ZombieArmStateChange(ZombieArmState _State)
 void Marco::UpperNone(float _DeltaTime)
 {
 	UpperStateChange(UpperBodyState::Idle);
+	return;
 }
 
 void Marco::UpperIdle(float _DeltaTime)
@@ -1012,13 +1009,6 @@ void Marco::UpperIdle(float _DeltaTime)
 			return;
 		}
 
-		if (InAir)
-		{
-			UpperStateChange(UpperBodyState::Jump);
-			return;
-		}
-
-
 		if (
 			true == UEngineInput::IsDown('D') ||
 			true == UEngineInput::IsDown('d')
@@ -1037,7 +1027,7 @@ void Marco::UpperMove(float _DeltaTime)
 
 	if (InAir)
 	{
-		UpperStateChange(UpperBodyState::Jump);
+		UpperStateChange(UpperBodyState::ForwardJump);
 		return;
 	}
 	else
@@ -1083,13 +1073,6 @@ void Marco::UpperMove(float _DeltaTime)
 			UpperStateChange(UpperBodyState::Shoot);
 			return;
 		}
-
-		if (InAir)
-		{
-			UpperStateChange(UpperBodyState::ForwardJump);
-			return;
-		}
-
 		if (
 			true == UEngineInput::IsDown('D') ||
 			true == UEngineInput::IsDown('d')
@@ -1313,13 +1296,6 @@ void Marco::UpperShoot(float _DeltaTime)
 					UpperStateChange(UpperBodyState::AimNormalToUp);
 					return;
 				}
-
-				if (InAir)
-				{
-					*AccTime = 0.0f;
-					UpperStateChange(UpperBodyState::Jump);
-					return;
-				}
 				if (
 					true == UEngineInput::IsDown('A') ||
 					true == UEngineInput::IsDown('a')
@@ -1525,12 +1501,6 @@ void Marco::UpperThrow(float _DeltaTime)
 				return;
 			}
 
-			if (InAir)
-			{
-				*AccTime = 0.0f;
-				UpperStateChange(UpperBodyState::Jump);
-				return;
-			}
 			if (
 				true == UEngineInput::IsDown('A') ||
 				true == UEngineInput::IsDown('a')
@@ -2401,15 +2371,15 @@ void Marco::LowerIdle(float _DeltaTime)
 		return;
 	}
 
-	if (InAir)
-	{
-		LowerStateChange(LowerBodyState::Jump);
-		return;
-	}
 
 	if (true == UEngineInput::IsPress(VK_DOWN))
 	{
 		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+		return;
+	}
+	if (InAir)
+	{
+		LowerStateChange(LowerBodyState::Jump);
 		return;
 	}
 
@@ -2444,17 +2414,6 @@ void Marco::LowerMove(float _DeltaTime)
 	{
 		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
 		return;
-	}
-
-	FVector MovePos = FVector::Zero;
-	if (UEngineInput::IsPress(VK_LEFT))
-	{
-		MovePos += FVector::Left * _DeltaTime * Run_Speed;
-	}
-
-	if (UEngineInput::IsPress(VK_RIGHT))
-	{
-		MovePos += FVector::Right * _DeltaTime * Run_Speed;
 	}
 
 	if (InAir)
@@ -2584,7 +2543,6 @@ void Marco::AllNone(float _DeltaTime)
 }
 void Marco::AllCrouch_Intro(float _DeltaTime)
 {
-	Move_Speed = Crouch_Speed;
 	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
 		AllStateChange(AllBodyState::Crouch_Idle);
@@ -2595,7 +2553,6 @@ void Marco::AllCrouch_Intro(float _DeltaTime)
 void Marco::AllCrouch_Outro(float _DeltaTime)
 {
 	Reset_UpperBodySyncro();
-	Move_Speed = Run_Speed;
 	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
@@ -2652,9 +2609,7 @@ void Marco::AllCrouch_Idle(float _DeltaTime)
 
 	if (InAir)
 	{
-		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
-		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
-		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
+		AllStateChange(AllBodyState::Crouch_Outro);
 		return;
 	}
 
@@ -2706,9 +2661,7 @@ void Marco::AllCrouch_Move(float _DeltaTime)
 
 	if (InAir)
 	{
-		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
-		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
-		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
+		AllStateChange(AllBodyState::Crouch_Outro);
 		return;
 	}
 
@@ -2760,9 +2713,7 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 		{
 			CrouchShooting = false;
 			*AccTime = 0.0f;
-			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
-			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
-			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
+			AllStateChange(AllBodyState::Crouch_Outro);
 			return;
 		}
 
@@ -2870,9 +2821,7 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 		{
 			CrouchShooting = false;
 			Throw_AccTime = 0.0f;
-			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
-			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
-			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
+			AllStateChange(AllBodyState::Crouch_Outro);
 			return;
 		}
 
@@ -2961,12 +2910,14 @@ void Marco::AllNoneStart()
 
 void Marco::AllCrouch_IntroStart()
 {
+	Move_Speed = Crouch_Speed;
 	CurAllBodyName = "AllBody_Crouch_Intro";
 	AllStart();
 }
 
 void Marco::AllCrouch_OutroStart()
 {
+	Move_Speed = Run_Speed;
 	CurAllBodyName = "AllBody_Crouch_Outro";
 	AllStart();
 }
@@ -3411,13 +3362,6 @@ void Marco::ZombieArm_Idle(float _DeltaTime)
 		ZombieArmStateChange(ZombieArmState::Shoot);
 		return;
 	}
-
-	if (true == UEngineInput::IsDown('S') ||
-		true == UEngineInput::IsDown('s'))
-	{
-		ZombieArmStateChange(ZombieArmState::Jump);
-		return;
-	}
 }
 
 void Marco::ZombieArm_Idle_AimUp(float _DeltaTime)
@@ -3455,13 +3399,6 @@ void Marco::ZombieArm_Idle_AimUp(float _DeltaTime)
 		true == UEngineInput::IsDown('a'))
 	{
 		ZombieArmStateChange(ZombieArmState::Shoot_AimUp);
-		return;
-	}
-
-	if (true == UEngineInput::IsDown('S') ||
-		true == UEngineInput::IsDown('s'))
-	{
-		ZombieArmStateChange(ZombieArmState::Jump_AimUp);
 		return;
 	}
 }
@@ -3502,13 +3439,6 @@ void Marco::ZombieArm_Move(float _DeltaTime)
 		ZombieArmStateChange(ZombieArmState::Shoot);
 		return;
 	}
-
-	if (true == UEngineInput::IsDown('S') ||
-		true == UEngineInput::IsDown('s'))
-	{
-		ZombieArmStateChange(ZombieArmState::Jump);
-		return;
-	}
 }
 
 void Marco::ZombieArm_Move_AimUp(float _DeltaTime)
@@ -3545,13 +3475,6 @@ void Marco::ZombieArm_Move_AimUp(float _DeltaTime)
 		true == UEngineInput::IsDown('a'))
 	{
 		ZombieArmStateChange(ZombieArmState::Shoot_AimUp);
-		return;
-	}
-
-	if (true == UEngineInput::IsDown('S') ||
-		true == UEngineInput::IsDown('s'))
-	{
-		ZombieArmStateChange(ZombieArmState::Jump);
 		return;
 	}
 }

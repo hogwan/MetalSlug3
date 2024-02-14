@@ -36,8 +36,8 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_ZombieArm.png", 10, 28);
 
 	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
-	Map->SetMapImage("State2Map.png");
-	Map->SetColMapImage("Stage2Map_Col.png");
+	Map->SetMapImage("BackGround1.png");
+	Map->SetColMapImage("BackGround1_Col.png");
 
 	SpawnActor<Marco>();
 }
