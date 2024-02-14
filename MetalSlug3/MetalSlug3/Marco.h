@@ -49,8 +49,8 @@ protected:
 	AllBodyState AllState = AllBodyState::None;
 	ZombieArmState ZArmState = ZombieArmState::None;
 	EActorDir DirState = EActorDir::Right;
-	EGunType GunType = EGunType::Pistol;
-	EGunList Gun = EGunList::Pistol;
+	EGunType GunType = EGunType::Rifle;
+	EGunList Gun = EGunList::HeavyMachineGun;
 
 	void UpperStateUpdate(float _DeltaTime);
 	void LowerStateUpdate(float _DeltaTime);

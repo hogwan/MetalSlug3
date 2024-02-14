@@ -1157,6 +1157,15 @@ void Marco::UpperShoot(float _DeltaTime)
 		}
 
 		int CurFrame = Renderer[static_cast<int>(BodyRenderer::UpperBody)]->GetCurAnimationFrame();
+
+		if (CurFrame >= 3)
+		{
+			if (true == UEngineInput::IsPress('A') ||
+				true == UEngineInput::IsPress('a'))
+			{
+				UpperStateChange(UpperBodyState::Shoot);
+			}
+		}
 		if (CurFrame != HeavyMachineGun_PrevFrame)
 		{
 			FVector BulletSpawnLocation = MarcoUpperBodyOffset + Standing_RifleBulletSpawnOffset;
@@ -1307,6 +1316,14 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 			}
 
 			int CurFrame = Renderer[static_cast<int>(BodyRenderer::UpperBody)]->GetCurAnimationFrame();
+			if (CurFrame >= 3)
+			{
+				if (true == UEngineInput::IsPress('A') ||
+					true == UEngineInput::IsPress('a'))
+				{
+					UpperStateChange(UpperBodyState::ForwardJumpShoot);
+				}
+			}
 			if (CurFrame != HeavyMachineGun_PrevFrame)
 			{
 				FVector BulletSpawnLocation = MarcoUpperBodyOffset + Standing_BulletSpawnOffset;
@@ -1603,6 +1620,14 @@ void Marco::UpperAimUpShoot(float _DeltaTime)
 		}
 
 		int CurFrame = Renderer[static_cast<int>(BodyRenderer::UpperBody)]->GetCurAnimationFrame();
+		if (CurFrame >= 3)
+		{
+			if (true == UEngineInput::IsPress('A') ||
+				true == UEngineInput::IsPress('a'))
+			{
+				UpperStateChange(UpperBodyState::AimUpShoot);
+			}
+		}
 		if (CurFrame != HeavyMachineGun_PrevFrame)
 		{
 			FVector BulletSpawnLocation = FVector::Zero;
@@ -1813,6 +1838,14 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 		}
 
 		int CurFrame = Renderer[static_cast<int>(BodyRenderer::UpperBody)]->GetCurAnimationFrame();
+		if (CurFrame >= 3)
+		{
+			if (true == UEngineInput::IsPress('A') ||
+				true == UEngineInput::IsPress('a'))
+			{
+				UpperStateChange(UpperBodyState::AimDownShoot);
+			}
+		}
 		if (CurFrame != HeavyMachineGun_PrevFrame)
 		{
 			FVector BulletSpawnLocation = FVector::Zero;
