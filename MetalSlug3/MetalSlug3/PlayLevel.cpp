@@ -4,6 +4,7 @@
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
 #include "BackGroundMap.h"
+#include "ManZombie1.h"
 
 PlayLevel::PlayLevel()
 {
@@ -42,4 +43,6 @@ void PlayLevel::BeginPlay()
 	Map->SetColMapImage("BackGround1_Col.png");
 
 	UContentsHelper::Player = SpawnActor<Marco>();
+	AManZombie1* MZ1_0 = SpawnActor<AManZombie1>();
+	MZ1_0->SetActorLocation({ 1000,1000 });
 }
