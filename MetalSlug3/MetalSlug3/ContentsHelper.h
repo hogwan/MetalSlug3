@@ -2,16 +2,14 @@
 #include <EngineBase\EngineMath.h>
 #include <EngineCore\EngineCore.h>
 #include <EngineCore\ImageRenderer.h>
+#include "Marco.h"
 
 enum MT3RenderOrder
 {
 	Map,
-	Monster,
 	Projectile,
-	ZombieArm,
-	AllBody,
-	LowerBody,
-	UpperBody,
+	Enemy,
+	Player,
 
 };
 
@@ -120,10 +118,22 @@ enum class ZombieArmState
 	Shoot_AimUp,
 };
 
+enum class EnemyZombieState
+{
+	None,
+	Lying,
+	Idle,
+	Move,
+	Turn,
+	Stun,
+	Attack,
+};
+
 class UContentsHelper
 {
 public:
 	static UWindowImage* ColMapImage;
+	static Marco* Player;
 
 private:
 	UContentsHelper();

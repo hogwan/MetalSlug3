@@ -41,5 +41,5 @@ void TestLevel::BeginPlay()
 
 
 
-	SpawnActor<Marco>();
+	UContentsHelper::Player = SpawnActor<Marco>();
 }

@@ -28,12 +28,6 @@
     <ClInclude Include="ContentsHelper.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="Bomb.h">
-      <Filter>Object\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Object\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="BackGroundMap.h">
       <Filter>Object</Filter>
     </ClInclude>
@@ -45,6 +39,18 @@
     </ClInclude>
     <ClInclude Include="PistolBullet.h">
       <Filter>Object\Projectile\PlayerProjectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ManZombie1.h">
+      <Filter>Object\Enemy\ManZombie1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -72,12 +78,6 @@
     <ClCompile Include="ContentsHelper.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="Bomb.cpp">
-      <Filter>Object\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Object\Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="BackGroundMap.cpp">
       <Filter>Object</Filter>
     </ClCompile>
@@ -89,6 +89,18 @@
     </ClCompile>
     <ClCompile Include="PistolBullet.cpp">
       <Filter>Object\Projectile\PlayerProjectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ManZombie1.cpp">
+      <Filter>Object\Enemy\ManZombie1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +124,15 @@
     </Filter>
     <Filter Include="Object\Projectile\PlayerProjectile">
       <UniqueIdentifier>{4465dc4f-9081-43f2-8e00-2593b7890266}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy">
+      <UniqueIdentifier>{b3133f5b-82a7-4131-8289-256ecddf75aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Projectile\ZombieProjectile">
+      <UniqueIdentifier>{630a9f00-4e88-4da0-93f3-bb1888bb29f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\ManZombie1">
+      <UniqueIdentifier>{acf56977-1796-4787-8419-32ce200af5b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

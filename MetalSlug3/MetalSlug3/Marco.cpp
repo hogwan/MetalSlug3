@@ -20,10 +20,10 @@ Marco::~Marco()
 
 void Marco::BeginPlay()
 {
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::UpperBody));          // UpperBody
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::LowerBody));          // LowerBody
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::AllBody));          // AllBody
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::ZombieArm));          //ZombieArm
+	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Player));          // UpperBody
+	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Player));          // LowerBody
+	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Player));          // AllBody
+	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Player));          //ZombieArm
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieLaunchEffect
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieProjectile
 
