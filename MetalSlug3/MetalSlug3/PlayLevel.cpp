@@ -15,6 +15,8 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::BeginPlay()
 {
+	ULevel::BeginPlay();
+
 	UEngineDirectory NewPath;
 	NewPath.MoveParent();
 	NewPath.Move("MT3Resource");

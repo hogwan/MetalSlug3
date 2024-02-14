@@ -12,22 +12,22 @@
     <ClCompile Include="EngineWindow.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="UUEngineInput.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
     <ClCompile Include="WindowImage.cpp">
       <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineInput.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineWindow.h">
       <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="UUEngineInput.h">
-      <Filter>Input</Filter>
-    </ClInclude>
     <ClInclude Include="WindowImage.h">
       <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineInput.h">
+      <Filter>Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -18,9 +18,9 @@ void MetalSlug3Core::BeginPlay()
 	MainWindow.SetWindowScale({ 800,600 });
 	CreateLevel<CharacterSelect>("CharacterSelect");
 	CreateLevel<PlayLevel>("Play");
-	CreateLevel<TestLevel>("Test");
+	//CreateLevel<TestLevel>("Test");
 
-	ChangeLevel("Test");
+	ChangeLevel("Play");
 	
 }
 

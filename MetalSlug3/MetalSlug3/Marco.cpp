@@ -67,32 +67,21 @@ void Marco::BeginPlay()
 	AllStateChange(AllBodyState::None);
 	ZombieArmStateChange(ZombieArmState::None);
 
-
-	/*UImageRenderer* TestRenderer1 = CreateImageRenderer(MT3RenderOrder::AllBody);
-	UImageRenderer* TestRenderer2 = CreateImageRenderer(MT3RenderOrder::ZombieArm);
-
-	TestRenderer1->SetImage("Marco_AllBody.png");
-	TestRenderer1->SetTransform({ {200,0}, MarcoSize });
-	TestRenderer1->CreateAnimation("Test1", "Marco_AllBody.png", 235, 235, 0.08f, true);
-	TestRenderer1->ChangeAnimation("Test1");
-	TestRenderer2->SetImage("Marco_ZombieArm.png");
-	TestRenderer2->SetTransform({ {210,-60}, MarcoSize });
-	TestRenderer2->CreateAnimation("Test2", "Marco_ZombieArm.png", 0, 0, 0.08f, true);
-	TestRenderer2->ChangeAnimation("Test2");*/
-
 }
 
 
 void Marco::Tick(float _DeltaTime)
 {
-	GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, 0.0f });
+	GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, GetActorLocation().Y - 550.0f });
 	if (Manipulate)
 	{
 		ManipulateUpdate(_DeltaTime);
 	}
 	InAirCheck();
-	DeathCheck();
 	GravityCheck(_DeltaTime);
+	GroundUp();
+
+	DeathCheck();
 
 	AllBodyStateUpdate(_DeltaTime);
 	if (!IsZombie)
@@ -110,18 +99,21 @@ void Marco::Tick(float _DeltaTime)
 void Marco::GravityCheck(float _DeltaTime)
 {
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	CalGravityVector(_DeltaTime);
 	if (Color != Color8Bit(255, 0, 255, 0))
 	{
-		AddActorLocation(FVector::Down * _DeltaTime * 300.0f);
+		JumpVector += GravityVector * _DeltaTime;
 	}
 	else
 	{
+		JumpVector = FVector::Zero;
 	}
+	AddActorLocation(JumpVector * _DeltaTime);
 }
 
 void Marco::InAirCheck()
 {
-	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY()+20, Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
 		InAir = false;
@@ -213,6 +205,26 @@ void Marco::DeathCheck()
 
 void Marco::ManipulateUpdate(float _DeltaTime)
 {
+	FVector CheckPos = GetActorLocation();
+	switch (DirState)
+	{
+	case EActorDir::Left:
+		CheckPos.X -= 30;
+		break;
+	case EActorDir::Right:
+		CheckPos.X += 30;
+		break;
+	default:
+		break;
+	}
+	CheckPos.Y -= 60;
+	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
+
+	if (Color == Color8Bit(255, 0, 255, 0))
+	{
+		return;
+	}
+
 	if (!CrouchShooting)
 	{
 		if (true == UEngineInput::IsPress(VK_LEFT) &&
@@ -235,10 +247,14 @@ void Marco::ManipulateUpdate(float _DeltaTime)
 			if (IsZombie)
 			{
 				//AddForce()
+				AddActorLocation(FVector::Up * 20);
+				JumpVector = ZombieJumpPower;
 			}
 			else
 			{
 				//AddForce()
+				AddActorLocation(FVector::Up * 20);
+				JumpVector = JumpPower;
 			}
 		}
 	}
@@ -395,73 +411,6 @@ void Marco::TriggerDirCheck(BodyRenderer _BodyRenderer, std::string _Name)
 	Renderer[static_cast<int>(_BodyRenderer)]->ChangeAnimation(ChangeName, false, PrevFrame, PrevTime);
 }
 
-
-void Marco::CameraFreeMove(float _DeltaTime)
-{
-	if (UEngineInput::IsPress(VK_LEFT))
-	{
-		GetWorld()->AddCameraPos(FVector::Left * _DeltaTime * 500.0f);
-		// AddActorLocation(FVector::Left * _DeltaTime * 500.0f);
-	}
-
-	if (UEngineInput::IsPress(VK_RIGHT))
-	{
-		GetWorld()->AddCameraPos(FVector::Right * _DeltaTime * 500.0f);
-	}
-
-	if (UEngineInput::IsPress(VK_UP))
-	{
-		GetWorld()->AddCameraPos(FVector::Up * _DeltaTime * 500.0f);
-		// AddActorLocation(FVector::Up * _DeltaTime * 500.0f);
-	}
-
-	if (UEngineInput::IsPress(VK_DOWN))
-	{
-		GetWorld()->AddCameraPos(FVector::Down * _DeltaTime * 500.0f);
-		// AddActorLocation(FVector::Down * _DeltaTime * 500.0f);
-	}
-
-	if (UEngineInput::IsDown('2'))
-	{
-		UpperStateChange(UpperBodyState::Idle);
-		LowerStateChange(LowerBodyState::Idle);
-		AllStateChange(AllBodyState::None);
-	}
-}
-void Marco::FreeMove(float _DeltaTime)
-{
-	FVector MovePos;
-
-	if (UEngineInput::IsPress(VK_LEFT))
-	{
-		MovePos += FVector::Left * _DeltaTime * FreeMoveSpeed;
-	}
-
-	if (UEngineInput::IsPress(VK_RIGHT))
-	{
-		MovePos += FVector::Right * _DeltaTime * FreeMoveSpeed;
-	}
-
-	if (UEngineInput::IsPress(VK_UP))
-	{
-		MovePos += FVector::Up * _DeltaTime * FreeMoveSpeed;
-	}
-
-	if (UEngineInput::IsPress(VK_DOWN))
-	{
-		MovePos += FVector::Down * _DeltaTime * FreeMoveSpeed;
-	}
-
-	AddActorLocation(MovePos);
-	GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, GetActorLocation().Y - 300.0f });
-
-	if (UEngineInput::IsDown('1'))
-	{
-		UpperStateChange(UpperBodyState::Idle);
-		LowerStateChange(LowerBodyState::Idle);
-		AllStateChange(AllBodyState::None);
-	}
-}
 void Marco::UpperStateUpdate(float _DeltaTime)
 {
 	switch (UpperState)
@@ -1684,7 +1633,12 @@ void Marco::UpperAimUpShoot(float _DeltaTime)
 		{
 			if (*AccTime > *CoolTime)
 			{
-
+				if (true == UEngineInput::IsFree(VK_UP))
+				{
+					HeavyMachineGun_PrevFrame = -1;
+					UpperStateChange(UpperBodyState::AimUpToNormal);
+					return;
+				}
 				if (
 					true == UEngineInput::IsDown('A') ||
 					true == UEngineInput::IsDown('a')
@@ -1716,6 +1670,12 @@ void Marco::UpperAimUpShoot(float _DeltaTime)
 			DirCheck(BodyRenderer::UpperBody, GunCheckedName);
 			if (*AccTime > *CoolTime)
 			{
+				if (true == UEngineInput::IsFree(VK_UP))
+				{
+					HeavyMachineGun_PrevFrame = -1;
+					UpperStateChange(UpperBodyState::AimUpToNormal);
+					return;
+				}
 				if (InAir)
 				{
 					*AccTime = 0.0f;
@@ -2388,7 +2348,6 @@ void Marco::LowerIdle(float _DeltaTime)
 void Marco::LowerMove(float _DeltaTime)
 {
 	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
-	GravityCheck(_DeltaTime);
 
 	if (
 		true == UEngineInput::IsPress(VK_LEFT) &&
@@ -2457,7 +2416,6 @@ void Marco::LowerJump(float _DeltaTime)
 
 void Marco::LowerForwardJump(float _DeltaTime)
 {
-	GravityCheck(_DeltaTime);
 	if (InAir)
 	{
 		if (UEngineInput::IsDown('A') ||
@@ -2507,7 +2465,7 @@ void Marco::LowerMoveStart()
 
 void Marco::LowerJumpStart()
 {
-	Move_Speed = InAir_Speed;
+	Move_Speed = Jump_Speed;
 	Jumping_UpperBodySyncro();
 	CurLowerBodyName = "LowerBody_Jump";
 	LowerStart();
@@ -2515,7 +2473,7 @@ void Marco::LowerJumpStart()
 
 void Marco::LowerForwardJumpStart()
 {
-	Move_Speed = InAir_Speed;
+	Move_Speed = ForwardJump_Speed;
 	ForwardJumping_UpperBodySyncro();
 	CurLowerBodyName = "LowerBody_ForwardJump";
 	LowerStart();
@@ -3728,5 +3686,31 @@ void Marco::ZombieArm_Syncro()
 	else if (DirState == EActorDir::Right)
 	{
 		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ ZombieArm_Offset_Right, MarcoSize });
+	}
+}
+
+void Marco::CalGravityVector(float _DeltaTime)
+{
+	GravityVector += Gravity * _DeltaTime;
+	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	if (Color == Color8Bit(255, 0, 255, 0))
+	{
+		GravityVector = FVector::Zero;
+	}
+}
+
+void Marco::GroundUp()
+{
+	while (true)
+	{
+		Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY()-15, Color8Bit::MagentaA);
+		if (Color == Color8Bit(255, 0, 255, 0))
+		{
+			AddActorLocation(FVector::Up);
+		}
+		else
+		{
+			break;
+		}
 	}
 }

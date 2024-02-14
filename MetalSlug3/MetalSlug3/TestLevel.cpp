@@ -35,11 +35,11 @@ void TestLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_AllBody.png", 10, 94);
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_ZombieArm.png", 10, 28);
 
-	ABackGroundMap* Map = SpawnActor<ABackGroundMap>(0);
+	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("TestLevelMap.png");
 	Map->SetColMapImage("TestLevelMap.png");
 
 
 
-	SpawnActor<Marco>(2);
+	SpawnActor<Marco>();
 }

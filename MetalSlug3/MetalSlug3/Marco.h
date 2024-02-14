@@ -49,11 +49,8 @@ protected:
 	AllBodyState AllState = AllBodyState::None;
 	ZombieArmState ZArmState = ZombieArmState::None;
 	EActorDir DirState = EActorDir::Right;
-	EGunType GunType = EGunType::Rifle;
-	EGunList Gun = EGunList::HeavyMachineGun;
-
-	void FreeMove(float _DeltaTime);
-	void CameraFreeMove(float _DeltaTime);
+	EGunType GunType = EGunType::Pistol;
+	EGunList Gun = EGunList::Pistol;
 
 	void UpperStateUpdate(float _DeltaTime);
 	void LowerStateUpdate(float _DeltaTime);
@@ -240,23 +237,17 @@ private:
 		Manipulate = false;
 	}
 
-	int RenderState = 0;
-	int PrevRenderState = 0;
-
 	float FreeMoveSpeed = 1000.0f;
-	float Gravity = 300.0f;
 
 	float* AccTime = nullptr;
 	float* CoolTime = nullptr;
 
 	float Move_Speed = 300.0f;
 	float Run_Speed = 300.0f;
-	float InAir_Speed = 100.0f;
+	float Jump_Speed = 100.0f;
+	float ForwardJump_Speed = 200.0f;
 	float Crouch_Speed = 50.0f;
 	float Zombie_Speed = 75.0f;
-
-	float JumpForce = 100.0f;
-	float ZombieJumpForce = 50.0f;
 
 	float Pistol_Shoot_CoolTime = 0.1f;
 	float Pistol_Shoot_AccTime = 0.0f;
@@ -308,5 +299,15 @@ private:
 	void ZombieArm_Syncro();
 
 	int HeavyMachineGun_PrevFrame = -1;
+
+	FVector GravityVector = FVector::Zero;
+	FVector Gravity = FVector::Down * 1300.0f;
+
+	FVector JumpPower = FVector::Up * 300.0f;
+	FVector ZombieJumpPower = FVector::Up * 100.0f;
+	FVector JumpVector = FVector::Zero;
+
+	void CalGravityVector(float _DeltaTime);
+	void GroundUp();
 };
 
