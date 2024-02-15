@@ -247,13 +247,13 @@ void Marco::ManipulateUpdate(float _DeltaTime)
 			if (IsZombie)
 			{
 				//AddForce()
-				AddActorLocation(FVector::Up * 20);
+				AddActorLocation(FVector::Up * 50);
 				JumpVector = ZombieJumpPower;
 			}
 			else
 			{
 				//AddForce()
-				AddActorLocation(FVector::Up * 20);
+				AddActorLocation(FVector::Up * 50);
 				JumpVector = JumpPower;
 			}
 		}
@@ -2378,12 +2378,6 @@ void Marco::LowerNone(float _DeltaTime)
 void Marco::LowerIdle(float _DeltaTime)
 {
 	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
-	if (InAir)
-	{
-		LowerStateChange(LowerBodyState::Jump);
-		return;
-	}
-
 	if (
 		true == UEngineInput::IsPress(VK_LEFT) &&
 		true == UEngineInput::IsPress(VK_RIGHT)
@@ -2401,16 +2395,27 @@ void Marco::LowerIdle(float _DeltaTime)
 		return;
 	}
 
-
-	if (true == UEngineInput::IsPress(VK_DOWN))
-	{
-		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
-		return;
-	}
 	if (InAir)
 	{
 		LowerStateChange(LowerBodyState::Jump);
 		return;
+	}
+
+
+
+	if (InAir)
+	{
+		LowerStateChange(LowerBodyState::Jump);
+		return;
+	}
+	if (!InAir)
+	{
+		if (true == UEngineInput::IsPress(VK_DOWN))
+		{
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+			return;
+		}
+
 	}
 
 }
@@ -2439,10 +2444,13 @@ void Marco::LowerMove(float _DeltaTime)
 		return;
 	}
 
-	if (true == UEngineInput::IsPress(VK_DOWN))
+	if (!InAir)
 	{
-		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
-		return;
+		if (true == UEngineInput::IsPress(VK_DOWN))
+		{
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+			return;
+		}
 	}
 
 	if (InAir)
@@ -2661,6 +2669,12 @@ void Marco::AllCrouch_Move(float _DeltaTime)
 		return;
 	}
 
+	if (InAir)
+	{
+		AllStateChange(AllBodyState::Crouch_Outro);
+		return;
+	}
+
 	if (
 		false == UEngineInput::IsPress(VK_RIGHT) &&
 		false == UEngineInput::IsPress(VK_LEFT)
@@ -2685,12 +2699,6 @@ void Marco::AllCrouch_Move(float _DeltaTime)
 			AllStateChange(AllBodyState::Crouch_Shoot);
 			return;
 		}
-	}
-
-	if (InAir)
-	{
-		AllStateChange(AllBodyState::Crouch_Outro);
-		return;
 	}
 
 	if (
@@ -2777,6 +2785,14 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 		return;
 	}
 
+	if (InAir)
+	{
+		CrouchShooting = false;
+		HeavyMachineGun_PrevFrame = -1;
+		AllStateChange(AllBodyState::Crouch_Outro);
+		return;
+	}
+
 	int CurFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
 	if (CurFrame >= 3)
 	{
@@ -2795,13 +2811,18 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 		if (DirState == EActorDir::Right)
 		{
 			BulletSpawnLocation += BulletSpawnOffset_Right;
-			BulletDir = FVector::Right;
+			int RandomInt = rand();
+			FVector RandomVector = HeavyMachineGun_RightArr[RandomInt % 5];
+			BulletDir = RandomVector;
 		}
 		else if (DirState == EActorDir::Left)
 		{
 			BulletSpawnLocation += BulletSpawnOffset_Left;
-			BulletDir = FVector::Left;
+			int RandomInt = rand();
+			FVector RandomVector = HeavyMachineGun_LeftArr[RandomInt % 5];
+			BulletDir = RandomVector;
 		}
+		BulletDir.Normalize2D();
 
 		ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
 		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
@@ -2998,7 +3019,7 @@ void Marco::AllCrouch_HeavyMachineGun_ShootStart()
 	std::string AddedGunTypeName = AddGunTypeName(CurAllBodyName);
 	HeavyMachineGunCheckName(AddedGunTypeName);
 	std::string DirectedName = AddDirectionName(AddedGunTypeName);
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName, true, 0.1f);
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName, true, 0, 0.1f);
 }
 
 void Marco::AllCrouch_ThrowStart()

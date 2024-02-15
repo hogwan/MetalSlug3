@@ -16,7 +16,7 @@ void MetalSlug3Core::BeginPlay()
 {
 	int Value = 0;
 	__int64 Address = reinterpret_cast<__int64>(&Value);
-	srand(Address);
+	srand(static_cast<unsigned int>(Address));
 
 	// "Title Level" + "을 만들다가 에러가 났습니다";
 	MainWindow.SetWindowScale({ 800,600 });
