@@ -19,6 +19,10 @@ void AManZombie1::BeginPlay()
 	Renderer->SetImage("ManZombie1.png");
 	Renderer->SetTransform({ {0,0}, {600,600} });
 
+	LaunchRenderer = CreateImageRenderer(MT3RenderOrder::Particle);
+	LaunchRenderer->SetImage("ManZombie1_LaunchEffect.png");
+	LaunchRenderer->SetTransform({ {0,0}, {600,600} });
+
 	Renderer->CreateAnimation("Idle_Right", "ManZombie1.png", 0, 6, 0.1f, true);
 	Renderer->CreateAnimation("Move_Right", "ManZombie1.png", 7, 22, 0.1f, true);
 	Renderer->CreateAnimation("Attack_Right", "ManZombie1.png", 23, 42, 0.1f, false);
@@ -36,6 +40,10 @@ void AManZombie1::BeginPlay()
 	Renderer->CreateAnimation("DeathInFlame_Left", "ManZombie1.png", 212, 238, 0.08f, false);
 
 	Renderer->CreateAnimation("Lying", "ManZombie1.png", 175, 187, 0.08f, false);
+
+	LaunchRenderer->CreateAnimation("LaunchEffect_Right", "ManZombie1_LaunchEffect.png", 0, 11, 0.1f, false);
+	LaunchRenderer->CreateAnimation("LaunchEffect_Left", "ManZombie1_LaunchEffect.png", 20, 31, 0.1f, false);
+	LaunchRenderer->ActiveOff();
 }
 
 void AManZombie1::Tick(float _DeltaTime)
@@ -253,13 +261,24 @@ void AManZombie1::Attack(float _DeltaTime)
 		{
 			SpawnLocation = GetActorLocation() + ProjectileSpawnOffset_Height + ProjectileSpawnOffset_Right;
 			Projectile->SetDir(FVector::Right);
+			LaunchRenderer->ChangeAnimation("LaunchEffect_Right");
 		}
 		else if (DirState == EActorDir::Left)
 		{
 			SpawnLocation = GetActorLocation() + ProjectileSpawnOffset_Height + ProjectileSpawnOffset_Left;
 			Projectile->SetDir(FVector::Left);
+			LaunchRenderer->ChangeAnimation("LaunchEffect_Left");
 		}
 		Projectile->SetActorLocation(SpawnLocation);
+
+		FVector EffectSpawnLocation = GetActorLocation() + LaunchEffectOffset;
+
+		if (DirState == EActorDir::Left)
+		{
+		}
+		else if (DirState == EActorDir::Right)
+		{
+		}
 
 		PrevFrame = CurFrame;
 	}
@@ -267,6 +286,7 @@ void AManZombie1::Attack(float _DeltaTime)
 	{
 		PrevFrame = -1;
 		StateChange(EnemyZombieState::Idle);
+		LaunchRenderer->ActiveOff();
 		return;
 	}
 }

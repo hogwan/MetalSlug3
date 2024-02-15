@@ -24,14 +24,6 @@ protected:
 	void StateUpdate(float _DeltaTime);
 	void StateChange(EnemyZombieState _State);
 
-	/*None,
-		Lying,
-		Idle,
-		Move,
-		Turn,
-		Stun,
-		Attack,*/
-
 	void None(float _DeltaTime);
 	void Lying(float _DeltaTime);
 	void Idle(float _DeltaTime);
@@ -72,4 +64,7 @@ protected:
 	FVector ProjectileSpawnOffset_Right = { 50,0 };
 	FVector ProjectileSpawnOffset_Left = { -50,0 };
 	FVector ProjectileSpawnOffset_Height = { 0,-110 };
+	FVector LaunchEffectOffset = { 0, -110 };
+
+	UImageRenderer* LaunchRenderer = nullptr;
 };

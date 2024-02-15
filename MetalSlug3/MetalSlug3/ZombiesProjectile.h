@@ -60,6 +60,6 @@ protected:
 
 	std::string CurAnimName = "None";
 
-	float ShootPower = 300.0f;
+	float ShootPower = 200.0f;
 
 };

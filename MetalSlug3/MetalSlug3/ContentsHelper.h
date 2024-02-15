@@ -12,6 +12,7 @@ enum MT3RenderOrder
 	UpperBody,
 	ZombieArm,
 	AllBody,
+	Particle,
 
 };
 
