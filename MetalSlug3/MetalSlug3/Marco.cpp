@@ -1177,13 +1177,18 @@ void Marco::UpperShoot(float _DeltaTime)
 			if (DirState == EActorDir::Right)
 			{
 				BulletSpawnLocation += BulletSpawnOffset_Right;
-				BulletDir = FVector::Right;
+				int RandomInt = rand();
+				FVector RandomVector = HeavyMachineGun_RightArr[RandomInt % 5];
+				BulletDir = RandomVector;
 			}
 			else if (DirState == EActorDir::Left)
 			{
 				BulletSpawnLocation += BulletSpawnOffset_Left;
-				BulletDir = FVector::Left;
+				int RandomInt = rand();
+				FVector RandomVector = HeavyMachineGun_LeftArr[RandomInt % 5];
+				BulletDir = RandomVector;
 			}
+			BulletDir.Normalize2D();
 
 			ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
 			FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
@@ -1331,17 +1336,23 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 			if (CurFrame != HeavyMachineGun_PrevFrame)
 			{
 				FVector BulletSpawnLocation = MarcoUpperBodyOffset + Standing_BulletSpawnOffset;
+
 				FVector BulletDir = FVector::Zero;
 				if (DirState == EActorDir::Right)
 				{
 					BulletSpawnLocation += BulletSpawnOffset_Right;
-					BulletDir = FVector::Right;
+					int RandomInt = rand();
+					FVector RandomVector = HeavyMachineGun_RightArr[RandomInt % 5];
+					BulletDir = RandomVector;
 				}
 				else if (DirState == EActorDir::Left)
 				{
 					BulletSpawnLocation += BulletSpawnOffset_Left;
-					BulletDir = FVector::Left;
+					int RandomInt = rand();
+					FVector RandomVector = HeavyMachineGun_LeftArr[RandomInt % 5];
+					BulletDir = RandomVector;
 				}
+				BulletDir.Normalize2D();
 
 				ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
 				FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
@@ -1638,14 +1649,19 @@ void Marco::UpperAimUpShoot(float _DeltaTime)
 			FVector BulletDir = FVector::Zero;
 			if (DirState == EActorDir::Right)
 			{
-				BulletSpawnLocation = MarcoUpperBodyOffset + AimUp_BulletSpawnOffset_Right;
+				BulletSpawnLocation = MarcoUpperBodyOffset + AimUp_RifleBulletSpawnOffset_Right;
+				int RandomInt = rand();
+				FVector RandomVector = HeavyMachineGun_UpArr[RandomInt % 5];
+				BulletDir = RandomVector;
 			}
 			else if (DirState == EActorDir::Left)
 			{
-				BulletSpawnLocation = MarcoUpperBodyOffset + AimUp_BulletSpawnOffset_Left;
+				BulletSpawnLocation = MarcoUpperBodyOffset + AimUp_RifleBulletSpawnOffset_Left;
+				int RandomInt = rand();
+				FVector RandomVector = HeavyMachineGun_UpArr[RandomInt % 5];
+				BulletDir = RandomVector;
 			}
-
-			BulletDir = FVector::Up;
+			BulletDir.Normalize2D();
 
 			ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
 			FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
@@ -1856,14 +1872,19 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 			FVector BulletDir = FVector::Zero;
 			if (DirState == EActorDir::Right)
 			{
-				BulletSpawnLocation = MarcoUpperBodyOffset + AimDown_BulletSpawnOffset_Right;
+				BulletSpawnLocation = MarcoUpperBodyOffset + AimDown_RifleBulletSpawnOffset_Right;
+				int RandomInt = rand();
+				FVector RandomVector = HeavyMachineGun_DownArr[RandomInt % 5];
+				BulletDir = RandomVector;
 			}
 			else if (DirState == EActorDir::Left)
 			{
-				BulletSpawnLocation = MarcoUpperBodyOffset + AimDown_BulletSpawnOffset_Left;
+				BulletSpawnLocation = MarcoUpperBodyOffset + AimDown_RifleBulletSpawnOffset_Left;
+				int RandomInt = rand();
+				FVector RandomVector = HeavyMachineGun_DownArr[RandomInt % 5];
+				BulletDir = RandomVector;
 			}
-
-			BulletDir = FVector::Down;
+			BulletDir.Normalize2D();
 
 			ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
 			FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
@@ -2170,7 +2191,7 @@ void Marco::UpperForwardJumpShootStart()
 	std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
 	HeavyMachineGunCheckName(AddedGunTypeName);
 	std::string AddedDirectionName = AddDirectionName(AddedGunTypeName);
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true,0,0.07f);
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true,0,0.1f);
 
 	if (Gun != EGunList::HeavyMachineGun)
 	{
@@ -2238,7 +2259,7 @@ void Marco::UpperAimUpShootStart()
 	std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
 	HeavyMachineGunCheckName(AddedGunTypeName);
 	std::string AddedDirectionName = AddDirectionName(AddedGunTypeName);
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true,0,0.07f);
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true,0,0.1f);
 
 	if (Gun != EGunList::HeavyMachineGun)
 	{
@@ -2281,7 +2302,7 @@ void Marco::UpperAimDownShootStart()
 	std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
 	HeavyMachineGunCheckName(AddedGunTypeName);
 	std::string AddedDirectionName = AddDirectionName(AddedGunTypeName);
-	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true,0,0.07f);
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true,0,0.1f);
 
 	if (Gun != EGunList::HeavyMachineGun)
 	{
@@ -2977,7 +2998,7 @@ void Marco::AllCrouch_HeavyMachineGun_ShootStart()
 	std::string AddedGunTypeName = AddGunTypeName(CurAllBodyName);
 	HeavyMachineGunCheckName(AddedGunTypeName);
 	std::string DirectedName = AddDirectionName(AddedGunTypeName);
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName, true);
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName, true, 0.1f);
 }
 
 void Marco::AllCrouch_ThrowStart()

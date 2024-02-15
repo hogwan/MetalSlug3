@@ -286,10 +286,17 @@ private:
 	FVector Standing_BulletSpawnOffset = { 0,-47 };
 	FVector Standing_RifleBulletSpawnOffset = { 0,-37 };
 	FVector Crouching_BulletSpawnOffset = { 0, -43 };
+
 	FVector AimUp_BulletSpawnOffset_Right = { 2,-75 };
 	FVector AimUp_BulletSpawnOffset_Left = { 0,-75 };
-	FVector AimDown_BulletSpawnOffset_Right = { 7,-25 };
-	FVector AimDown_BulletSpawnOffset_Left = { -7,-25 };
+	FVector AimDown_BulletSpawnOffset_Right = { 7,25 };
+	FVector AimDown_BulletSpawnOffset_Left = { -7,25 };
+
+	FVector AimUp_RifleBulletSpawnOffset_Right = { -5,-130 };
+	FVector AimUp_RifleBulletSpawnOffset_Left = { 5,-130 };
+	FVector AimDown_RifleBulletSpawnOffset_Right = { -10,90 };
+	FVector AimDown_RifleBulletSpawnOffset_Left = { 10,90 };
+
 	FVector BulletSpawnOffset_Right = { 75,0 };
 	FVector BulletSpawnOffset_Left = { -75,0 };
 
@@ -309,5 +316,10 @@ private:
 
 	void CalGravityVector(float _DeltaTime);
 	void GroundUp();
+
+	FVector HeavyMachineGun_RightArr[5] = { {70,-7},{70,-4},{1,0},{70,4},{70,7} };
+	FVector HeavyMachineGun_LeftArr[5] = { {-70,-7},{-70,-4},{-1,0},{-70,4},{-70,7} };
+	FVector HeavyMachineGun_UpArr[5] = { {-7,-70},{-4,-70},{0,-1},{4,-70},{7,-70} };
+	FVector HeavyMachineGun_DownArr[5] = { {-7,70},{-4,70},{0,1},{4,70},{7,70} };
 };
 
