@@ -19,5 +19,6 @@ protected:
 	void Tick(float _DeltaTime)	override;
 
 	UImageRenderer* Renderer = nullptr;
+	UCollision* Collider = nullptr;
 };
 

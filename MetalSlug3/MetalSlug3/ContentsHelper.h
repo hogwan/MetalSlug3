@@ -15,6 +15,14 @@ enum MT3RenderOrder
 	Particle,
 
 };
+enum class MT3CollisionOrder
+{
+	PlayerBullet,
+	EnemyProjectile,
+	ZombieProjectile,
+	Enemy,
+	Player
+};
 
 enum class EActorDir
 {

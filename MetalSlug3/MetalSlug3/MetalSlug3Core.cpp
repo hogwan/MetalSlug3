@@ -30,7 +30,12 @@ void MetalSlug3Core::BeginPlay()
 
 void MetalSlug3Core::Tick(float _DeltaTime)
 {
-	// 플레이어 움직여야 한다.
+	UEngineCore::Tick(_DeltaTime);
+	
+	if (true == UEngineInput::IsDown(VK_F10))
+	{
+		GEngine->EngineDebugSwitch();
+	}
 }
 
 void MetalSlug3Core::End()

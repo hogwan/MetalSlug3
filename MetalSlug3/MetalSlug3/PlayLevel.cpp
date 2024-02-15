@@ -43,6 +43,7 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("ManZombie1_LaunchEffect.png", 10, 4);
 	UEngineResourcesManager::GetInst().CuttingImage("DoctorZombie.png", 10, 22);
 	UEngineResourcesManager::GetInst().CuttingImage("DoctorZombie_LaunchEffect.png", 10, 4);
+	UEngineResourcesManager::GetInst().CuttingImage("BulletDestroy.png", 10, 1);
 	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("BackGround1.png");
 	Map->SetColMapImage("BackGround1_Col.png");

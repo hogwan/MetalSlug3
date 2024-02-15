@@ -12,6 +12,32 @@ void AHeavyMachineGunBullet::Tick(float _DeltaTime)
 {
 	ABullet::Tick(_DeltaTime);
 
+	if (IsDestroy && Renderer->IsCurAnimationEnd())
+	{
+		int a = Renderer->GetCurAnimationFrame();
+		Destroy();
+	}
+
+	std::vector<UCollision*> Result;
+	if (true == Collider->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+	{
+		Speed = 0.0f;
+		IsDestroy = true;
+		Collider->Destroy();
+		Renderer->SetImage("BulletDestroy.png");
+		Renderer->ChangeAnimation("Destroy");
+		Renderer->SetTransform({ {0,0}, {30,30} });
+	}
+
+	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	if (Color == Color8Bit(255, 0, 255, 0))
+	{
+		Speed = 0.0f;
+		IsDestroy = true;
+		Destroy();
+	}
+
+	if (IsDestroy) return;
 
 	if (Dir.Y > 0.999f)
 	{
@@ -207,7 +233,12 @@ void AHeavyMachineGunBullet::BeginPlay()
 {
 	ABullet::BeginPlay();
 
+	Collider = CreateCollision(MT3CollisionOrder::PlayerBullet);
+	Collider->SetScale({ 50,20 });
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
+	Renderer->CreateAnimation("Destroy", "BulletDestroy.png", 0, 9, 0.05f);
+
 	Renderer->CreateAnimation("Right0", "HeavyMachineGunBullet_Right_0.png", 0, 0, 1.0f);
 	Renderer->CreateAnimation("Right1", "HeavyMachineGunBullet_Right_1.png", 0, 0, 1.0f);
 	Renderer->CreateAnimation("Right2", "HeavyMachineGunBullet_Right_2.png", 0, 0, 1.0f);

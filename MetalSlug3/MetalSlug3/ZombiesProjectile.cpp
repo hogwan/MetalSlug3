@@ -12,7 +12,6 @@ AZombiesProjectile::~AZombiesProjectile()
 void AZombiesProjectile::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-	GravityCheck(_DeltaTime);
 	StateUpdate(_DeltaTime);
 	if (Dir.X < 0.0f)
 	{
@@ -28,6 +27,10 @@ void AZombiesProjectile::Tick(float _DeltaTime)
 void AZombiesProjectile::BeginPlay()
 {
 	AActor::BeginPlay();
+
+	Collider = CreateCollision(MT3CollisionOrder::ZombieProjectile);
+	Collider->SetScale({ 30,30 });
+	Collider->SetPosition({ 0,-30 });
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
 	Renderer->SetImage("Zombies_Projectile.png");
@@ -121,21 +124,32 @@ void AZombiesProjectile::None(float _DeltaTime)
 
 void AZombiesProjectile::Flying(float _DeltaTime)
 {
+	GravityCheck(_DeltaTime);
+
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
-		StateChange(State::CollideGround);
 		ResultVector = FVector::Zero;
+		Collider->Destroy();
+		StateChange(State::CollideGround);
 	}
 
 	//오브젝트에 충돌한다면 콜라이드오브젝트로 이동
+	std::vector<UCollision*> Result;
+	if (true == Collider->CollisionCheck(MT3CollisionOrder::Player, Result))
+	{
+		ResultVector = FVector::Zero;
+		Collider->Destroy();
+		StateChange(State::CollideObject);
+		return;
+	}
 }
 
 void AZombiesProjectile::CollideGround(float _DeltaTime)
 {
 	if (Renderer->IsCurAnimationEnd())
 	{
-		Destroy(0.0f);
+		Destroy();
 	}
 }
 
@@ -143,7 +157,7 @@ void AZombiesProjectile::CollideObject(float _DeltaTime)
 {
 	if (Renderer->IsCurAnimationEnd())
 	{
-		Destroy(0.0f);
+		Destroy();
 	}
 }
 

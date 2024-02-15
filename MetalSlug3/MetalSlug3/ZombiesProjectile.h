@@ -55,6 +55,7 @@ protected:
 	FVector Gravity = { 0.0f,500.0f };
 
 	UImageRenderer* Renderer = nullptr;
+	UCollision* Collider = nullptr;
 
 	State CurState = State::Flying;
 

@@ -211,6 +211,7 @@ protected:
 	
 private:
 	std::vector<UImageRenderer*> Renderer;
+	UCollision* Collision = nullptr;
 
 	std::string CurUpperBodyName = "UpperBody_Idle";
 	std::string CurLowerBodyName = "LowerBody_Idle";
@@ -219,6 +220,13 @@ private:
 
 	FVector ShootDir = FVector::Right;
 
+	void Jumping_UpperBodySyncro();
+	void ForwardJumping_UpperBodySyncro();
+	void Reset_UpperBodySyncro();
+	void ZombieArm_Syncro();
+	void CalGravityVector(float _DeltaTime);
+	void GroundUp();
+
 	bool IsZombie = false;
 	bool IsDeath = false;
 
@@ -226,6 +234,7 @@ private:
 	bool IsHeavyMachineGun = false;
 	bool CrouchShooting = false;
 	bool Manipulate = true;
+	bool NoHit = false;
 
 	inline void ManipulateOn()
 	{
@@ -271,6 +280,8 @@ private:
 	float Throw_AccTime = 0.0f;
 	int RemainBomb = 0;
 
+	int HeavyMachineGun_PrevFrame = -1;
+
 	FVector MarcoUpperBodyOffset = { 0.0f, 0.0f };
 	FVector MarcoDefaultUpperBodyOffset = { 0.0f,-23.0f };
 	FVector MarcoSize = { 527.27273f, 527.27273f };
@@ -300,13 +311,6 @@ private:
 	FVector BulletSpawnOffset_Right = { 75,0 };
 	FVector BulletSpawnOffset_Left = { -75,0 };
 
-	void Jumping_UpperBodySyncro();
-	void ForwardJumping_UpperBodySyncro();
-	void Reset_UpperBodySyncro();
-	void ZombieArm_Syncro();
-
-	int HeavyMachineGun_PrevFrame = -1;
-
 	FVector GravityVector = FVector::Zero;
 	FVector Gravity = FVector::Down * 1300.0f;
 
@@ -314,12 +318,15 @@ private:
 	FVector ZombieJumpPower = FVector::Up * 100.0f;
 	FVector JumpVector = FVector::Zero;
 
-	void CalGravityVector(float _DeltaTime);
-	void GroundUp();
 
 	FVector HeavyMachineGun_RightArr[5] = { {70,-7},{70,-4},{1,0},{70,4},{70,7} };
 	FVector HeavyMachineGun_LeftArr[5] = { {-70,-7},{-70,-4},{-1,0},{-70,4},{-70,7} };
 	FVector HeavyMachineGun_UpArr[5] = { {-7,-70},{-4,-70},{0,-1},{4,-70},{7,-70} };
 	FVector HeavyMachineGun_DownArr[5] = { {-7,70},{-4,70},{0,1},{4,70},{7,70} };
+
+	FVector DefaultCollisionScale = { 50,100 };
+	FVector DefaultCollisionPosition = { 0, -50 };
+	FVector CrouchCollisionScale = { 50,50 };
+	FVector CrouchCollisionPosition = { 0,-25 };
 };
 

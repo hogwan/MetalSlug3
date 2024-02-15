@@ -27,6 +27,11 @@ void Marco::BeginPlay()
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieLaunchEffect
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieProjectile
 
+	Collision = CreateCollision(MT3CollisionOrder::Player);
+	Collision->SetScale(DefaultCollisionScale);
+	Collision->SetPosition(DefaultCollisionPosition);
+	Collision->SetColType(ECollisionType::Rect);
+
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetImage("Marco_UpperBody.png");
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoDefaultUpperBodyOffset, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransColor({ 0,0,0,255 });
@@ -72,11 +77,20 @@ void Marco::BeginPlay()
 
 void Marco::Tick(float _DeltaTime)
 {
-	GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, GetActorLocation().Y - 550.0f });
+	if (GetActorLocation().X < 400.0f)
+	{
+		GetWorld()->SetCameraPos({ 0.0f, 490.0f });
+	}
+	else
+	{
+		GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, 490.0f});
+	}
+
 	if (Manipulate)
 	{
 		ManipulateUpdate(_DeltaTime);
 	}
+
 	InAirCheck();
 	GravityCheck(_DeltaTime);
 	GroundUp();
@@ -123,12 +137,14 @@ void Marco::InAirCheck()
 
 void Marco::DeathCheck()
 {
+	if (NoHit) return;
+
+	std::vector<UCollision*> Result;
 	if (IsZombie)
 	{
 		//if(좀비 DNA 피격 시) || (TrueDamaged)
 		if (
-			true == UEngineInput::IsDown('Q') ||
-			true == UEngineInput::IsDown('q')
+			true == Collision->CollisionCheck(MT3CollisionOrder::ZombieProjectile, Result)
 			)
 		{
 			ManipulateOff();
@@ -146,34 +162,27 @@ void Marco::DeathCheck()
 				return;
 			}
 		}
-		//좀비 DNA없는 것에 피격 시 무시
-		else if (
-			true == UEngineInput::IsDown('w') ||
-			true == UEngineInput::IsDown('W')
-			)
-		{
-			return;
-		}
 	}
 	else
 	{
 		//if(좀비 DNA 피격 시)
 		if (
-			true == UEngineInput::IsDown('Q') ||
-			true == UEngineInput::IsDown('q')
+			true == Collision->CollisionCheck(MT3CollisionOrder::ZombieProjectile, Result)
 			)
 		{
 			ManipulateOff();
+			IsZombie = true;
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+			Collision->SetScale(DefaultCollisionScale);
+			Collision->SetPosition(DefaultCollisionPosition);
 			AllStateChange(AllBodyState::TransformToZombie_Intro);
 			return;
 		}
 		//else if(좀비 DNA없는 것에 피격시) || TrueDamaged
 		else if (
-			true == UEngineInput::IsDown('w') ||
-			true == UEngineInput::IsDown('W')
+			true == Collision->CollisionCheck(MT3CollisionOrder::EnemyProjectile, Result)
 			)
 		{
 			ManipulateOff();
@@ -224,6 +233,7 @@ void Marco::ManipulateUpdate(float _DeltaTime)
 	{
 		return;
 	}
+
 
 	if (!CrouchShooting)
 	{
@@ -2960,6 +2970,8 @@ void Marco::AllNoneStart()
 void Marco::AllCrouch_IntroStart()
 {
 	Move_Speed = Crouch_Speed;
+	Collision->SetScale(CrouchCollisionScale);
+	Collision->SetPosition(CrouchCollisionPosition);
 	CurAllBodyName = "AllBody_Crouch_Intro";
 	AllStart();
 }
@@ -2967,6 +2979,8 @@ void Marco::AllCrouch_IntroStart()
 void Marco::AllCrouch_OutroStart()
 {
 	Move_Speed = Run_Speed;
+	Collision->SetScale(DefaultCollisionScale);
+	Collision->SetPosition(DefaultCollisionPosition);
 	CurAllBodyName = "AllBody_Crouch_Outro";
 	AllStart();
 }
@@ -3048,6 +3062,7 @@ void Marco::AllCeremonyStart()
 void Marco::AllDeathStart()
 {
 	//AddForce
+	NoHit = true;
 	CurAllBodyName = "AllBody_Death";
 	std::string DirectedName = AddDirectionName(CurAllBodyName);
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName);
@@ -3057,6 +3072,7 @@ void Marco::AllDeathStart()
 void Marco::AllDeathInAirStart()
 {
 	//AddForce
+	NoHit = true;
 	CurAllBodyName = "AllBody_DeathInAir";
 	std::string DirectedName = AddDirectionName(CurAllBodyName);
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName);
@@ -3065,6 +3081,7 @@ void Marco::AllDeathInAirStart()
 
 void Marco::AllDeathByKnifeStart()
 {
+	NoHit = true;
 	CurAllBodyName = "AllBody_DeathByKnife";
 	std::string DirectedName = AddDirectionName(CurAllBodyName);
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName);
@@ -3092,6 +3109,7 @@ void Marco::AllStart()
 
 void Marco::Zombie_AllTransformToZombie_Intro(float _DeltaTime)
 {
+	NoHit = true;
 	if (!InAir)
 	{
 		AllStateChange(AllBodyState::TransformToZombie_Falling);
@@ -3117,6 +3135,7 @@ void Marco::Zombie_AllTransformToZombie_Rising(float _DeltaTime)
 		GunType = EGunType::Pistol;
 		Gun = EGunList::Pistol;
 		AllStateChange(AllBodyState::Zombie_Idle);
+		NoHit = false;
 		return;
 	}
 }
@@ -3297,7 +3316,6 @@ void Marco::Zombie_AllDeathInAir(float _DeltaTime)
 
 void Marco::Zombie_AllTransformToZombie_IntroStart()
 {
-	IsZombie = true;
 	CurAllBodyName = "Zombie_AllBody_TransformToZombie_Intro";
 	ZombieStart();
 }
@@ -3713,18 +3731,58 @@ void Marco::ZombieArm_Jump_AimUpStart()
 
 void Marco::ZombieArm_ShootStart()
 {
+	if (!Manipulate) return;
+
 	CurZArmName = "ZombieArm_Shoot";
 	std::string DirectedName = AddDirectionName(CurZArmName);
 	ZombieArm_Syncro();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true);
+
+	FVector BulletSpawnLocation = MarcoUpperBodyOffset + Standing_BulletSpawnOffset;
+	FVector BulletDir = FVector::Zero;
+	if (DirState == EActorDir::Right)
+	{
+		BulletSpawnLocation += BulletSpawnOffset_Right;
+		BulletDir = FVector::Right;
+	}
+	else if (DirState == EActorDir::Left)
+	{
+		BulletSpawnLocation += BulletSpawnOffset_Left;
+		BulletDir = FVector::Left;
+	}
+
+	ABullet* Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
+	FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
+	Bullet->SetActorLocation(BulletLocation);
+	Bullet->SetDir(BulletDir);
 }
 
 void Marco::ZombieArm_Shoot_AimUpStart()
 {
+	if (!Manipulate) return;
+
 	CurZArmName = "ZombieArm_Shoot_AimUp";
 	std::string DirectedName = AddDirectionName(CurZArmName);
 	ZombieArm_Syncro();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true);
+
+	FVector BulletSpawnLocation = FVector::Zero;
+	FVector BulletDir = FVector::Zero;
+	if (DirState == EActorDir::Right)
+	{
+		BulletSpawnLocation = MarcoUpperBodyOffset + AimUp_BulletSpawnOffset_Right;
+	}
+	else if (DirState == EActorDir::Left)
+	{
+		BulletSpawnLocation = MarcoUpperBodyOffset + AimUp_BulletSpawnOffset_Left;
+	}
+
+	BulletDir = FVector::Up;
+
+	ABullet* Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
+	FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
+	Bullet->SetActorLocation(BulletLocation);
+	Bullet->SetDir(BulletDir);
 }
 
 void Marco::ZombieArm_AimNormalToUpStart()

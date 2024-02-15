@@ -93,8 +93,8 @@ Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_
 Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_Jump_Left", "Marco_LowerBody.png", 43, 50, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::LowerBody)]->CreateAnimation("LowerBody_ForwardJump_Left", "Marco_LowerBody.png", 51, 56, 0.12f, false);\
 \
-Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Intro_Right", "Marco_AllBody.png", 0, 2, 0.08f, false);\
-Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Outro_Right", "Marco_AllBody.png", 3, 5, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Intro_Right", "Marco_AllBody.png", 0, 2, 0.05f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Outro_Right", "Marco_AllBody.png", 3, 5, 0.05f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Idle_Right", "Marco_AllBody.png", 6, 11, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Move_Right", "Marco_AllBody.png", 12, 18, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Shoot_Right", "Marco_AllBody.png", 19, 28, 0.08f, false);\
@@ -130,8 +130,8 @@ Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBo
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Death_Right", "Marco_AllBody.png", 366, 445, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_DeathInAir_Right", "Marco_AllBody.png", 446, 460, 0.08f, false);\
 \
-Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Intro_Left", "Marco_AllBody.png", 470, 472, 0.08f, false);\
-Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Outro_Left", "Marco_AllBody.png", 473, 475, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Intro_Left", "Marco_AllBody.png", 470, 472, 0.05f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Outro_Left", "Marco_AllBody.png", 473, 475, 0.05f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Idle_Left", "Marco_AllBody.png", 476, 481, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Move_Left", "Marco_AllBody.png", 482, 488, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Pistol_AllBody_Crouch_Shoot_Left", "Marco_AllBody.png", 489, 498, 0.08f, false);\

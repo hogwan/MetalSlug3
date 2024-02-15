@@ -19,6 +19,10 @@ void AManZombie1::BeginPlay()
 	Renderer->SetImage("ManZombie1.png");
 	Renderer->SetTransform({ {0,0}, {600,600} });
 
+	Collider = CreateCollision(MT3CollisionOrder::Enemy);
+	Collider->SetScale({50,100});
+	Collider->SetPosition({ 0,-50 });
+
 	LaunchRenderer = CreateImageRenderer(MT3RenderOrder::Particle);
 	LaunchRenderer->SetImage("ManZombie1_LaunchEffect.png");
 	LaunchRenderer->SetTransform({ LaunchEffectOffset_Up + LaunchEffectoffset_Left, {400,400} });

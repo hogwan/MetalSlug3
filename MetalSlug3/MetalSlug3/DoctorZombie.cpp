@@ -25,6 +25,10 @@ void ADoctorZombie::BeginPlay()
 	Renderer->SetImage("DoctorZombie.png");
 	Renderer->SetTransform({ {0,0}, {600,600} });
 
+	Collider = CreateCollision(MT3CollisionOrder::Enemy);
+	Collider->SetScale({ 50,100 });
+	Collider->SetPosition({ 0,-50 });
+
 	LaunchRenderer = CreateImageRenderer(MT3RenderOrder::Particle);
 	LaunchRenderer->SetImage("DoctorZombie_LaunchEffect.png");
 	LaunchRenderer->SetTransform({ LaunchEffectOffset_Up + LaunchEffectoffset_Left, {600,600} });

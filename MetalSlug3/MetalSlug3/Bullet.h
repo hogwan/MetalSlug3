@@ -27,6 +27,8 @@ protected:
 
 	FVector Dir = FVector::Zero;
 	float Speed = 1000.0f;
+	bool IsDestroy = false;
 	UImageRenderer* Renderer = nullptr;
+	UCollision* Collider = nullptr;
 };
 
