@@ -50,11 +50,9 @@ protected:
 	void GravityCheck(float _DeltaTime);
 	void GroundUp();
 
-	float Range = 300.0f;
+	float Range = 200.0f;
 	float MaxStunGauge = 100.0f;
 	float CurStunGauge = 0.0f;
-	float CoolTime = 1.0f;
-	float AccTime = 0.0f;
 	float MoveSpeed = 50.0f;
 
 	int PrevFrame = -1;

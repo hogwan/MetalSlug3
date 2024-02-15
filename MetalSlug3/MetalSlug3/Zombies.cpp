@@ -99,32 +99,27 @@ void AZombies::Lying(float _DeltaTime)
 
 void AZombies::Idle(float _DeltaTime)
 {
-	AccTime += _DeltaTime;
-	if (AccTime > CoolTime)
+	if (Renderer->IsCurAnimationEnd())
 	{
 		if (false == WatchPlayer())
 		{
-			AccTime = 0.0f;
 			StateChange(EnemyZombieState::Turn);
 			return;
 		}
 
 		if (PlayerInRange())
 		{
-			AccTime = 0.0f;
 			StateChange(EnemyZombieState::Attack);
 			return;
 		}
 		else
 		{
-			AccTime = 0.0f;
 			StateChange(EnemyZombieState::Move);
 			return;
 		}
 
 		if (MaxStunGauge < CurStunGauge)
 		{
-			AccTime = 0.0f;
 			StateChange(EnemyZombieState::Stun);
 			return;
 		}
@@ -135,21 +130,18 @@ void AZombies::Move(float _DeltaTime)
 {
 	if (false == WatchPlayer())
 	{
-		AccTime = 0.0f;
 		StateChange(EnemyZombieState::Turn);
 		return;
 	}
 
 	if (PlayerInRange())
 	{
-		AccTime = 0.0f;
 		StateChange(EnemyZombieState::Attack);
 		return;
 	}
 
 	if (MaxStunGauge < CurStunGauge)
 	{
-		AccTime = 0.0f;
 		CurStunGauge = 0.0f;
 		StateChange(EnemyZombieState::Stun);
 		return;

@@ -1172,6 +1172,7 @@ void Marco::UpperShoot(float _DeltaTime)
 		if (CurFrame != HeavyMachineGun_PrevFrame)
 		{
 			FVector BulletSpawnLocation = MarcoUpperBodyOffset + Standing_RifleBulletSpawnOffset;
+			
 			FVector BulletDir = FVector::Zero;
 			if (DirState == EActorDir::Right)
 			{
@@ -1935,17 +1936,21 @@ void Marco::UpperAimNormalToUpShoot(float _DeltaTime)
 		{
 			DirectionVector = { 18.0f,-25.0f };
 		}
+		DirectionVector.Normalize2D();
 		FVector BulletSpawnLocation = FVector::Zero;
 		if (DirState == EActorDir::Right)
 		{
-			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + BulletSpawnOffset_Right;
+			FVector SpawnAngleVector = { BulletSpawnOffset_Right.Size2D() * DirectionVector.X,  BulletSpawnOffset_Right.Size2D() * DirectionVector.Y };
+			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + SpawnAngleVector;
 		}
 		else if (DirState == EActorDir::Left)
 		{
-			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + BulletSpawnOffset_Left;
 			DirectionVector.X = -DirectionVector.X;
+			FVector SpawnAngleVector = { BulletSpawnOffset_Left.Size2D() * DirectionVector.X, BulletSpawnOffset_Left.Size2D() * DirectionVector.Y };
+			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + SpawnAngleVector;
 		}
-		DirectionVector.Normalize2D();
+
+
 		FVector BulletDir = DirectionVector;
 		ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
 		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
@@ -1976,18 +1981,20 @@ void Marco::UpperAimUpToNormalShoot(float _DeltaTime)
 		{
 			DirectionVector = { 25.0f,-18.0f };
 		}
+		DirectionVector.Normalize2D();
 		FVector BulletSpawnLocation = FVector::Zero;
 		if (DirState == EActorDir::Right)
 		{
-			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + BulletSpawnOffset_Right;
+			FVector SpawnAngleVector = { BulletSpawnOffset_Right.Size2D() * DirectionVector.X, BulletSpawnOffset_Right.Size2D() * DirectionVector.Y };
+			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + SpawnAngleVector;
 		}
 		else if (DirState == EActorDir::Left)
 		{
-			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + BulletSpawnOffset_Left;
 			DirectionVector.X = -DirectionVector.X;
+			FVector SpawnAngleVector = { BulletSpawnOffset_Left.Size2D() * DirectionVector.X, BulletSpawnOffset_Left.Size2D() * DirectionVector.Y };
+			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + SpawnAngleVector;
 		}
 
-		DirectionVector.Normalize2D();
 		FVector BulletDir = DirectionVector;
 		ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
 		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
@@ -2020,18 +2027,21 @@ void Marco::UpperAimNormalToDownShoot(float _DeltaTime)
 			DirectionVector = { 18.0f, 25.0f };
 			int a = 0;
 		}
+
+		DirectionVector.Normalize2D();
 		FVector BulletSpawnLocation = FVector::Zero;
 		if (DirState == EActorDir::Right)
 		{
-			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + BulletSpawnOffset_Right;
+			FVector SpawnAngleVector = { BulletSpawnOffset_Right.Size2D() * DirectionVector.X, BulletSpawnOffset_Right.Size2D() * DirectionVector.Y };
+			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + SpawnAngleVector;
 		}
 		else if (DirState == EActorDir::Left)
 		{
-			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + BulletSpawnOffset_Left;
 			DirectionVector.X = -DirectionVector.X;
+			FVector SpawnAngleVector = { BulletSpawnOffset_Left.Size2D() * DirectionVector.X, BulletSpawnOffset_Left.Size2D() * DirectionVector.Y };
+			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + SpawnAngleVector;
 		}
 
-		DirectionVector.Normalize2D();
 		FVector BulletDir = DirectionVector;
 		ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
 		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
@@ -2062,18 +2072,21 @@ void Marco::UpperAimDownToNormalShoot(float _DeltaTime)
 		{
 			DirectionVector = { 25.0f,18.0f };
 		}
+
+		DirectionVector.Normalize2D();
 		FVector BulletSpawnLocation = FVector::Zero;
 		if (DirState == EActorDir::Right)
 		{
-			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + BulletSpawnOffset_Right;
+			FVector SpawnAngleVector = { BulletSpawnOffset_Right.Size2D() * DirectionVector.X, BulletSpawnOffset_Right.Size2D() * DirectionVector.Y };
+			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + SpawnAngleVector;
 		}
 		else if (DirState == EActorDir::Left)
 		{
-			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + BulletSpawnOffset_Left;
 			DirectionVector.X = -DirectionVector.X;
+			FVector SpawnAngleVector = { BulletSpawnOffset_Left.Size2D() * DirectionVector.X, BulletSpawnOffset_Left.Size2D() * DirectionVector.Y };
+			BulletSpawnLocation = Standing_RifleBulletSpawnOffset + SpawnAngleVector;
 		}
 
-		DirectionVector.Normalize2D();
 		FVector BulletDir = DirectionVector;
 		ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
 		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;

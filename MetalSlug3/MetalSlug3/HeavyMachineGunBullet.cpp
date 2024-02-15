@@ -12,92 +12,64 @@ void AHeavyMachineGunBullet::Tick(float _DeltaTime)
 {
 	ABullet::Tick(_DeltaTime);
 
-	if (Dir.Y < -0.9f)
+	if (Dir.Y > 0.999f)
 	{
-		Renderer->SetImage("HeavyMachineGunBullet_Up.png");
-		Renderer->ChangeAnimation("Up");
-		return;
+
 	}
-	else if (Dir.Y < -0.8f)
+	else if (Dir.Y > 0.98f)
 	{
-		if (Dir.X > 0.0f)
-		{
-			Renderer->SetImage("HeavyMachineGunBullet_NormalToUp2_Right.png");
-			Renderer->ChangeAnimation("NormalToUp2_Right");
-			return;
-		}
-		else
-		{
-			Renderer->SetImage("HeavyMachineGunBullet_NormalToUp2_Left.png");
-			Renderer->ChangeAnimation("NormalToUp2_Left");
-			return;
-		}
+
 	}
-	else if (Dir.Y < -0.5f)
+	else if (Dir.Y > 0.97f)
 	{
-		if (Dir.X > 0.0f)
-		{
-			Renderer->SetImage("HeavyMachineGunBullet_NormalToUp1_Right.png");
-			Renderer->ChangeAnimation("NormalToUp1_Right");
-			return;
-		}
-		else
-		{
-			Renderer->SetImage("HeavyMachineGunBullet_NormalToUp1_Left.png");
-			Renderer->ChangeAnimation("NormalToUp1_Left");
-			return;
-		}
+
 	}
-	else if (Dir.Y < 0.1f)
+	else if (Dir.Y > 0.8f)
 	{
-		if (Dir.X > 0.0f)
-		{
-			Renderer->SetImage("HeavyMachineGunBullet_Right.png");
-			Renderer->ChangeAnimation("Right");
-			return;
-		}
-		else
-		{
-			Renderer->SetImage("HeavyMachineGunBullet_Left.png");
-			Renderer->ChangeAnimation("Left");
-			return;
-		}
+
 	}
-	else if (Dir.Y < 0.6f)
+	else if (Dir.Y > 0.55f)
 	{
-		if (Dir.X > 0.0f)
-		{
-			Renderer->SetImage("HeavyMachineGunBullet_NormalToDown1_Right.png");
-			Renderer->ChangeAnimation("NormalToDown1_Right");
-			return;
-		}
-		else
-		{
-			Renderer->SetImage("HeavyMachineGunBullet_NormalToDown1_Left.png");
-			Renderer->ChangeAnimation("NormalToDown1_Left");
-			return;
-		}
+
 	}
-	else if (Dir.Y < 0.85f)
+	else if (Dir.Y > 0.233f)
 	{
-		if (Dir.X > 0.0f)
-		{
-			Renderer->SetImage("HeavyMachineGunBullet_NormalToDown2_Right.png");
-			Renderer->ChangeAnimation("NormalToDown2_Right");
-			return;
-		}
-		else
-		{
-			Renderer->SetImage("HeavyMachineGunBullet_NormalToDown2_Left.png");
-			Renderer->ChangeAnimation("NormalToDown2_Left");
-			return;
-		}
+
+	}
+	else if (Dir.Y > 0.135f)
+	{
+
+	}
+	else if (Dir.Y > -0.0001f)
+	{
+
+	}
+	else if(Dir.Y > -0.14f)
+	{
+
+	}
+	else if (Dir.Y > -0.25f)
+	{
+
+	}
+	else if (Dir.Y > -0.6f)
+	{
+
+	}
+	else if (Dir.Y > -0.98f)
+	{
+
+	}
+	else if (Dir.Y > -0.9999f)
+	{
+
 	}
 	else
 	{
-		Renderer->SetImage("HeavyMachineGunBullet_Down.png");
-		Renderer->ChangeAnimation("Down");
+
 	}
+
+	
 }
 
 void AHeavyMachineGunBullet::BeginPlay()
@@ -105,10 +77,30 @@ void AHeavyMachineGunBullet::BeginPlay()
 	ABullet::BeginPlay();
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
-	Renderer->CreateAnimation("Right", "HeavyMachineGunBullet_Right.png", 0, 0, 1.0f);
-	Renderer->CreateAnimation("Left", "HeavyMachineGunBullet_Left.png", 0, 0, 1.0f);
-	Renderer->CreateAnimation("Up", "HeavyMachineGunBullet_Up.png", 0, 0, 1.0f);
-	Renderer->CreateAnimation("Down", "HeavyMachineGunBullet_Down.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Right0", "HeavyMachineGunBullet_Right_0.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Right1", "HeavyMachineGunBullet_Right_1.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Right2", "HeavyMachineGunBullet_Right_2.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Right3", "HeavyMachineGunBullet_Right_3.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Right4", "HeavyMachineGunBullet_Right_4.png", 0, 0, 1.0f);
+
+	Renderer->CreateAnimation("Left0", "HeavyMachineGunBullet_Left_0.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Left1", "HeavyMachineGunBullet_Left_1.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Left2", "HeavyMachineGunBullet_Left_2.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Left3", "HeavyMachineGunBullet_Left_3.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Left4", "HeavyMachineGunBullet_Left_4.png", 0, 0, 1.0f);
+
+	Renderer->CreateAnimation("Up0", "HeavyMachineGunBullet_Up_0.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Up1", "HeavyMachineGunBullet_Up_1.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Up2", "HeavyMachineGunBullet_Up_2.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Up3", "HeavyMachineGunBullet_Up_3.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Up4", "HeavyMachineGunBullet_Up_4.png", 0, 0, 1.0f);
+
+	Renderer->CreateAnimation("Down0", "HeavyMachineGunBullet_Down_0.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Down1", "HeavyMachineGunBullet_Down_1.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Down2", "HeavyMachineGunBullet_Down_2.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Down3", "HeavyMachineGunBullet_Down_3.png", 0, 0, 1.0f);
+	Renderer->CreateAnimation("Down4", "HeavyMachineGunBullet_Down_4.png", 0, 0, 1.0f);
+
 	Renderer->CreateAnimation("NormalToUp1_Right", "HeavyMachineGunBullet_NormalToUp1_Right.png", 0, 0, 1.0f);
 	Renderer->CreateAnimation("NormalToUp2_Right", "HeavyMachineGunBullet_NormalToUp2_Right.png", 0, 0, 1.0f);
 	Renderer->CreateAnimation("NormalToUp1_Left", "HeavyMachineGunBullet_NormalToUp1_Left.png", 0, 0, 1.0f);

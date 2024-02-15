@@ -41,7 +41,7 @@ void AManZombie1::BeginPlay()
 
 	Renderer->CreateAnimation("Lying", "ManZombie1.png", 175, 187, 0.08f, false);
 
-	LaunchRenderer->CreateAnimation("LaunchEffect_Right", "ManZombie1_LaunchEffect.png", 0, 19, 0.05f, false);
+	LaunchRenderer->CreateAnimation("LaunchEffect_Right", "ManZombie1_LaunchEffect.png", 0, 11, 0.05f, false);
 	LaunchRenderer->CreateAnimation("LaunchEffect_Left", "ManZombie1_LaunchEffect.png", 20, 31, 0.05f, false);
 	LaunchRenderer->ActiveOff();
 	LaunchRenderer->ChangeAnimation("LaunchEffect_Left", true, 0, 0.1f);
