@@ -199,6 +199,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="TestLevel.h" />
+    <ClInclude Include="Zombies.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ZombiesProjectile.h" />
   </ItemGroup>
   <ItemGroup>
@@ -257,6 +261,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TestLevel.cpp" />
+    <ClCompile Include="Zombies.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ZombiesProjectile.cpp" />
   </ItemGroup>
   <ItemGroup>
