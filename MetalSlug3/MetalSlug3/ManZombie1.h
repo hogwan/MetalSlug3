@@ -64,7 +64,9 @@ protected:
 	FVector ProjectileSpawnOffset_Right = { 50,0 };
 	FVector ProjectileSpawnOffset_Left = { -50,0 };
 	FVector ProjectileSpawnOffset_Height = { 0,-110 };
-	FVector LaunchEffectOffset = { 0, -110 };
+	FVector LaunchEffectOffset_Up = { 0, -110 };
+	FVector LaunchEffectOffset_Right = { 20,0 };
+	FVector LaunchEffectoffset_Left = { -20,0 };
 
 	UImageRenderer* LaunchRenderer = nullptr;
 };
