@@ -164,12 +164,20 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="CreateMarcoAnimation.h" />
+    <ClInclude Include="DoctorZombie.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="HeavyMachineGunBullet.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="ManZombie1.h" />
+    <ClInclude Include="ManZombie2.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Marco.h">
       <SubType>
       </SubType>
@@ -226,12 +234,20 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="DoctorZombie.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="HeavyMachineGunBullet.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="ManZombie1.cpp" />
+    <ClCompile Include="ManZombie2.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Marco.cpp">
       <SubType>
       </SubType>

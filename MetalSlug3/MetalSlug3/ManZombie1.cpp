@@ -13,7 +13,7 @@ AManZombie1::~AManZombie1()
 
 void AManZombie1::BeginPlay()
 {
-	AEnemy::BeginPlay();
+	AZombies::BeginPlay();
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetImage("ManZombie1.png");
