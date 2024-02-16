@@ -123,7 +123,7 @@ Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBo
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_TransformToZombie_Rising_Right", "Marco_AllBody.png", 187, 234, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Idle_Right", "Marco_AllBody.png", 235, 246, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Move_Right", "Marco_AllBody.png", 247, 270, 0.08f, true);\
-Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Turn_Right", "Marco_AllBody.png", 271, 286, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Turn_Right", "Marco_AllBody.png", 271, 286, 0.05f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_AimUpTurn_Right", "Marco_AllBody.png", 287, 302, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Jump_Right", "Marco_AllBody.png", 303, 318, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Vomit_Right", "Marco_AllBody.png", 319, 365, 0.08f, false);\
@@ -156,7 +156,7 @@ Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBo
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_TransformToZombie_Rising_Left", "Marco_AllBody.png", 657, 704, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Idle_Left", "Marco_AllBody.png", 705, 716, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Move_Left", "Marco_AllBody.png", 717, 740, 0.08f, true);\
-Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Turn_Left", "Marco_AllBody.png", 741, 756, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Turn_Left", "Marco_AllBody.png", 741, 756, 0.05f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_AimUpTurn_Left", "Marco_AllBody.png", 757, 772, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Jump_Left", "Marco_AllBody.png", 773, 788, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Vomit_Left", "Marco_AllBody.png", 789, 835, 0.08f, false);\

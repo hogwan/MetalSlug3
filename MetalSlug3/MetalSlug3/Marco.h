@@ -328,5 +328,8 @@ private:
 	FVector DefaultCollisionPosition = { 0, -50 };
 	FVector CrouchCollisionScale = { 50,50 };
 	FVector CrouchCollisionPosition = { 0,-25 };
+
+	bool VomitEnd = false;
+	std::vector<UImageRenderer*> VomitRenderer;
 };
 
