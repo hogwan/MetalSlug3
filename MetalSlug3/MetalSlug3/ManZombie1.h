@@ -1,6 +1,4 @@
 #pragma once
-#include <EngineCore/Actor.h>
-#include "ContentsHelper.h"
 #include "Zombies.h"
 class AManZombie1 : public AZombies
 {

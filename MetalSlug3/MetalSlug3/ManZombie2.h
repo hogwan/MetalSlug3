@@ -1,6 +1,6 @@
 #pragma once
 #include "Zombies.h"
-class AManZombie2 : AZombies
+class AManZombie2 : public AZombies
 {
 public:
 	// constructor destructor

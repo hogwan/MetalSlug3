@@ -5,6 +5,7 @@
 #include <EngineBase\EngineFile.h>
 #include "BackGroundMap.h"
 #include "ManZombie1.h"
+#include "ManZombie2.h"
 #include "DoctorZombie.h"
 
 PlayLevel::PlayLevel()
@@ -38,11 +39,17 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_LowerBody.png", 10, 6);
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_AllBody.png", 10, 94);
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_ZombieArm.png", 10, 28);
+
 	UEngineResourcesManager::GetInst().CuttingImage("Zombies_Projectile.png", 10, 10);
 	UEngineResourcesManager::GetInst().CuttingImage("ManZombie1.png", 10, 24);
 	UEngineResourcesManager::GetInst().CuttingImage("ManZombie1_LaunchEffect.png", 10, 4);
+
 	UEngineResourcesManager::GetInst().CuttingImage("DoctorZombie.png", 10, 22);
 	UEngineResourcesManager::GetInst().CuttingImage("DoctorZombie_LaunchEffect.png", 10, 4);
+
+	UEngineResourcesManager::GetInst().CuttingImage("ManZombie2.png", 10, 22);
+	UEngineResourcesManager::GetInst().CuttingImage("ManZombie2_LaunchEffect.png", 10, 4);
+
 	UEngineResourcesManager::GetInst().CuttingImage("BulletDestroy.png", 10, 1);
 	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("BackGround1.png");
@@ -54,4 +61,7 @@ void PlayLevel::BeginPlay()
 
 	AZombies* Zombie_1= SpawnActor<ADoctorZombie>();
 	Zombie_1->SetActorLocation({ 500,1000 });
+
+	AZombies* Zombie_2 = SpawnActor<AManZombie2>();
+	Zombie_2->SetActorLocation({ 750,1000 });
 }
