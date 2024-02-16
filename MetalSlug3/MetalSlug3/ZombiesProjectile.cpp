@@ -34,7 +34,7 @@ void AZombiesProjectile::BeginPlay()
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
 	Renderer->SetImage("Zombies_Projectile.png");
-	Renderer->SetTransform({ { 0,0 }, { 400,400 } });
+	Renderer->SetTransform({ { 0,0 }, { 500,500 } });
 
 	Renderer->CreateAnimation("Flying_Right", "Zombies_Projectile.png", 0, 13,0.08f, false);
 	Renderer->CreateAnimation("CollideGround_Right", "Zombies_Projectile.png", 14, 32, 0.08f, false);

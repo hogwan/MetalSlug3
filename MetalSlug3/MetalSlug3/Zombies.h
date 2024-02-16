@@ -28,7 +28,7 @@ protected:
 	void Move(float _DeltaTime);
 	void Turn(float _DeltaTime);
 	void Stun(float _DeltaTime);
-	void Attack(float _DeltaTime, int _LaunchFrame);
+	void Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFrame);
 
 	void NoneStart();
 	void LyingStart();
@@ -57,6 +57,7 @@ protected:
 
 	int PrevFrame = -1;
 	int LaunchFrame = 9;
+	int LaunchEffectFrame = 9;
 
 	FVector ProjectileScale = { 400,400 };
 	FVector LaunchEffectScale = { 400,400 };

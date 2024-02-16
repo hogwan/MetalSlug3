@@ -14,6 +14,7 @@ AManZombie1::~AManZombie1()
 void AManZombie1::BeginPlay()
 {
 	AZombies::BeginPlay();
+	LaunchEffectScale = { 500,500 };
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetImage("ManZombie1.png");
@@ -53,7 +54,7 @@ void AManZombie1::BeginPlay()
 
 void AManZombie1::Tick(float _DeltaTime)
 {
-	AEnemy::Tick(_DeltaTime);
+	AZombies::Tick(_DeltaTime);
 	GravityCheck(_DeltaTime);
 	GroundUp();
 	StateUpdate(_DeltaTime);

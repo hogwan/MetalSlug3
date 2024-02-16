@@ -207,6 +207,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="TestLevel.h" />
+    <ClInclude Include="WomanZombie.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Zombies.h">
       <SubType>
       </SubType>
@@ -277,6 +281,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TestLevel.cpp" />
+    <ClCompile Include="WomanZombie.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Zombies.cpp">
       <SubType>
       </SubType>

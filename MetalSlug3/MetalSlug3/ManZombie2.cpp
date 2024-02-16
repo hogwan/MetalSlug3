@@ -12,6 +12,17 @@ void AManZombie2::BeginPlay()
 {
 	AZombies::BeginPlay();
 
+	LaunchFrame = 21;
+	LaunchEffectFrame = 8;
+	LaunchEffectOffset_Up = { 0,0 };
+	LaunchEffectoffset_Left = { -10,0 };
+	LaunchEffectOffset_Right = { 50,0 };
+	LaunchEffectScale = { 500,500 };
+
+	ProjectileSpawnOffset_Height = { 0,-50 };
+	ProjectileSpawnOffset_Left = { -50,0 };
+	ProjectileSpawnOffset_Right = { 50,0 };
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetImage("ManZombie2.png");
 	Renderer->SetTransform({ {0,0}, {600,600} });
@@ -22,7 +33,6 @@ void AManZombie2::BeginPlay()
 
 	LaunchRenderer = CreateImageRenderer(MT3RenderOrder::Particle);
 	LaunchRenderer->SetImage("ManZombie2_LaunchEffect.png");
-	LaunchRenderer->SetTransform({ LaunchEffectOffset_Up + LaunchEffectoffset_Left, {400,400} });
 
 	Renderer->CreateAnimation("Idle_Right", "ManZombie2.png", 0, 6, 0.1f, true);
 	Renderer->CreateAnimation("Move_Right", "ManZombie2.png", 7, 18, 0.1f, true);
@@ -42,8 +52,8 @@ void AManZombie2::BeginPlay()
 
 	Renderer->CreateAnimation("Lying", "ManZombie2.png", 168, 179, 0.08f, false);
 
-	LaunchRenderer->CreateAnimation("LaunchEffect_Right", "ManZombie2_LaunchEffect.png", 0, 19, 0.05f, false);
-	LaunchRenderer->CreateAnimation("LaunchEffect_Left", "ManZombie2_LaunchEffect.png", 20, 39, 0.05f, false);
+	LaunchRenderer->CreateAnimation("LaunchEffect_Left", "ManZombie2_LaunchEffect.png", 0, 19, 0.1f, false);
+	LaunchRenderer->CreateAnimation("LaunchEffect_Right", "ManZombie2_LaunchEffect.png", 20, 39, 0.1f, false);
 	LaunchRenderer->ActiveOff();
 	LaunchRenderer->ChangeAnimation("LaunchEffect_Left", true, 0, 0.1f);
 }
