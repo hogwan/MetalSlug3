@@ -225,6 +225,7 @@ private:
 	void Reset_UpperBodySyncro();
 	void ZombieArm_Syncro();
 	void CalGravityVector(float _DeltaTime);
+	void CalVomitProjectileVector();
 	void GroundUp();
 
 	bool IsZombie = false;
@@ -323,6 +324,8 @@ private:
 	FVector HeavyMachineGun_LeftArr[5] = { {-70,-7},{-70,-4},{-1,0},{-70,4},{-70,7} };
 	FVector HeavyMachineGun_UpArr[5] = { {-7,-70},{-4,-70},{0,-1},{4,-70},{7,-70} };
 	FVector HeavyMachineGun_DownArr[5] = { {-7,70},{-4,70},{0,1},{4,70},{7,70} };
+
+	FVector VomitProjectileVectorArr[100];
 
 	FVector DefaultCollisionScale = { 50,100 };
 	FVector DefaultCollisionPosition = { 0, -50 };

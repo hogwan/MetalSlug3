@@ -3293,7 +3293,8 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 {
 	ManipulateOff();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
-	if (!VomitEnd)
+
+	/*if (!VomitEnd)
 	{
 		for (int i = 0; i < 10; i++)
 		{
@@ -3307,7 +3308,7 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 			VomitRenderer[i]->SetTransform({ {50 + 50 * i,-100}, {100,100} });
 		}
 		VomitEnd = true;
-	}
+	}*/
 
 	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
@@ -3315,11 +3316,11 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
 		AllStateChange(AllBodyState::Zombie_Idle);
 		Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->ActiveOff();
-		for (UImageRenderer* image : VomitRenderer)
+		/*for (UImageRenderer* image : VomitRenderer)
 		{
 			image->Destroy();
 		}
-		VomitRenderer.clear();
+		VomitRenderer.clear();*/
 		VomitEnd = false;
 		return;
 	}

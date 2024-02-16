@@ -220,6 +220,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ZombiesProjectile.h" />
+    <ClInclude Include="ZombieVomitProjectile.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackGroundMap.cpp">
@@ -298,6 +302,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ZombiesProjectile.cpp" />
+    <ClCompile Include="ZombieVomitProjectile.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EngineBase\EngineBase.vcxproj">
