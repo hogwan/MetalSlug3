@@ -126,7 +126,7 @@ Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBo
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Turn_Right", "Marco_AllBody.png", 271, 286, 0.05f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_AimUpTurn_Right", "Marco_AllBody.png", 287, 302, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Jump_Right", "Marco_AllBody.png", 303, 318, 0.08f, false);\
-Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Vomit_Right", "Marco_AllBody.png", 319, 365, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Vomit_Right", "Marco_AllBody.png", 319, 365, 0.06f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Death_Right", "Marco_AllBody.png", 366, 445, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_DeathInAir_Right", "Marco_AllBody.png", 446, 460, 0.08f, false);\
 \
@@ -159,7 +159,7 @@ Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBo
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Turn_Left", "Marco_AllBody.png", 741, 756, 0.05f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_AimUpTurn_Left", "Marco_AllBody.png", 757, 772, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Jump_Left", "Marco_AllBody.png", 773, 788, 0.08f, false);\
-Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Vomit_Left", "Marco_AllBody.png", 789, 835, 0.08f, false);\
+Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Vomit_Left", "Marco_AllBody.png", 789, 835, 0.06f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_Death_Left", "Marco_AllBody.png", 836, 915, 0.08f, false);\
 Renderer[static_cast<int>(BodyRenderer::AllBody)]->CreateAnimation("Zombie_AllBody_DeathInAir_Left", "Marco_AllBody.png", 916, 930, 0.08f, false);\
 \

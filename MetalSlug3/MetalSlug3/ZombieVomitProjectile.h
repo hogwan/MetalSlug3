@@ -32,19 +32,21 @@ public:
 	{
 		Number = _Number;
 	}
+	bool End = false;
+	bool RendererEnd = false;
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 	void DamageLogic();
-	void GravityCheck();
+	void GravityCheck(float _DeltaTime);
 	FVector Dir = FVector::Zero;
 	int Number = 0;
-
 	UImageRenderer* Renderer = nullptr;
 	UCollision* Collider = nullptr;
 
-	float Gravity = 3000.0f;
+	float Gravity = 500.0f;
+
 };
 

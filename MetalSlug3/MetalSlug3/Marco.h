@@ -333,7 +333,7 @@ private:
 
 	FVector VomitProjectileVectorArr[100] = { {48,35},{48,35},{70,41},{70,41},{82,34},
 												{82,34},{87,30},{87,30},{79,19} ,{79,19} ,
-												{82,14} ,{82,14} ,{87,30} ,{1,0},{1,0},
+												{82,14} ,{82,14} ,{1,0},{1,0},
 												{65,-13},{65,-13},{43,-16},{43,-16},{52,-21},
 												{52,-21}, {43,-20},{42,-20},{39,-27},{39,-27},
 												{40,-33},{40,-33},{41,-37},{41,-37},{37,-40},
@@ -346,5 +346,8 @@ private:
 	FVector CrouchCollisionPosition = { 0,-25 };
 
 	std::vector<UImageRenderer*> VomitRenderer;
+	float AccDeltaTime = 0.0f;
+
+	float ParabolaLogic(float _X, float _Y, int X);
 };
 

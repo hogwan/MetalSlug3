@@ -3296,8 +3296,9 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
 	int CurFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
 	int LaunchFrame = 21;
+	int LaunchEndFrame = 38;
 
-	if (CurFrame >= LaunchFrame && Vomit_PrevFrame != CurFrame)
+	if (CurFrame >= LaunchFrame && CurFrame <=LaunchEndFrame && Vomit_PrevFrame != CurFrame)
 	{
 		for (AZombieVomitProjectile* Projectile : VomitProjectileVec)
 		{
@@ -3305,20 +3306,27 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 		}
 		VomitProjectileVec.clear();
 
-		for (int i = 0; i < 18; i++)
+		for (int i = 0; i < 30; i++)
 		{
 			if (IsVomitProjectileCol) continue;
 
 			AZombieVomitProjectile* ZombieProjectile = GetWorld()->SpawnActor<AZombieVomitProjectile>();
 			VomitProjectileVec.push_back(ZombieProjectile);
 			FVector ProjectileVector = VomitProjectileVectorArr[iterator * 2];
-			int VectorLength = 50 * (i + 1);
+			int VectorLength = 70;
 			ProjectileVector.Normalize2D();
 			FVector ResultVector = FVector::Zero;
-			ResultVector.X = ProjectileVector.X * VectorLength;
-			ResultVector.Y = ProjectileVector.Y * VectorLength;
+			FVector VomitLaunchOffset = { 40,-100 };
+			if (DirState == EActorDir::Left)
+			{
+				ProjectileVector.X = -ProjectileVector.X;
+				VomitLaunchOffset = { -40,-100 };
+			}
+		
+			ResultVector.X = ProjectileVector.X * VectorLength * i;
+			ResultVector.Y = ProjectileVector.Y * VectorLength * i + 0.5f*4.5f*i*i;
 
-			FVector VomitLaunchOffset = { 0,-100 };
+
 			ZombieProjectile->SetActorLocation(GetActorLocation()+ VomitLaunchOffset + ResultVector);
 			ZombieProjectile->SetDir(ProjectileVector);
 			ZombieProjectile->SetNumber(i);
@@ -3338,12 +3346,19 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 			}
 
 		}
+		if (CurFrame == LaunchEndFrame)
+		{
+			for (AZombieVomitProjectile* Projectile : VomitProjectileVec)
+			{
+				Projectile->End = true;
+				Projectile->RendererEnd = true;
+			}
+		}
 
 		iterator++;
 		IsVomitProjectileCol = false;
 		Vomit_PrevFrame = CurFrame;
 	}
-	
 
 	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
@@ -3923,4 +3938,14 @@ void Marco::GroundUp()
 			break;
 		}
 	}
+}
+
+float Marco::ParabolaLogic(float _X, float _Y, int X)
+{
+	float gravity = Gravity.Y;
+	float equation1 = gravity / (-2.0f * _X * _X);
+	float equation2 = X - ((_X * _Y) / gravity);
+	float equation3 = (_Y * _Y * 0.5) / gravity;
+
+	return (equation1 * equation2 * equation2) + equation3;
 }
