@@ -28,6 +28,11 @@ public:
 		Dir = _Dir;
 	}
 
+	void SetNumber(int _Number)
+	{
+		Number = _Number;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -35,6 +40,7 @@ protected:
 	void DamageLogic();
 	void GravityCheck();
 	FVector Dir = FVector::Zero;
+	int Number = 0;
 
 	UImageRenderer* Renderer = nullptr;
 	UCollision* Collider = nullptr;

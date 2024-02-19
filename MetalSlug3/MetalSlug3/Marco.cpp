@@ -3321,6 +3321,7 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 			FVector VomitLaunchOffset = { 0,-100 };
 			ZombieProjectile->SetActorLocation(GetActorLocation()+ VomitLaunchOffset + ResultVector);
 			ZombieProjectile->SetDir(ProjectileVector);
+			ZombieProjectile->SetNumber(i);
 
 			UCollision* ZombieProjectileCollider = ZombieProjectile->GetCollider();
 			std::vector<UCollision*> Result;
