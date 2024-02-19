@@ -10,7 +10,6 @@ enum class BodyRenderer
 	AllBody,
 	ZombieArm,
 	ZombieLaunchEffect,
-	ZombieProjectile,
 };
 
 class Marco : public AActor

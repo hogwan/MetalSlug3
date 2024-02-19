@@ -26,7 +26,6 @@ void Marco::BeginPlay()
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::AllBody));          // AllBody
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::ZombieArm));          //ZombieArm
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieLaunchEffect
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieProjectile
 
 	Collision = CreateCollision(MT3CollisionOrder::Player);
 	Collision->SetScale(DefaultCollisionScale);
@@ -49,13 +48,9 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {10,-60} ,MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransColor({ 0,0,0,255 });
 	
-	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransform({ {150,-75}, MarcoSize });
+	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetImage("Marco_VomitLaunchEffect.png");
+	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransform({ {0,-70}, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransColor({ 0,0,0,255 });
-
-	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->SetImage("Marco_UpperBody.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->SetTransform({ {150,-225}, MarcoSize });
-	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->SetTransColor({ 0,0,0,255 });
 
 	CreateMarcoAnimation;
 
@@ -65,7 +60,6 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ActiveOff();
-	Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->ActiveOff();
 
 	SetActorLocation({ 50, 1000 });
 	UpperStateChange(UpperBodyState::Idle);
@@ -3300,6 +3294,8 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 
 	if (CurFrame >= LaunchFrame && CurFrame <=LaunchEndFrame && Vomit_PrevFrame != CurFrame)
 	{
+		Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ActiveOn();
+		Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ChangeAnimation("VombitLaunchEffect_Right", false, 0, 0.05f);
 		for (AZombieVomitProjectile* Projectile : VomitProjectileVec)
 		{
 			Projectile->Destroy();
@@ -3352,6 +3348,8 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 			{
 				Projectile->End = true;
 				Projectile->RendererEnd = true;
+				Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ActiveOff();
+				Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ChangeAnimation("Pistol_UpperBody_Idle_Right");
 			}
 		}
 
@@ -3365,7 +3363,7 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 		ManipulateOn();
 		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
 		AllStateChange(AllBodyState::Zombie_Idle);
-		Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ActiveOff();
 
 		for (AZombieVomitProjectile* Projectile : VomitProjectileVec)
 		{
