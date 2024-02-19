@@ -27,7 +27,7 @@ void ABomb::BeginPlay()
 	Collider->SetPosition({ 0.0f,0.0f });
 	Collider->SetColType(ECollisionType::Rect);
 
-	Renderer->CreateAnimation("Rotate_Right", "Bomb.png", 0, 31, 0.01f, true);
+	Renderer->CreateAnimation("Rotate_Right", "Bomb.png", 0, 31, 0.03f, true);
 	Renderer->ChangeAnimation("Rotate_Right");
 }
 void ABomb::GravityCheck(float _DeltaTime)
@@ -40,7 +40,8 @@ void ABomb::ReflectionCheck()
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
 		AddActorLocation({ 0.0f, -10.0f});
-		MoveVector.Y = -MoveVector.Y;
+		MoveVector.Y = -0.7f * MoveVector.Y;
+		MoveVector.X = 1.1f * MoveVector.X;
 	}
 }
 void ABomb::HitCheck()

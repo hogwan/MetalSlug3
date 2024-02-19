@@ -2136,12 +2136,14 @@ void Marco::UpperNoneStart()
 
 void Marco::UpperIdleStart()
 {
+	Move_Speed = 0.0f;
 	CurUpperBodyName = "UpperBody_Idle";
 	UpperStart();
 }
 
 void Marco::UpperMoveStart()
 {
+	Move_Speed = Run_Speed;
 	CurUpperBodyName = "UpperBody_Move";
 	UpperStart();
 }
@@ -2224,17 +2226,29 @@ void Marco::UpperThrowStart()
 {
 	//SpawnActor<Bomb>
 	CurUpperBodyName = "UpperBody_Throw";
-	UpperStart();
+	std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
+	std::string AddedDirectionName = AddDirectionName(AddedGunTypeName);
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true, 0 , 0.08f);
 
 	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
-	FVector ThrowVector = { 1,-1 };
+	FVector ThrowVector = { 3,-3 };
 	ThrowVector.Normalize2D();
-	float ThrowForce = 300.0f;
+	float ThrowForce = 400.0f;
 	ThrowVector *= ThrowForce;
 	FVector SpawnLocation = GetActorLocation();
-	SpawnLocation += {0.0f, -100.0f};
+
+	if (DirState == EActorDir::Left)
+	{
+		SpawnLocation += {-30.0f, -100.0f};
+	}
+	else if (DirState == EActorDir::Right)
+	{
+		SpawnLocation += {30.0f, -100.0f};
+	}
+
 	Bomb->SetActorLocation(SpawnLocation);
 	Bomb->SetMoveVector(ThrowVector);
+	Bomb->Destroy(1.8f);
 }
 
 void Marco::UpperKnifeAttack1Start()
