@@ -2225,6 +2225,16 @@ void Marco::UpperThrowStart()
 	//SpawnActor<Bomb>
 	CurUpperBodyName = "UpperBody_Throw";
 	UpperStart();
+
+	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
+	FVector ThrowVector = { 1,-1 };
+	ThrowVector.Normalize2D();
+	float ThrowForce = 300.0f;
+	ThrowVector *= ThrowForce;
+	FVector SpawnLocation = GetActorLocation();
+	SpawnLocation += {0.0f, -100.0f};
+	Bomb->SetActorLocation(SpawnLocation);
+	Bomb->SetMoveVector(ThrowVector);
 }
 
 void Marco::UpperKnifeAttack1Start()

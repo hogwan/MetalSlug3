@@ -7,6 +7,8 @@ public:
 	ABomb();
 	~ABomb();
 
+	ABomb(FVector _Force);
+
 	// delete Function
 	ABomb(const ABomb& _Other) = delete;
 	ABomb(ABomb&& _Other) noexcept = delete;
@@ -18,12 +20,27 @@ public:
 		Dir = _Dir;
 	}
 
+	void SetMoveVector(FVector _MoveVector)
+	{
+		MoveVector = _MoveVector;
+	}
+
 protected:
 	void Tick(float _DeltaTime) override;
 	void BeginPlay() override;
 
+	void GravityCheck(float _DeltaTime);
+	void ReflectionCheck();
+
+	void HitCheck();
+
 private:
 	FVector Dir = FVector::Zero;
-	float Speed = 200.0f;
+	FVector Force = FVector::Zero;
+	FVector MoveVector = FVector::Zero;
+	FVector Gravity = { 0.0f,800.0f };
+
+	UImageRenderer* Renderer = nullptr;
+	UCollision* Collider = nullptr;
 };
 

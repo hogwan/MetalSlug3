@@ -225,7 +225,6 @@ private:
 	void Reset_UpperBodySyncro();
 	void ZombieArm_Syncro();
 	void CalGravityVector(float _DeltaTime);
-	void CalVomitProjectileVector();
 	void GroundUp();
 
 	bool IsZombie = false;
