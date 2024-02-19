@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore\Actor.h>
 #include "ContentsHelper.h"
+#include "ZombieVomitProjectile.h"
 
 enum class BodyRenderer
 {
@@ -282,6 +283,11 @@ private:
 	int RemainBomb = 0;
 
 	int HeavyMachineGun_PrevFrame = -1;
+	int Vomit_PrevFrame = -1;
+
+	bool IsVomitProjectileCol = false;
+	int iterator = 0;
+	std::vector<AZombieVomitProjectile*> VomitProjectileVec;
 
 	FVector MarcoUpperBodyOffset = { 0.0f, 0.0f };
 	FVector MarcoDefaultUpperBodyOffset = { 0.0f,-23.0f };
@@ -325,14 +331,20 @@ private:
 	FVector HeavyMachineGun_UpArr[5] = { {-7,-70},{-4,-70},{0,-1},{4,-70},{7,-70} };
 	FVector HeavyMachineGun_DownArr[5] = { {-7,70},{-4,70},{0,1},{4,70},{7,70} };
 
-	FVector VomitProjectileVectorArr[100];
+	FVector VomitProjectileVectorArr[100] = { {48,35},{48,35},{70,41},{70,41},{82,34},
+												{82,34},{87,30},{87,30},{79,19} ,{79,19} ,
+												{82,14} ,{82,14} ,{87,30} ,{1,0},{1,0},
+												{65,-13},{65,-13},{43,-16},{43,-16},{52,-21},
+												{52,-21}, {43,-20},{42,-20},{39,-27},{39,-27},
+												{40,-33},{40,-33},{41,-37},{41,-37},{37,-40},
+												{37,-40},{37,-45},{37,-45}, {25,-55}, {25,-55},
+												{16,-66},{16,-66} };
 
 	FVector DefaultCollisionScale = { 50,100 };
 	FVector DefaultCollisionPosition = { 0, -50 };
 	FVector CrouchCollisionScale = { 50,50 };
 	FVector CrouchCollisionPosition = { 0,-25 };
 
-	bool VomitEnd = false;
 	std::vector<UImageRenderer*> VomitRenderer;
 };
 

@@ -55,6 +55,7 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("WomanZombie_LaunchEffect.png", 10, 2);
 
 	UEngineResourcesManager::GetInst().CuttingImage("BulletDestroy.png", 10, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("Marco_ZombieVomitProjectile.png", 10, 12);
 	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("BackGround1.png");
 	Map->SetColMapImage("BackGround1_Col.png");

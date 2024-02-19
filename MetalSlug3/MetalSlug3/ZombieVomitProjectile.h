@@ -13,12 +13,28 @@ public:
 	AZombieVomitProjectile& operator=(const AZombieVomitProjectile& _Other) = delete;
 	AZombieVomitProjectile& operator=(AZombieVomitProjectile&& _Other) = delete;
 
+	UCollision* GetCollider()
+	{
+		return Collider;
+	}
+
+	UImageRenderer* GetRenderer()
+	{
+		return Renderer;
+	}
+
+	void SetDir(FVector _Dir)
+	{
+		Dir = _Dir;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 	void DamageLogic();
 	void GravityCheck();
+	FVector Dir = FVector::Zero;
 
 	UImageRenderer* Renderer = nullptr;
 	UCollision* Collider = nullptr;

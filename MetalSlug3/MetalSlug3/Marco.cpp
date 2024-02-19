@@ -8,6 +8,7 @@
 #include "Bomb.h"
 #include "CreateMarcoAnimation.h"
 #include "ContentsHelper.h"
+#include "ZombieVomitProjectile.h"
 
 
 Marco::Marco()
@@ -3293,22 +3294,55 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 {
 	ManipulateOff();
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
+	int CurFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
+	int LaunchFrame = 21;
 
-	/*if (!VomitEnd)
+	if (CurFrame >= LaunchFrame && Vomit_PrevFrame != CurFrame)
 	{
-		for (int i = 0; i < 10; i++)
+		for (AZombieVomitProjectile* Projectile : VomitProjectileVec)
 		{
-			UImageRenderer* TempRenderer = CreateImageRenderer(MT3RenderOrder::Projectile);
-			TempRenderer->SetImage("VomitProjectile.png");
-			VomitRenderer.push_back(TempRenderer);
+			Projectile->Destroy();
+		}
+		VomitProjectileVec.clear();
+
+		for (int i = 0; i < 18; i++)
+		{
+			if (IsVomitProjectileCol) continue;
+
+			AZombieVomitProjectile* ZombieProjectile = GetWorld()->SpawnActor<AZombieVomitProjectile>();
+			VomitProjectileVec.push_back(ZombieProjectile);
+			FVector ProjectileVector = VomitProjectileVectorArr[iterator * 2];
+			int VectorLength = 50 * (i + 1);
+			ProjectileVector.Normalize2D();
+			FVector ResultVector = FVector::Zero;
+			ResultVector.X = ProjectileVector.X * VectorLength;
+			ResultVector.Y = ProjectileVector.Y * VectorLength;
+
+			FVector VomitLaunchOffset = { 0,-100 };
+			ZombieProjectile->SetActorLocation(GetActorLocation()+ VomitLaunchOffset + ResultVector);
+			ZombieProjectile->SetDir(ProjectileVector);
+
+			UCollision* ZombieProjectileCollider = ZombieProjectile->GetCollider();
+			std::vector<UCollision*> Result;
+			if (ZombieProjectileCollider->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+			{
+				//데미지로직
+				IsVomitProjectileCol = true;
+			}
+
+			Color8Bit Color = UContentsHelper::ColMapImage->GetColor(ZombieProjectile->GetActorLocation().iX(), ZombieProjectile->GetActorLocation().iY(), Color8Bit::MagentaA);
+			if (Color == Color8Bit(255, 0, 255, 0))
+			{
+				IsVomitProjectileCol = true;
+			}
+
 		}
 
-		for (int i = 0; i < 10; i++)
-		{
-			VomitRenderer[i]->SetTransform({ {50 + 50 * i,-100}, {100,100} });
-		}
-		VomitEnd = true;
-	}*/
+		iterator++;
+		IsVomitProjectileCol = false;
+		Vomit_PrevFrame = CurFrame;
+	}
+	
 
 	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
@@ -3316,12 +3350,14 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
 		AllStateChange(AllBodyState::Zombie_Idle);
 		Renderer[static_cast<int>(BodyRenderer::ZombieProjectile)]->ActiveOff();
-		/*for (UImageRenderer* image : VomitRenderer)
+
+		for (AZombieVomitProjectile* Projectile : VomitProjectileVec)
 		{
-			image->Destroy();
+			Projectile->Destroy();
 		}
-		VomitRenderer.clear();*/
-		VomitEnd = false;
+		VomitProjectileVec.clear();
+		Vomit_PrevFrame = -1;
+		iterator = 0;
 		return;
 	}
 }
