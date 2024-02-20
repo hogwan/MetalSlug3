@@ -162,7 +162,7 @@ void Marco::DeathCheck()
 	{
 		//if(좀비 DNA 피격 시)
 		if (
-			true == UEngineInput::IsDown('Q')
+			true == Collision->CollisionCheck(MT3CollisionOrder::ZombieProjectile, Result)
 			)
 		{
 			ManipulateOff();
