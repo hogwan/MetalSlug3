@@ -12,6 +12,7 @@
 #include "ManZombie3.h"
 #include "Front1.h"
 #include "Front2.h"
+#include "Back1.h"
 
 PlayLevel::PlayLevel()
 {
@@ -70,14 +71,17 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_VomitLaunchEffect.png", 10, 8);
 	UEngineResourcesManager::GetInst().CuttingImage("Bomb.png", 10, 8);
 
+	ABack1* B1 = SpawnActor<ABack1>();
+	B1->SetActorLocation({ 2263,241 });
+
 	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("BackGround1.png");
 	Map->SetColMapImage("BackGround1_Col.png");
 
-	Front1* F1 = SpawnActor<Front1>();
+	AFront1* F1 = SpawnActor<AFront1>();
 	F1->SetActorLocation({ 2733,930 });
 
-	Front2* F2 = SpawnActor<Front2>();
+	AFront2* F2 = SpawnActor<AFront2>();
 	F2->SetActorLocation({ 4270,807 });
 
 	UContentsHelper::Player = SpawnActor<Marco>();
@@ -100,4 +104,13 @@ void PlayLevel::BeginPlay()
 
 	AZombies* Zombie_5 = SpawnActor<AManZombie3>();
 	Zombie_5->SetActorLocation({ 1500,1000 });*/
+
+	/*17087 2676
+
+	6429 999
+
+
+	2.6578005910717063306890651734329  2.6786786786786786786786786786787
+
+	4.0741626794258373205741626794258*/
 }

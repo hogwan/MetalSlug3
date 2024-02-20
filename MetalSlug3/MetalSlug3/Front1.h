@@ -1,17 +1,17 @@
 #pragma once
 #include "FrontMap.h"
-class Front1 : public FrontMap
+class AFront1 : public AFrontMap
 {
 public:
 	// constructor destructor
-	Front1();
-	~Front1();
+	AFront1();
+	~AFront1();
 
 	// delete Function
-	Front1(const Front1& _Other) = delete;
-	Front1(Front1&& _Other) noexcept = delete;
-	Front1& operator=(const Front1& _Other) = delete;
-	Front1& operator=(Front1&& _Other) = delete;
+	AFront1(const AFront1& _Other) = delete;
+	AFront1(AFront1&& _Other) noexcept = delete;
+	AFront1& operator=(const AFront1& _Other) = delete;
+	AFront1& operator=(AFront1&& _Other) = delete;
 
 protected:
 	void BeginPlay() override;

@@ -1,14 +1,14 @@
 #include "Front1.h"
 
-Front1::Front1()
+AFront1::AFront1()
 {
 }
 
-Front1::~Front1()
+AFront1::~AFront1()
 {
 }
 
-void Front1::BeginPlay()
+void AFront1::BeginPlay()
 {
 	Renderer = CreateImageRenderer(MT3RenderOrder::Front);
 	Renderer->SetImage("Front1.png");
@@ -16,7 +16,7 @@ void Front1::BeginPlay()
 	
 }
 
-void Front1::Tick(float _DeltaTime)
+void AFront1::Tick(float _DeltaTime)
 {
 
 }

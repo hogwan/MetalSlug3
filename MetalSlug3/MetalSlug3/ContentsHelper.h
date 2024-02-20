@@ -5,6 +5,7 @@
 
 enum MT3RenderOrder
 {
+	Back,
 	Map,
 	Projectile,
 	Enemy,

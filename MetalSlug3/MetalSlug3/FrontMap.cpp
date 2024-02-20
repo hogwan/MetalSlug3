@@ -1,19 +1,19 @@
 #include "FrontMap.h"
 
-FrontMap::FrontMap()
+AFrontMap::AFrontMap()
 {
 }
 
-FrontMap::~FrontMap()
+AFrontMap::~AFrontMap()
 {
 }
 
-void FrontMap::BeginPlay()
+void AFrontMap::BeginPlay()
 {
 	AActor::BeginPlay();
 }
 
-void FrontMap::Tick(float _DeltaTime)
+void AFrontMap::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 }

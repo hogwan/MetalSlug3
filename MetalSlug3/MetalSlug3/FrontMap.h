@@ -1,18 +1,18 @@
 #pragma once
 #include <EngineCore\Actor.h>
 #include "ContentsHelper.h"
-class FrontMap : public AActor
+class AFrontMap : public AActor
 {
 public:
 	// constructor destructor
-	FrontMap();
-	~FrontMap();
+	AFrontMap();
+	~AFrontMap();
 
 	// delete Function
-	FrontMap(const FrontMap& _Other) = delete;
-	FrontMap(FrontMap&& _Other) noexcept = delete;
-	FrontMap& operator=(const FrontMap& _Other) = delete;
-	FrontMap& operator=(FrontMap&& _Other) = delete;
+	AFrontMap(const AFrontMap& _Other) = delete;
+	AFrontMap(AFrontMap&& _Other) noexcept = delete;
+	AFrontMap& operator=(const AFrontMap& _Other) = delete;
+	AFrontMap& operator=(AFrontMap&& _Other) = delete;
 
 	UImageRenderer* Renderer = nullptr;
 

@@ -85,6 +85,12 @@
     <ClInclude Include="ManZombie3.h">
       <Filter>Object\Enemy\Zombies</Filter>
     </ClInclude>
+    <ClInclude Include="BackMap.h">
+      <Filter>Object\BackMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Back1.h">
+      <Filter>Object\BackMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -168,6 +174,12 @@
     <ClCompile Include="ManZombie3.cpp">
       <Filter>Object\Enemy\Zombies</Filter>
     </ClCompile>
+    <ClCompile Include="BackMap.cpp">
+      <Filter>Object\BackMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Back1.cpp">
+      <Filter>Object\BackMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -194,14 +206,17 @@
     <Filter Include="Object\Enemy">
       <UniqueIdentifier>{b3133f5b-82a7-4131-8289-256ecddf75aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Projectile\ZombieProjectile">
-      <UniqueIdentifier>{630a9f00-4e88-4da0-93f3-bb1888bb29f3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Enemy\Zombies">
       <UniqueIdentifier>{c52819bf-1088-46a5-af6f-c3af9cbc95e1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object\FrontMap">
       <UniqueIdentifier>{3f4d57cd-c6b4-44a9-8736-75636c39bffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Projectile\ZombieProjectile">
+      <UniqueIdentifier>{630a9f00-4e88-4da0-93f3-bb1888bb29f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\BackMap">
+      <UniqueIdentifier>{b15719b6-5ee9-4341-877c-fe16877a4c94}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

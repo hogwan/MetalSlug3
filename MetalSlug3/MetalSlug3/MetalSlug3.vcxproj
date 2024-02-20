@@ -143,7 +143,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Back1.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BackGroundMap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="BackMap.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -242,7 +250,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Back1.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BackGroundMap.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="BackMap.cpp">
       <SubType>
       </SubType>
     </ClCompile>
