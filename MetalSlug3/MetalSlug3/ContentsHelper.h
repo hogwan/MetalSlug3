@@ -139,6 +139,8 @@ enum class EnemyZombieState
 	Turn,
 	Stun,
 	Attack,
+	Death,
+	Falling,
 };
 
 class UContentsHelper

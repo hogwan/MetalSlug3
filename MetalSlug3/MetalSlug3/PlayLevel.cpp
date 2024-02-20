@@ -8,6 +8,8 @@
 #include "ManZombie2.h"
 #include "DoctorZombie.h"
 #include "WomanZombie.h"
+#include "UncleZombie.h"
+#include "ManZombie3.h"
 #include "Front1.h"
 #include "Front2.h"
 
@@ -53,8 +55,14 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("ManZombie2.png", 10, 22);
 	UEngineResourcesManager::GetInst().CuttingImage("ManZombie2_LaunchEffect.png", 10, 4);
 
+	UEngineResourcesManager::GetInst().CuttingImage("ManZombie3.png", 10, 22);
+	UEngineResourcesManager::GetInst().CuttingImage("ManZombie3_LaunchEffect.png", 10, 4);
+
 	UEngineResourcesManager::GetInst().CuttingImage("WomanZombie.png", 10, 22);
 	UEngineResourcesManager::GetInst().CuttingImage("WomanZombie_LaunchEffect.png", 10, 2);
+
+	UEngineResourcesManager::GetInst().CuttingImage("UncleZombie.png", 10, 20);
+	UEngineResourcesManager::GetInst().CuttingImage("UncleZombie_LaunchEffect.png", 10, 4);
 
 	UEngineResourcesManager::GetInst().CuttingImage("BulletDestroy.png", 10, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_ZombieVomitProjectile.png", 10, 12);
@@ -73,8 +81,9 @@ void PlayLevel::BeginPlay()
 	F2->SetActorLocation({ 4270,807 });
 
 	UContentsHelper::Player = SpawnActor<Marco>();
+	UContentsHelper::Player->SetActorLocation({ 100,1000 });
 	 
-	AZombies* Zombie_0 = SpawnActor<AManZombie1>();
+	/*AZombies* Zombie_0 = SpawnActor<AManZombie1>();
 	Zombie_0->SetActorLocation({ 1000,1000 });
 
 	AZombies* Zombie_1= SpawnActor<ADoctorZombie>();
@@ -85,4 +94,10 @@ void PlayLevel::BeginPlay()
 
 	AZombies* Zombie_3 = SpawnActor<AWomanZombie>();
 	Zombie_3->SetActorLocation({ 250,1000 });
+
+	AZombies* Zombie_4 = SpawnActor<AUncleZombie>();
+	Zombie_4->SetActorLocation({ 1250,1000 });
+
+	AZombies* Zombie_5 = SpawnActor<AManZombie3>();
+	Zombie_5->SetActorLocation({ 1500,1000 });*/
 }

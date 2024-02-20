@@ -82,6 +82,9 @@
     <ClInclude Include="Front2.h">
       <Filter>Object\FrontMap</Filter>
     </ClInclude>
+    <ClInclude Include="ManZombie3.h">
+      <Filter>Object\Enemy\Zombies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -161,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="Front2.cpp">
       <Filter>Object\FrontMap</Filter>
+    </ClCompile>
+    <ClCompile Include="ManZombie3.cpp">
+      <Filter>Object\Enemy\Zombies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

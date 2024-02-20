@@ -22,6 +22,11 @@ void AZombies::Tick(float _DeltaTime)
 	{
 		LaunchRenderer->ActiveOff();
 	}
+
+	if (Hp <= 0)
+	{
+		StateChange(EnemyZombieState::Death);
+	}
 }
 void AZombies::StateUpdate(float _DeltaTime)
 {
@@ -213,40 +218,40 @@ void AZombies::Stun(float _DeltaTime)
 void AZombies::Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFrame)
 {
 	int CurFrame = Renderer->GetCurAnimationFrame();
-	if (CurFrame == PrevFrame) return;
-	if (CurFrame == _LaunchFrame)
+	if (CurFrame != PrevFrame)
 	{
-		AZombiesProjectile* Projectile = GetWorld()->SpawnActor<AZombiesProjectile>();
-		FVector SpawnLocation = FVector::Zero;
-		if (DirState == EActorDir::Right)
+		if (CurFrame == _LaunchFrame)
 		{
-			SpawnLocation = GetActorLocation() + ProjectileSpawnOffset_Height + ProjectileSpawnOffset_Right;
-			Projectile->SetDir(FVector::Right);
-		}
-		else if (DirState == EActorDir::Left)
-		{
-			SpawnLocation = GetActorLocation() + ProjectileSpawnOffset_Height + ProjectileSpawnOffset_Left;
-			Projectile->SetDir(FVector::Left);
-		}
-		Projectile->SetActorLocation(SpawnLocation);
-
-		PrevFrame = CurFrame;
-	}
-
-	if (CurFrame == _LaunchEffectFrame)
-	{
-		LaunchRenderer->ActiveOn();
-		if (DirState == EActorDir::Right)
-		{
-			LaunchRenderer->ChangeAnimation("LaunchEffect_Right", true, 0, 0.1f);
-			LaunchRenderer->SetTransform({ LaunchEffectOffset_Up + LaunchEffectOffset_Right, LaunchEffectScale });
-		}
-		else if (DirState == EActorDir::Left)
-		{
-			LaunchRenderer->ChangeAnimation("LaunchEffect_Left", true, 0, 0.1f);
-			LaunchRenderer->SetTransform({ LaunchEffectOffset_Up + LaunchEffectoffset_Left, LaunchEffectScale });
+			AZombiesProjectile* Projectile = GetWorld()->SpawnActor<AZombiesProjectile>();
+			FVector SpawnLocation = FVector::Zero;
+			if (DirState == EActorDir::Right)
+			{
+				SpawnLocation = GetActorLocation() + ProjectileSpawnOffset_Height + ProjectileSpawnOffset_Right;
+				Projectile->SetDir(FVector::Right);
+			}
+			else if (DirState == EActorDir::Left)
+			{
+				SpawnLocation = GetActorLocation() + ProjectileSpawnOffset_Height + ProjectileSpawnOffset_Left;
+				Projectile->SetDir(FVector::Left);
+			}
+			Projectile->SetActorLocation(SpawnLocation);
 		}
 
+		if (CurFrame == _LaunchEffectFrame)
+		{
+			LaunchRenderer->ActiveOn();
+			if (DirState == EActorDir::Right)
+			{
+				LaunchRenderer->ChangeAnimation("LaunchEffect_Right", true, 0, 0.1f);
+				LaunchRenderer->SetTransform({ LaunchEffectOffset_Up + LaunchEffectOffset_Right, LaunchEffectScale });
+			}
+			else if (DirState == EActorDir::Left)
+			{
+				LaunchRenderer->ChangeAnimation("LaunchEffect_Left", true, 0, 0.1f);
+				LaunchRenderer->SetTransform({ LaunchEffectOffset_Up + LaunchEffectoffset_Left, LaunchEffectScale });
+			}
+
+		}
 		PrevFrame = CurFrame;
 	}
 	if (Renderer->IsCurAnimationEnd())
@@ -254,6 +259,14 @@ void AZombies::Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFrame
 		PrevFrame = -1;
 		StateChange(EnemyZombieState::Idle);
 		return;
+	}
+}
+
+void AZombies::Death(float _DeltaTime)
+{
+	if (Renderer->IsCurAnimationEnd())
+	{
+		Destroy();
 	}
 }
 
@@ -298,6 +311,13 @@ void AZombies::StunStart()
 }
 
 void AZombies::AttackStart()
+{
+	CurAnimName = "Attack";
+	DirCheck(CurAnimName);
+	Renderer->ChangeAnimation(CurAnimName);
+}
+
+void AZombies::DeathStart()
 {
 	CurAnimName = "Attack";
 	DirCheck(CurAnimName);

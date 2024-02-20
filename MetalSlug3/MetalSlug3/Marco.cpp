@@ -61,7 +61,6 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ActiveOff();
 
-	SetActorLocation({ 4230, 500 });
 	UpperStateChange(UpperBodyState::Idle);
 	LowerStateChange(LowerBodyState::Idle);
 	AllStateChange(AllBodyState::None);
@@ -3960,14 +3959,4 @@ void Marco::GroundUp()
 			break;
 		}
 	}
-}
-
-float Marco::ParabolaLogic(float _X, float _Y, int X)
-{
-	float gravity = Gravity.Y;
-	float equation1 = gravity / (-2.0f * _X * _X);
-	float equation2 = X - ((_X * _Y) / gravity);
-	float equation3 = (_Y * _Y * 0.5) / gravity;
-
-	return (equation1 * equation2 * equation2) + equation3;
 }

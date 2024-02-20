@@ -19,24 +19,26 @@ protected:
 
 	EActorDir DirState = EActorDir::Left;
 	EnemyZombieState CurState = EnemyZombieState::None;
-	void StateUpdate(float _DeltaTime);
-	void StateChange(EnemyZombieState _State);
+	virtual void StateUpdate(float _DeltaTime);
+	virtual void StateChange(EnemyZombieState _State);
 
-	void None(float _DeltaTime);
-	void Lying(float _DeltaTime);
-	void Idle(float _DeltaTime);
-	void Move(float _DeltaTime);
-	void Turn(float _DeltaTime);
-	void Stun(float _DeltaTime);
-	void Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFrame);
+	virtual void None(float _DeltaTime);
+	virtual void Lying(float _DeltaTime);
+	virtual void Idle(float _DeltaTime);
+	virtual void Move(float _DeltaTime);
+	virtual void Turn(float _DeltaTime);
+	virtual void Stun(float _DeltaTime);
+	virtual void Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFrame);
+	virtual void Death(float _DeltaTime);
 
-	void NoneStart();
-	void LyingStart();
-	void IdleStart();
-	void MoveStart();
-	void TurnStart();
-	void StunStart();
-	void AttackStart();
+	virtual void NoneStart();
+	virtual void LyingStart();
+	virtual void IdleStart();
+	virtual void MoveStart();
+	virtual void TurnStart();
+	virtual void StunStart();
+	virtual void AttackStart();
+	virtual void DeathStart();
 
 	std::string CurAnimName = "None";
 
@@ -50,6 +52,7 @@ protected:
 	void GravityCheck(float _DeltaTime);
 	void GroundUp();
 
+	int Hp = 100;
 	float Range = 200.0f;
 	float MaxStunGauge = 100.0f;
 	float CurStunGauge = 0.0f;
@@ -69,5 +72,6 @@ protected:
 	FVector LaunchEffectoffset_Left = { -20,0 };
 
 	UImageRenderer* LaunchRenderer = nullptr;
+
 };
 
