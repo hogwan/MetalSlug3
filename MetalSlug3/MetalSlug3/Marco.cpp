@@ -61,7 +61,7 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
 	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ActiveOff();
 
-	SetActorLocation({ 50, 1000 });
+	SetActorLocation({ 4230, 500 });
 	UpperStateChange(UpperBodyState::Idle);
 	LowerStateChange(LowerBodyState::Idle);
 	AllStateChange(AllBodyState::None);

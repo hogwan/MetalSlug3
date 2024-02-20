@@ -8,6 +8,8 @@
 #include "ManZombie2.h"
 #include "DoctorZombie.h"
 #include "WomanZombie.h"
+#include "Front1.h"
+#include "Front2.h"
 
 PlayLevel::PlayLevel()
 {
@@ -63,6 +65,12 @@ void PlayLevel::BeginPlay()
 	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("BackGround1.png");
 	Map->SetColMapImage("BackGround1_Col.png");
+
+	Front1* F1 = SpawnActor<Front1>();
+	F1->SetActorLocation({ 2733,930 });
+
+	Front2* F2 = SpawnActor<Front2>();
+	F2->SetActorLocation({ 4270,807 });
 
 	UContentsHelper::Player = SpawnActor<Marco>();
 	 

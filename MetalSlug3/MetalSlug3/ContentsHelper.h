@@ -13,6 +13,7 @@ enum MT3RenderOrder
 	ZombieArm,
 	AllBody,
 	Particle,
+	Front,
 
 };
 enum class MT3CollisionOrder
@@ -21,7 +22,7 @@ enum class MT3CollisionOrder
 	EnemyProjectile,
 	ZombieProjectile,
 	Enemy,
-	Player
+	Player,
 };
 
 enum class EActorDir

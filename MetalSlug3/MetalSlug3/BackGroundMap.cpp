@@ -60,4 +60,6 @@ void ABackGroundMap::BeginPlay()
 	Renderer = CreateImageRenderer(MT3RenderOrder::Map);
 	ColRenderer = CreateImageRenderer(MT3RenderOrder::Map);
 	ColRenderer->SetActive(false);
+
+
 }

@@ -169,6 +169,18 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Front1.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Front2.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FrontMap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="HeavyMachineGunBullet.h">
       <SubType>
       </SubType>
@@ -251,6 +263,18 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Front1.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Front2.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FrontMap.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="HeavyMachineGunBullet.cpp">
       <SubType>
       </SubType>

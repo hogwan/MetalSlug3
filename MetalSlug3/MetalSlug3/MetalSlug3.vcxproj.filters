@@ -73,6 +73,15 @@
     <ClInclude Include="ZombieVomitProjectile.h">
       <Filter>Object\Projectile\PlayerProjectile</Filter>
     </ClInclude>
+    <ClInclude Include="FrontMap.h">
+      <Filter>Object\FrontMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Front1.h">
+      <Filter>Object\FrontMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Front2.h">
+      <Filter>Object\FrontMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -144,6 +153,15 @@
     <ClCompile Include="ZombieVomitProjectile.cpp">
       <Filter>Object\Projectile\PlayerProjectile</Filter>
     </ClCompile>
+    <ClCompile Include="FrontMap.cpp">
+      <Filter>Object\FrontMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Front1.cpp">
+      <Filter>Object\FrontMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Front2.cpp">
+      <Filter>Object\FrontMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -175,6 +193,9 @@
     </Filter>
     <Filter Include="Object\Enemy\Zombies">
       <UniqueIdentifier>{c52819bf-1088-46a5-af6f-c3af9cbc95e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\FrontMap">
+      <UniqueIdentifier>{3f4d57cd-c6b4-44a9-8736-75636c39bffe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
