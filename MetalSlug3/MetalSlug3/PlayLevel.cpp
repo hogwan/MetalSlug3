@@ -12,11 +12,11 @@
 #include "ManZombie3.h"
 #include "Front1.h"
 #include "Front2.h"
-#include "Back1.h"
 #include "Go.h"
 #include "ScreenCollision.h"
 #include "Time.h"
 #include "StatusUI.h"
+#include "BackMap.h"
 
 PlayLevel::PlayLevel()
 {
@@ -37,7 +37,7 @@ void PlayLevel::BeginPlay()
 
 
 	std::list<UEngineFile> AllFileList = NewPath.AllFile({ ".png", ".bmp" }, true);
-	
+
 	for (UEngineFile& File : AllFileList)
 	{
 		std::string FullPath = File.GetFullPath();
@@ -87,8 +87,8 @@ void PlayLevel::BeginPlay()
 	UContentsHelper::ScreenCol = SpawnActor<AScreenCollision>();
 	//UContentsHelper::ScreenCol->GetCollider()->ActiveOff();
 
-	ABack1* B1 = SpawnActor<ABack1>();
-	B1->SetActorLocation({ 2263,241 });
+	ABackMap* Back = SpawnActor<ABackMap>();
+	Back->SetActorLocation({ 1994,550 });
 
 	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("BackGround1.png");
@@ -139,5 +139,5 @@ void PlayLevel::BeginPlay()
 
 	2.6578005910717063306890651734329  2.6786786786786786786786786786787
 
-	4.0741626794258373205741626794258*/
+	4.0741626794258373205741626794258   0.27357286157213204450118548240015*/
 }

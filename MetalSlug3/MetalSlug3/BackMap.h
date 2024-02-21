@@ -15,7 +15,7 @@ public:
 	ABackMap& operator=(ABackMap&& _Other) = delete;
 
 	UImageRenderer* Renderer = nullptr;
-	float MoveRatio = 1.0f;
+	float MoveRatio = 0.27357286f;
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

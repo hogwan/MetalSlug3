@@ -88,9 +88,6 @@
     <ClInclude Include="BackMap.h">
       <Filter>Object\BackMap</Filter>
     </ClInclude>
-    <ClInclude Include="Back1.h">
-      <Filter>Object\BackMap</Filter>
-    </ClInclude>
     <ClInclude Include="UIBase.h">
       <Filter>Object\UI</Filter>
     </ClInclude>
@@ -188,9 +185,6 @@
       <Filter>Object\Enemy\Zombies</Filter>
     </ClCompile>
     <ClCompile Include="BackMap.cpp">
-      <Filter>Object\BackMap</Filter>
-    </ClCompile>
-    <ClCompile Include="Back1.cpp">
       <Filter>Object\BackMap</Filter>
     </ClCompile>
     <ClCompile Include="UIBase.cpp">

@@ -77,7 +77,7 @@ void Marco::Tick(float _DeltaTime)
 	}
 	else
 	{
-		GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, 490.0f});
+		GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, GetActorLocation().Y-530.0f});
 	}
 
 
@@ -216,6 +216,26 @@ void Marco::DeathCheck()
 
 void Marco::ManipulateUpdate(float _DeltaTime)
 {
+	if (!InAir)
+	{
+		if (true == UEngineInput::IsDown('S') ||
+			true == UEngineInput::IsDown('s'))
+		{
+			if (IsZombie)
+			{
+				//AddForce()
+				AddActorLocation(FVector::Up * 50);
+				JumpVector = ZombieJumpPower;
+			}
+			else
+			{
+				//AddForce()
+				AddActorLocation(FVector::Up * 50);
+				JumpVector = JumpPower;
+			}
+		}
+	}
+
 	FVector CheckPos = GetActorLocation();
 	switch (DirState)
 	{
@@ -251,25 +271,6 @@ void Marco::ManipulateUpdate(float _DeltaTime)
 		}
 	}
 
-	if (!InAir)
-	{
-		if (true == UEngineInput::IsDown('S') ||
-			true == UEngineInput::IsDown('s'))
-		{
-			if (IsZombie)
-			{
-				//AddForce()
-				AddActorLocation(FVector::Up * 50);
-				JumpVector = ZombieJumpPower;
-			}
-			else
-			{
-				//AddForce()
-				AddActorLocation(FVector::Up * 50);
-				JumpVector = JumpPower;
-			}
-		}
-	}
 
 }
 
@@ -1179,6 +1180,7 @@ void Marco::UpperShoot(float _DeltaTime)
 				true == UEngineInput::IsPress('a'))
 			{
 				UpperStateChange(UpperBodyState::Shoot);
+				return;
 			}
 		}
 		if (CurFrame != HeavyMachineGun_PrevFrame)
@@ -1344,6 +1346,7 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 					true == UEngineInput::IsPress('a'))
 				{
 					UpperStateChange(UpperBodyState::ForwardJumpShoot);
+					return;
 				}
 			}
 			if (CurFrame != HeavyMachineGun_PrevFrame)
@@ -1879,6 +1882,7 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 				true == UEngineInput::IsPress('a'))
 			{
 				UpperStateChange(UpperBodyState::AimDownShoot);
+				return;
 			}
 		}
 		if (CurFrame != HeavyMachineGun_PrevFrame)
@@ -1941,11 +1945,17 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 					UpperStateChange(UpperBodyState::Throw);
 					return;
 				}
+
+				if (true == UEngineInput::IsFree(VK_DOWN))
+				{
+					UpperStateChange(UpperBodyState::Idle);
+					return;
+				}
 			}
 
 			if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
 			{
-				UpperStateChange(UpperBodyState::AimNormalToDown);
+				UpperStateChange(UpperBodyState::Idle);
 				return;
 			}
 		}
@@ -2151,7 +2161,7 @@ void Marco::UpperNoneStart()
 
 void Marco::UpperIdleStart()
 {
-	Move_Speed = 0.0f;
+	Move_Speed = Run_Speed;
 	CurUpperBodyName = "UpperBody_Idle";
 	UpperStart();
 }
