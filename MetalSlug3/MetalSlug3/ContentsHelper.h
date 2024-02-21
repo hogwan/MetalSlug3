@@ -2,6 +2,7 @@
 #include <EngineBase\EngineMath.h>
 #include <EngineCore\EngineCore.h>
 #include <EngineCore\ImageRenderer.h>
+#include "ScreenCollision.h"
 
 enum MT3RenderOrder
 {
@@ -15,6 +16,7 @@ enum MT3RenderOrder
 	AllBody,
 	Particle,
 	Front,
+	UI,
 
 };
 enum class MT3CollisionOrder
@@ -24,6 +26,7 @@ enum class MT3CollisionOrder
 	ZombieProjectile,
 	Enemy,
 	Player,
+	Screen,
 };
 
 enum class EActorDir
@@ -148,7 +151,9 @@ class UContentsHelper
 {
 public:
 	static UWindowImage* ColMapImage;
+	static AScreenCollision* ScreenCol;
 	static class Marco* Player;
+	static int Life;
 private:
 	UContentsHelper();
 	~UContentsHelper();

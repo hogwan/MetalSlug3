@@ -24,6 +24,15 @@ public:
 	Marco(Marco&& _Other) noexcept = delete;
 	Marco& operator=(const Marco& _Other) = delete;
 	Marco& operator=(Marco&& _Other) = delete;
+
+	bool IsZombie = false;
+	bool IsDeath = false;
+
+	int ArmsCount = 100;
+	int BombsCount = 10;
+
+	EGunType GunType = EGunType::Rifle;
+	EGunList Gun = EGunList::HeavyMachineGun;
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -49,8 +58,6 @@ protected:
 	AllBodyState AllState = AllBodyState::None;
 	ZombieArmState ZArmState = ZombieArmState::None;
 	EActorDir DirState = EActorDir::Right;
-	EGunType GunType = EGunType::Rifle;
-	EGunList Gun = EGunList::HeavyMachineGun;
 
 	void UpperStateUpdate(float _DeltaTime);
 	void LowerStateUpdate(float _DeltaTime);
@@ -227,8 +234,6 @@ private:
 	void CalGravityVector(float _DeltaTime);
 	void GroundUp();
 
-	bool IsZombie = false;
-	bool IsDeath = false;
 
 	bool InAir = false;
 	bool IsHeavyMachineGun = false;
@@ -346,6 +351,5 @@ private:
 	std::vector<UImageRenderer*> VomitRenderer;
 	float AccDeltaTime = 0.0f;
 
-	float ParabolaLogic(float _X, float _Y, int X);
 };
 

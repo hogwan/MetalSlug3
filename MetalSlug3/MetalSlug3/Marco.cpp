@@ -80,6 +80,7 @@ void Marco::Tick(float _DeltaTime)
 		GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, 490.0f});
 	}
 
+
 	if (Manipulate)
 	{
 		ManipulateUpdate(_DeltaTime);
@@ -102,6 +103,16 @@ void Marco::Tick(float _DeltaTime)
 		ZombieArmStateUpdate(_DeltaTime);
 	}
 
+	if (ArmsCount < 0)
+	{
+		ArmsCount = 0;
+	}
+
+	if (ArmsCount == 0)
+	{
+		Gun = EGunList::Pistol;
+		GunType = EGunType::Pistol;
+	}
 }
 
 void Marco::GravityCheck(float _DeltaTime)
@@ -141,7 +152,6 @@ void Marco::DeathCheck()
 			true == Collision->CollisionCheck(MT3CollisionOrder::ZombieProjectile, Result)
 			)
 		{
-			ManipulateOff();
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
@@ -164,7 +174,6 @@ void Marco::DeathCheck()
 			true == Collision->CollisionCheck(MT3CollisionOrder::ZombieProjectile, Result)
 			)
 		{
-			ManipulateOff();
 			IsZombie = true;
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
@@ -179,7 +188,6 @@ void Marco::DeathCheck()
 			true == Collision->CollisionCheck(MT3CollisionOrder::EnemyProjectile, Result)
 			)
 		{
-			ManipulateOff();
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
@@ -1195,6 +1203,7 @@ void Marco::UpperShoot(float _DeltaTime)
 			BulletDir.Normalize2D();
 
 			ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
+			--ArmsCount;
 			FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
 			Bullet->SetActorLocation(BulletLocation);
 			Bullet->SetDir(BulletDir);
@@ -1359,6 +1368,7 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 				BulletDir.Normalize2D();
 
 				ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
+				--ArmsCount;
 				FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
 				Bullet->SetActorLocation(BulletLocation);
 				Bullet->SetDir(BulletDir);
@@ -1668,6 +1678,7 @@ void Marco::UpperAimUpShoot(float _DeltaTime)
 			BulletDir.Normalize2D();
 
 			ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
+			--ArmsCount;
 			FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
 			Bullet->SetActorLocation(BulletLocation);
 			Bullet->SetDir(BulletDir);
@@ -1891,6 +1902,7 @@ void Marco::UpperAimDownShoot(float _DeltaTime)
 			BulletDir.Normalize2D();
 
 			ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
+			--ArmsCount;
 			FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
 			Bullet->SetActorLocation(BulletLocation);
 			Bullet->SetDir(BulletDir);
@@ -1978,6 +1990,7 @@ void Marco::UpperAimNormalToUpShoot(float _DeltaTime)
 
 		FVector BulletDir = DirectionVector;
 		ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
+		--ArmsCount;
 		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
 		Bullet->SetActorLocation(BulletLocation);
 		Bullet->SetDir(BulletDir);
@@ -2022,6 +2035,7 @@ void Marco::UpperAimUpToNormalShoot(float _DeltaTime)
 
 		FVector BulletDir = DirectionVector;
 		ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
+		--ArmsCount;
 		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
 		Bullet->SetActorLocation(BulletLocation);
 		Bullet->SetDir(BulletDir);
@@ -2069,6 +2083,7 @@ void Marco::UpperAimNormalToDownShoot(float _DeltaTime)
 
 		FVector BulletDir = DirectionVector;
 		ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
+		--ArmsCount;
 		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
 		Bullet->SetActorLocation(BulletLocation);
 		Bullet->SetDir(BulletDir);
@@ -2114,6 +2129,7 @@ void Marco::UpperAimDownToNormalShoot(float _DeltaTime)
 
 		FVector BulletDir = DirectionVector;
 		ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
+		--ArmsCount;
 		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
 		Bullet->SetActorLocation(BulletLocation);
 		Bullet->SetDir(BulletDir);
@@ -2229,25 +2245,29 @@ void Marco::UpperThrowStart()
 	std::string AddedDirectionName = AddDirectionName(AddedGunTypeName);
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true, 0 , 0.08f);
 
-	ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
-	FVector ThrowVector = { 3,-3 };
-	ThrowVector.Normalize2D();
-	float ThrowForce = 400.0f;
-	ThrowVector *= ThrowForce;
-	FVector SpawnLocation = GetActorLocation();
-
-	if (DirState == EActorDir::Left)
+	if (BombsCount > 0)
 	{
-		SpawnLocation += {-30.0f, -100.0f};
-	}
-	else if (DirState == EActorDir::Right)
-	{
-		SpawnLocation += {30.0f, -100.0f};
-	}
+		ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
+		--BombsCount;
+		FVector ThrowVector = { 3,-3 };
+		ThrowVector.Normalize2D();
+		float ThrowForce = 400.0f;
+		ThrowVector *= ThrowForce;
+		FVector SpawnLocation = GetActorLocation();
 
-	Bomb->SetActorLocation(SpawnLocation);
-	Bomb->SetMoveVector(ThrowVector);
-	Bomb->Destroy(1.8f);
+		if (DirState == EActorDir::Left)
+		{
+			SpawnLocation += {-30.0f, -100.0f};
+		}
+		else if (DirState == EActorDir::Right)
+		{
+			SpawnLocation += {30.0f, -100.0f};
+		}
+
+		Bomb->SetActorLocation(SpawnLocation);
+		Bomb->SetMoveVector(ThrowVector);
+		Bomb->Destroy(1.2f);
+	}
 }
 
 void Marco::UpperKnifeAttack1Start()
@@ -2853,6 +2873,7 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 		BulletDir.Normalize2D();
 
 		ABullet* Bullet = GetWorld()->SpawnActor<AHeavyMachineGunBullet>(MT3RenderOrder::Projectile);
+		--ArmsCount;
 		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
 		Bullet->SetActorLocation(BulletLocation);
 		Bullet->SetDir(BulletDir);
@@ -2939,17 +2960,29 @@ void Marco::AllCeremony(float _DeltaTime)
 
 void Marco::AllDeath(float _DeltaTime)
 {
-	Destroy(5.0f);
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
+	{
+		--UContentsHelper::Life;
+		Destroy();
+	}
 }
 
 void Marco::AllDeathInAir(float _DeltaTime)
 {
-	Destroy(5.0f);
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
+	{
+		--UContentsHelper::Life;
+		Destroy();
+	}
 }
 
 void Marco::AllDeathByKnife(float _DeltaTime)
 {
-	Destroy(5.0f);
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
+	{
+		--UContentsHelper::Life;
+		Destroy();
+	}
 }
 
 void Marco::AllElephantSlug_Idle(float _DeltaTime)
@@ -3080,6 +3113,7 @@ void Marco::AllCeremonyStart()
 void Marco::AllDeathStart()
 {
 	//AddForce
+	ManipulateOff();
 	NoHit = true;
 	CurAllBodyName = "AllBody_Death";
 	std::string DirectedName = AddDirectionName(CurAllBodyName);
@@ -3090,6 +3124,7 @@ void Marco::AllDeathStart()
 void Marco::AllDeathInAirStart()
 {
 	//AddForce
+	ManipulateOff();
 	NoHit = true;
 	CurAllBodyName = "AllBody_DeathInAir";
 	std::string DirectedName = AddDirectionName(CurAllBodyName);
@@ -3099,6 +3134,7 @@ void Marco::AllDeathInAirStart()
 
 void Marco::AllDeathByKnifeStart()
 {
+	ManipulateOff();
 	NoHit = true;
 	CurAllBodyName = "AllBody_DeathByKnife";
 	std::string DirectedName = AddDirectionName(CurAllBodyName);
@@ -3401,18 +3437,25 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 
 void Marco::Zombie_AllDeath(float _DeltaTime)
 {
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
-	ManipulateOff();
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
+	{
+		--UContentsHelper::Life;
+		Destroy();
+	}
 }
 
 void Marco::Zombie_AllDeathInAir(float _DeltaTime)
 {
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
-	ManipulateOff();
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
+	{
+		--UContentsHelper::Life;
+		Destroy();
+	}
 }
 
 void Marco::Zombie_AllTransformToZombie_IntroStart()
 {
+	ManipulateOff();
 	CurAllBodyName = "Zombie_AllBody_TransformToZombie_Intro";
 	ZombieStart();
 }
@@ -3431,6 +3474,7 @@ void Marco::Zombie_AllTransformToZombie_RisingStart()
 
 void Marco::Zombie_AllIdleStart()
 {
+	ManipulateOn();
 	Move_Speed = Zombie_Speed;
 	CurAllBodyName = "Zombie_AllBody_Idle";
 	ZombieStart();
@@ -3468,12 +3512,14 @@ void Marco::Zombie_AllVomitStart()
 
 void Marco::Zombie_AllDeathStart()
 {
+	ManipulateOff();
 	CurAllBodyName = "Zombie_AllBody_Death";
 	ZombieStart();
 }
 
 void Marco::Zombie_AllDeathInAirStart()
 {
+	ManipulateOff();
 	CurAllBodyName = "Zombie_AllBody_DeathInAir";
 	ZombieStart();
 }

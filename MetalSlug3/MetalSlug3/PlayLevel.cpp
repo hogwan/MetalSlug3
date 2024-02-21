@@ -13,6 +13,10 @@
 #include "Front1.h"
 #include "Front2.h"
 #include "Back1.h"
+#include "Go.h"
+#include "ScreenCollision.h"
+#include "Time.h"
+#include "StatusUI.h"
 
 PlayLevel::PlayLevel()
 {
@@ -71,6 +75,18 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_VomitLaunchEffect.png", 10, 8);
 	UEngineResourcesManager::GetInst().CuttingImage("Bomb.png", 10, 8);
 
+	UEngineResourcesManager::GetInst().CuttingImage("Go.png", 10, 2);
+	UEngineResourcesManager::GetInst().CuttingImage("In.png", 10, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("P1UI.png", 10, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("TimeNumber.png", 10, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("MissionStart.png", 10, 4);
+	UEngineResourcesManager::GetInst().CuttingImage("NormalFont.png", 10, 4);
+	UEngineResourcesManager::GetInst().CuttingImage("YellowFont.png", 10, 4);
+	UEngineResourcesManager::GetInst().CuttingImage("Status.png", 2, 1);
+
+	UContentsHelper::ScreenCol = SpawnActor<AScreenCollision>();
+	//UContentsHelper::ScreenCol->GetCollider()->ActiveOff();
+
 	ABack1* B1 = SpawnActor<ABack1>();
 	B1->SetActorLocation({ 2263,241 });
 
@@ -86,11 +102,22 @@ void PlayLevel::BeginPlay()
 
 	UContentsHelper::Player = SpawnActor<Marco>();
 	UContentsHelper::Player->SetActorLocation({ 100,1000 });
+
+	AGo* Go = SpawnActor<AGo>();
+	Go->SetActorLocation({ 650,230 });
+	Go->Renderer->ActiveOff();
+
+	ATime* TimeUI = SpawnActor<ATime>();
+	TimeUI->SetActorLocation({400,50});
+
+	AStatusUI* StatusUI = SpawnActor<AStatusUI>();
+	StatusUI->SetActorLocation({ 270,50 });
+
 	 
-	/*AZombies* Zombie_0 = SpawnActor<AManZombie1>();
+	AZombies* Zombie_0 = SpawnActor<AManZombie1>();
 	Zombie_0->SetActorLocation({ 1000,1000 });
 
-	AZombies* Zombie_1= SpawnActor<ADoctorZombie>();
+	/*AZombies* Zombie_1= SpawnActor<ADoctorZombie>();
 	Zombie_1->SetActorLocation({ 500,1000 });
 
 	AZombies* Zombie_2 = SpawnActor<AManZombie2>();

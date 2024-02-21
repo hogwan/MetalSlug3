@@ -189,6 +189,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Go.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="HeavyMachineGunBullet.h">
       <SubType>
       </SubType>
@@ -230,7 +234,23 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ScreenCollision.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="StatusUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TestLevel.h" />
+    <ClInclude Include="Time.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="UIBase.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="UncleZombie.h">
       <SubType>
       </SubType>
@@ -295,6 +315,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Go.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="HeavyMachineGunBullet.cpp">
       <SubType>
       </SubType>
@@ -336,7 +360,23 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="ScreenCollision.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="StatusUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TestLevel.cpp" />
+    <ClCompile Include="Time.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="UIBase.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="UncleZombie.cpp">
       <SubType>
       </SubType>

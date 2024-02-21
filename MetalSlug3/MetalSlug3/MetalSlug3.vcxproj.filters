@@ -91,6 +91,19 @@
     <ClInclude Include="Back1.h">
       <Filter>Object\BackMap</Filter>
     </ClInclude>
+    <ClInclude Include="UIBase.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Go.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenCollision.h" />
+    <ClInclude Include="Time.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusUI.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -180,6 +193,19 @@
     <ClCompile Include="Back1.cpp">
       <Filter>Object\BackMap</Filter>
     </ClCompile>
+    <ClCompile Include="UIBase.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Go.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenCollision.cpp" />
+    <ClCompile Include="Time.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusUI.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -217,6 +243,9 @@
     </Filter>
     <Filter Include="Object\BackMap">
       <UniqueIdentifier>{b15719b6-5ee9-4341-877c-fe16877a4c94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI">
+      <UniqueIdentifier>{d8c09642-4670-445f-b7c7-a3c06452a6c4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
