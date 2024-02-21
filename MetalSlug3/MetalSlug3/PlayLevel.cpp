@@ -88,7 +88,7 @@ void PlayLevel::BeginPlay()
 	//UContentsHelper::ScreenCol->GetCollider()->ActiveOff();
 
 	ABackMap* Back = SpawnActor<ABackMap>();
-	Back->SetActorLocation({ 1994,550 });
+	Back->SetActorLocation({ 1994,700 });
 
 	ABackGroundMap* Map = SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("BackGround1.png");
