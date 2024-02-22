@@ -1,186 +1,97 @@
-#include "Actor.h"
+#pragma once
+#include <EngineBase\Transform.h>
+#include "TickObject.h"
+#include <EngineBase\NameObject.h>
 #include "ImageRenderer.h"
+#include "Collision.h"
+#include "Level.h"
 
-AActor::AActor()
+class ULevel;
+class UActorComponent;
+class UImageRenderer;
+class UCollision;
+
+// 설명 : A가 붙은 오브젝트는 화면에 위치가 존재해야한다.
+// Level->SpawnActor를 통해서 만들면
+// 레벨이 자연스럽게 자신의 관리하에 두고 언제나 Tick을 실행해준다.
+class AActor : public UNameObject, public UTickObject
 {
-}
+	friend ULevel;
 
-AActor::~AActor()
-{
-	for (UImageRenderer* ImageRenderer : Renderers)
+public:
+	// constrcuter destructer
+	AActor();
+	~AActor();
+
+	// delete Function
+	AActor(const AActor& _Other) = delete;
+	AActor(AActor&& _Other) noexcept = delete;
+	AActor& operator=(const AActor& _Other) = delete;
+	AActor& operator=(AActor&& _Other) noexcept = delete;
+
+	FVector GetActorLocation()
 	{
-		if (nullptr == ImageRenderer)
-		{
-			MsgBoxAssert("이미지 랜더러가 nullptr인 상황이 있었습니다");
-		}
-
-		delete ImageRenderer;
-		ImageRenderer = nullptr;
+		return Transform.GetPosition();
 	}
 
-	Renderers.clear();
-
-	for (UCollision* Collision : Collisions)
+	void SetActorLocation(FVector _Value)
 	{
-		if (nullptr == Collision)
-		{
-			MsgBoxAssert("이미지 랜더러가 nullptr인 상황이 있었습니다");
-		}
-
-		delete Collision;
-		Collision = nullptr;
+		Transform.SetPosition(_Value);
 	}
 
-	Collisions.clear();
-
-}
-
-void AActor::Tick(float _DeltaTime)
-{
-	UTickObject::Tick(_DeltaTime);
-}
-
-UImageRenderer* AActor::CreateImageRenderer(int _Order /*= 0*/)
-{
-	UImageRenderer* Component = new UImageRenderer();
-	UActorComponent* ActorCom = Component;
-	ActorCom->SetOwner(this);
-	ActorCom->SetOrder(_Order);
-	ActorCom->BeginPlay();
-	Renderers.push_back(Component);
-	return Component;
-}
-
-
-UCollision* AActor::CreateCollision(int _Order /*= 0*/)
-{
-	UCollision* Component = new UCollision();
-	UActorComponent* ActorCom = Component;
-	ActorCom->SetOwner(this);
-	ActorCom->SetOrder(_Order);
-	ActorCom->BeginPlay();
-	Collisions.push_back(Component);
-	return Component;
-}
-
-void AActor::Destroy(float _DestroyTime /*= 0.0f*/)
-{
-	// 액터는 자신을 죽이면서
-	UTickObject::Destroy(_DestroyTime);
-
-	// 자신이 관리하고 있는 랜더러들도 다 죽여야 한다.
-	for (UImageRenderer* Renderer : Renderers)
+	void AddActorLocation(FVector _Value)
 	{
-		Renderer->Destroy(_DestroyTime);
+		Transform.AddPosition(_Value);
 	}
 
-	for (UCollision* Collision : Collisions)
+	FTransform GetTransform()
 	{
-		Collision->Destroy(_DestroyTime);
+		return Transform;
 	}
 
-}
-
-void AActor::CheckReleaseChild()
-{
-
+	ULevel* GetWorld()
 	{
-		std::list<UImageRenderer*>::iterator StartIter = Renderers.begin();
-		std::list<UImageRenderer*>::iterator EndIter = Renderers.end();
-
-		for (; StartIter != EndIter;)
-		{
-			UImageRenderer* Renderer = StartIter.operator*();
-
-			if (nullptr == Renderer)
-			{
-				MsgBoxAssert("Collision가 nullptr인 경우가 존재했습니다");
-				return;
-			}
-
-			if (false == Renderer->IsDestroy())
-			{
-				++StartIter;
-				continue;
-			}
-
-			delete Renderer;
-			Renderer = nullptr;
-			StartIter = Renderers.erase(StartIter);
-		}
+		return World;
 	}
 
+	template<typename EnumType>
+	UCollision* CreateCollision(EnumType _Order = 0)
 	{
-		std::list<UCollision*>::iterator StartIter = Collisions.begin();
-		std::list<UCollision*>::iterator EndIter = Collisions.end();
-
-		for (; StartIter != EndIter;)
-		{
-			UCollision* Collision = StartIter.operator*();
-
-			if (nullptr == Collision)
-			{
-				MsgBoxAssert("Collision가 nullptr인 경우가 존재했습니다");
-				return;
-			}
-
-			if (false == Collision->IsDestroy())
-			{
-				++StartIter;
-				continue;
-			}
-
-			delete Collision;
-			Collision = nullptr;
-			StartIter = Collisions.erase(StartIter);
-		}
-	}
-}
-
-void AActor::DestroyUpdate(float _DeltaTime)
-{
-	// 부모의 함수를 호출하는게 기본이다.
-	UTickObject::DestroyUpdate(_DeltaTime);
-
-	for (UImageRenderer* Renderer : Renderers)
-	{
-		Renderer->DestroyUpdate(_DeltaTime);
+		return CreateCollision(static_cast<int>(_Order));
 	}
 
-	for (UCollision* Collision : Collisions)
+	template<typename EnumType>
+	UImageRenderer* CreateImageRenderer(EnumType _Order = 0)
 	{
-		Collision->DestroyUpdate(_DeltaTime);
-	}
-}
-
-void AActor::ActiveUpdate(float _DeltaTime)
-{
-	// 부모의 함수를 호출하는게 기본이다.
-	UTickObject::ActiveUpdate(_DeltaTime);
-
-	for (UImageRenderer* Renderer : Renderers)
-	{
-		Renderer->ActiveUpdate(_DeltaTime);
+		return CreateImageRenderer(static_cast<int>(_Order));
 	}
 
-	for (UCollision* Collision : Collisions)
-	{
-		Collision->ActiveUpdate(_DeltaTime);
-	}
-}
+	UCollision* CreateCollision(int _Order = 0);
+	UImageRenderer* CreateImageRenderer(int _Order = 0);
 
-void AActor::AllRenderersActiveOff()
-{
-	for (UImageRenderer* Renderer : Renderers)
-	{
-		Renderer->ActiveOff();
-	}
-}
+	void Destroy(float _DestroyTime = 0.0f) override;
+	void DestroyUpdate(float _DeltaTime) override;
 
-void AActor::AllRenderersActiveOn()
-{
-	for (UImageRenderer* Renderer : Renderers)
+	void ActiveUpdate(float _DeltaTime) override;
+
+	void CheckReleaseChild();
+
+	void AllRenderersActiveOff();
+	void AllRenderersActiveOn();
+
+protected:
+	void Tick(float _DeltaTime) override;
+
+private:
+	std::list<UImageRenderer*> Renderers;
+	std::list<UCollision*> Collisions;
+
+	ULevel* World = nullptr;
+	FTransform Transform = FTransform();
+
+	void SetWorld(ULevel* _Value)
 	{
-		Renderer->ActiveOn();
+		World = _Value;
 	}
-}
+};
+
