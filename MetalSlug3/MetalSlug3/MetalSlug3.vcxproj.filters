@@ -113,6 +113,15 @@
     <ClInclude Include="Human.h">
       <Filter>Object\NPC</Filter>
     </ClInclude>
+    <ClInclude Include="Doctor.h">
+      <Filter>Object\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Man1.h">
+      <Filter>Object\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Man2.h">
+      <Filter>Object\NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -222,6 +231,15 @@
       <Filter>Object\UI</Filter>
     </ClCompile>
     <ClCompile Include="Human.cpp">
+      <Filter>Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Doctor.cpp">
+      <Filter>Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Man1.cpp">
+      <Filter>Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Man2.cpp">
       <Filter>Object\NPC</Filter>
     </ClCompile>
   </ItemGroup>

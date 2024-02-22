@@ -50,7 +50,7 @@ void AManZombie2::BeginPlay()
 	Renderer->CreateAnimation("Death_Left", "ManZombie1.png", 197, 211, 0.05f, false);
 	Renderer->CreateAnimation("DeathInFlame_Left", "ManZombie2.png", 189, 215, 0.08f, false);
 
-	Renderer->CreateAnimation("Lying", "ManZombie2.png", 168, 179, 0.08f, false);
+	Renderer->CreateAnimation("Lying", "ManZombie2.png", 168, 179, 0.15f, false);
 
 	LaunchRenderer->CreateAnimation("LaunchEffect_Left", "ManZombie2_LaunchEffect.png", 0, 19, 0.1f, false);
 	LaunchRenderer->CreateAnimation("LaunchEffect_Right", "ManZombie2_LaunchEffect.png", 20, 39, 0.1f, false);

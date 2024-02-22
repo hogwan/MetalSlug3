@@ -27,6 +27,7 @@ enum class MT3CollisionOrder
 	Enemy,
 	Player,
 	Screen,
+	Detect,
 };
 
 enum class EActorDir
@@ -145,6 +146,16 @@ enum class EnemyZombieState
 	Attack,
 	Death,
 	Falling,
+};
+
+enum class HumanState
+{
+	None,
+	Idle,
+	Move,
+	Run,
+	Shock,
+	Death,
 };
 
 class UContentsHelper

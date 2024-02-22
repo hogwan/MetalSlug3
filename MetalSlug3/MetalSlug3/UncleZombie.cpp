@@ -53,7 +53,7 @@ void AUncleZombie::BeginPlay()
 	Renderer->CreateAnimation("DeathInFlame_Left", "UncleZombie.png", 171, 197, 0.08f, false);
 
 
-	Renderer->CreateAnimation("Lying", "UncleZombie.png", 149, 161, 0.08f, false);
+	Renderer->CreateAnimation("Lying", "UncleZombie.png", 149, 161, 0.15f, false);
 
 	LaunchRenderer->CreateAnimation("LaunchEffect_Right", "UncleZombie_LaunchEffect.png", 0, 12, 0.1f, false);
 	LaunchRenderer->CreateAnimation("LaunchEffect_Left", "UncleZombie_LaunchEffect.png", 13, 25, 0.1f, false);

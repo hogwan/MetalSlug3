@@ -1,24 +1,43 @@
 #pragma once
 #include <EngineCore/Actor.h>
-class Human : public AActor
+#include "ContentsHelper.h"
+class AHuman : public AActor
 {
 public:
 	// constructor destructor
-	Human();
-	~Human();
+	AHuman();
+	~AHuman();
 
 	// delete Function
-	Human(const Human& _Other) = delete;
-	Human(Human&& _Other) noexcept = delete;
-	Human& operator=(const Human& _Other) = delete;
-	Human& operator=(Human&& _Other) = delete;
+	AHuman(const AHuman& _Other) = delete;
+	AHuman(AHuman&& _Other) noexcept = delete;
+	AHuman& operator=(const AHuman& _Other) = delete;
+	AHuman& operator=(AHuman&& _Other) = delete;
+
+	void SetHumanState(HumanState _State)
+	{
+		CurState = _State;
+	}
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-private:
 	UImageRenderer* Renderer = nullptr;
 	UCollision* Collider = nullptr;
+	UCollision* DetectCollider = nullptr;
+	HumanState CurState = HumanState::None;
+	bool IsDeath = false;
+	float MoveSpeed = 25.0f;
+	float RunSpeed = 100.0f;
+
+	float DetectRange = 300.0f;
+
+	FVector CollisionScale = { 50,50 };
+	FVector CollisionPosition = { 0, -25 };
+
+	void GravityCheck(float _DeltaTime);
+	void GroundUp();
+
 };
 

@@ -53,7 +53,7 @@ void AWomanZombie::BeginPlay()
 	Renderer->CreateAnimation("DeathInFlame_Left", "WomanZombie.png", 189, 215, 0.08f, false);
 
 
-	Renderer->CreateAnimation("Lying", "WomanZombie.png", 171, 181, 0.08f, false);
+	Renderer->CreateAnimation("Lying", "WomanZombie.png", 171, 181, 0.15f, false);
 
 	LaunchRenderer->CreateAnimation("LaunchEffect_Right", "WomanZombie_LaunchEffect.png", 0, 9, 0.1f, false);
 	LaunchRenderer->CreateAnimation("LaunchEffect_Left", "WomanZombie_LaunchEffect.png", 10, 19, 0.1f, false);

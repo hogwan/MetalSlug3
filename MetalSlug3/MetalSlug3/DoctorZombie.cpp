@@ -53,7 +53,7 @@ void ADoctorZombie::BeginPlay()
 	Renderer->CreateAnimation("DeathInFlame_Left", "DoctorZombie.png", 186, 212, 0.08f, false);
 
 
-	Renderer->CreateAnimation("Lying", "DoctorZombie.png", 171, 181, 0.08f, false);
+	Renderer->CreateAnimation("Lying", "DoctorZombie.png", 171, 181, 0.3f, false);
 
 	LaunchRenderer->CreateAnimation("LaunchEffect_Right", "DoctorZombie_LaunchEffect.png", 0, 11, 0.08f, false);
 	LaunchRenderer->CreateAnimation("LaunchEffect_Left", "DoctorZombie_LaunchEffect.png", 20, 31, 0.08f, false);

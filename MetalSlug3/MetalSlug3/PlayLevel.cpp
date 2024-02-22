@@ -20,6 +20,9 @@
 #include "ScoreUI.h"
 #include "SlugEnergyBar.h"
 #include "LifeUI.h"
+#include "Doctor.h"
+#include "Man1.h"
+#include "Man2.h"
 
 PlayLevel::PlayLevel()
 {
@@ -78,6 +81,12 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_VomitLaunchEffect.png", 10, 8);
 	UEngineResourcesManager::GetInst().CuttingImage("Bomb.png", 10, 8);
 
+	UEngineResourcesManager::GetInst().CuttingImage("Doctor.png", 10, 4);
+	UEngineResourcesManager::GetInst().CuttingImage("Man1.png", 10, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("Man2.png", 10, 4);
+	UEngineResourcesManager::GetInst().CuttingImage("Woman.png", 10, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("Uncle.png", 10, 2);
+
 	UEngineResourcesManager::GetInst().CuttingImage("Go.png", 10, 2);
 	UEngineResourcesManager::GetInst().CuttingImage("In.png", 10, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("P1UI.png", 10, 1);
@@ -126,9 +135,22 @@ void PlayLevel::BeginPlay()
 	ALifeUI* LifeUI = SpawnActor<ALifeUI>();
 	LifeUI->SetActorLocation({ 70,87 });
 	 
+	ADoctor* Doctor_0 = SpawnActor<ADoctor>();
+	Doctor_0->SetActorLocation({ 1000,1000 });
+	Doctor_0->StateChange(HumanState::Run);
+
+	AMan1* Man1_0 = SpawnActor<AMan1>();
+	Man1_0->SetActorLocation({ 400,1000 });
+	Man1_0->StateChange(HumanState::Idle);
+
+	AMan2* Man2_0 = SpawnActor<AMan2>();
+	Man2_0->SetActorLocation({ 500,1000 });
+	Man2_0->StateChange(HumanState::Move);
+
+
 	AZombies* Zombie_0 = SpawnActor<AManZombie1>();
 	Zombie_0->SetActorLocation({ 1000,1000 });
-
+	/*
 	AZombies* Zombie_1= SpawnActor<ADoctorZombie>();
 	Zombie_1->SetActorLocation({ 500,1000 });
 
@@ -142,7 +164,7 @@ void PlayLevel::BeginPlay()
 	Zombie_4->SetActorLocation({ 1250,1000 });
 
 	AZombies* Zombie_5 = SpawnActor<AManZombie3>();
-	Zombie_5->SetActorLocation({ 1500,1000 });
+	Zombie_5->SetActorLocation({ 1500,1000 });*/
 
 	/*17087 2676
 
