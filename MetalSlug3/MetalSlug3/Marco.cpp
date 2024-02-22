@@ -2255,7 +2255,7 @@ void Marco::UpperThrowStart()
 	std::string AddedDirectionName = AddDirectionName(AddedGunTypeName);
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AddedDirectionName, true, 0 , 0.08f);
 
-	if (BombsCount > 0)
+	if (BombsCount > 0 && RemainBomb > 0)
 	{
 		ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
 		--BombsCount;
@@ -2276,7 +2276,6 @@ void Marco::UpperThrowStart()
 
 		Bomb->SetActorLocation(SpawnLocation);
 		Bomb->SetMoveVector(ThrowVector);
-		Bomb->Destroy(1.2f);
 	}
 }
 

@@ -1,6 +1,7 @@
 #include "Bomb.h"
 #include "EngineCore/EngineCore.h"
 #include "ContentsHelper.h"
+#include "Marco.h"
 
 ABomb::ABomb()
 {
@@ -8,6 +9,7 @@ ABomb::ABomb()
 
 ABomb::~ABomb()
 {
+	++UContentsHelper::Player->RemainBomb;
 }
 
 ABomb::ABomb(FVector _Force)
@@ -29,6 +31,9 @@ void ABomb::BeginPlay()
 
 	Renderer->CreateAnimation("Rotate_Right", "Bomb.png", 0, 31, 0.03f, true);
 	Renderer->ChangeAnimation("Rotate_Right");
+
+	Destroy(1.2f);
+	--UContentsHelper::Player->RemainBomb;
 }
 void ABomb::GravityCheck(float _DeltaTime)
 {

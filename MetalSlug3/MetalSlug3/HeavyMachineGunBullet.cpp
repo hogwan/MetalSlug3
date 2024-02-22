@@ -1,4 +1,5 @@
 #include "HeavyMachineGunBullet.h"
+#include "Enemy.h"
 
 AHeavyMachineGunBullet::AHeavyMachineGunBullet()
 {
@@ -11,23 +12,6 @@ AHeavyMachineGunBullet::~AHeavyMachineGunBullet()
 void AHeavyMachineGunBullet::Tick(float _DeltaTime)
 {
 	ABullet::Tick(_DeltaTime);
-
-	if (IsDestroy && Renderer->IsCurAnimationEnd())
-	{
-		int a = Renderer->GetCurAnimationFrame();
-		Destroy();
-	}
-
-	std::vector<UCollision*> Result;
-	if (true == Collider->CollisionCheck(MT3CollisionOrder::Enemy, Result))
-	{
-		Speed = 0.0f;
-		IsDestroy = true;
-		Collider->Destroy();
-		Renderer->SetImage("BulletDestroy.png");
-		Renderer->ChangeAnimation("Destroy");
-		Renderer->SetTransform({ {0,0}, {30,30} });
-	}
 
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
@@ -272,4 +256,6 @@ void AHeavyMachineGunBullet::BeginPlay()
 	Renderer->CreateAnimation("NormalToDown1_Left", "HeavyMachineGunBullet_NormalToDown1_Left.png", 0, 0, 1.0f);
 	Renderer->CreateAnimation("NormalToDown2_Left", "HeavyMachineGunBullet_NormalToDown2_Left.png", 0, 0, 1.0f);
 	Renderer->SetTransform({ {0,0}, {80,80} });
+
+	Damage = 1;
 }

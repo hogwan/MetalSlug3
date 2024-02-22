@@ -20,38 +20,38 @@ void AStatusUI::BeginPlay()
 
 	Arms_Units = CreateImageRenderer(MT3RenderOrder::UI);
 	Arms_Units->SetImage("YellowFont.png");
-	Arms_Units->SetTransform({ { -10,0 }, { 500,500 } });
+	Arms_Units->SetTransform({ { -10,-3 }, { 500,500 } });
 	Arms_Units->CreateAnimation("Arms", "YellowFont.png", 0, 37, 0.08f, true);
 	Arms_Units->CameraEffectOff();
 
 	Arms_Tens = CreateImageRenderer(MT3RenderOrder::UI);
 	Arms_Tens->SetImage("YellowFont.png");
-	Arms_Tens->SetTransform({ { -30,0 }, { 500,500 } });
+	Arms_Tens->SetTransform({ { -30,-3 }, { 500,500 } });
 	Arms_Tens->CreateAnimation("Arms", "YellowFont.png", 0, 37, 0.08f, true);
 	Arms_Tens->CameraEffectOff();
 
 	Arms_Hundreds = CreateImageRenderer(MT3RenderOrder::UI);
 	Arms_Hundreds->SetImage("YellowFont.png");
-	Arms_Hundreds->SetTransform({ { -50,0 }, { 500,500 } });
+	Arms_Hundreds->SetTransform({ { -50,-3 }, { 500,500 } });
 	Arms_Hundreds->CreateAnimation("Arms", "YellowFont.png", 0, 37, 0.08f, true);
 	Arms_Hundreds->CameraEffectOff();
 
 	Arms_Pistol = CreateImageRenderer(MT3RenderOrder::UI);
 	Arms_Pistol->SetImage("YellowFont.png");
-	Arms_Pistol->SetTransform({ { -30,0 }, { 500,500 } });
+	Arms_Pistol->SetTransform({ { -30,-3 }, { 500,500 } });
 	Arms_Pistol->CreateAnimation("Arms", "YellowFont.png", 0, 37, 0.08f, true);
 	Arms_Pistol->CameraEffectOff();
 	
 
 	Bombs_Units = CreateImageRenderer(MT3RenderOrder::UI);
 	Bombs_Units->SetImage("YellowFont.png");
-	Bombs_Units->SetTransform({ { 50,0 }, { 500,500 } });
+	Bombs_Units->SetTransform({ { 50,-3 }, { 500,500 } });
 	Bombs_Units->CreateAnimation("Arms", "YellowFont.png", 0, 37, 0.08f, true);
 	Bombs_Units->CameraEffectOff();
 
 	Bombs_Tens = CreateImageRenderer(MT3RenderOrder::UI);
 	Bombs_Tens->SetImage("YellowFont.png");
-	Bombs_Tens->SetTransform({ { 30,0 }, { 500,500 } });
+	Bombs_Tens->SetTransform({ { 30,-3 }, { 500,500 } });
 	Bombs_Tens->CreateAnimation("Arms", "YellowFont.png", 0, 37, 0.08f, true);
 	Bombs_Tens->CameraEffectOff();
 }

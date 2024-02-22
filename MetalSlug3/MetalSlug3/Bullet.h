@@ -21,6 +21,11 @@ public:
 		Dir = _Dir;
 	}
 
+	int GetDamage()
+	{
+		return Damage;
+	}
+
 protected:
 	void Tick(float _DeltaTime) override;
 	void BeginPlay() override;
@@ -30,5 +35,7 @@ protected:
 	bool IsDestroy = false;
 	UImageRenderer* Renderer = nullptr;
 	UCollision* Collider = nullptr;
+
+	int Damage = 1;
 };
 

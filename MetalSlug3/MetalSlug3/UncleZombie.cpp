@@ -40,7 +40,7 @@ void AUncleZombie::BeginPlay()
 	Renderer->CreateAnimation("Attack_Right", "UncleZombie.png", 25, 36, 0.1f, false);
 	Renderer->CreateAnimation("Stun_Right", "UncleZombie.png", 37, 61, 0.1f, false);
 	Renderer->CreateAnimation("Turn_Right", "UncleZombie.png", 62, 70, 0.1f, false);
-	Renderer->CreateAnimation("Death_Right", "ManZombie1.png", 77, 91, 0.1f, false);
+	Renderer->CreateAnimation("Death_Right", "ManZombie1.png", 77, 91, 0.05f, false);
 	Renderer->CreateAnimation("DeathInFlame_Right", "UncleZombie.png", 71, 97, 0.08f, false);
 
 
@@ -49,7 +49,7 @@ void AUncleZombie::BeginPlay()
 	Renderer->CreateAnimation("Attack_Left", "UncleZombie.png", 125, 136, 0.1f, false);
 	Renderer->CreateAnimation("Stun_Left", "UncleZombie.png", 137, 161, 0.1f, false);
 	Renderer->CreateAnimation("Turn_Left", "UncleZombie.png", 162, 170, 0.1f, false);
-	Renderer->CreateAnimation("Death_Left", "ManZombie1.png", 197, 211, 0.08f, false);
+	Renderer->CreateAnimation("Death_Left", "ManZombie1.png", 197, 211, 0.05f, false);
 	Renderer->CreateAnimation("DeathInFlame_Left", "UncleZombie.png", 171, 197, 0.08f, false);
 
 

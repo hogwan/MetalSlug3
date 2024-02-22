@@ -39,7 +39,7 @@ void AManZombie2::BeginPlay()
 	Renderer->CreateAnimation("Attack_Right", "ManZombie2.png", 19, 43, 0.1f, false);
 	Renderer->CreateAnimation("Stun_Right", "ManZombie2.png", 44, 69, 0.1f, false);
 	Renderer->CreateAnimation("Turn_Right", "ManZombie2.png", 70, 78, 0.1f, false);
-	Renderer->CreateAnimation("Death_Right", "ManZombie1.png", 77, 91, 0.1f, false);
+	Renderer->CreateAnimation("Death_Right", "ManZombie1.png", 77, 91, 0.05f, false);
 	Renderer->CreateAnimation("DeathInFlame_Right", "ManZombie2.png", 79, 105, 0.08f, false);
 
 	Renderer->CreateAnimation("Idle_Left", "ManZombie2.png", 110, 116, 0.1f, true);
@@ -47,7 +47,7 @@ void AManZombie2::BeginPlay()
 	Renderer->CreateAnimation("Attack_Left", "ManZombie2.png", 129, 153, 0.1f, false);
 	Renderer->CreateAnimation("Stun_Left", "ManZombie2.png", 154, 179, 0.1f, false);
 	Renderer->CreateAnimation("Turn_Left", "ManZombie2.png", 180, 188, 0.1f, false);
-	Renderer->CreateAnimation("Death_Left", "ManZombie1.png", 197, 211, 0.08f, false);
+	Renderer->CreateAnimation("Death_Left", "ManZombie1.png", 197, 211, 0.05f, false);
 	Renderer->CreateAnimation("DeathInFlame_Left", "ManZombie2.png", 189, 215, 0.08f, false);
 
 	Renderer->CreateAnimation("Lying", "ManZombie2.png", 168, 179, 0.08f, false);

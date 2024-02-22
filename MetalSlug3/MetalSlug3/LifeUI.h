@@ -1,21 +1,24 @@
 #pragma once
 #include "UIBase.h"
-class LifeUI : public AUIBase
+class ALifeUI
+	: public AUIBase
 {
 public:
 	// constructor destructor
-	LifeUI();
-	~LifeUI();
+	ALifeUI();
+	~ALifeUI();
 
 	// delete Function
-	LifeUI(const LifeUI& _Other) = delete;
-	LifeUI(LifeUI&& _Other) noexcept = delete;
-	LifeUI& operator=(const LifeUI& _Other) = delete;
-	LifeUI& operator=(LifeUI&& _Other) = delete;
+	ALifeUI(const ALifeUI& _Other) = delete;
+	ALifeUI(ALifeUI&& _Other) noexcept = delete;
+	ALifeUI& operator=(const ALifeUI& _Other) = delete;
+	ALifeUI& operator=(ALifeUI&& _Other) = delete;
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+private:
+	void SwitchNumber(int _Count, UImageRenderer* _Renderer);
 
 	UImageRenderer* Renderer0 = nullptr;
 	UImageRenderer* Renderer1 = nullptr;

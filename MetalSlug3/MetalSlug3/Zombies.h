@@ -13,6 +13,11 @@ public:
 	AZombies& operator=(const AZombies& _Other) = delete;
 	AZombies& operator=(AZombies&& _Other) = delete;
 
+	void SetCurState(EnemyZombieState _State)
+	{
+		CurState = _State;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime)	override;
@@ -52,7 +57,6 @@ protected:
 	void GravityCheck(float _DeltaTime);
 	void GroundUp();
 
-	int Hp = 100;
 	float Range = 200.0f;
 	float MaxStunGauge = 100.0f;
 	float CurStunGauge = 0.0f;
@@ -72,6 +76,7 @@ protected:
 	FVector LaunchEffectoffset_Left = { -20,0 };
 
 	UImageRenderer* LaunchRenderer = nullptr;
+
 
 };
 

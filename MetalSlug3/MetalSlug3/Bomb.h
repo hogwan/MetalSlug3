@@ -25,6 +25,11 @@ public:
 		MoveVector = _MoveVector;
 	}
 
+	int GetDamage()
+	{
+		return Damage;
+	}
+
 protected:
 	void Tick(float _DeltaTime) override;
 	void BeginPlay() override;
@@ -33,6 +38,7 @@ protected:
 	void ReflectionCheck();
 
 	void HitCheck();
+	int Damage = 10;
 
 private:
 	FVector Dir = FVector::Zero;
@@ -42,5 +48,6 @@ private:
 
 	UImageRenderer* Renderer = nullptr;
 	UCollision* Collider = nullptr;
+
 };
 

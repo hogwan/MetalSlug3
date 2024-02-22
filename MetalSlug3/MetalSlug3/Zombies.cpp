@@ -14,7 +14,9 @@ AZombies::~AZombies()
 void AZombies::BeginPlay()
 {
 	AEnemy::BeginPlay();
+	Hp = 10;
 }
+
 void AZombies::Tick(float _DeltaTime)
 {
 	AEnemy::Tick(_DeltaTime);
@@ -53,6 +55,9 @@ void AZombies::StateUpdate(float _DeltaTime)
 	case EnemyZombieState::Attack:
 		Attack(_DeltaTime, LaunchFrame, LaunchEffectFrame);
 		break;
+	case EnemyZombieState::Death:
+		Death(_DeltaTime);
+		break;
 	default:
 		break;
 	}
@@ -84,6 +89,9 @@ void AZombies::StateChange(EnemyZombieState _State)
 			break;
 		case EnemyZombieState::Attack:
 			AttackStart();
+			break;
+		case EnemyZombieState::Death:
+			DeathStart();
 			break;
 		default:
 			break;
@@ -319,7 +327,8 @@ void AZombies::AttackStart()
 
 void AZombies::DeathStart()
 {
-	CurAnimName = "Attack";
+	Collider->Destroy();
+	CurAnimName = "Death";
 	DirCheck(CurAnimName);
 	Renderer->ChangeAnimation(CurAnimName);
 }

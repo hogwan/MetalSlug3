@@ -40,7 +40,7 @@ void AWomanZombie::BeginPlay()
 	Renderer->CreateAnimation("Attack_Right", "WomanZombie.png", 24, 44, 0.1f, false);
 	Renderer->CreateAnimation("Stun_Right", "WomanZombie.png", 45, 69, 0.1f, false);
 	Renderer->CreateAnimation("Turn_Right", "WomanZombie.png", 70, 78, 0.1f, false);
-	Renderer->CreateAnimation("Death_Right", "ManZombie1.png", 77, 91, 0.1f, false);
+	Renderer->CreateAnimation("Death_Right", "ManZombie1.png", 77, 91, 0.05f, false);
 	Renderer->CreateAnimation("DeathInFlame_Right", "WomanZombie.png", 79, 105, 0.08f, false);
 
 
@@ -49,7 +49,7 @@ void AWomanZombie::BeginPlay()
 	Renderer->CreateAnimation("Attack_Left", "WomanZombie.png", 134, 154, 0.1f, false);
 	Renderer->CreateAnimation("Stun_Left", "WomanZombie.png", 155, 179, 0.1f, false);
 	Renderer->CreateAnimation("Turn_Left", "WomanZombie.png", 180, 188, 0.1f, false);
-	Renderer->CreateAnimation("Death_Left", "ManZombie1.png", 197, 211, 0.08f, false);
+	Renderer->CreateAnimation("Death_Left", "ManZombie1.png", 197, 211, 0.05f, false);
 	Renderer->CreateAnimation("DeathInFlame_Left", "WomanZombie.png", 189, 215, 0.08f, false);
 
 

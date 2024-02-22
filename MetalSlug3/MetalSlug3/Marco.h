@@ -30,6 +30,7 @@ public:
 
 	int ArmsCount = 100;
 	int BombsCount = 10;
+	int RemainBomb = 2;
 
 	EGunType GunType = EGunType::Rifle;
 	EGunList Gun = EGunList::HeavyMachineGun;
@@ -283,7 +284,7 @@ private:
 
 	float Throw_CoolTime = 0.1f;
 	float Throw_AccTime = 0.0f;
-	int RemainBomb = 0;
+	
 
 	int HeavyMachineGun_PrevFrame = -1;
 	int Vomit_PrevFrame = -1;
