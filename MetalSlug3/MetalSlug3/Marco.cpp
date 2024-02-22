@@ -73,11 +73,11 @@ void Marco::Tick(float _DeltaTime)
 {
 	if (GetActorLocation().X < 400.0f)
 	{
-		GetWorld()->SetCameraPos({ 0.0f, GetActorLocation().Y - 555.0f });
+		GetWorld()->SetCameraPos({ 0.0f, 490.0f });
 	}
 	else
 	{
-		GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, GetActorLocation().Y-555.0f});
+		GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, GetActorLocation().Y-530.0f});
 	}
 
 

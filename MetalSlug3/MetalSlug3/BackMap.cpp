@@ -15,7 +15,7 @@ void ABackMap::BeginPlay()
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Back);
 	Renderer->SetImage("DistantBackGround.png");
-	Renderer->SetTransform({ {0,0}, {3987,1500} }); //{3987,812}
+	Renderer->SetTransform({ {0,0}, {3987,1200} }); //{3987,812}
 	Renderer->SetCameraRatio(MoveRatio);
 }
 
