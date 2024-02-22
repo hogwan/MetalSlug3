@@ -13,6 +13,8 @@ void AHeavyMachineGunBullet::Tick(float _DeltaTime)
 {
 	ABullet::Tick(_DeltaTime);
 
+	if (IsDestroy) return;
+
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
@@ -20,8 +22,6 @@ void AHeavyMachineGunBullet::Tick(float _DeltaTime)
 		IsDestroy = true;
 		Destroy();
 	}
-
-	if (IsDestroy) return;
 
 	if (Dir.Y > 0.999f)
 	{
