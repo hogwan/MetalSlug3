@@ -184,7 +184,7 @@ void PlayLevel::BeginPlay()
 
 	AZombies* Zombie_0 = SpawnActor<AManZombie1>();
 	Zombie_0->SetActorLocation({ 1000,1000 });
-	/*
+	
 	AZombies* Zombie_1= SpawnActor<ADoctorZombie>();
 	Zombie_1->SetActorLocation({ 500,1000 });
 
@@ -198,7 +198,7 @@ void PlayLevel::BeginPlay()
 	Zombie_4->SetActorLocation({ 1250,1000 });
 
 	AZombies* Zombie_5 = SpawnActor<AManZombie3>();
-	Zombie_5->SetActorLocation({ 1500,1000 });*/
+	Zombie_5->SetActorLocation({ 1500,1000 });
 
 
 

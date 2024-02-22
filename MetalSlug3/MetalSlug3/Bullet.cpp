@@ -22,7 +22,6 @@ void ABullet::Tick(float _DeltaTime)
 	AddActorLocation(Dir * Speed * _DeltaTime);
 	if (IsDestroy && Renderer->IsCurAnimationEnd())
 	{
-		int a = Renderer->GetCurAnimationFrame();
 		Destroy();
 	}
 

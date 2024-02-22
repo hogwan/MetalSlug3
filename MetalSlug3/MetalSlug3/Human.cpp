@@ -15,7 +15,6 @@ void AHuman::BeginPlay()
 	DetectCollider = CreateCollision(MT3CollisionOrder::Detect);
 	DetectCollider->SetTransform({{0,0},{DetectRange * 2.0f, 200.0f}});
 	DetectCollider->SetColType(ECollisionType::Rect);
-
 }
 
 void AHuman::Tick(float _DeltaTime)

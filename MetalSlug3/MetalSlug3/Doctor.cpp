@@ -115,7 +115,7 @@ void ADoctor::Death(float _DeltaTime)
 	{
 		ADoctorZombie* Zombie = GetWorld()->SpawnActor<ADoctorZombie>();
 		Zombie->SetActorLocation(GetActorLocation());
-		Zombie->SetCurState(EnemyZombieState::Lying);
+		Zombie->StateChange(EnemyZombieState::Lying);
 		Destroy();
 	}
 }

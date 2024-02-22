@@ -31,6 +31,7 @@ void AZombiesProjectile::BeginPlay()
 	Collider = CreateCollision(MT3CollisionOrder::ZombieProjectile);
 	Collider->SetScale({ 30,30 });
 	Collider->SetPosition({ 0,-30 });
+	Collider->SetColType(ECollisionType::Rect);
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
 	Renderer->SetImage("Zombies_Projectile.png");
@@ -130,16 +131,15 @@ void AZombiesProjectile::Flying(float _DeltaTime)
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
 		ResultVector = FVector::Zero;
-		Collider->Destroy();
 		StateChange(State::CollideGround);
+		return;
 	}
 
-	//오브젝트에 충돌한다면 콜라이드오브젝트로 이동
 	std::vector<UCollision*> Result;
-	if (true == Collider->CollisionCheck(MT3CollisionOrder::Player, Result))
+	if (true == Collider->CollisionCheck(MT3CollisionOrder::Player, Result)
+		||true == Collider->CollisionCheck(MT3CollisionOrder::Human,Result))
 	{
 		ResultVector = FVector::Zero;
-		Collider->Destroy();
 		StateChange(State::CollideObject);
 		return;
 	}
@@ -175,6 +175,7 @@ void AZombiesProjectile::FlyingStart()
 
 void AZombiesProjectile::CollideGroundStart()
 {
+	Collider->Destroy();
 	CurAnimName = "CollideGround";
 	std::string DirectedName = DirCheck(CurAnimName);
 	Renderer->ChangeAnimation(DirectedName);
@@ -182,6 +183,7 @@ void AZombiesProjectile::CollideGroundStart()
 
 void AZombiesProjectile::CollideObjectStart()
 {
+	Collider->Destroy();
 	CurAnimName = "CollideObject";
 	std::string DirectedName = DirCheck(CurAnimName);
 	Renderer->ChangeAnimation(DirectedName);

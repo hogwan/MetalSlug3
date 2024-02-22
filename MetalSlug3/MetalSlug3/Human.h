@@ -33,8 +33,8 @@ protected:
 
 	float DetectRange = 300.0f;
 
-	FVector CollisionScale = { 50,50 };
-	FVector CollisionPosition = { 0, -25 };
+	FVector CollisionScale = { 70,70 };
+	FVector CollisionPosition = { 0, -35 };
 
 	void GravityCheck(float _DeltaTime);
 	void GroundUp();

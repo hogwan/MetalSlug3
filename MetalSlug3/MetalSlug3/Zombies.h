@@ -52,7 +52,6 @@ protected:
 	FVector GravityVector = FVector::Zero;
 	FVector Gravity = FVector::Down * 1300.0f;
 
-	bool PlayerInRange();
 	bool WatchPlayer();
 	void GravityCheck(float _DeltaTime);
 	void GroundUp();
