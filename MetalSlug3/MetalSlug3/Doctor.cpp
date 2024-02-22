@@ -15,11 +15,11 @@ void ADoctor::BeginPlay()
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetImage("Doctor.png");
 	Renderer->SetTransform({ {0,0},{500,500} });
-	Renderer->CreateAnimation("Run", "Doctor.png", 0, 9, 0.08, true);
+	Renderer->CreateAnimation("Run", "Doctor.png", 0, 9, 0.08f, true);
 	Renderer->CreateAnimation("Idle", "Doctor.png", 10, 20, 0.3f, true);
 	Renderer->CreateAnimation("Death", "Doctor.png", 21, 31, 0.08f, false);
 
-	Collider = CreateCollision(MT3CollisionOrder::Player);
+	Collider = CreateCollision(MT3CollisionOrder::Human);
 	Collider->SetScale(CollisionScale);
 	Collider->SetPosition(CollisionPosition);
 	Collider->SetColType(ECollisionType::Rect);

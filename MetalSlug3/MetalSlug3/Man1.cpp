@@ -20,7 +20,7 @@ void AMan1::BeginPlay()
 	Renderer->CreateAnimation("Shock", "Man1.png", 6, 13, 0.15f, true);
 	Renderer->CreateAnimation("Death", "Man1.png", 14, 25, 0.15f, false);
 
-	Collider = CreateCollision(MT3CollisionOrder::Player);
+	Collider = CreateCollision(MT3CollisionOrder::Human);
 	Collider->SetScale(CollisionScale);
 	Collider->SetPosition(CollisionPosition);
 	Collider->SetColType(ECollisionType::Rect);

@@ -19,7 +19,7 @@ void AUncle::BeginPlay()
 	Renderer->CreateAnimation("Idle", "Uncle.png", 0, 7, 0.3f, true);
 	Renderer->CreateAnimation("Death", "Uncle.png", 8, 18, 0.15f, false);
 
-	Collider = CreateCollision(MT3CollisionOrder::Player);
+	Collider = CreateCollision(MT3CollisionOrder::Human);
 	Collider->SetScale(CollisionScale);
 	Collider->SetPosition(CollisionPosition);
 	Collider->SetColType(ECollisionType::Rect);

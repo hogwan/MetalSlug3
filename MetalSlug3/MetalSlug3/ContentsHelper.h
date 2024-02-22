@@ -26,6 +26,7 @@ enum class MT3CollisionOrder
 	ZombieProjectile,
 	Enemy,
 	Player,
+	Human,
 	Screen,
 	Detect,
 };

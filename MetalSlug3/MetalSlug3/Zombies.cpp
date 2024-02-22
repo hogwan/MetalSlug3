@@ -148,7 +148,8 @@ void AZombies::Idle(float _DeltaTime)
 		}
 
 		std::vector<UCollision*> Result;
-		if (DetectCollider->CollisionCheck(MT3CollisionOrder::Player, Result))
+		if (DetectCollider->CollisionCheck(MT3CollisionOrder::Player, Result)
+			|| DetectCollider->CollisionCheck(MT3CollisionOrder::Human,Result))
 		{
 			StateChange(EnemyZombieState::Attack);
 		}
@@ -171,7 +172,8 @@ void AZombies::Move(float _DeltaTime)
 	}
 
 	std::vector<UCollision*> Result;
-	if (DetectCollider->CollisionCheck(MT3CollisionOrder::Player, Result))
+	if (DetectCollider->CollisionCheck(MT3CollisionOrder::Player, Result)
+		|| DetectCollider->CollisionCheck(MT3CollisionOrder::Human, Result))
 	{
 		StateChange(EnemyZombieState::Attack);
 	}

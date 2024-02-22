@@ -20,7 +20,7 @@ void AWoman::BeginPlay()
 	Renderer->CreateAnimation("Shock", "Woman.png", 9, 14, 0.15f, true);
 	Renderer->CreateAnimation("Death", "Woman.png", 15, 28, 0.15f, false);
 
-	Collider = CreateCollision(MT3CollisionOrder::Player);
+	Collider = CreateCollision(MT3CollisionOrder::Human);
 	Collider->SetScale(CollisionScale);
 	Collider->SetPosition(CollisionPosition);
 	Collider->SetColType(ECollisionType::Rect);
