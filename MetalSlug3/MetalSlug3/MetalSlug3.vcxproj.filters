@@ -122,6 +122,12 @@
     <ClInclude Include="Man2.h">
       <Filter>Object\NPC</Filter>
     </ClInclude>
+    <ClInclude Include="Woman.h">
+      <Filter>Object\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Uncle.h">
+      <Filter>Object\NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -240,6 +246,12 @@
       <Filter>Object\NPC</Filter>
     </ClCompile>
     <ClCompile Include="Man2.cpp">
+      <Filter>Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Woman.cpp">
+      <Filter>Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Uncle.cpp">
       <Filter>Object\NPC</Filter>
     </ClCompile>
   </ItemGroup>

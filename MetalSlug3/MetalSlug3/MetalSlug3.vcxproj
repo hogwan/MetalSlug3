@@ -279,7 +279,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Uncle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="UncleZombie.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Woman.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -429,7 +437,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Uncle.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="UncleZombie.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Woman.cpp">
       <SubType>
       </SubType>
     </ClCompile>

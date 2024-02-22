@@ -23,6 +23,8 @@
 #include "Doctor.h"
 #include "Man1.h"
 #include "Man2.h"
+#include "Woman.h"
+#include "Uncle.h"
 
 PlayLevel::PlayLevel()
 {
@@ -147,6 +149,13 @@ void PlayLevel::BeginPlay()
 	Man2_0->SetActorLocation({ 500,1000 });
 	Man2_0->StateChange(HumanState::Move);
 
+	AWoman* Woman_0 = SpawnActor<AWoman>();
+	Woman_0->SetActorLocation({ 500,1000 });
+	Woman_0->StateChange(HumanState::Move);
+
+	AUncle* Uncle_0 = SpawnActor<AUncle>();
+	Uncle_0->SetActorLocation({ 600,1000 });
+	Uncle_0->StateChange(HumanState::Idle);
 
 	AZombies* Zombie_0 = SpawnActor<AManZombie1>();
 	Zombie_0->SetActorLocation({ 1000,1000 });
