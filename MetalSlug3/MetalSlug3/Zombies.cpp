@@ -14,12 +14,24 @@ AZombies::~AZombies()
 void AZombies::BeginPlay()
 {
 	AEnemy::BeginPlay();
+	DetectCollider = CreateCollision(MT3CollisionOrder::Detect);
+	DetectCollider->SetColType(ECollisionType::Rect);
 	Hp = 10;
 }
 
 void AZombies::Tick(float _DeltaTime)
 {
 	AEnemy::Tick(_DeltaTime);
+
+	if (DirState == EActorDir::Left)
+	{
+		DetectCollider->SetTransform({ {-Range / 2.0f,0.0f},{Range,300.0f} });
+	}
+	else if (DirState == EActorDir::Right)
+	{
+		DetectCollider->SetTransform({ {Range / 2.0f,0.0f},{Range,300.0f} });
+	}
+	
 	if (LaunchRenderer->IsCurAnimationEnd())
 	{
 		LaunchRenderer->ActiveOff();
@@ -123,12 +135,6 @@ void AZombies::Idle(float _DeltaTime)
 			StateChange(EnemyZombieState::Turn);
 			return;
 		}
-
-		if (PlayerInRange())
-		{
-			StateChange(EnemyZombieState::Attack);
-			return;
-		}
 		else
 		{
 			StateChange(EnemyZombieState::Move);
@@ -139,6 +145,12 @@ void AZombies::Idle(float _DeltaTime)
 		{
 			StateChange(EnemyZombieState::Stun);
 			return;
+		}
+
+		std::vector<UCollision*> Result;
+		if (DetectCollider->CollisionCheck(MT3CollisionOrder::Player, Result))
+		{
+			StateChange(EnemyZombieState::Attack);
 		}
 	}
 }
@@ -151,17 +163,17 @@ void AZombies::Move(float _DeltaTime)
 		return;
 	}
 
-	if (PlayerInRange())
-	{
-		StateChange(EnemyZombieState::Attack);
-		return;
-	}
-
 	if (MaxStunGauge < CurStunGauge)
 	{
 		CurStunGauge = 0.0f;
 		StateChange(EnemyZombieState::Stun);
 		return;
+	}
+
+	std::vector<UCollision*> Result;
+	if (DetectCollider->CollisionCheck(MT3CollisionOrder::Player, Result))
+	{
+		StateChange(EnemyZombieState::Attack);
 	}
 
 	FVector CheckPos = GetActorLocation();
@@ -350,23 +362,6 @@ void AZombies::DirCheck(std::string& _Name)
 	}
 
 	_Name += Dir;
-}
-
-bool AZombies::PlayerInRange()
-{
-	FVector PlayerPos = UContentsHelper::Player->GetActorLocation();
-	FVector ThisPos = GetActorLocation();
-
-	float _Range = abs(PlayerPos.X - ThisPos.X);
-
-	if (_Range >= Range)
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
 }
 
 bool AZombies::WatchPlayer()
