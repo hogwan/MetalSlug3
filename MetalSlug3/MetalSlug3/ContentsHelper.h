@@ -154,6 +154,7 @@ public:
 	static AScreenCollision* ScreenCol;
 	static class Marco* Player;
 	static int Life;
+	static int Score;
 private:
 	UContentsHelper();
 	~UContentsHelper();

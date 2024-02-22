@@ -101,6 +101,15 @@
     <ClInclude Include="StatusUI.h">
       <Filter>Object\UI</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreUI.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SlugEnergyBar.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeUI.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -198,6 +207,15 @@
       <Filter>Object\UI</Filter>
     </ClCompile>
     <ClCompile Include="StatusUI.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreUI.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SlugEnergyBar.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeUI.cpp">
       <Filter>Object\UI</Filter>
     </ClCompile>
   </ItemGroup>

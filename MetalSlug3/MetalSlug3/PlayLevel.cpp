@@ -17,6 +17,8 @@
 #include "Time.h"
 #include "StatusUI.h"
 #include "BackMap.h"
+#include "ScoreUI.h"
+#include "SlugEnergyBar.h"
 
 PlayLevel::PlayLevel()
 {
@@ -108,11 +110,17 @@ void PlayLevel::BeginPlay()
 	Go->Renderer->ActiveOff();
 
 	ATime* TimeUI = SpawnActor<ATime>();
-	TimeUI->SetActorLocation({400,50});
+	TimeUI->SetActorLocation({400,70});
 
 	AStatusUI* StatusUI = SpawnActor<AStatusUI>();
-	StatusUI->SetActorLocation({ 270,50 });
+	StatusUI->SetActorLocation({ 280,70 });
 
+	AScoreUI* ScoreUI = SpawnActor<AScoreUI>();
+	ScoreUI->SetActorLocation({ 190,47 });
+	UContentsHelper::Score = 1234567;
+
+	ASlugEnergyBar* SlugEnergyBar = SpawnActor<ASlugEnergyBar>();
+	SlugEnergyBar->SetActorLocation({120,67});
 	 
 	AZombies* Zombie_0 = SpawnActor<AManZombie1>();
 	Zombie_0->SetActorLocation({ 1000,1000 });
