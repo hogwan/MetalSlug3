@@ -66,20 +66,13 @@ void Marco::BeginPlay()
 	AllStateChange(AllBodyState::None);
 	ZombieArmStateChange(ZombieArmState::None);
 
+	GetWorld()->SetCameraPos({ 0,497 });
 }
 
 
 void Marco::Tick(float _DeltaTime)
 {
-	if (GetActorLocation().X < 400.0f)
-	{
-		GetWorld()->SetCameraPos({ 0.0f, 490.0f });
-	}
-	else
-	{
-		GetWorld()->SetCameraPos({ GetActorLocation().X - 400.0f, GetActorLocation().Y-530.0f});
-	}
-
+	CameraUpdate(_DeltaTime);
 
 	if (Manipulate)
 	{
@@ -252,6 +245,12 @@ void Marco::ManipulateUpdate(float _DeltaTime)
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 
 	if (Color == Color8Bit(255, 0, 255, 0))
+	{
+		return;
+	}
+
+	if (CheckPos.X < GetWorld()->GetCameraPos().X ||
+		CheckPos.X > GetWorld()->GetCameraPos().X + GEngine->MainWindow.GetWindowScale().X)
 	{
 		return;
 	}
@@ -4013,5 +4012,194 @@ void Marco::GroundUp()
 		{
 			break;
 		}
+	}
+}
+
+void Marco::CameraUpdate(float _DeltaTime)
+{
+	FVector CameraPos = GetWorld()->GetCameraPos();
+	FVector PlayerPos = GetActorLocation();
+	float XGap = PlayerPos.X - CameraPos.X;
+
+	std::vector<UCollision*> Result;
+	if (Collision->CollisionCheck(MT3CollisionOrder::CameraSwitch, Result))
+	{
+		AActor* Switch = Result[0]->GetOwner();
+		Switch->Destroy();
+
+		++CameraMode;
+	}
+	
+	switch (CameraMode)
+	{
+	case 0:
+	{
+		if (XGap > 300.0f)
+		{
+			CameraSpeed = XGap - 180.0f;
+			GetWorld()->AddCameraPos(FVector::Right * CameraSpeed * _DeltaTime);
+		}
+		else
+		{
+			CameraSpeed = 0.0f;
+		}
+	}
+		break;
+	case 1:
+	{
+		float TargetY = 969.0f;
+		float CameraBottomPos = CameraPos.Y + 600.0f;
+		if (XGap > 300.0f)
+		{
+			CameraSpeed = XGap - 180.0f;
+			GetWorld()->AddCameraPos(FVector::Right * CameraSpeed * _DeltaTime);
+		}
+
+		if (CameraBottomPos > TargetY)
+		{
+			CameraSpeed = 500.0f;
+			GetWorld()->AddCameraPos(FVector::Up * CameraSpeed * _DeltaTime);
+		}
+	}
+		break;
+	case 2:
+	{
+		float TargetY = GetActorLocation().Y + 60;
+		float CameraBottomPos = CameraPos.Y + 600.0f;
+		if (XGap > 300.0f)
+		{
+			CameraSpeed = XGap - 180.0f;
+			GetWorld()->AddCameraPos(FVector::Right * CameraSpeed * _DeltaTime);
+		}
+
+		if (CameraBottomPos < TargetY)
+		{
+			CameraSpeed = 500.0f;
+			GetWorld()->AddCameraPos(FVector::Down * CameraSpeed * _DeltaTime);
+		}
+	}
+		break;
+	case 3:
+	{
+		float TargetY = 1483;
+		float TargetX = 7275;
+		float CameraBottomPosY = CameraPos.Y + 600.0f;
+		float CameraRightPosX = CameraPos.X + 800.0f;
+
+		if (abs(CameraBottomPosY - TargetY) <1.0f && abs(CameraRightPosX > TargetX) < 1.0f)
+		{
+			return;
+		}
+
+		FVector DirVector = { (TargetX - CameraRightPosX), (TargetY - CameraBottomPosY) };
+		CameraSpeed = 1000.0f;
+		DirVector.Normalize2D();
+		GetWorld()->AddCameraPos(DirVector * CameraSpeed * _DeltaTime);
+	}
+		break;
+	case 4:
+	{
+		float TargetY = 1869;
+		float CameraBottomPos = CameraPos.Y + 600.0f;
+		if (XGap > 300.0f)
+		{
+			CameraSpeed = XGap - 180.0f;
+			GetWorld()->AddCameraPos(FVector::Right * CameraSpeed * _DeltaTime);
+		}
+
+		if (CameraBottomPos < TargetY)
+		{
+			CameraSpeed = 1000.0f;
+			GetWorld()->AddCameraPos(FVector::Down * CameraSpeed * _DeltaTime);
+		}
+	}
+		break;
+	case 5:
+	{
+		float TargetY = GetActorLocation().Y + 100;
+		float CameraBottomPos = CameraPos.Y + 600.0f;
+		if (XGap > 300.0f)
+		{
+			CameraSpeed = XGap - 180.0f;
+			GetWorld()->AddCameraPos(FVector::Right * CameraSpeed * _DeltaTime);
+		}
+
+		if (CameraBottomPos < TargetY)
+		{
+			CameraSpeed = 500.0f;
+			GetWorld()->AddCameraPos(FVector::Down * CameraSpeed * _DeltaTime);
+		}
+	}
+		break;
+	case 6:
+	{
+		float TargetY = 2255;
+		float CameraBottomPos = CameraPos.Y + 600.0f;
+		if (XGap > 300.0f)
+		{
+			CameraSpeed = XGap - 180.0f;
+			GetWorld()->AddCameraPos(FVector::Right * CameraSpeed * _DeltaTime);
+		}
+
+		FVector DirVector = { 0.f,TargetY - CameraBottomPos };
+
+		if (abs(TargetY - CameraBottomPos) < 1.0f)
+		{
+			return;
+		}
+
+		DirVector.Normalize2D();
+		CameraSpeed = 1000.0f;
+		GetWorld()->AddCameraPos(DirVector * CameraSpeed * _DeltaTime);
+	}
+	break;
+	case 7:
+	{
+		float TargetY = GetActorLocation().Y + 100;
+		float CameraBottomPos = CameraPos.Y + 600.0f;
+		if (XGap > 300.0f)
+		{
+			CameraSpeed = XGap - 180.0f;
+			GetWorld()->AddCameraPos(FVector::Right * CameraSpeed * _DeltaTime);
+		}
+
+		if (CameraBottomPos < TargetY)
+		{
+			CameraSpeed = 500.0f;
+			GetWorld()->AddCameraPos(FVector::Down * CameraSpeed * _DeltaTime);
+		}
+	}
+	break;
+	case 8:
+	{
+		float EndX = 14572;
+		float TargetY = 2427;
+		float CameraBottomPos = CameraPos.Y + 600.0f;
+		float CameraRightPos = CameraPos.X + 800.0f;
+		if (EndX < CameraRightPos)
+		{
+			return;
+		}
+
+		if (XGap > 300.0f)
+		{
+			CameraSpeed = XGap - 180.0f;
+			GetWorld()->AddCameraPos(FVector::Right * CameraSpeed * _DeltaTime);
+		}
+
+		FVector DirVector = { 0.f,TargetY - CameraBottomPos };
+
+		if (abs(TargetY - CameraBottomPos) < 1.0f)
+		{
+			return;
+		}
+
+		DirVector.Normalize2D();
+		CameraSpeed = 1000.0f;
+		GetWorld()->AddCameraPos(DirVector * CameraSpeed * _DeltaTime);
+	}
+	break;
+	default:
+		break;
 	}
 }

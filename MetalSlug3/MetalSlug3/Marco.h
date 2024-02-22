@@ -352,5 +352,11 @@ private:
 	std::vector<UImageRenderer*> VomitRenderer;
 	float AccDeltaTime = 0.0f;
 
+	int CameraMode = 0;
+	float CameraSpeed = 0.0f;
+	float Cameraacceleration = 300.0f;
+	float MaxCameraSpeed = 300.0f;
+	void CameraUpdate(float _DeltaTime);
+
 };
 

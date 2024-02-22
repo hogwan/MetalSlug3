@@ -29,6 +29,7 @@ enum class MT3CollisionOrder
 	Human,
 	Screen,
 	Detect,
+	CameraSwitch,
 };
 
 enum class EActorDir

@@ -163,6 +163,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="CameraModeSwitch.h" />
     <ClInclude Include="CharacterSelect.h">
       <SubType>
       </SubType>
@@ -322,6 +323,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="CameraModeSwitch.cpp" />
     <ClCompile Include="CharacterSelect.cpp">
       <SubType>
       </SubType>

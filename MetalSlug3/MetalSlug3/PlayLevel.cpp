@@ -25,6 +25,7 @@
 #include "Man2.h"
 #include "Woman.h"
 #include "Uncle.h"
+#include "CameraModeSwitch.h"
 
 PlayLevel::PlayLevel()
 {
@@ -99,7 +100,7 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Status.png", 2, 1);
 
 	UContentsHelper::ScreenCol = SpawnActor<AScreenCollision>();
-	//UContentsHelper::ScreenCol->GetCollider()->ActiveOff();
+	UContentsHelper::ScreenCol->GetCollider()->ActiveOff();
 
 	ABackMap* Back = SpawnActor<ABackMap>();
 	Back->SetActorLocation({ 1994,550 });
@@ -136,6 +137,30 @@ void PlayLevel::BeginPlay()
 
 	ALifeUI* LifeUI = SpawnActor<ALifeUI>();
 	LifeUI->SetActorLocation({ 70,87 });
+
+	ACameraModeSwitch* CameraSwitch_0 = SpawnActor<ACameraModeSwitch>();
+	CameraSwitch_0->SetActorLocation({ 3500,870 });
+
+	ACameraModeSwitch* CameraSwitch_1 = SpawnActor<ACameraModeSwitch>();
+	CameraSwitch_1->SetActorLocation({ 4680,650 });
+
+	ACameraModeSwitch* CameraSwitch_2 = SpawnActor<ACameraModeSwitch>();
+	CameraSwitch_2->SetActorLocation({ 6900,1450});
+
+	ACameraModeSwitch* CameraSwitch_3 = SpawnActor<ACameraModeSwitch>();
+	CameraSwitch_3->SetActorLocation({ 7300,1450 });
+
+	ACameraModeSwitch* CameraSwitch_4 = SpawnActor<ACameraModeSwitch>();
+	CameraSwitch_4->SetActorLocation({ 8160,1810 });
+
+	ACameraModeSwitch* CameraSwitch_5 = SpawnActor<ACameraModeSwitch>();
+	CameraSwitch_5->SetActorLocation({ 8535,2200 });
+
+	ACameraModeSwitch* CameraSwitch_6 = SpawnActor<ACameraModeSwitch>();
+	CameraSwitch_6->SetActorLocation({ 10730,2200 });
+
+	ACameraModeSwitch* CameraSwitch_7 = SpawnActor<ACameraModeSwitch>();
+	CameraSwitch_7->SetActorLocation({ 13200,2370 });
 	 
 	ADoctor* Doctor_0 = SpawnActor<ADoctor>();
 	Doctor_0->SetActorLocation({ 1000,1000 });
@@ -174,6 +199,10 @@ void PlayLevel::BeginPlay()
 
 	AZombies* Zombie_5 = SpawnActor<AManZombie3>();
 	Zombie_5->SetActorLocation({ 1500,1000 });*/
+
+
+
+
 
 	/*17087 2676
 
