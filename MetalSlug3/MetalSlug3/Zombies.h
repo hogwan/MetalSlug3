@@ -19,11 +19,11 @@ public:
 	}
 
 	virtual void StateChange(EnemyZombieState _State);
+	EActorDir DirState = EActorDir::Left;
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime)	override;
 
-	EActorDir DirState = EActorDir::Left;
 	EnemyZombieState CurState = EnemyZombieState::None;
 	virtual void StateUpdate(float _DeltaTime);
 

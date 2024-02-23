@@ -279,6 +279,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="SpawnInfo.h" />
     <ClInclude Include="StatusUI.h">
       <SubType>
       </SubType>

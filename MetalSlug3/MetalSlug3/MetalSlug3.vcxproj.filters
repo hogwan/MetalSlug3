@@ -129,6 +129,9 @@
       <Filter>Object\NPC</Filter>
     </ClInclude>
     <ClInclude Include="CameraModeSwitch.h" />
+    <ClInclude Include="SpawnInfo.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">

@@ -3,6 +3,7 @@
 #include <EngineCore\EngineResourcesManager.h>
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
+#include "SpawnInfo.h"
 #include "BackGroundMap.h"
 #include "ManZombie1.h"
 #include "ManZombie2.h"
@@ -138,6 +139,8 @@ void PlayLevel::BeginPlay()
 	ALifeUI* LifeUI = SpawnActor<ALifeUI>();
 	LifeUI->SetActorLocation({ 70,87 });
 
+	SpawnAllActor;
+
 	ACameraModeSwitch* CameraSwitch_0 = SpawnActor<ACameraModeSwitch>();
 	CameraSwitch_0->SetActorLocation({ 3500,870 });
 
@@ -161,10 +164,6 @@ void PlayLevel::BeginPlay()
 
 	ACameraModeSwitch* CameraSwitch_7 = SpawnActor<ACameraModeSwitch>();
 	CameraSwitch_7->SetActorLocation({ 13200,2370 });
-	 
-	ADoctor* Doctor_0 = SpawnActor<ADoctor>();
-	Doctor_0->SetActorLocation({ 1000,1000 });
-	Doctor_0->StateChange(HumanState::Run);
 
 	AMan1* Man1_0 = SpawnActor<AMan1>();
 	Man1_0->SetActorLocation({ 400,1000 });
