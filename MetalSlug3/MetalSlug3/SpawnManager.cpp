@@ -37,7 +37,7 @@ SpawnManager::~SpawnManager()
 void SpawnManager::BeginPlay()
 {
 	UContentsHelper::ScreenCol = GetWorld()->SpawnActor<AScreenCollision>();
-	UContentsHelper::ScreenCol->GetCollider()->ActiveOff();
+	//UContentsHelper::ScreenCol->GetCollider()->ActiveOff();
 
 	ABackMap* Back = GetWorld()->SpawnActor<ABackMap>();
 	Back->SetActorLocation({ 1994,550 });
