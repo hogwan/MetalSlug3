@@ -129,8 +129,8 @@
       <Filter>Object\NPC</Filter>
     </ClInclude>
     <ClInclude Include="CameraModeSwitch.h" />
-    <ClInclude Include="SpawnInfo.h">
-      <Filter>Level</Filter>
+    <ClInclude Include="SpawnManager.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +259,9 @@
       <Filter>Object\NPC</Filter>
     </ClCompile>
     <ClCompile Include="CameraModeSwitch.cpp" />
+    <ClCompile Include="SpawnManager.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
