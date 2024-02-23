@@ -220,6 +220,7 @@ protected:
 private:
 	std::vector<UImageRenderer*> Renderer;
 	UCollision* Collision = nullptr;
+	UCollision* KnifeReach = nullptr;
 
 	std::string CurUpperBodyName = "UpperBody_Idle";
 	std::string CurLowerBodyName = "LowerBody_Idle";
@@ -348,6 +349,16 @@ private:
 	FVector DefaultCollisionPosition = { 0, -50 };
 	FVector CrouchCollisionScale = { 50,50 };
 	FVector CrouchCollisionPosition = { 0,-25 };
+
+	int KnifeDamage = 2;
+
+	FVector KnifeReachCollisionScale = { 30,80 };
+	FVector KnifeReachCollisionPosition_Right = {35,-50 };
+	FVector KnifeReachCollisionPosition_Left = { -35,-50 };
+
+	FVector CrouchKnifeReachCollisionScale = { 30,40 };
+	FVector CrouchKnifeReachCollisionPosition_Right = { 35,-25 };
+	FVector CrouchKnifeReachCollisionPosition_Left = { -35,-25 };
 
 	std::vector<UImageRenderer*> VomitRenderer;
 	float AccDeltaTime = 0.0f;

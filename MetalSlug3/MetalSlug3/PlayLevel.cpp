@@ -58,9 +58,11 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("UncleZombie_LaunchEffect.png", 10, 4);
 
 	UEngineResourcesManager::GetInst().CuttingImage("BulletDestroy.png", 10, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("BloodEffect.png", 10, 6);
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_ZombieVomitProjectile.png", 10, 12);
 
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_VomitLaunchEffect.png", 10, 8);
+
 	UEngineResourcesManager::GetInst().CuttingImage("Bomb.png", 10, 8);
 
 	UEngineResourcesManager::GetInst().CuttingImage("Doctor.png", 10, 4);

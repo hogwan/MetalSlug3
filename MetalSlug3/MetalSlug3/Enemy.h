@@ -26,5 +26,6 @@ protected:
 	UImageRenderer* Renderer = nullptr;
 	UCollision* Collider = nullptr;
 	int Hp = 1;
+	int PrevHp = 1;
 };
 

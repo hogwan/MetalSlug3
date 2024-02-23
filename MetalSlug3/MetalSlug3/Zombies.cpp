@@ -16,7 +16,18 @@ void AZombies::BeginPlay()
 	AEnemy::BeginPlay();
 	DetectCollider = CreateCollision(MT3CollisionOrder::Detect);
 	DetectCollider->SetColType(ECollisionType::Rect);
+
+	BloodEffect = CreateImageRenderer(MT3RenderOrder::Particle);
+	BloodEffect->SetImage("BloodEffect.png");
+	BloodEffect->SetTransform({ {0,-100},{500,500} });
+	BloodEffect->CreateAnimation("BloodEffect1_Right", "BloodEffect.png", 0, 7, 0.03f, false);
+	BloodEffect->CreateAnimation("BloodEffect2_Right", "BloodEffect.png", 8, 15, 0.03f, false);
+	BloodEffect->CreateAnimation("BloodEffect1_Left", "BloodEffect.png", 30, 37, 0.03f, false);
+	BloodEffect->CreateAnimation("BloodEffect2_Left", "BloodEffect.png", 38, 45, 0.03f, false);
+	BloodEffect->ChangeAnimation("BloodEffect1_Right", true, 0, 0.05f);
+	BloodEffect->ActiveOff();
 	Hp = 10;
+	PrevHp = Hp;
 }
 
 void AZombies::Tick(float _DeltaTime)
@@ -35,6 +46,47 @@ void AZombies::Tick(float _DeltaTime)
 	if (LaunchRenderer->IsCurAnimationEnd())
 	{
 		LaunchRenderer->ActiveOff();
+	}
+
+	if (BloodEffect->IsCurAnimationEnd())
+	{
+		BloodEffect->ActiveOff();
+	}
+
+	if (PrevHp != Hp)
+	{
+		BloodEffect->ActiveOn();
+
+		int Random = -(rand() % 70 + 30);
+		int RandomEffect = rand() % 2;
+		
+
+		if (DirState == EActorDir::Right)
+		{
+			BloodEffect->SetTransform({ {-100,Random},{500,500} });
+			if (RandomEffect == 0)
+			{
+				BloodEffect->ChangeAnimation("BloodEffect1_Right", true, 0, 0.03f);
+			}
+			else
+			{
+				BloodEffect->ChangeAnimation("BloodEffect2_Right", true, 0, 0.03f);
+			}
+		}
+		else
+		{
+			BloodEffect->SetTransform({ {0,Random},{500,500} });
+			if (RandomEffect == 0)
+			{
+				BloodEffect->ChangeAnimation("BloodEffect1_Left", true, 0, 0.03f);
+			}
+			else
+			{
+				BloodEffect->ChangeAnimation("BloodEffect2_Left", true, 0, 0.03f);
+			}
+		}
+
+		PrevHp = Hp;
 	}
 
 	if (Hp <= 0)

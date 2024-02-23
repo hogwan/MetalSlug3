@@ -75,8 +75,8 @@ protected:
 	FVector LaunchEffectoffset_Left = { -20,0 };
 
 	UImageRenderer* LaunchRenderer = nullptr;
+	UImageRenderer* BloodEffect = nullptr;
 	UCollision* DetectCollider = nullptr;
-
 
 };
 

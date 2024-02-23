@@ -33,6 +33,11 @@ void Marco::BeginPlay()
 	Collision->SetPosition(DefaultCollisionPosition);
 	Collision->SetColType(ECollisionType::Rect);
 
+	KnifeReach = CreateCollision(MT3CollisionOrder::Detect);
+	KnifeReach->SetScale(KnifeReachCollisionScale);
+	KnifeReach->SetPosition(KnifeReachCollisionPosition_Right);
+	KnifeReach->SetColType(ECollisionType::Rect);
+
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetImage("Marco_UpperBody.png");
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoDefaultUpperBodyOffset, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransColor({ 0,0,0,255 });
@@ -86,6 +91,8 @@ void Marco::Tick(float _DeltaTime)
 
 	DeathCheck();
 
+
+
 	AllBodyStateUpdate(_DeltaTime);
 	if (!IsZombie)
 	{
@@ -96,6 +103,7 @@ void Marco::Tick(float _DeltaTime)
 	{
 		ZombieArmStateUpdate(_DeltaTime);
 	}
+
 
 	if (ArmsCount < 0)
 	{
@@ -967,8 +975,26 @@ void Marco::UpperIdle(float _DeltaTime)
 			true == UEngineInput::IsDown('a')
 			)
 		{
-			UpperStateChange(UpperBodyState::Shoot);
-			return;
+			std::vector<UCollision*> Result;
+			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+			{
+				int random = rand() % 2;
+				if (random == 0)
+				{
+					UpperStateChange(UpperBodyState::KnifeAttack1);
+					return;
+				}
+				else
+				{
+					UpperStateChange(UpperBodyState::KnifeAttack2);
+					return;
+				}
+			}
+			else
+			{
+				UpperStateChange(UpperBodyState::Shoot);
+				return;
+			}
 		}
 
 		if (
@@ -1032,9 +1058,28 @@ void Marco::UpperMove(float _DeltaTime)
 			true == UEngineInput::IsDown('a')
 			)
 		{
-			UpperStateChange(UpperBodyState::Shoot);
-			return;
+			std::vector<UCollision*> Result;
+			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+			{
+				int random = rand() % 2;
+				if (random == 0)
+				{
+					UpperStateChange(UpperBodyState::KnifeAttack1);
+					return;
+				}
+				else
+				{
+					UpperStateChange(UpperBodyState::KnifeAttack2);
+					return;
+				}
+			}
+			else
+			{
+				UpperStateChange(UpperBodyState::Shoot);
+				return;
+			}
 		}
+
 		if (
 			true == UEngineInput::IsDown('D') ||
 			true == UEngineInput::IsDown('d')
@@ -1069,11 +1114,30 @@ void Marco::UpperJump(float _DeltaTime)
 			true == UEngineInput::IsDown('a')
 			)
 		{
-			std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
-			TriggerDirCheck(BodyRenderer::UpperBody, AddedGunTypeName);
-			UpperStateChange(UpperBodyState::Shoot);
-			return;
+			std::vector<UCollision*> Result;
+			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+			{
+				int random = rand() % 2;
+				if (random == 0)
+				{
+					UpperStateChange(UpperBodyState::KnifeAttack1);
+					return;
+				}
+				else
+				{
+					UpperStateChange(UpperBodyState::KnifeAttack2);
+					return;
+				}
+			}
+			else
+			{
+				std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
+				TriggerDirCheck(BodyRenderer::UpperBody, AddedGunTypeName);
+				UpperStateChange(UpperBodyState::Shoot);
+				return;
+			}
 		}
+
 
 		if (
 			true == UEngineInput::IsDown('D') ||
@@ -1114,10 +1178,28 @@ void Marco::UpperForwardJump(float _DeltaTime)
 			true == UEngineInput::IsDown('a')
 			)
 		{
-			std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
-			TriggerDirCheck(BodyRenderer::UpperBody, AddedGunTypeName);
-			UpperStateChange(UpperBodyState::ForwardJumpShoot);
-			return;
+			std::vector<UCollision*> Result;
+			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+			{
+				int random = rand() % 2;
+				if (random == 0)
+				{
+					UpperStateChange(UpperBodyState::KnifeAttack1);
+					return;
+				}
+				else
+				{
+					UpperStateChange(UpperBodyState::KnifeAttack2);
+					return;
+				}
+			}
+			else
+			{
+				std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
+				TriggerDirCheck(BodyRenderer::UpperBody, AddedGunTypeName);
+				UpperStateChange(UpperBodyState::ForwardJumpShoot);
+				return;
+			}
 		}
 
 		if (
@@ -1176,11 +1258,31 @@ void Marco::UpperShoot(float _DeltaTime)
 
 		if (CurFrame >= 3)
 		{
-			if (true == UEngineInput::IsPress('A') ||
-				true == UEngineInput::IsPress('a'))
+			if (
+				true == UEngineInput::IsDown('A') ||
+				true == UEngineInput::IsDown('a')
+				)
 			{
-				UpperStateChange(UpperBodyState::Shoot);
-				return;
+				std::vector<UCollision*> Result;
+				if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+				{
+					int random = rand() % 2;
+					if (random == 0)
+					{
+						UpperStateChange(UpperBodyState::KnifeAttack1);
+						return;
+					}
+					else
+					{
+						UpperStateChange(UpperBodyState::KnifeAttack2);
+						return;
+					}
+				}
+				else
+				{
+					UpperStateChange(UpperBodyState::Shoot);
+					return;
+				}
 			}
 		}
 		if (CurFrame != HeavyMachineGun_PrevFrame)
@@ -1234,16 +1336,35 @@ void Marco::UpperShoot(float _DeltaTime)
 					UpperStateChange(UpperBodyState::AimNormalToDown);
 					return;
 				}
+
 				if (
 					true == UEngineInput::IsDown('A') ||
 					true == UEngineInput::IsDown('a')
 					)
 				{
 					*AccTime = 0.0f;
-					std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
-					TriggerDirCheck(BodyRenderer::UpperBody, AddedGunTypeName);
-					UpperStateChange(UpperBodyState::Shoot);
-					return;
+					std::vector<UCollision*> Result;
+					if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+					{
+						int random = rand() % 2;
+						if (random == 0)
+						{
+							UpperStateChange(UpperBodyState::KnifeAttack1);
+							return;
+						}
+						else
+						{
+							UpperStateChange(UpperBodyState::KnifeAttack2);
+							return;
+						}
+					}
+					else
+					{
+						std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
+						TriggerDirCheck(BodyRenderer::UpperBody, AddedGunTypeName);
+						UpperStateChange(UpperBodyState::Shoot);
+						return;
+					}
 				}
 
 				if (
@@ -1284,8 +1405,26 @@ void Marco::UpperShoot(float _DeltaTime)
 					)
 				{
 					*AccTime = 0.0f;
-					UpperStateChange(UpperBodyState::Shoot);
-					return;
+					std::vector<UCollision*> Result;
+					if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+					{
+						int random = rand() % 2;
+						if (random == 0)
+						{
+							UpperStateChange(UpperBodyState::KnifeAttack1);
+							return;
+						}
+						else
+						{
+							UpperStateChange(UpperBodyState::KnifeAttack2);
+							return;
+						}
+					}
+					else
+					{
+						UpperStateChange(UpperBodyState::Shoot);
+						return;
+					}
 				}
 
 				if (
@@ -1342,9 +1481,25 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 			int CurFrame = Renderer[static_cast<int>(BodyRenderer::UpperBody)]->GetCurAnimationFrame();
 			if (CurFrame >= 3)
 			{
-				if (true == UEngineInput::IsPress('A') ||
-					true == UEngineInput::IsPress('a'))
+				std::vector<UCollision*> Result;
+				if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
 				{
+					int random = rand() % 2;
+					if (random == 0)
+					{
+						UpperStateChange(UpperBodyState::KnifeAttack1);
+						return;
+					}
+					else
+					{
+						UpperStateChange(UpperBodyState::KnifeAttack2);
+						return;
+					}
+				}
+				else
+				{
+					std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
+					TriggerDirCheck(BodyRenderer::UpperBody, AddedGunTypeName);
 					UpperStateChange(UpperBodyState::ForwardJumpShoot);
 					return;
 				}
@@ -1402,10 +1557,28 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 					)
 				{
 					*AccTime = 0.0f;
-					std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
-					TriggerDirCheck(BodyRenderer::UpperBody, AddedGunTypeName);
-					UpperStateChange(UpperBodyState::ForwardJumpShoot);
-					return;
+					std::vector<UCollision*> Result;
+					if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+					{
+						int random = rand() % 2;
+						if (random == 0)
+						{
+							UpperStateChange(UpperBodyState::KnifeAttack1);
+							return;
+						}
+						else
+						{
+							UpperStateChange(UpperBodyState::KnifeAttack2);
+							return;
+						}
+					}
+					else
+					{
+						std::string AddedGunTypeName = AddGunTypeName(CurUpperBodyName);
+						TriggerDirCheck(BodyRenderer::UpperBody, AddedGunTypeName);
+						UpperStateChange(UpperBodyState::ForwardJumpShoot);
+						return;
+					}
 				}
 
 				if (
@@ -1532,12 +1705,21 @@ void Marco::UpperThrow(float _DeltaTime)
 
 void Marco::UpperKnifeAttack1(float _DeltaTime)
 {
-	//콜라이더 배우면 구현
+	
+	if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
+	{
+		UpperStateChange(UpperBodyState::Idle);
+		return;
+	}
 }
 
 void Marco::UpperKnifeAttack2(float _DeltaTime)
 {
-	//콜라이더 배우면 구현
+	if (Renderer[static_cast<int>(BodyRenderer::UpperBody)]->IsCurAnimationEnd())
+	{
+		UpperStateChange(UpperBodyState::Idle);
+		return;
+	}
 }
 
 void Marco::UpperAimNormalToUp(float _DeltaTime)
@@ -2482,6 +2664,7 @@ void Marco::LowerMove(float _DeltaTime)
 {
 	DirCheck(BodyRenderer::LowerBody, CurLowerBodyName);
 
+
 	if (
 		true == UEngineInput::IsPress(VK_LEFT) &&
 		true == UEngineInput::IsPress(VK_RIGHT)
@@ -2595,6 +2778,16 @@ void Marco::LowerIdleStart()
 
 void Marco::LowerMoveStart()
 {
+	KnifeReach->SetScale(KnifeReachCollisionScale);
+	if (DirState == EActorDir::Left)
+	{
+		KnifeReach->SetPosition(KnifeReachCollisionPosition_Left);
+	}
+	else
+	{
+		KnifeReach->SetPosition(KnifeReachCollisionPosition_Right);
+	}
+
 	CurLowerBodyName = "LowerBody_Move";
 	LowerStart();
 }
@@ -2689,16 +2882,35 @@ void Marco::AllCrouch_Idle(float _DeltaTime)
 		true == UEngineInput::IsDown('a')
 		)
 	{
-		if (Gun == EGunList::HeavyMachineGun)
+		std::vector<UCollision*> Result;
+		if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
 		{
-			AllStateChange(AllBodyState::Crouch_Shoot_HeavyMachineGun);
-			return;
+			int random = rand() % 2;
+			if (random == 0)
+			{
+				AllStateChange(AllBodyState::Crouch_KnifeAttack1);
+				return;
+			}
+			else
+			{
+				AllStateChange(AllBodyState::Crouch_KnifeAttack2);
+				return;
+			}
 		}
 		else
 		{
-			AllStateChange(AllBodyState::Crouch_Shoot);
-			return;
+			if (Gun == EGunList::HeavyMachineGun)
+			{
+				AllStateChange(AllBodyState::Crouch_Shoot_HeavyMachineGun);
+				return;
+			}
+			else
+			{
+				AllStateChange(AllBodyState::Crouch_Shoot);
+				return;
+			}
 		}
+		
 	}
 
 	if (InAir)
@@ -2747,15 +2959,33 @@ void Marco::AllCrouch_Move(float _DeltaTime)
 		true == UEngineInput::IsDown('a')
 		)
 	{
-		if (Gun == EGunList::HeavyMachineGun)
+		std::vector<UCollision*> Result;
+		if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
 		{
-			AllStateChange(AllBodyState::Crouch_Shoot_HeavyMachineGun);
-			return;
+			int random = rand() % 2;
+			if (random == 0)
+			{
+				AllStateChange(AllBodyState::Crouch_KnifeAttack1);
+				return;
+			}
+			else
+			{
+				AllStateChange(AllBodyState::Crouch_KnifeAttack2);
+				return;
+			}
 		}
 		else
 		{
-			AllStateChange(AllBodyState::Crouch_Shoot);
-			return;
+			if (Gun == EGunList::HeavyMachineGun)
+			{
+				AllStateChange(AllBodyState::Crouch_Shoot_HeavyMachineGun);
+				return;
+			}
+			else
+			{
+				AllStateChange(AllBodyState::Crouch_Shoot);
+				return;
+			}
 		}
 	}
 
@@ -2788,17 +3018,34 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 			true == UEngineInput::IsDown('a')
 			)
 		{
-			CrouchShooting = false;
 			*AccTime = 0.0f;
-			if (Gun == EGunList::HeavyMachineGun)
+			std::vector<UCollision*> Result;
+			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
 			{
-				AllStateChange(AllBodyState::Crouch_Shoot_HeavyMachineGun);
-				return;
+				int random = rand() % 2;
+				if (random == 0)
+				{
+					AllStateChange(AllBodyState::Crouch_KnifeAttack1);
+					return;
+				}
+				else
+				{
+					AllStateChange(AllBodyState::Crouch_KnifeAttack2);
+					return;
+				}
 			}
 			else
 			{
-				AllStateChange(AllBodyState::Crouch_Shoot);
-				return;
+				if (Gun == EGunList::HeavyMachineGun)
+				{
+					AllStateChange(AllBodyState::Crouch_Shoot_HeavyMachineGun);
+					return;
+				}
+				else
+				{
+					AllStateChange(AllBodyState::Crouch_Shoot);
+					return;
+				}
 			}
 			return;
 		}
@@ -2854,12 +3101,31 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 	int CurFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
 	if (CurFrame >= 3)
 	{
+
 		if (true == UEngineInput::IsPress('A') ||
 			true == UEngineInput::IsPress('a'))
 		{
 			HeavyMachineGun_PrevFrame = -1;
-			AllStateChange(AllBodyState::Crouch_Shoot_HeavyMachineGun);
-			return;
+			std::vector<UCollision*> Result;
+			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+			{
+				int random = rand() % 2;
+				if (random == 0)
+				{
+					AllStateChange(AllBodyState::Crouch_KnifeAttack1);
+					return;
+				}
+				else
+				{
+					AllStateChange(AllBodyState::Crouch_KnifeAttack2);
+					return;
+				}
+			}
+			else
+			{
+				AllStateChange(AllBodyState::Crouch_Shoot_HeavyMachineGun);
+				return;
+			}
 		}
 	}
 	if (CurFrame != HeavyMachineGun_PrevFrame)
@@ -2956,12 +3222,22 @@ void Marco::AllCrouch_Throw(float _DeltaTime)
 
 void Marco::AllCrouch_KnifeAttack1(float _DeltaTime)
 {
-	//콜라이더
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
+	{
+		CrouchShooting = false;
+		AllStateChange(AllBodyState::Crouch_Idle);
+		return;
+	}
 }
 
 void Marco::AllCrouch_KnifeAttack2(float _DeltaTime)
 {
-	//콜라이더
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
+	{
+		CrouchShooting = false;
+		AllStateChange(AllBodyState::Crouch_Idle);
+		return;
+	}
 }
 
 void Marco::AllCeremony(float _DeltaTime)
@@ -3033,6 +3309,15 @@ void Marco::AllCrouch_IntroStart()
 	Move_Speed = Crouch_Speed;
 	Collision->SetScale(CrouchCollisionScale);
 	Collision->SetPosition(CrouchCollisionPosition);
+	KnifeReach->SetScale(CrouchKnifeReachCollisionScale);
+	if (DirState == EActorDir::Left)
+	{
+		KnifeReach->SetPosition(CrouchKnifeReachCollisionPosition_Left);
+	}
+	else
+	{
+		KnifeReach->SetPosition(CrouchKnifeReachCollisionPosition_Right);
+	}
 	CurAllBodyName = "AllBody_Crouch_Intro";
 	AllStart();
 }
@@ -3042,6 +3327,15 @@ void Marco::AllCrouch_OutroStart()
 	Move_Speed = Run_Speed;
 	Collision->SetScale(DefaultCollisionScale);
 	Collision->SetPosition(DefaultCollisionPosition);
+	KnifeReach->SetScale(KnifeReachCollisionScale);
+	if (DirState == EActorDir::Left)
+	{
+		KnifeReach->SetPosition(KnifeReachCollisionPosition_Left);
+	}
+	else
+	{
+		KnifeReach->SetPosition(KnifeReachCollisionPosition_Right);
+	}
 	CurAllBodyName = "AllBody_Crouch_Outro";
 	AllStart();
 }
@@ -3106,12 +3400,16 @@ void Marco::AllCrouch_ThrowStart()
 
 void Marco::AllCrouch_KnifeAttack1Start()
 {
-	//콜라이더
+	CrouchShooting = true;
+	CurAllBodyName = "AllBody_Crouch_KnifeAttack1";
+	AllStart();
 }
 
 void Marco::AllCrouch_KnifeAttack2Start()
 {
-	//콜라이더
+	CrouchShooting = true;
+	CurAllBodyName = "AllBody_Crouch_KnifeAttack2";
+	AllStart();
 }
 
 void Marco::AllCeremonyStart()
