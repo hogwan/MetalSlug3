@@ -10,6 +10,7 @@
 #include "ContentsHelper.h"
 #include "ZombieVomitProjectile.h"
 #include "CameraManager.h"
+#include "Enemy.h"
 
 
 Marco::Marco()
@@ -2464,12 +2465,31 @@ void Marco::UpperThrowStart()
 
 void Marco::UpperKnifeAttack1Start()
 {
+	std::vector<UCollision*> Result;
+	if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+	{
+		for (UCollision* EnemyCol : Result)
+		{
+			AEnemy* Enemy = dynamic_cast<AEnemy*>(EnemyCol->GetOwner());
+			Enemy->Damaged(KnifeDamage);
+		}
+	}
+
 	CurUpperBodyName = "UpperBody_KnifeAttack1";
 	UpperStart();
 }
 
 void Marco::UpperKnifeAttack2Start()
 {
+	std::vector<UCollision*> Result;
+	if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+	{
+		for (UCollision* EnemyCol : Result)
+		{
+			AEnemy* Enemy = dynamic_cast<AEnemy*>(EnemyCol->GetOwner());
+			Enemy->Damaged(KnifeDamage);
+		}
+	}
 	CurUpperBodyName = "UpperBody_KnifeAttack2";
 	UpperStart();
 }
@@ -3400,6 +3420,15 @@ void Marco::AllCrouch_ThrowStart()
 
 void Marco::AllCrouch_KnifeAttack1Start()
 {
+	std::vector<UCollision*> Result;
+	if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+	{
+		for (UCollision* EnemyCol : Result)
+		{
+			AEnemy* Enemy = dynamic_cast<AEnemy*>(EnemyCol->GetOwner());
+			Enemy->Damaged(KnifeDamage);
+		}
+	}
 	CrouchShooting = true;
 	CurAllBodyName = "AllBody_Crouch_KnifeAttack1";
 	AllStart();
@@ -3407,6 +3436,15 @@ void Marco::AllCrouch_KnifeAttack1Start()
 
 void Marco::AllCrouch_KnifeAttack2Start()
 {
+	std::vector<UCollision*> Result;
+	if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+	{
+		for (UCollision* EnemyCol : Result)
+		{
+			AEnemy* Enemy = dynamic_cast<AEnemy*>(EnemyCol->GetOwner());
+			Enemy->Damaged(KnifeDamage);
+		}
+	}
 	CrouchShooting = true;
 	CurAllBodyName = "AllBody_Crouch_KnifeAttack2";
 	AllStart();
