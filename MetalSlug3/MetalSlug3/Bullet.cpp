@@ -33,7 +33,7 @@ void ABullet::Tick(float _DeltaTime)
 
 		Speed = 0.0f;
 		IsDestroy = true;
-		Collider->Destroy();
+		Collider->ActiveOff();
 		Renderer->SetImage("BulletDestroy.png");
 		Renderer->ChangeAnimation("Destroy");
 		Renderer->SetTransform({ {0,0}, {30,30} });

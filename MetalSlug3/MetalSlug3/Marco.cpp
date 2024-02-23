@@ -2267,6 +2267,7 @@ void Marco::UpperThrowStart()
 		if (DirState == EActorDir::Left)
 		{
 			SpawnLocation += {-30.0f, -100.0f};
+			ThrowVector.X = -ThrowVector.X;
 		}
 		else if (DirState == EActorDir::Right)
 		{

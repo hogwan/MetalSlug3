@@ -175,7 +175,7 @@ void AZombiesProjectile::FlyingStart()
 
 void AZombiesProjectile::CollideGroundStart()
 {
-	Collider->Destroy();
+	Collider->ActiveOff();
 	CurAnimName = "CollideGround";
 	std::string DirectedName = DirCheck(CurAnimName);
 	Renderer->ChangeAnimation(DirectedName);
@@ -183,7 +183,7 @@ void AZombiesProjectile::CollideGroundStart()
 
 void AZombiesProjectile::CollideObjectStart()
 {
-	Collider->Destroy();
+	Collider->ActiveOff();
 	CurAnimName = "CollideObject";
 	std::string DirectedName = DirCheck(CurAnimName);
 	Renderer->ChangeAnimation(DirectedName);
