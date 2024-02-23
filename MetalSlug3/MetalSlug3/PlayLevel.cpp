@@ -3,6 +3,8 @@
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
 #include "SpawnManager.h"
+#include "CameraManager.h"
+#include "ContentsHelper.h"
 
 PlayLevel::PlayLevel()
 {
@@ -77,4 +79,5 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Status.png", 2, 1);
 
 	SpawnActor<SpawnManager>();
+	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 }

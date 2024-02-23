@@ -31,7 +31,7 @@ protected:
 	float MoveSpeed = 25.0f;
 	float RunSpeed = 100.0f;
 
-	float DetectRange = 300.0f;
+	float DetectRange = 150.0f;
 
 	FVector CollisionScale = { 70,70 };
 	FVector CollisionPosition = { 0, -35 };

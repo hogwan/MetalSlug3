@@ -166,6 +166,7 @@ public:
 	static UWindowImage* ColMapImage;
 	static AScreenCollision* ScreenCol;
 	static class Marco* Player;
+	static class CameraManager* CameraManager;
 	static int Life;
 	static int Score;
 private:
