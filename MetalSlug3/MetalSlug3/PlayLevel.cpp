@@ -80,6 +80,8 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("YellowFont.png", 10, 4);
 	UEngineResourcesManager::GetInst().CuttingImage("Status.png", 2, 1);
 
+	UEngineResourcesManager::GetInst().CuttingImage("Solider.png", 10, 14);
+
 	SpawnActor<SpawnManager>();
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 }

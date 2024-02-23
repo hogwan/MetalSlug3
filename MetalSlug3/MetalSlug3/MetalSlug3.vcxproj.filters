@@ -133,6 +133,9 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Solider.h">
+      <Filter>Object\Enemy\Solider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -264,6 +267,9 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Solider.cpp">
+      <Filter>Object\Enemy\Solider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -307,6 +313,9 @@
     </Filter>
     <Filter Include="Object\NPC">
       <UniqueIdentifier>{a7e982d0-2272-4b72-a774-2af6c971d637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Solider">
+      <UniqueIdentifier>{9a991c7e-38b8-4f16-81fe-3dd8163a91d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

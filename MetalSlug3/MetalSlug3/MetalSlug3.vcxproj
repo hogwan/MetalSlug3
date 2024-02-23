@@ -283,6 +283,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Solider.h" />
     <ClInclude Include="SpawnManager.h">
       <SubType>
       </SubType>
@@ -450,6 +451,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Solider.cpp" />
     <ClCompile Include="SpawnManager.cpp">
       <SubType>
       </SubType>

@@ -160,6 +160,16 @@ enum class HumanState
 	Death,
 };
 
+enum class SoilderState
+{
+	None,
+	Idle,
+	Move,
+	Throw,
+	KnifeAttack,
+	Death,
+};
+
 class UContentsHelper
 {
 public:
