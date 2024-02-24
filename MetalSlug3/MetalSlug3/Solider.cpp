@@ -119,20 +119,54 @@ void ASolider::Idle(float _DeltaTime)
 
 	switch (Pattern)
 	{
-
+	case SoliderPattern::KnifeAttack:
+		break;
+	case SoliderPattern::Throw:
+		break;
+	case SoliderPattern::RunAway:
+		break;
 	}
 }
 
 void ASolider::Move(float _DeltaTime)
 {
+	DirCheck();
+
+	switch (Pattern)
+	{
+	case SoliderPattern::KnifeAttack:
+		break;
+	case SoliderPattern::Throw:
+		break;
+	case SoliderPattern::RunAway:
+		break;
+	}
 }
 
 void ASolider::Throw(float _DeltaTime)
 {
+	switch (Pattern)
+	{
+	case SoliderPattern::KnifeAttack:
+		break;
+	case SoliderPattern::Throw:
+		break;
+	case SoliderPattern::RunAway:
+		break;
+	}
 }
 
 void ASolider::KnifeAttack(float _DeltaTime)
 {
+	switch (Pattern)
+	{
+	case SoliderPattern::KnifeAttack:
+		break;
+	case SoliderPattern::Throw:
+		break;
+	case SoliderPattern::RunAway:
+		break;
+	}
 }
 
 void ASolider::Death(float _DeltaTime)
@@ -146,22 +180,31 @@ void ASolider::NoneStart()
 void ASolider::IdleStart()
 {
 	CurAnimName = "Idle";
+	DirCheck();
 }
 
 void ASolider::MoveStart()
 {
+	CurAnimName = "Move";
+	DirCheck();
 }
 
 void ASolider::ThrowStart()
 {
+	CurAnimName = "Throw";
+	DirCheck();
 }
 
 void ASolider::KnifeAttackStart()
 {
+	CurAnimName = "KnifeAttack";
+	DirCheck();
 }
 
 void ASolider::DeathStart()
 {
+	CurAnimName = "Death";
+	DirCheck();
 }
 
 void ASolider::TargetCheck()
@@ -219,7 +262,7 @@ void ASolider::GroundUp()
 	}
 }
 
-void ASolider::ChangePattern(int _Pattern)
+void ASolider::ChangePattern(SoliderPattern _Pattern)
 {
 	Pattern = _Pattern;
 }

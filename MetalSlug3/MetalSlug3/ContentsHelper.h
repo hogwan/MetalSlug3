@@ -170,6 +170,13 @@ enum class SoilderState
 	Death,
 };
 
+enum class SoliderPattern
+{
+	KnifeAttack,
+	Throw,
+	RunAway,
+};
+
 class UContentsHelper
 {
 public:

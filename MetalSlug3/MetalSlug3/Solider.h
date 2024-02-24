@@ -2,13 +2,6 @@
 #include "Enemy.h"
 #include "ContentsHelper.h"
 
-enum class SoliderPattern
-{
-	KnifeAttack,
-	Throw,
-	RunAway,
-};
-
 class ASolider : public AEnemy
 {
 public:
@@ -22,11 +15,6 @@ public:
 	ASolider& operator=(const ASolider& _Other) = delete;
 	ASolider& operator=(ASolider&& _Other) noexcept = delete;
 
-	template<typename EnumType>
-	void ChangePattern(EnumType _Order = 0)
-	{
-		return CreateCollision(static_cast<int>(_Order));
-	}
 	FVector TargetVector = FVector::Zero;
 	FVector MoveVector = FVector::Zero;
 protected:
@@ -52,14 +40,14 @@ protected:
 	void KnifeAttackStart();
 	void DeathStart();
 
-	int Pattern = 0;
+	SoliderPattern Pattern = SoliderPattern::KnifeAttack;
 	std::string CurAnimName = "None";
 	void TargetCheck();
 	void DirCheck();
 	void GravityCheck(float _DeltaTime);
 	void GroundUp();
 
-	void ChangePattern(int _Pattern);
+	void ChangePattern(SoliderPattern _Pattern);
 	SoilderState CurState = SoilderState::None;
 
 	FVector KnifeReachCollisionScale = { 30,80 };
