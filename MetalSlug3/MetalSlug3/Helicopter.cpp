@@ -138,7 +138,6 @@ void AHelicopter::None(float _DeltaTime)
 void AHelicopter::Move(float _DeltaTime)
 {
 
-	FVector Offset = { 0,-300 };
 	TargetVector = (UContentsHelper::Player->GetActorLocation() + Offset) - GetActorLocation();
 	MoveVector = TargetVector;
 	AddActorLocation(MoveVector * _DeltaTime);

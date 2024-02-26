@@ -39,7 +39,7 @@ SpawnManager::~SpawnManager()
 void SpawnManager::BeginPlay()
 {
 	UContentsHelper::ScreenCol = GetWorld()->SpawnActor<AScreenCollision>();
-	UContentsHelper::ScreenCol->GetCollider()->ActiveOff();
+	//UContentsHelper::ScreenCol->GetCollider()->ActiveOff();
 
 	ABackMap* Back = GetWorld()->SpawnActor<ABackMap>();
 	Back->SetActorLocation({ 1994,550 });
@@ -85,9 +85,6 @@ void SpawnManager::BeginPlay()
 
 	ACameraModeSwitch* CameraSwitch_2 = GetWorld()->SpawnActor<ACameraModeSwitch>();
 	CameraSwitch_2->SetActorLocation({ 6900,1450 });
-
-	ACameraModeSwitch* CameraSwitch_3 = GetWorld()->SpawnActor<ACameraModeSwitch>();
-	CameraSwitch_3->SetActorLocation({ 7300,1450 });
 
 	ACameraModeSwitch* CameraSwitch_4 = GetWorld()->SpawnActor<ACameraModeSwitch>();
 	CameraSwitch_4->SetActorLocation({ 8160,1810 });
@@ -463,7 +460,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 11 && TargetPos > 7265)
+	if (SpawnNumber == 11 && TargetPos > 7200)
 	{
 		AHelicopter* Helicopter_0 = GetWorld()->SpawnActor<AHelicopter>();
 		Helicopter_0->SetActorLocation({ 6300,970 });
@@ -475,6 +472,23 @@ void SpawnManager::Tick(float _DeltaTime)
 		Helicopter_1->Offset = { 0.f,-300.0f };
 		Helicopter_1->StateChange(HelicopterState::Move);
 
+		AUncleZombie* UncleZombie_0 = GetWorld()->SpawnActor<AUncleZombie>();
+		UncleZombie_0->SetActorLocation({ 6150,1050 });
+		UncleZombie_0->StateChange(EnemyZombieState::Move);
+
+
 		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 12 && UContentsHelper::CameraManager->CameraMode == 5)
+	{
+		std::vector<UCollision*> Result;
+		UContentsHelper::CameraManager->CameraMode;
+		if (
+			!UContentsHelper::ScreenCol->GetCollider()->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+			)
+		{
+			++UContentsHelper::CameraManager->CameraMode;
+		}
 	}
 }

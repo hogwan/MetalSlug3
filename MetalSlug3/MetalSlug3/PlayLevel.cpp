@@ -25,6 +25,8 @@ void PlayLevel::BeginPlay()
 	NewPath.Move("MT3Resource");
 	NewPath.Move("PlayLevel");
 
+	GEngine->MainWindow.SetClearColor({ 0,0,0,255 });
+
 
 	std::list<UEngineFile> AllFileList = NewPath.AllFile({ ".png", ".bmp" }, true);
 

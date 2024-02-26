@@ -13,7 +13,6 @@ public:
 	ExplosionEffect& operator=(const ExplosionEffect& _Other) = delete;
 	ExplosionEffect& operator=(ExplosionEffect&& _Other) = delete;
 
-
 	void SetSize(FVector _Size)
 	{
 		Size = _Size;

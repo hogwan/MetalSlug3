@@ -26,7 +26,7 @@ void AZombies::BeginPlay()
 	BloodEffect->CreateAnimation("BloodEffect2_Left", "BloodEffect.png", 38, 45, 0.03f, false);
 	BloodEffect->ChangeAnimation("BloodEffect1_Right", true, 0, 0.05f);
 	BloodEffect->ActiveOff();
-	Hp = 5;
+	Hp = 8;
 	PrevHp = Hp;
 }
 

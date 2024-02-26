@@ -2346,14 +2346,12 @@ void Marco::UpperNoneStart()
 
 void Marco::UpperIdleStart()
 {
-	Move_Speed = Run_Speed;
 	CurUpperBodyName = "UpperBody_Idle";
 	UpperStart();
 }
 
 void Marco::UpperMoveStart()
 {
-	Move_Speed = Run_Speed;
 	CurUpperBodyName = "UpperBody_Move";
 	UpperStart();
 }
@@ -3418,6 +3416,30 @@ void Marco::AllCrouch_ThrowStart()
 	CrouchShooting = true;
 	CurAllBodyName = "AllBody_Crouch_Throw";
 	AllStart();
+
+	if (BombsCount > 0 && RemainBomb > 0)
+	{
+		ABomb* Bomb = GetWorld()->SpawnActor<ABomb>();
+		--BombsCount;
+		FVector ThrowVector = { 3,-3 };
+		ThrowVector.Normalize2D();
+		float ThrowForce = 400.0f;
+		ThrowVector *= ThrowForce;
+		FVector SpawnLocation = GetActorLocation();
+
+		if (DirState == EActorDir::Left)
+		{
+			SpawnLocation += {-30.0f, -50.0f};
+			ThrowVector.X = -ThrowVector.X;
+		}
+		else if (DirState == EActorDir::Right)
+		{
+			SpawnLocation += {30.0f, -50.0f};
+		}
+
+		Bomb->SetActorLocation(SpawnLocation);
+		Bomb->SetMoveVector(ThrowVector);
+	}
 }
 
 void Marco::AllCrouch_KnifeAttack1Start()
