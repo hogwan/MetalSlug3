@@ -19,6 +19,13 @@ public:
 	FVector MoveVector = FVector::Right;
 	float RunAwayRange = 300.0f;
 	float ThrowRange = 200.0f;
+
+	void SetPattern(SoldierPattern _Pattern)
+	{
+		Pattern = _Pattern;
+	}
+
+	void StateChange(SoldierState _State);
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -28,7 +35,6 @@ protected:
 
 
 	void StateUpdate(float _DeltaTime);
-	void StateChange(SoldierState _State);
 
 	void None(float _DeltaTime);
 	void Idle(float _DeltaTime);

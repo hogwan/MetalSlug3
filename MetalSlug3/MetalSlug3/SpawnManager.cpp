@@ -25,6 +25,7 @@
 #include "CameraModeSwitch.h"
 #include "ContentsHelper.h"
 #include "CameraManager.h"
+#include "Soldier.h"
 
 SpawnManager::SpawnManager()
 {
@@ -342,6 +343,121 @@ void SpawnManager::Tick(float _DeltaTime)
 		AWomanZombie* WomanZombie_3 = GetWorld()->SpawnActor<AWomanZombie>();
 		WomanZombie_3->SetActorLocation({ 5400,930 });
 		WomanZombie_3->StateChange(EnemyZombieState::Idle);
+
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 9 && TargetPos > 5950)
+	{
+		ASoldier* Soldier_0 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_0->SetPattern(SoldierPattern::Throw);
+		Soldier_0->StateChange(SoldierState::Move);
+		Soldier_0->SetActorLocation({ 6050,1050 });
+
+		ASoldier* Soldier_1 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_1->SetPattern(SoldierPattern::Throw);
+		Soldier_1->StateChange(SoldierState::Move);
+		Soldier_1->SetActorLocation({ 6120,1050 });
+
+		ASoldier* Soldier_2 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_2->SetPattern(SoldierPattern::Throw);
+		Soldier_2->StateChange(SoldierState::Move);
+		Soldier_2->SetActorLocation({ 6190,1050 });
+
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 10 && TargetPos > 6100)
+	{
+		ASoldier* Soldier_0 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_0->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_0->StateChange(SoldierState::Move);
+		Soldier_0->SetActorLocation({ 6150,1050 });
+
+		ASoldier* Soldier_1 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_1->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_1->StateChange(SoldierState::Move);
+		Soldier_1->SetActorLocation({ 6220,1050 });
+
+		ASoldier* Soldier_2 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_2->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_2->StateChange(SoldierState::Move);
+		Soldier_2->SetActorLocation({ 6290,1050 });
+
+		ASoldier* Soldier_3 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_3->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_3->StateChange(SoldierState::Move);
+		Soldier_3->SetActorLocation({ 6440,1050 });
+
+		ASoldier* Soldier_4 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_4->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_4->StateChange(SoldierState::Move);
+		Soldier_4->SetActorLocation({ 6510,1050 });
+
+		ASoldier* Soldier_5 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_5->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_5->StateChange(SoldierState::Move);
+		Soldier_5->SetActorLocation({ 6580,1050 });
+
+		ASoldier* Soldier_6 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_6->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_6->StateChange(SoldierState::Move);
+		Soldier_6->SetActorLocation({ 6730,1050 });
+
+		ASoldier* Soldier_7 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_7->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_7->StateChange(SoldierState::Move);
+		Soldier_7->SetActorLocation({ 6800,1050 });
+
+		ASoldier* Soldier_8 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_8->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_8->StateChange(SoldierState::Move);
+		Soldier_8->SetActorLocation({ 6870,1050 });
+
+		ASoldier* Soldier_9 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_9->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_9->StateChange(SoldierState::Move);
+		Soldier_9->SetActorLocation({ 7020,1050 });
+
+		ASoldier* Soldier_10 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_10->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_10->StateChange(SoldierState::Move);
+		Soldier_10->SetActorLocation({ 7090,1050 });
+
+		ASoldier* Soldier_11 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_11->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_11->StateChange(SoldierState::Move);
+		Soldier_11->SetActorLocation({ 7160,1050 });
+
+		ASoldier* Soldier_12 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_12->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_12->StateChange(SoldierState::Move);
+		Soldier_12->SetActorLocation({ 7310,1050 });
+
+		ASoldier* Soldier_13 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_13->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_13->StateChange(SoldierState::Move);
+		Soldier_13->SetActorLocation({ 7380,1050 });
+
+		ASoldier* Soldier_14 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_14->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_14->StateChange(SoldierState::Move);
+		Soldier_14->SetActorLocation({ 7450,1050 });
+
+		ASoldier* Soldier_15 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_15->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_15->StateChange(SoldierState::Move);
+		Soldier_15->SetActorLocation({ 7600,1050 });
+
+		ASoldier* Soldier_16 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_16->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_16->StateChange(SoldierState::Move);
+		Soldier_16->SetActorLocation({ 7680,1050 });
+
+		ASoldier* Soldier_17 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_17->SetPattern(SoldierPattern::KnifeAttack);
+		Soldier_17->StateChange(SoldierState::Move);
+		Soldier_17->SetActorLocation({ 7750,1050 });
 
 		++SpawnNumber;
 	}

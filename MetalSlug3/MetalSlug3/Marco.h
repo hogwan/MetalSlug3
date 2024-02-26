@@ -28,7 +28,7 @@ public:
 	bool IsZombie = false;
 	bool IsDeath = false;
 
-	int ArmsCount = 100;
+	int ArmsCount = 200;
 	int BombsCount = 10;
 	int RemainBomb = 2;
 

@@ -178,7 +178,7 @@ void ASoldier::Move(float _DeltaTime)
 	case SoldierPattern::Throw:
 	{
 		TargetVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
-		if (abs(TargetVector.X) > ThrowRange)
+		if (abs(TargetVector.X) > ThrowRange && abs(TargetVector.X) < ThrowRange + 50.0f)
 		{
 			if (TargetVector.X > 0.f)
 			{
@@ -194,13 +194,21 @@ void ASoldier::Move(float _DeltaTime)
 			return;
 		}
 
-		if (TargetVector.X > 0.0f)
+		if (TargetVector.X > 0.0f && abs(TargetVector.X) < ThrowRange)
 		{
 			MoveVector = FVector::Left;
 		}
-		else
+		else if (TargetVector.X > 0.0f && abs(TargetVector.X) > ThrowRange + 50.0f)
 		{
 			MoveVector = FVector::Right;
+		}
+		else if(TargetVector.X < 0.0f && abs(TargetVector.X) < ThrowRange)
+		{
+			MoveVector = FVector::Right;
+		}
+		else if (TargetVector.X < 0.0f && abs(TargetVector.X) > ThrowRange + 50.0f)
+		{
+			MoveVector = FVector::Left;
 		}
 
 		AddActorLocation(MoveVector * MoveSpeed * _DeltaTime);
@@ -344,6 +352,7 @@ void ASoldier::KnifeAttackStart()
 
 void ASoldier::DeathStart()
 {
+	Collider->ActiveOff();
 	std::vector<UCollision*> Result;
 	if (true == Collider->CollisionCheck(MT3CollisionOrder::PlayerKnife, Result))
 	{
