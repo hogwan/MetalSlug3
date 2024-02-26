@@ -393,7 +393,7 @@ void AZombies::AttackStart()
 
 void AZombies::DeathStart()
 {
-	Collider->Destroy();
+	Collider->ActiveOff();
 	CurAnimName = "Death";
 	DirCheck(CurAnimName);
 	Renderer->ChangeAnimation(CurAnimName);

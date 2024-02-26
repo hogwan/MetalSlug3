@@ -3,6 +3,7 @@
 #include "ContentsHelper.h"
 #include "Marco.h"
 #include "Enemy.h"
+#include "ExplosionEffect.h"
 
 ABomb::ABomb()
 {
@@ -11,6 +12,8 @@ ABomb::ABomb()
 ABomb::~ABomb()
 {
 	++UContentsHelper::Player->RemainBomb;
+	ExplosionEffect* Explosion = GetWorld()->SpawnActor<ExplosionEffect>();
+	Explosion->SetActorLocation(GetActorLocation());
 }
 
 ABomb::ABomb(FVector _Force)
@@ -53,9 +56,9 @@ void ABomb::ReflectionCheck()
 void ABomb::HitCheck()
 {
 	std::vector<UCollision*> Result;
-	if (Collider->CollisionCheck(MT3CollisionOrder::Player, Result))
+	if (Collider->CollisionCheck(MT3CollisionOrder::Enemy, Result))
 	{
-		AEnemy* Enemy = dynamic_cast<AEnemy*>(Result[0]);
+		AEnemy* Enemy = dynamic_cast<AEnemy*>(Result[0]->GetOwner());
 		Enemy->Damaged(Damage);
 		Destroy();
 	}
@@ -65,6 +68,7 @@ void ABomb::Tick(float _DeltaTime)
 	AddActorLocation(MoveVector * _DeltaTime);
 	GravityCheck(_DeltaTime);
 	ReflectionCheck();
+	HitCheck();
 
 }
 

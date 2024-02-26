@@ -139,6 +139,9 @@
     <ClInclude Include="SoldierBomb.h">
       <Filter>Object\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="ExplosionEffect.h">
+      <Filter>Object\Projectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -274,6 +277,9 @@
       <Filter>Object\Enemy\Solider</Filter>
     </ClCompile>
     <ClCompile Include="SoldierBomb.cpp">
+      <Filter>Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionEffect.cpp">
       <Filter>Object\Projectile</Filter>
     </ClCompile>
   </ItemGroup>

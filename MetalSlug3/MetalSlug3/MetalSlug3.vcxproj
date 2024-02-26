@@ -198,6 +198,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="ExplosionEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Front1.h">
       <SubType>
       </SubType>
@@ -370,6 +374,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="ExplosionEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Front1.cpp">
       <SubType>
       </SubType>
