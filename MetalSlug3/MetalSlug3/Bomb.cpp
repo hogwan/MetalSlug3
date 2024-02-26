@@ -2,6 +2,7 @@
 #include "EngineCore/EngineCore.h"
 #include "ContentsHelper.h"
 #include "Marco.h"
+#include "Enemy.h"
 
 ABomb::ABomb()
 {
@@ -52,9 +53,11 @@ void ABomb::ReflectionCheck()
 void ABomb::HitCheck()
 {
 	std::vector<UCollision*> Result;
-	if (Collider->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+	if (Collider->CollisionCheck(MT3CollisionOrder::Player, Result))
 	{
-		//데미지주고 디스트로이
+		AEnemy* Enemy = dynamic_cast<AEnemy*>(Result[0]);
+		Enemy->Damaged(Damage);
+		Destroy();
 	}
 }
 void ABomb::Tick(float _DeltaTime)

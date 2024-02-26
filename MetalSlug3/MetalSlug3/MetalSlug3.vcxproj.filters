@@ -133,8 +133,11 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="CameraManager.h" />
-    <ClInclude Include="Solider.h">
+    <ClInclude Include="Soldier.h">
       <Filter>Object\Enemy\Solider</Filter>
+    </ClInclude>
+    <ClInclude Include="SoldierBomb.h">
+      <Filter>Object\Projectile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -267,8 +270,11 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="CameraManager.cpp" />
-    <ClCompile Include="Solider.cpp">
+    <ClCompile Include="Soldier.cpp">
       <Filter>Object\Enemy\Solider</Filter>
+    </ClCompile>
+    <ClCompile Include="SoldierBomb.cpp">
+      <Filter>Object\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -283,7 +283,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Solider.h" />
+    <ClInclude Include="Soldier.h" />
+    <ClInclude Include="SoldierBomb.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SpawnManager.h">
       <SubType>
       </SubType>
@@ -451,7 +455,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Solider.cpp" />
+    <ClCompile Include="Soldier.cpp" />
+    <ClCompile Include="SoldierBomb.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="SpawnManager.cpp">
       <SubType>
       </SubType>

@@ -1,0 +1,353 @@
+#include "Soldier.h"
+#include "Marco.h"
+ASoldier::ASoldier()
+{
+}
+
+ASoldier::~ASoldier()
+{
+}
+
+void ASoldier::BeginPlay()
+{
+	AEnemy::BeginPlay();
+
+	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
+	Renderer->SetImage("Soldier.png");
+	Renderer->SetTransform({ {0,0}, {500,500} });
+	Renderer->CreateAnimation("Idle_Right", "Soldier.png", 0, 3, 0.2f, false);
+	Renderer->CreateAnimation("Move_Right", "Soldier.png", 4, 15, 0.08f, true);
+	Renderer->CreateAnimation("DeathByGun_Right", "Soldier.png", 16, 21, 0.08f, false);
+	Renderer->CreateAnimation("Throw_Right", "Soldier.png", 30, 43, 0.08f, false);
+	Renderer->CreateAnimation("KnifeAttack_Right", "Soldier.png", 44, 55, 0.08f, false);
+	Renderer->CreateAnimation("DeathByKnife_Right", "Soldier.png", 56, 67, 0.08f, false);
+
+	Renderer->CreateAnimation("Idle_Left", "Soldier.png", 70, 73, 0.2f, false);
+	Renderer->CreateAnimation("Move_Left", "Soldier.png", 74, 85, 0.08f, true);
+	Renderer->CreateAnimation("DeathByGun_Left", "Soldier.png", 86, 91, 0.08f, false);
+	Renderer->CreateAnimation("Throw_Left", "Soldier.png", 100, 113, 0.08f, false);
+	Renderer->CreateAnimation("KnifeAttack_Left", "Soldier.png", 114, 125, 0.08f, false);
+	Renderer->CreateAnimation("DeathByKnife_Left", "Soldier.png", 126, 137, 0.08f, false);
+
+	Collider = CreateCollision(MT3CollisionOrder::Enemy);
+	Collider->SetTransform({ {0,-50},{50,100} });
+	Collider->SetColType(ECollisionType::Rect);
+
+	KnifeAttackCollider = CreateCollision(MT3CollisionOrder::Detect);
+	KnifeAttackCollider->SetTransform({ KnifeReachCollisionPosition_Right, KnifeReachCollisionScale});
+	KnifeAttackCollider->SetColType(ECollisionType::Rect);
+
+	ChangePattern(SoldierPattern::KnifeAttack);
+}
+
+void ASoldier::Tick(float _DeltaTime)
+{
+	AEnemy::Tick(_DeltaTime);
+
+	GravityCheck(_DeltaTime);
+	GroundUp();
+	StateUpdate(_DeltaTime);
+}
+
+void ASoldier::StateUpdate(float _DeltaTime)
+{
+	switch (CurState)
+	{
+	case SoldierState::None:
+		None(_DeltaTime);
+		break;
+	case SoldierState::Idle:
+		Idle(_DeltaTime);
+		break;
+	case SoldierState::Move:
+		Move(_DeltaTime);
+		break;
+	case SoldierState::KnifeAttack:
+		KnifeAttack(_DeltaTime);
+		break;
+	case SoldierState::Throw:
+		Throw(_DeltaTime);
+		break;
+	case SoldierState::Death:
+		Death(_DeltaTime);
+		break;
+	default:
+		break;
+	}
+}
+
+void ASoldier::StateChange(SoldierState _State)
+{
+	if (CurState != _State)
+	{
+		switch (_State)
+		{
+		case SoldierState::None:
+			NoneStart();
+			break;
+		case SoldierState::Idle:
+			IdleStart();
+			break;
+		case SoldierState::Move:
+			MoveStart();
+			break;
+		case SoldierState::KnifeAttack:
+			KnifeAttackStart();
+			break;
+		case SoldierState::Throw:
+			ThrowStart();
+			break;
+		case SoldierState::Death:
+			DeathStart();
+			break;
+		default:
+			break;
+		}
+	}
+
+	CurState = _State;
+}
+
+void ASoldier::None(float _DeltaTime)
+{
+	StateChange(SoldierState::Idle);
+	return;
+}
+
+void ASoldier::Idle(float _DeltaTime)
+{
+	DirCheck();
+
+	if (Renderer->IsCurAnimationEnd())
+	{
+		switch (Pattern)
+		{
+		case SoldierPattern::KnifeAttack:
+			StateChange(SoldierState::Move);
+			break;
+		case SoldierPattern::Throw:
+			StateChange(SoldierState::Move);
+			break;
+		case SoldierPattern::RunAway:
+			StateChange(SoldierState::Move);
+			break;
+		}
+	}
+
+}
+
+void ASoldier::Move(float _DeltaTime)
+{
+	DirCheck();
+
+	switch (Pattern)
+	{
+	case SoldierPattern::KnifeAttack:
+	{
+		TargetVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
+		std::vector<UCollision*> Result;
+		if (true == Collider->CollisionCheck(MT3CollisionOrder::Player, Result))
+		{
+			StateChange(SoldierState::KnifeAttack);
+			return;
+		}
+
+		if (TargetVector.X > 0.0f)
+		{
+			MoveVector = FVector::Right;
+		}
+		else
+		{
+			MoveVector = FVector::Left;
+		}
+
+		AddActorLocation(MoveVector * MoveSpeed * _DeltaTime);
+
+	}
+		break;
+	case SoldierPattern::Throw:
+	{
+		TargetVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
+		if (abs(TargetVector.X) > ThrowRange)
+		{
+			StateChange(SoldierState::Throw);
+			return;
+		}
+
+		if (TargetVector.X > 0.0f)
+		{
+			MoveVector = FVector::Left;
+		}
+		else
+		{
+			MoveVector = FVector::Right;
+		}
+
+		AddActorLocation(MoveVector * MoveSpeed * _DeltaTime);
+	}
+		break;
+	case SoldierPattern::RunAway:
+	{
+		TargetVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
+		if (abs(TargetVector.X) > RunAwayRange)
+		{
+			RandomPattern();
+			StateChange(SoldierState::Idle);
+			return;
+		}
+		if (TargetVector.X > 0.0f)
+		{
+			MoveVector = FVector::Left;
+		}
+		else
+		{
+			MoveVector = FVector::Right;
+		}
+
+		AddActorLocation(MoveVector * MoveSpeed * _DeltaTime);
+	}
+		break;
+	}
+}
+
+void ASoldier::Throw(float _DeltaTime)
+{
+	if (Renderer->IsCurAnimationEnd())
+	{
+		RandomPattern();
+		StateChange(SoldierState::Idle);
+		return;
+	}
+}
+
+void ASoldier::KnifeAttack(float _DeltaTime)
+{
+	if (Renderer->IsCurAnimationEnd())
+	{
+		RandomPattern();
+		StateChange(SoldierState::Idle);
+		return;
+	}
+}
+
+void ASoldier::Death(float _DeltaTime)
+{
+	if (Renderer->IsCurAnimationEnd())
+	{
+		Destroy();
+		return;
+	}
+}
+
+void ASoldier::NoneStart()
+{
+}
+
+void ASoldier::IdleStart()
+{
+	CurAnimName = "Idle";
+	DirCheck();
+}
+
+void ASoldier::MoveStart()
+{
+	CurAnimName = "Move";
+	DirCheck();
+}
+
+void ASoldier::ThrowStart()
+{
+	CurAnimName = "Throw";
+	FVector TargetVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
+	if (TargetVector.X > 0.0f)
+	{
+		MoveVector = FVector::Right;
+	}
+	else
+	{
+		MoveVector = FVector::Left;
+	}
+
+	DirCheck();
+}
+
+void ASoldier::KnifeAttackStart()
+{
+	CurAnimName = "KnifeAttack";
+	FVector TargetVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
+	if (TargetVector.X > 0.0f)
+	{
+		MoveVector = FVector::Right;
+	}
+	else
+	{
+		MoveVector = FVector::Left;
+	}
+	DirCheck();
+}
+
+void ASoldier::DeathStart()
+{
+	CurAnimName = "Death";
+	FVector TargetVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
+	if (TargetVector.X > 0.0f)
+	{
+		MoveVector = FVector::Right;
+	}
+	else
+	{
+		MoveVector = FVector::Left;
+	}
+	DirCheck();
+}
+
+void ASoldier::DirCheck()
+{
+	std::string DirCheckedName = CurAnimName;
+	if (MoveVector.X < 0.0f)
+	{
+		DirCheckedName += "_Left";
+	}
+	else
+	{
+		DirCheckedName += "_Right";
+	}
+
+	Renderer->ChangeAnimation(DirCheckedName, false, 0, 0.08f);
+}
+
+void ASoldier::GravityCheck(float _DeltaTime)
+{
+	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	if (Color != Color8Bit(255, 0, 255, 0))
+	{
+		AddActorLocation(FVector::Down * 500.0f * _DeltaTime);
+	}
+}
+
+void ASoldier::GroundUp()
+{
+	while (true)
+	{
+		Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+		if (Color == Color8Bit(255, 0, 255, 0))
+		{
+			AddActorLocation(FVector::Up);
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+
+void ASoldier::RandomPattern()
+{
+	int Random = rand() % 3;
+	Pattern = SoldierPattern(Random);
+}
+
+void ASoldier::ChangePattern(SoldierPattern _Pattern)
+{
+	Pattern = _Pattern;
+}

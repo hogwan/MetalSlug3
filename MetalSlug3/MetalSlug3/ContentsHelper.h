@@ -30,6 +30,8 @@ enum class MT3CollisionOrder
 	Screen,
 	Detect,
 	CameraSwitch,
+	EnemyKnife,
+	PlayerKnife,
 };
 
 enum class EActorDir
@@ -160,7 +162,7 @@ enum class HumanState
 	Death,
 };
 
-enum class SoilderState
+enum class SoldierState
 {
 	None,
 	Idle,
@@ -170,7 +172,7 @@ enum class SoilderState
 	Death,
 };
 
-enum class SoliderPattern
+enum class SoldierPattern
 {
 	KnifeAttack,
 	Throw,

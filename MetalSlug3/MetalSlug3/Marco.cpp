@@ -34,7 +34,7 @@ void Marco::BeginPlay()
 	Collision->SetPosition(DefaultCollisionPosition);
 	Collision->SetColType(ECollisionType::Rect);
 
-	KnifeReach = CreateCollision(MT3CollisionOrder::Detect);
+	KnifeReach = CreateCollision(MT3CollisionOrder::PlayerKnife);
 	KnifeReach->SetScale(KnifeReachCollisionScale);
 	KnifeReach->SetPosition(KnifeReachCollisionPosition_Right);
 	KnifeReach->SetColType(ECollisionType::Rect);

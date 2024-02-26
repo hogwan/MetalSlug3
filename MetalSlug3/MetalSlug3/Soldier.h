@@ -2,21 +2,23 @@
 #include "Enemy.h"
 #include "ContentsHelper.h"
 
-class ASolider : public AEnemy
+class ASoldier : public AEnemy
 {
 public:
 	// constrcuter destructer
-	ASolider();
-	~ASolider();
+	ASoldier();
+	~ASoldier();
 
 	// delete Function
-	ASolider(const ASolider& _Other) = delete;
-	ASolider(ASolider&& _Other) noexcept = delete;
-	ASolider& operator=(const ASolider& _Other) = delete;
-	ASolider& operator=(ASolider&& _Other) noexcept = delete;
+	ASoldier(const ASoldier& _Other) = delete;
+	ASoldier(ASoldier&& _Other) noexcept = delete;
+	ASoldier& operator=(const ASoldier& _Other) = delete;
+	ASoldier& operator=(ASoldier&& _Other) noexcept = delete;
 
 	FVector TargetVector = FVector::Zero;
-	FVector MoveVector = FVector::Zero;
+	FVector MoveVector = FVector::Right;
+	float RunAwayRange = 300.0f;
+	float ThrowRange = 200.0f;
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -24,7 +26,7 @@ protected:
 	UCollision* KnifeAttackCollider = nullptr;
 
 	void StateUpdate(float _DeltaTime);
-	void StateChange(SoilderState _State);
+	void StateChange(SoldierState _State);
 
 	void None(float _DeltaTime);
 	void Idle(float _DeltaTime);
@@ -40,18 +42,20 @@ protected:
 	void KnifeAttackStart();
 	void DeathStart();
 
-	SoliderPattern Pattern = SoliderPattern::KnifeAttack;
+	SoldierPattern Pattern = SoldierPattern::KnifeAttack;
 	std::string CurAnimName = "None";
-	void TargetCheck();
 	void DirCheck();
 	void GravityCheck(float _DeltaTime);
 	void GroundUp();
+	void RandomPattern();
 
-	void ChangePattern(SoliderPattern _Pattern);
-	SoilderState CurState = SoilderState::None;
+	void ChangePattern(SoldierPattern _Pattern);
+	SoldierState CurState = SoldierState::None;
 
 	FVector KnifeReachCollisionScale = { 30,80 };
 	FVector KnifeReachCollisionPosition_Right = { 35,-50 };
 	FVector KnifeReachCollisionPosition_Left = { -35,-50 };
+
+	float MoveSpeed = 150.0f;
 };
 

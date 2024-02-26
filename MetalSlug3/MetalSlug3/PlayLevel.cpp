@@ -5,6 +5,7 @@
 #include "SpawnManager.h"
 #include "CameraManager.h"
 #include "ContentsHelper.h"
+#include "Soldier.h"
 
 PlayLevel::PlayLevel()
 {
@@ -80,8 +81,10 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("YellowFont.png", 10, 4);
 	UEngineResourcesManager::GetInst().CuttingImage("Status.png", 2, 1);
 
-	UEngineResourcesManager::GetInst().CuttingImage("Solider.png", 10, 14);
-
+	UEngineResourcesManager::GetInst().CuttingImage("Soldier.png", 10, 14);
+	UEngineResourcesManager::GetInst().CuttingImage("SoldierBomb.png", 10, 2);
 	SpawnActor<SpawnManager>();
+	ASoldier* aa = SpawnActor<ASoldier>();
+	aa->SetActorLocation({500,1000});
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 }
