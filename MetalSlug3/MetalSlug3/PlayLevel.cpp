@@ -84,6 +84,9 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Soldier.png", 10, 14);
 	UEngineResourcesManager::GetInst().CuttingImage("SoldierBomb.png", 10, 2);
 
+	UEngineResourcesManager::GetInst().CuttingImage("Helicopter.png", 10, 12);
+	UEngineResourcesManager::GetInst().CuttingImage("LeaderHelicopter.png", 10, 12);
+
 	UEngineResourcesManager::GetInst().CuttingImage("NormalExplosion.png", 10, 3);
 	SpawnActor<SpawnManager>();
 	ASoldier* aa = SpawnActor<ASoldier>();

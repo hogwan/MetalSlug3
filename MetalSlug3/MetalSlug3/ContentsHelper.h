@@ -179,6 +179,13 @@ enum class SoldierPattern
 	RunAway,
 };
 
+enum class HelicopterState
+{
+	None,
+	Move,
+	Aiming,
+};
+
 class UContentsHelper
 {
 public:

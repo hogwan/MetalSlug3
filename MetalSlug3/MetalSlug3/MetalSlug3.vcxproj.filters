@@ -142,6 +142,9 @@
     <ClInclude Include="ExplosionEffect.h">
       <Filter>Object\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="Helicopter.h">
+      <Filter>Object\Enemy\Helicopter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -282,6 +285,9 @@
     <ClCompile Include="ExplosionEffect.cpp">
       <Filter>Object\Projectile</Filter>
     </ClCompile>
+    <ClCompile Include="Helicopter.cpp">
+      <Filter>Object\Enemy\Helicopter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -328,6 +334,9 @@
     </Filter>
     <Filter Include="Object\Enemy\Solider">
       <UniqueIdentifier>{9a991c7e-38b8-4f16-81fe-3dd8163a91d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Helicopter">
+      <UniqueIdentifier>{9e8d0e4d-f1d7-434f-938f-22216f79b6da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
