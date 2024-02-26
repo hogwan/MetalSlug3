@@ -145,7 +145,7 @@ void Marco::InAirCheck()
 
 void Marco::DeathCheck()
 {
-	//if (NoHit) return;
+	if (NoHit) return;
 
 	std::vector<UCollision*> Result;
 	if (IsZombie)

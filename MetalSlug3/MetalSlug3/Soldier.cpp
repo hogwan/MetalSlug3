@@ -18,14 +18,14 @@ void ASoldier::BeginPlay()
 	Renderer->SetTransform({ {0,0}, {500,500} });
 	Renderer->CreateAnimation("Idle_Right", "Soldier.png", 0, 3, 0.2f, false);
 	Renderer->CreateAnimation("Move_Right", "Soldier.png", 4, 15, 0.08f, true);
-	Renderer->CreateAnimation("DeathByGun_Right", "Soldier.png", 16, 21, 0.08f, false);
+	Renderer->CreateAnimation("DeathByGun_Right", "Soldier.png", 16, 21, 0.12f, false);
 	Renderer->CreateAnimation("Throw_Right", "Soldier.png", 30, 43, 0.08f, false);
 	Renderer->CreateAnimation("KnifeAttack_Right", "Soldier.png", 44, 55, 0.08f, false);
 	Renderer->CreateAnimation("DeathByKnife_Right", "Soldier.png", 56, 67, 0.08f, false);
 
 	Renderer->CreateAnimation("Idle_Left", "Soldier.png", 70, 73, 0.2f, false);
 	Renderer->CreateAnimation("Move_Left", "Soldier.png", 74, 85, 0.08f, true);
-	Renderer->CreateAnimation("DeathByGun_Left", "Soldier.png", 86, 91, 0.08f, false);
+	Renderer->CreateAnimation("DeathByGun_Left", "Soldier.png", 86, 91, 0.12f, false);
 	Renderer->CreateAnimation("Throw_Left", "Soldier.png", 100, 113, 0.08f, false);
 	Renderer->CreateAnimation("KnifeAttack_Left", "Soldier.png", 114, 125, 0.08f, false);
 	Renderer->CreateAnimation("DeathByKnife_Left", "Soldier.png", 126, 137, 0.08f, false);
@@ -52,6 +52,11 @@ void ASoldier::Tick(float _DeltaTime)
 	GravityCheck(_DeltaTime);
 	GroundUp();
 	StateUpdate(_DeltaTime);
+	
+	if (Hp <= 0)
+	{
+		StateChange(SoldierState::Death);
+	}
 }
 
 void ASoldier::StateUpdate(float _DeltaTime)
@@ -339,7 +344,15 @@ void ASoldier::KnifeAttackStart()
 
 void ASoldier::DeathStart()
 {
-	CurAnimName = "Death";
+	std::vector<UCollision*> Result;
+	if (true == Collider->CollisionCheck(MT3CollisionOrder::PlayerKnife, Result))
+	{
+		CurAnimName = "DeathByKnife";
+	}
+	else
+	{
+		CurAnimName = "DeathByGun";
+	}
 	FVector TargetVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
 	if (TargetVector.X > 0.0f)
 	{
