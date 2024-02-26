@@ -19,11 +19,13 @@ public:
 	int Update(float _DeltaTime);
 };
 
+class AActor;
 class UWindowImage;
 // Ό³Έν :
 class UImageRenderer : public USceneComponent
 {
 public:
+	friend AActor;
 
 public:
 	// constrcuter destructer
@@ -57,11 +59,11 @@ public:
 	}
 
 	void CreateAnimation(
-		std::string_view _AnimationName,
-		std::string_view _ImageName,
-		int _Start,
-		int _End,
-		float _Inter,
+		std::string_view _AnimationName, 
+		std::string_view _ImageName, 
+		int _Start, 
+		int _End, 
+		float _Inter, 
 		bool _Loop = true
 	);
 
@@ -107,7 +109,7 @@ public:
 		return Image;
 	}
 
-	void CameraEffectOff()
+	void CameraEffectOff() 
 	{
 		CameraEffect = false;
 	}
@@ -131,6 +133,11 @@ public:
 	float GetCurAnimationTime() const
 	{
 		return CurAnimation->CurTime;
+	}
+
+	UAnimationInfo* GetCurAnimation() const
+	{
+		return CurAnimation;
 	}
 
 	void TextRender(float _DeltaTime);
@@ -168,6 +175,7 @@ public:
 
 protected:
 	void BeginPlay() override;
+	void Tick(float _Time) override;
 
 private:
 	int InfoIndex = 0;

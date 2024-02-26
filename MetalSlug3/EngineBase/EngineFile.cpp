@@ -1,6 +1,6 @@
 #include "EngineFile.h"
 
-UEngineFile::UEngineFile()
+UEngineFile::UEngineFile() 
 {
 }
 
@@ -10,7 +10,7 @@ UEngineFile::UEngineFile(std::filesystem::path _Path)
 
 }
 
-UEngineFile::~UEngineFile()
+UEngineFile::~UEngineFile() 
 {
 }
 

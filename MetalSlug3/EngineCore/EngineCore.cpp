@@ -7,12 +7,12 @@
 bool UEngineCore::IsDebugValue = false;
 UEngineCore* GEngine = nullptr;
 
-UEngineCore::UEngineCore()
+UEngineCore::UEngineCore() 
 	: MainWindow()
 {
 }
 
-UEngineCore::~UEngineCore()
+UEngineCore::~UEngineCore() 
 {
 }
 
@@ -50,7 +50,7 @@ void UEngineCore::CoreTick()
 		if (CurFrameTime <= FrameTime)
 		{
 			return;
-		}
+		} 
 
 		//  0.0167         0.016666675
 		CurFrameTime -= FrameTime;
@@ -86,6 +86,7 @@ void UEngineCore::CoreTick()
 		NextLevel = nullptr;
 		MainTimer.TimeCheckStart();
 		DeltaTime = MainTimer.TimeCheck();
+		CurFrameTime = 0.0f;
 	}
 
 
@@ -146,7 +147,7 @@ void UEngineCore::EngineStart(HINSTANCE _hInstance)
 {
 	GEngine = this;
 	MainTimer.TimeCheckStart();
-	CoreInit(_hInstance);
+	CoreInit(_hInstance); 
 	BeginPlay();
 	UEngineWindow::WindowMessageLoop(EngineTick, EngineEnd);
 }

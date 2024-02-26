@@ -2,7 +2,7 @@
 #include "EngineDebug.h"
 #include <Windows.h>
 
-UEnginePath::UEnginePath()
+UEnginePath::UEnginePath() 
 	: Path(std::filesystem::current_path())
 {
 	// 과거의 방식
@@ -19,7 +19,7 @@ UEnginePath::UEnginePath(std::filesystem::path _Path)
 {
 }
 
-UEnginePath::~UEnginePath()
+UEnginePath::~UEnginePath() 
 {
 }
 
@@ -57,6 +57,11 @@ bool UEnginePath::IsExists()
 void UEnginePath::MoveParent()
 {
 	Path = Path.parent_path();
+}
+
+bool UEnginePath::IsRoot()
+{
+	return Path.root_path() == Path;
 }
 
 bool UEnginePath::IsFile()

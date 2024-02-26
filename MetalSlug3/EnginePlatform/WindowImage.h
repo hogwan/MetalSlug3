@@ -28,7 +28,7 @@ enum class EWIndowImageType
 	IMG_PNG
 };
 
-class UImageInfo
+class UImageInfo 
 {
 public:
 	HBITMAP hBitMap;
@@ -94,6 +94,8 @@ public:
 	bool Create(UWindowImage* _Image, const FVector& _Scale);
 
 	void Cutting(int _X, int _Y);
+
+	void SetCuttingTransform(const FTransform& _CuttingTrans, int _Index = 0);
 
 	void DrawRectangle(const FTransform& _Trans);
 	void DrawEllipse(const FTransform& _Trans);

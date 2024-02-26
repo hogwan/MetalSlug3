@@ -144,7 +144,7 @@ public:
 	}
 
 	// p1 p2          d1의 비율로 간다.
-	static float4 Lerp(float4 p1, float4 p2, float d1)
+	static float4 Lerp(float4 p1, float4 p2, float d1) 
 	{
 		return (p1 * (1.0f - d1)) + (p2 * d1);
 	}
@@ -171,10 +171,13 @@ public:
 	void Normalize2D()
 	{
 		float Size = Size2D();
-		X /= Size;
-		Y /= Size;
-		Z = 0.0f;
-		W = 0.0f;
+		if (0.0f < Size && false == isnan(Size))
+		{
+			X /= Size;
+			Y /= Size;
+			Z = 0.0f;
+			W = 0.0f;
+		}
 	}
 
 	// 나는 변화하지 않고 길이 1짜리로 변한 나와 방향이 같은 벡터를 리턴하는 함수
@@ -297,7 +300,7 @@ public:
 		return *this;
 	}
 
-	float4 operator-()
+	float4 operator-() 
 	{
 		float4 Result;
 		Result.X = -X;

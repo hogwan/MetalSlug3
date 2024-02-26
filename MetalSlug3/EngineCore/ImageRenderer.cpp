@@ -90,6 +90,17 @@ void UImageRenderer::BeginPlay()
 	USceneComponent::BeginPlay();
 }
 
+void UImageRenderer::Tick(float _DeltaTime)
+{
+	USceneComponent::Tick(_DeltaTime);
+
+	if (nullptr != CurAnimation)
+	{
+		Image = CurAnimation->Image;
+		InfoIndex = CurAnimation->Update(_DeltaTime);
+	}
+}
+
 void UImageRenderer::SetImage(std::string_view _Name, int _InfoIndex /*= 0*/)
 {
 	Image = UEngineResourcesManager::GetInst().FindImg(_Name);
@@ -242,12 +253,6 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 		MsgBoxAssert("이미지가 존재하지 않는 랜더러 입니다");
 	}
 
-	if (nullptr != CurAnimation)
-	{
-		Image = CurAnimation->Image;
-		InfoIndex = CurAnimation->Update(_DeltaTime);
-	}
-
 	FTransform RendererTrans = GetRenderTransForm();
 
 	EWIndowImageType ImageType = Image->GetImageType();
@@ -263,7 +268,7 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 		{
 			GEngine->MainWindow.GetBackBufferImage()->AlphaCopy(Image, RendererTrans, InfoIndex, TransColor);
 		}
-		else
+		else 
 		{
 			GEngine->MainWindow.GetBackBufferImage()->PlgCopy(Image, RendererTrans, InfoIndex, Angle * UEngineMath::DToR);
 		}
