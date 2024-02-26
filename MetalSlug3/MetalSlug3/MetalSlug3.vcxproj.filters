@@ -145,6 +145,9 @@
     <ClInclude Include="Helicopter.h">
       <Filter>Object\Enemy\Helicopter</Filter>
     </ClInclude>
+    <ClInclude Include="HelicopterBullet.h">
+      <Filter>Object\Enemy\Helicopter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -286,6 +289,9 @@
       <Filter>Object\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="Helicopter.cpp">
+      <Filter>Object\Enemy\Helicopter</Filter>
+    </ClCompile>
+    <ClCompile Include="HelicopterBullet.cpp">
       <Filter>Object\Enemy\Helicopter</Filter>
     </ClCompile>
   </ItemGroup>

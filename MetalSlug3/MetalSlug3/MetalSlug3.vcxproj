@@ -226,6 +226,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="HelicopterBullet.h" />
     <ClInclude Include="Human.h">
       <SubType>
       </SubType>
@@ -406,6 +407,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="HelicopterBullet.cpp" />
     <ClCompile Include="Human.cpp">
       <SubType>
       </SubType>
