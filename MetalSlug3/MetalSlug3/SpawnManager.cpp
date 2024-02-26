@@ -26,6 +26,7 @@
 #include "ContentsHelper.h"
 #include "CameraManager.h"
 #include "Soldier.h"
+#include "Helicopter.h"
 
 SpawnManager::SpawnManager()
 {
@@ -462,9 +463,17 @@ void SpawnManager::Tick(float _DeltaTime)
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 11 && TargetPos > 7310)
+	if (SpawnNumber == 11 && TargetPos > 7265)
 	{
+		AHelicopter* Helicopter_0 = GetWorld()->SpawnActor<AHelicopter>();
+		Helicopter_0->SetActorLocation({ 6300,970 });
+		Helicopter_0->Offset = { 0.f,-200.0f };
+		Helicopter_0->StateChange(HelicopterState::Move);
 
+		AHelicopter* Helicopter_1 = GetWorld()->SpawnActor<AHelicopter>();
+		Helicopter_1->SetActorLocation({ 7650,1400 });
+		Helicopter_1->Offset = { 0.f,-300.0f };
+		Helicopter_1->StateChange(HelicopterState::Move);
 
 		++SpawnNumber;
 	}

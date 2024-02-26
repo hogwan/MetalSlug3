@@ -1262,8 +1262,8 @@ void Marco::UpperShoot(float _DeltaTime)
 		if (CurFrame >= 3)
 		{
 			if (
-				true == UEngineInput::IsDown('A') ||
-				true == UEngineInput::IsDown('a')
+				true == UEngineInput::IsPress('A') ||
+				true == UEngineInput::IsPress('a')
 				)
 			{
 				std::vector<UCollision*> Result;

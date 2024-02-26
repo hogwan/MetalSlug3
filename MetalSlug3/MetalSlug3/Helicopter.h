@@ -23,10 +23,14 @@ protected:
 	void None(float _DeltaTime);
 	void Move(float _DeltaTime);
 	void Aiming(float _DeltaTime);
+	void Shoot(float _DeltaTime);
+	void Death(float _DeltaTime);
 
 	void NoneStart();
 	void MoveStart();
 	void AimingStart();
+	void ShootStart();
+	void DeathStart();
 
 private:
 	HelicopterState CurState = HelicopterState::None;
@@ -34,16 +38,22 @@ private:
 
 	FVector MoveVector = FVector::Zero;
 	FVector TargetVector = FVector::Zero;
+	FVector ShootVector = FVector::Zero;
 
 	void DirCheck();
 
 	float Speed = 300.0f;
-	float ShootCoolDown = 2.0f;
+	float ShootCoolDown = 1.0f;
 	float MoveCoolDown = 1.0f;
 	float AccMove = 0.0f;
 	float AccAiming = 0.0f;
 
 	int Bullet = 3;
 	float BulletCoolDown = 0.1f;
+	float AccBullet = 0.0f;
+
+	float DamagedEffectTime = 0.02f;
+	float DamagedEffectAcc = 0.0f;
+	int PrevHp = -1;
 };
 

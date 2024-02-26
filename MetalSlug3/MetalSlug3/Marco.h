@@ -352,11 +352,11 @@ private:
 
 	int KnifeDamage = 2;
 
-	FVector KnifeReachCollisionScale = { 30,80 };
+	FVector KnifeReachCollisionScale = { 70,80 };
 	FVector KnifeReachCollisionPosition_Right = {35,-50 };
 	FVector KnifeReachCollisionPosition_Left = { -35,-50 };
 
-	FVector CrouchKnifeReachCollisionScale = { 30,40 };
+	FVector CrouchKnifeReachCollisionScale = { 70,40 };
 	FVector CrouchKnifeReachCollisionPosition_Right = { 35,-25 };
 	FVector CrouchKnifeReachCollisionPosition_Left = { -35,-25 };
 

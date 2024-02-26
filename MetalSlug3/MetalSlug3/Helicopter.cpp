@@ -1,6 +1,7 @@
 #include "Helicopter.h"
 #include "Marco.h"
 #include "HelicopterBullet.h"
+#include "ExplosionEffect.h"
 
 AHelicopter::AHelicopter()
 {
@@ -8,6 +9,9 @@ AHelicopter::AHelicopter()
 
 AHelicopter::~AHelicopter()
 {
+	ExplosionEffect* Explosion = GetWorld()->SpawnActor<ExplosionEffect>();
+	Explosion->SetActorLocation(GetActorLocation());
+	Explosion->SetSize(FVector{ 800,800 });
 }
 
 
@@ -43,6 +47,8 @@ void AHelicopter::BeginPlay()
 
 	StateChange(HelicopterState::Move);
 	Renderer->ChangeAnimation("Speed4_Right");
+
+	Hp = 20;
 }
 
 void AHelicopter::Tick(float _DeltaTime)
@@ -50,6 +56,25 @@ void AHelicopter::Tick(float _DeltaTime)
 	AEnemy::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
+
+	DamagedEffectAcc += _DeltaTime;
+	if (DamagedEffectAcc > DamagedEffectTime)
+	{
+		Renderer->SetAlpha(1.0f);
+	}
+
+	if (Hp != PrevHp)
+	{
+		DamagedEffectAcc = 0.0f;
+		Renderer->SetAlpha(0.5f);
+		PrevHp = Hp;
+	}
+
+	if (Hp <= 0)
+	{
+		StateChange(HelicopterState::Death);
+		return;
+	}
 }
 
 void AHelicopter::StateUpdate(float _DeltaTime)
@@ -64,6 +89,14 @@ void AHelicopter::StateUpdate(float _DeltaTime)
 		break;;
 	case HelicopterState::Aiming:
 		Aiming(_DeltaTime);
+		break;
+	case HelicopterState::Shoot:
+		Shoot(_DeltaTime);
+		break;
+	case HelicopterState::Death:
+		Death(_DeltaTime);
+		break;
+	default:
 		break;
 	}
 }
@@ -82,6 +115,14 @@ void AHelicopter::StateChange(HelicopterState _State)
 			break;;
 		case HelicopterState::Aiming:
 			AimingStart();
+			break;
+		case HelicopterState::Shoot:
+			ShootStart();
+			break;
+		case HelicopterState::Death:
+			DeathStart();
+			break;
+		default:
 			break;
 		}
 	}
@@ -137,11 +178,6 @@ void AHelicopter::Move(float _DeltaTime)
 		StateChange(HelicopterState::Aiming);
 		return;
 	}
-	/*0.7764580943901145744254063635837(69,56)
-
-	0.57993129338951082900686700669849(42,59)
-
-	0.16598207031014622822993720684492 (16,102)*/
 }
 
 void AHelicopter::Aiming(float _DeltaTime)
@@ -149,6 +185,7 @@ void AHelicopter::Aiming(float _DeltaTime)
 	AccAiming += _DeltaTime;
 	FVector AimVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
 	AimVector.Normalize2D();
+	DirCheck();
 
 	if (abs(AimVector.X) < 0.17f)
 	{
@@ -160,29 +197,52 @@ void AHelicopter::Aiming(float _DeltaTime)
 	}
 	else
 	{
+		AccAiming = 0.0f;
+		StateChange(HelicopterState::Move);
+		return;
+	}
+
+	if (AccAiming > ShootCoolDown)
+	{
+		AccAiming = 0.0f;
+		StateChange(HelicopterState::Shoot);
+		return;
+	}
+
+}
+
+void AHelicopter::Shoot(float _DeltaTime)
+{
+	AccBullet += _DeltaTime;
+	if (AccBullet > BulletCoolDown && Bullet > 0)
+	{
+		AHelicopterBullet* BulletPtr = GetWorld()->SpawnActor<AHelicopterBullet>();
+		BulletPtr->SetDir(ShootVector);
+		BulletPtr->SetActorLocation(GetActorLocation());
+		--Bullet;
+		AccBullet = 0.0f;
+	}
+
+	if (Bullet == 0)
+	{
 		AccMove += _DeltaTime;
 		if (AccMove > MoveCoolDown)
 		{
 			AccMove = 0.0f;
-			StateChange(HelicopterState::Move);
+			Bullet = 3;
+			StateChange(HelicopterState::Aiming);
 			return;
 		}
 	}
+}
 
-	DirCheck();
-
-	if (AccAiming > ShootCoolDown && Bullet > 0)
+void AHelicopter::Death(float _DeltaTime)
+{
+	AddActorLocation(FVector::Down * 600.0f* _DeltaTime);
+	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	if (Color == Color8Bit(255, 0, 255, 0))
 	{
-		AHelicopterBullet* BulletPtr = GetWorld()->SpawnActor<AHelicopterBullet>();
-		BulletPtr->SetDir(AimVector);
-		BulletPtr->SetActorLocation(GetActorLocation());
-		--Bullet;
-
-		AccAiming = 0.0f;
-		if (Bullet <= 0)
-		{
-			Bullet = 3;
-		}
+		Destroy();
 	}
 }
 
@@ -223,6 +283,34 @@ void AHelicopter::MoveStart()
 
 void AHelicopter::AimingStart()
 {
+}
+
+void AHelicopter::ShootStart()
+{
+	FVector AimVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
+	AimVector.Normalize2D();
+	if (abs(AimVector.X) < 0.17f)
+	{
+		ShootVector = FVector::Down;
+		ShootVector.Normalize2D();
+	}
+	else
+	{
+		if (AimVector.X > 0.0f)
+		{
+			ShootVector = { 41.0f,60.0f };
+		}
+		else
+		{
+			ShootVector = { -41.0f,60.0f };
+		}
+		ShootVector.Normalize2D();
+	}
+}
+
+void AHelicopter::DeathStart()
+{
+	Collider->ActiveOff();
 }
 
 void AHelicopter::DirCheck()

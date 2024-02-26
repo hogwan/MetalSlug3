@@ -352,7 +352,6 @@ void ASoldier::KnifeAttackStart()
 
 void ASoldier::DeathStart()
 {
-	Collider->ActiveOff();
 	std::vector<UCollision*> Result;
 	if (true == Collider->CollisionCheck(MT3CollisionOrder::PlayerKnife, Result))
 	{
@@ -372,6 +371,7 @@ void ASoldier::DeathStart()
 		MoveVector = FVector::Left;
 	}
 	DirCheck();
+	Collider->ActiveOff();
 }
 
 void ASoldier::DirCheck()

@@ -184,6 +184,8 @@ enum class HelicopterState
 	None,
 	Move,
 	Aiming,
+	Shoot,
+	Death,
 };
 
 class UContentsHelper
