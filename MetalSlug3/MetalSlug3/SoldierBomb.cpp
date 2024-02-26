@@ -52,6 +52,6 @@ void ASoldierBomb::HitCheck()
 	std::vector<UCollision*> Result;
 	if (Collider->CollisionCheck(MT3CollisionOrder::Player, Result))
 	{
-		Destroy();
+		Destroy(0.001f);
 	}
 }

@@ -24,6 +24,8 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	UCollision* KnifeAttackCollider = nullptr;
+	UCollision* KnifeRangecollider = nullptr;
+
 
 	void StateUpdate(float _DeltaTime);
 	void StateChange(SoldierState _State);

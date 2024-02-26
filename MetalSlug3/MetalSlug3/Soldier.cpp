@@ -34,6 +34,10 @@ void ASoldier::BeginPlay()
 	Collider->SetTransform({ {0,-50},{50,100} });
 	Collider->SetColType(ECollisionType::Rect);
 
+	KnifeRangecollider = CreateCollision(MT3CollisionOrder::Detect);
+	KnifeRangecollider->SetTransform({ KnifeReachCollisionPosition_Right, KnifeReachCollisionScale });
+	KnifeRangecollider->SetColType(ECollisionType::Rect);
+
 	KnifeAttackCollider = CreateCollision(MT3CollisionOrder::EnemyKnife);
 	KnifeAttackCollider->SetTransform({ KnifeReachCollisionPosition_Right, KnifeReachCollisionScale});
 	KnifeAttackCollider->SetColType(ECollisionType::Rect);
@@ -147,7 +151,7 @@ void ASoldier::Move(float _DeltaTime)
 	{
 		TargetVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
 		std::vector<UCollision*> Result;
-		if (true == Collider->CollisionCheck(MT3CollisionOrder::Player, Result))
+		if (true == KnifeRangecollider->CollisionCheck(MT3CollisionOrder::Player, Result))
 		{
 			StateChange(SoldierState::KnifeAttack);
 			return;
@@ -261,8 +265,15 @@ void ASoldier::Throw(float _DeltaTime)
 
 void ASoldier::KnifeAttack(float _DeltaTime)
 {
+	if (Renderer->GetCurAnimationFrame() >= 6)
+	{
+		KnifeAttackCollider->ActiveOn();
+	}
+
 	if (Renderer->IsCurAnimationEnd())
 	{
+		std::vector<UCollision*> Result;
+		KnifeAttackCollider->ActiveOff();
 		RandomPattern();
 		StateChange(SoldierState::Idle);
 		return;
@@ -284,6 +295,7 @@ void ASoldier::NoneStart()
 
 void ASoldier::IdleStart()
 {
+	KnifeAttackCollider->ActiveOff();
 	CurAnimName = "Idle";
 	DirCheck();
 }
@@ -346,11 +358,22 @@ void ASoldier::DirCheck()
 	if (MoveVector.X < 0.0f)
 	{
 		DirCheckedName += "_Left";
+		KnifeRangecollider->SetTransform({ KnifeReachCollisionPosition_Left, KnifeReachCollisionScale });
+		KnifeRangecollider->SetColType(ECollisionType::Rect);
+
+		KnifeAttackCollider->SetTransform({ KnifeReachCollisionPosition_Left, KnifeReachCollisionScale });
+		KnifeAttackCollider->SetColType(ECollisionType::Rect);
 	}
 	else
 	{
 		DirCheckedName += "_Right";
+		KnifeRangecollider->SetTransform({ KnifeReachCollisionPosition_Right, KnifeReachCollisionScale });
+		KnifeRangecollider->SetColType(ECollisionType::Rect);
+
+		KnifeAttackCollider->SetTransform({ KnifeReachCollisionPosition_Right, KnifeReachCollisionScale });
+		KnifeAttackCollider->SetColType(ECollisionType::Rect);
 	}
+
 
 	Renderer->ChangeAnimation(DirCheckedName, false, 0, 0.08f);
 }

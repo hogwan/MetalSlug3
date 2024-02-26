@@ -145,7 +145,7 @@ void Marco::InAirCheck()
 
 void Marco::DeathCheck()
 {
-	if (NoHit) return;
+	//if (NoHit) return;
 
 	std::vector<UCollision*> Result;
 	if (IsZombie)
@@ -201,17 +201,19 @@ void Marco::DeathCheck()
 			}
 			else
 			{
-				if (true) //Ä®¿¡ ÇÇ°Ý½Ã
-				{
-					AllStateChange(AllBodyState::DeathByKnife);
-					return;
-				}
-				else
-				{
-					AllStateChange(AllBodyState::Death);
-					return;
-				}
+				AllStateChange(AllBodyState::Death);
+				return;
 			}
+		}
+		else if (
+			true == Collision->CollisionCheck(MT3CollisionOrder::EnemyKnife, Result)
+			)
+		{
+			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+			AllStateChange(AllBodyState::DeathByKnife);
+			return;
 		}
 
 	}
