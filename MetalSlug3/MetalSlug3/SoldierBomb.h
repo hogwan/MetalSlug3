@@ -13,6 +13,11 @@ public:
 	ASoldierBomb& operator=(const ASoldierBomb& _Other) = delete;
 	ASoldierBomb& operator=(ASoldierBomb&& _Other) = delete;
 
+	void SetMoveVector(FVector _MoveVector)
+	{
+		MoveVector = _MoveVector;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -25,7 +30,6 @@ protected:
 
 private:
 	FVector Dir = FVector::Zero;
-	FVector Force = FVector::Zero;
 	FVector MoveVector = FVector::Zero;
 	FVector Gravity = { 0.0f,800.0f };
 

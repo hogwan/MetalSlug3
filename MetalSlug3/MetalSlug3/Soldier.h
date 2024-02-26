@@ -56,6 +56,11 @@ protected:
 	FVector KnifeReachCollisionPosition_Right = { 35,-50 };
 	FVector KnifeReachCollisionPosition_Left = { -35,-50 };
 
+	FVector BombSpawnOffset_Right = { 75,0 };
+	FVector BombSpawnOffset_Left = { -75,0 };
+
 	float MoveSpeed = 150.0f;
+
+	int PrevFrame = -1;
 };
 

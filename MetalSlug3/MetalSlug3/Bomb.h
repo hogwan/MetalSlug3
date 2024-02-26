@@ -42,7 +42,6 @@ protected:
 
 private:
 	FVector Dir = FVector::Zero;
-	FVector Force = FVector::Zero;
 	FVector MoveVector = FVector::Zero;
 	FVector Gravity = { 0.0f,800.0f };
 

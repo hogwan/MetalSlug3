@@ -16,11 +16,6 @@ ABomb::~ABomb()
 	Explosion->SetActorLocation(GetActorLocation());
 }
 
-ABomb::ABomb(FVector _Force)
-{
-	Force = _Force;
-}
-
 void ABomb::BeginPlay()
 {
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);

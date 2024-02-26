@@ -1,5 +1,6 @@
 #include "Soldier.h"
 #include "Marco.h"
+#include "SoldierBomb.h"
 ASoldier::ASoldier()
 {
 }
@@ -33,7 +34,7 @@ void ASoldier::BeginPlay()
 	Collider->SetTransform({ {0,-50},{50,100} });
 	Collider->SetColType(ECollisionType::Rect);
 
-	KnifeAttackCollider = CreateCollision(MT3CollisionOrder::Detect);
+	KnifeAttackCollider = CreateCollision(MT3CollisionOrder::EnemyKnife);
 	KnifeAttackCollider->SetTransform({ KnifeReachCollisionPosition_Right, KnifeReachCollisionScale});
 	KnifeAttackCollider->SetColType(ECollisionType::Rect);
 
@@ -170,6 +171,16 @@ void ASoldier::Move(float _DeltaTime)
 		TargetVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
 		if (abs(TargetVector.X) > ThrowRange)
 		{
+			if (TargetVector.X > 0.f)
+			{
+				MoveVector = FVector::Right;
+			}
+			else
+			{
+				MoveVector = FVector::Left;
+			}
+
+
 			StateChange(SoldierState::Throw);
 			return;
 		}
@@ -212,9 +223,37 @@ void ASoldier::Move(float _DeltaTime)
 
 void ASoldier::Throw(float _DeltaTime)
 {
+	int CurFrame = Renderer->GetCurAnimationFrame();
+	if (CurFrame != PrevFrame && CurFrame == 10)
+	{
+		ASoldierBomb* Bomb = GetWorld()->SpawnActor<ASoldierBomb>();
+		FVector ThrowVector = { 3,-5 };
+		ThrowVector.Normalize2D();
+		float ThrowForce = 400.0f;
+		ThrowVector *= ThrowForce;
+		FVector SpawnLocation = GetActorLocation();
+
+		if (MoveVector.X >  0.0f)
+		{
+			SpawnLocation += {30.0f, -100.0f};
+		}
+		else
+		{
+			SpawnLocation += {-30.0f, -100.0f};
+			ThrowVector.X = -ThrowVector.X;
+		}
+
+		Bomb->SetActorLocation(SpawnLocation);
+		Bomb->SetMoveVector(ThrowVector);
+
+		PrevFrame = CurFrame;
+
+	}
+
 	if (Renderer->IsCurAnimationEnd())
 	{
 		RandomPattern();
+		PrevFrame = -1;
 		StateChange(SoldierState::Idle);
 		return;
 	}
