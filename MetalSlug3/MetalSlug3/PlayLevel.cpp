@@ -91,8 +91,5 @@ void PlayLevel::BeginPlay()
 
 	UEngineResourcesManager::GetInst().CuttingImage("NormalExplosion.png", 10, 3);
 	SpawnActor<SpawnManager>();
-	AHelicopter* aa = SpawnActor<AHelicopter>();
-	aa->SetActorLocation({500,800});
-	aa->StateChange(HelicopterState::Move);
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 }
