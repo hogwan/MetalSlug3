@@ -637,13 +637,13 @@ void SpawnManager::Tick(float _DeltaTime)
 		Van_0->SetActorLocation({ 9050,2200 });
 
 		AVan* Van_1 = GetWorld()->SpawnActor<AVan>();
-		Van_1->SetActorLocation({ 9280,2200 });
+		Van_1->SetActorLocation({ 9250,2200 });
 
 		AVan* Van_2 = GetWorld()->SpawnActor<AVan>();
-		Van_2->SetActorLocation({ 9510,2200 });
+		Van_2->SetActorLocation({ 9450,2200 });
 
 		AVan* Van_3 = GetWorld()->SpawnActor<AVan>();
-		Van_3->SetActorLocation({ 9640,2200 });
+		Van_3->SetActorLocation({ 9650,2200 });
 
 		++SpawnNumber;
 	}

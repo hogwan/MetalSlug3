@@ -1,6 +1,7 @@
 #include "Van.h"
 #include "Soldier.h"
 #include "HugeExplosionEffect.h"
+#include "ManZombie3.h"
 
 AVan::AVan()
 {
@@ -10,6 +11,10 @@ AVan::~AVan()
 {
 	AHugeExplosionEffect* HugeExplosionEffect = GetWorld()->SpawnActor<AHugeExplosionEffect>();
 	HugeExplosionEffect->SetActorLocation(GetActorLocation());
+
+	AManZombie3* Zombie = GetWorld()->SpawnActor<AManZombie3>();
+	Zombie->SetActorLocation(GetActorLocation());
+	Zombie->StateChange(EnemyZombieState::Idle);
 }
 
 void AVan::BeginPlay()
