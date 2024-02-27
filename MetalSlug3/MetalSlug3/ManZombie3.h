@@ -17,5 +17,7 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+
+	void Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFrame) override;
 };
 

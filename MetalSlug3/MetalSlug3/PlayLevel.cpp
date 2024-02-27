@@ -7,6 +7,7 @@
 #include "ContentsHelper.h"
 #include "Soldier.h"
 #include "Helicopter.h"
+#include "ManZombie3.h"
 
 PlayLevel::PlayLevel()
 {
@@ -43,6 +44,8 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Marco_ZombieArm.png", 10, 28);
 
 	UEngineResourcesManager::GetInst().CuttingImage("Zombies_Projectile.png", 10, 10);
+	UEngineResourcesManager::GetInst().CuttingImage("ManZombie3_Projectile.png", 10, 2);
+
 	UEngineResourcesManager::GetInst().CuttingImage("ManZombie1.png", 10, 24);
 	UEngineResourcesManager::GetInst().CuttingImage("ManZombie1_LaunchEffect.png", 10, 4);
 
@@ -93,5 +96,8 @@ void PlayLevel::BeginPlay()
 
 	UEngineResourcesManager::GetInst().CuttingImage("NormalExplosion.png", 10, 3);
 	SpawnActor<SpawnManager>();
+	
+	AManZombie3* aaa = SpawnActor<AManZombie3>();
+	aaa->SetActorLocation({ 500,1000 });
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 }

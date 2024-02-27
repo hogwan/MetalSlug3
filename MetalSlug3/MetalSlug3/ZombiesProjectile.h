@@ -28,6 +28,15 @@ public:
 		Dir = _Dir;
 	}
 
+	void SetShootVector(FVector _ShootVector)
+	{
+		ShootVector = _ShootVector;
+	}
+	void SetShootPower(float _Power)
+	{
+		ShootPower = _Power;
+	}
+
 protected:
 	void Tick(float _DeltaTime) override;
 	void BeginPlay() override;

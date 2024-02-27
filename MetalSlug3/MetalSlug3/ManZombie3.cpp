@@ -1,4 +1,5 @@
 #include "ManZombie3.h"
+#include "ManZombie3Projectile.h"
 
 AManZombie3::AManZombie3()
 {
@@ -66,4 +67,76 @@ void AManZombie3::Tick(float _DeltaTime)
 	GravityCheck(_DeltaTime);
 	GroundUp();
 	StateUpdate(_DeltaTime);
+}
+
+void AManZombie3::Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFrame)
+{
+	int CurFrame = Renderer->GetCurAnimationFrame();
+	if (CurFrame != PrevFrame)
+	{
+		if (CurFrame == _LaunchFrame)
+		{
+			AZombiesProjectile* Projectile_0 = GetWorld()->SpawnActor<AManZombie3Projectile>();
+			AZombiesProjectile* Projectile_1 = GetWorld()->SpawnActor<AManZombie3Projectile>();
+			AZombiesProjectile* Projectile_2 = GetWorld()->SpawnActor<AManZombie3Projectile>();
+			AZombiesProjectile* Projectile_3 = GetWorld()->SpawnActor<AManZombie3Projectile>();
+			FVector SpawnLocation = FVector::Zero;
+			if (DirState == EActorDir::Right)
+			{
+				SpawnLocation = GetActorLocation() + ProjectileSpawnOffset_Height + ProjectileSpawnOffset_Right;
+				Projectile_0->SetDir(FVector::Right);
+				Projectile_1->SetDir(FVector::Right);
+				Projectile_2->SetDir(FVector::Right);
+				Projectile_3->SetDir(FVector::Right);
+				//{ 5, -4 };
+				Projectile_0->SetActorLocation(SpawnLocation);
+				SpawnLocation += {-25, -25};
+				Projectile_1->SetActorLocation(SpawnLocation);
+				SpawnLocation += {-25, -25};
+				Projectile_2->SetActorLocation(SpawnLocation);
+				SpawnLocation += {-25, -25};
+				Projectile_3->SetActorLocation(SpawnLocation);
+			}
+			else if (DirState == EActorDir::Left)
+			{
+				SpawnLocation = GetActorLocation() + ProjectileSpawnOffset_Height + ProjectileSpawnOffset_Left;
+				Projectile_0->SetDir(FVector::Left);
+				Projectile_1->SetDir(FVector::Left);
+				Projectile_2->SetDir(FVector::Left);
+				Projectile_3->SetDir(FVector::Left);
+
+				Projectile_0->SetActorLocation(SpawnLocation);
+				SpawnLocation += {25, -25};
+				Projectile_1->SetActorLocation(SpawnLocation);
+				SpawnLocation += {25,-25};
+				Projectile_2->SetActorLocation(SpawnLocation);
+				SpawnLocation += {25, -25};
+				Projectile_3->SetActorLocation(SpawnLocation);
+			}
+			
+		}
+
+		if (CurFrame == _LaunchEffectFrame)
+		{
+			LaunchRenderer->ActiveOn();
+			if (DirState == EActorDir::Right)
+			{
+				LaunchRenderer->ChangeAnimation("LaunchEffect_Right", true, 0, 0.1f);
+				LaunchRenderer->SetTransform({ LaunchEffectOffset_Up + LaunchEffectOffset_Right, LaunchEffectScale });
+			}
+			else if (DirState == EActorDir::Left)
+			{
+				LaunchRenderer->ChangeAnimation("LaunchEffect_Left", true, 0, 0.1f);
+				LaunchRenderer->SetTransform({ LaunchEffectOffset_Up + LaunchEffectoffset_Left, LaunchEffectScale });
+			}
+
+		}
+		PrevFrame = CurFrame;
+	}
+	if (Renderer->IsCurAnimationEnd())
+	{
+		PrevFrame = -1;
+		StateChange(EnemyZombieState::Idle);
+		return;
+	}
 }
