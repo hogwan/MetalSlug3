@@ -97,7 +97,7 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("NormalExplosion.png", 10, 3);
 	SpawnActor<SpawnManager>();
 	
-	AManZombie3* aaa = SpawnActor<AManZombie3>();
-	aaa->SetActorLocation({ 500,1000 });
+	AHelicopter* aaa = SpawnActor<AHelicopter>();
+	aaa->SetActorLocation({ 1100,800 });
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 }

@@ -81,6 +81,23 @@ void AManZombie3::Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFr
 			AZombiesProjectile* Projectile_2 = GetWorld()->SpawnActor<AManZombie3Projectile>();
 			AZombiesProjectile* Projectile_3 = GetWorld()->SpawnActor<AManZombie3Projectile>();
 			FVector SpawnLocation = FVector::Zero;
+
+			FVector Dir0 = { 5,-4 };
+			FVector Dir1 = { 174,-164 };
+			FVector Dir2 = { 132,-186 };
+			FVector Dir3 = { 88,-201 };
+
+			Projectile_0->SetShootVector(Dir0);
+			Projectile_1->SetShootVector(Dir1);
+			Projectile_2->SetShootVector(Dir2);
+			Projectile_3->SetShootVector(Dir3);
+
+			Projectile_0->SetShootPower(300.0f);
+			Projectile_1->SetShootPower(300.0f);
+			Projectile_2->SetShootPower(300.0f);
+			Projectile_3->SetShootPower(300.0f);
+
+
 			if (DirState == EActorDir::Right)
 			{
 				SpawnLocation = GetActorLocation() + ProjectileSpawnOffset_Height + ProjectileSpawnOffset_Right;
@@ -88,14 +105,12 @@ void AManZombie3::Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFr
 				Projectile_1->SetDir(FVector::Right);
 				Projectile_2->SetDir(FVector::Right);
 				Projectile_3->SetDir(FVector::Right);
-				//{ 5, -4 };
+
 				Projectile_0->SetActorLocation(SpawnLocation);
-				SpawnLocation += {-25, -25};
 				Projectile_1->SetActorLocation(SpawnLocation);
-				SpawnLocation += {-25, -25};
 				Projectile_2->SetActorLocation(SpawnLocation);
-				SpawnLocation += {-25, -25};
 				Projectile_3->SetActorLocation(SpawnLocation);
+				
 			}
 			else if (DirState == EActorDir::Left)
 			{
@@ -106,11 +121,8 @@ void AManZombie3::Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFr
 				Projectile_3->SetDir(FVector::Left);
 
 				Projectile_0->SetActorLocation(SpawnLocation);
-				SpawnLocation += {25, -25};
 				Projectile_1->SetActorLocation(SpawnLocation);
-				SpawnLocation += {25,-25};
 				Projectile_2->SetActorLocation(SpawnLocation);
-				SpawnLocation += {25, -25};
 				Projectile_3->SetActorLocation(SpawnLocation);
 			}
 			

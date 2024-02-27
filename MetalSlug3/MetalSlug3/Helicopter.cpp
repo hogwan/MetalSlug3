@@ -22,23 +22,31 @@ void AHelicopter::BeginPlay()
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ {0,0}, {500,500} });
 	Renderer->SetImage("Helicopter.png");
-	Renderer->CreateAnimation("Speed1_Right", "Helicopter.png", 0, 5, 0.08f, true);
-	Renderer->CreateAnimation("Speed2_Right", "Helicopter.png", 6, 11, 0.08f, true);
-	Renderer->CreateAnimation("Speed3_Right", "Helicopter.png", 12, 17, 0.08f, true);
+	Renderer->CreateAnimation("Speed7_Right", "Helicopter.png", 0, 5, 0.08f, true);
+	Renderer->CreateAnimation("Speed6_Right", "Helicopter.png", 6, 11, 0.08f, true);
+	Renderer->CreateAnimation("Speed5_Right", "Helicopter.png", 12, 17, 0.08f, true);
 	Renderer->CreateAnimation("Speed4_Right", "Helicopter.png", 18, 23, 0.08f, true);
-	Renderer->CreateAnimation("Speed5_Right", "Helicopter.png", 24, 29, 0.08f, true);
-	Renderer->CreateAnimation("Speed0_Right", "Helicopter.png", 30, 35, 0.08f, true);
+	Renderer->CreateAnimation("Speed3_Right", "Helicopter.png", 24, 29, 0.08f, true);
+	Renderer->CreateAnimation("Speed2_Right", "Helicopter.png", 30, 35, 0.08f, true);
+	Renderer->CreateAnimation("Speed1_Right", "Helicopter.png", 36, 41, 0.08f, true);
+	Renderer->CreateAnimation("Speed0_Right", "Helicopter.png", 42, 47, 0.08f, true);
+
 	Renderer->CreateAnimation("Aiming1_Right", "Helicopter.png", 36, 41, 0.08f, true);
 	Renderer->CreateAnimation("Aiming0_Right", "Helicopter.png", 42, 47, 0.08f, true);
+	Renderer->CreateAnimation("TurnLeftToCenter", "Helicopter.png", 48, 55, 0.08f, false);
 
-	Renderer->CreateAnimation("Speed1_Left", "Helicopter.png", 60, 65, 0.08f, true);
-	Renderer->CreateAnimation("Speed2_Left", "Helicopter.png", 66, 71, 0.08f, true);
-	Renderer->CreateAnimation("Speed3_Left", "Helicopter.png", 72, 77, 0.08f, true);
+	Renderer->CreateAnimation("Speed7_Left", "Helicopter.png", 60, 65, 0.08f, true);
+	Renderer->CreateAnimation("Speed6_Left", "Helicopter.png", 66, 71, 0.08f, true);
+	Renderer->CreateAnimation("Speed5_Left", "Helicopter.png", 72, 77, 0.08f, true);
 	Renderer->CreateAnimation("Speed4_Left", "Helicopter.png", 78, 83, 0.08f, true);
-	Renderer->CreateAnimation("Speed5_Left", "Helicopter.png", 84, 89, 0.08f, true);
-	Renderer->CreateAnimation("Speed0_Left", "Helicopter.png", 90, 95, 0.08f, true);
+	Renderer->CreateAnimation("Speed3_Left", "Helicopter.png", 84, 89, 0.08f, true);
+	Renderer->CreateAnimation("Speed2_Left", "Helicopter.png", 90, 95, 0.08f, true);
+	Renderer->CreateAnimation("Speed1_Left", "Helicopter.png", 96, 101, 0.08f, true);
+	Renderer->CreateAnimation("Speed0_Left", "Helicopter.png", 102, 107, 0.08f, true);
+
 	Renderer->CreateAnimation("Aiming1_Left", "Helicopter.png", 96, 101, 0.08f, true);
 	Renderer->CreateAnimation("Aiming0_Left", "Helicopter.png", 102, 107, 0.08f, true);
+	Renderer->CreateAnimation("TurnRightToCenter", "Helicopter.png", 108, 115, 0.08f, false);
 
 	Collider = CreateCollision(MT3CollisionOrder::Enemy);
 	Collider->SetScale({ 100,100 });
@@ -56,6 +64,27 @@ void AHelicopter::Tick(float _DeltaTime)
 	AEnemy::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
+
+	if (!IsDependent)
+	{
+		if (CurState == HelicopterState::Move)
+		{
+			if (Speed < MaxSpeed)
+			{
+				Speed += Accel * _DeltaTime;
+			}
+		}
+		else
+		{
+			if (Speed > 0.f)
+			{
+				Speed -= Accel * _DeltaTime;
+			}
+		}
+	}
+
+	MoveVector.Normalize2D();
+	AddActorLocation(MoveVector * abs(Speed) * _DeltaTime);
 
 	DamagedEffectAcc += _DeltaTime;
 	if (DamagedEffectAcc > DamagedEffectTime)
@@ -137,28 +166,94 @@ void AHelicopter::None(float _DeltaTime)
 
 void AHelicopter::Move(float _DeltaTime)
 {
+	if (IsDependent)
+	{
+		if (Speed < 0.0f)
+		{
+			MoveVector = FVector::Left;
+		}
+		else
+		{
+			MoveVector = FVector::Right;
+		}
 
-	TargetVector = (UContentsHelper::Player->GetActorLocation() + Offset) - GetActorLocation();
-	MoveVector = TargetVector;
-	AddActorLocation(MoveVector * _DeltaTime);
+		if (AccelDir.X < 0.0f)
+		{
+			if (Speed > -300.0f)
+			{
+				Speed -= Accel*_DeltaTime;
+			}
 
-	if (MoveVector.Size2D() > 300.0f)
+			float aa = GetActorLocation().Y;
+
+			if (GetActorLocation().Y < CP_Bottom)
+			{
+				AddActorLocation(FVector::Down * 200.0f * _DeltaTime);
+			}
+		}
+		else
+		{
+			float aa = GetActorLocation().Y;
+			if (Speed < 300.0f)
+			{
+				Speed += Accel*_DeltaTime;
+			}
+			if (GetActorLocation().Y > CP_Top)
+			{
+				AddActorLocation(FVector::Up * 200.0f * _DeltaTime);
+			}
+		}
+
+		if (GetActorLocation().X < CP_Left && AccelDir.X < 0.0f)
+		{
+			AccelDir = FVector::Right;
+		}
+		else if (GetActorLocation().X > CP_Right && AccelDir.X > 0.0f)
+		{
+			AccelDir = FVector::Left;
+		}
+
+	}
+	else
+	{
+		MoveVector = (UContentsHelper::Player->GetActorLocation() + Offset) - GetActorLocation();
+
+		FVector AimVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
+		AimVector.Normalize2D();
+
+		if (abs(AimVector.X) < 0.58f)
+		{
+			AccMove = 0.0f;
+			StateChange(HelicopterState::Aiming);
+			return;
+		}
+
+	}
+	if (abs(Speed) > 250.0f)
+	{
+		CurAnimName = "Speed7";
+	}
+	else if (abs(Speed) > 200.0f)
+	{
+		CurAnimName = "Speed6";
+	}
+	else if (abs(Speed) > 150.0f)
 	{
 		CurAnimName = "Speed5";
 	}
-	else if (MoveVector.Size2D() > 250.0f)
+	else if (abs(Speed) > 100.0f)
 	{
 		CurAnimName = "Speed4";
 	}
-	else if (MoveVector.Size2D() > 200.0f)
+	else if (abs(Speed) > 50.0f)
 	{
 		CurAnimName = "Speed3";
 	}
-	else if (MoveVector.Size2D() > 150.0f)
+	else if (abs(Speed) > 30.0f)
 	{
 		CurAnimName = "Speed2";
 	}
-	else if (MoveVector.Size2D() > 100.0f)
+	else if (abs(Speed) > 10.0f)
 	{
 		CurAnimName = "Speed1";
 	}
@@ -167,16 +262,6 @@ void AHelicopter::Move(float _DeltaTime)
 		CurAnimName = "Speed0";
 	}
 	DirCheck();
-
-	FVector AimVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
-	AimVector.Normalize2D();
-
-	if (abs(AimVector.X) < 0.58f)
-	{
-		AccMove = 0.0f;
-		StateChange(HelicopterState::Aiming);
-		return;
-	}
 }
 
 void AHelicopter::Aiming(float _DeltaTime)
@@ -245,31 +330,38 @@ void AHelicopter::Death(float _DeltaTime)
 	}
 }
 
+
 void AHelicopter::NoneStart()
 {
 }
 
 void AHelicopter::MoveStart()
 {
-	TargetVector = (UContentsHelper::Player->GetActorLocation() + Offset) - GetActorLocation();
-	MoveVector.X = TargetVector.X / 2.0f;
-	if (abs(MoveVector.X) > 300.0f)
+	if (abs(Speed) > 250.0f)
+	{
+		CurAnimName = "Speed7";
+	}
+	else if (abs(Speed) > 200.0f)
+	{
+		CurAnimName = "Speed6";
+	}
+	else if (abs(Speed) > 150.0f)
 	{
 		CurAnimName = "Speed5";
 	}
-	else if (abs(MoveVector.X) > 250.0f)
+	else if (abs(Speed) > 100.0f)
 	{
 		CurAnimName = "Speed4";
 	}
-	else if (abs(MoveVector.X) > 200.0f)
+	else if (abs(Speed) > 50.0f)
 	{
 		CurAnimName = "Speed3";
 	}
-	else if (abs(MoveVector.X) > 150.0f)
+	else if (abs(Speed) > 30.0f)
 	{
 		CurAnimName = "Speed2";
 	}
-	else if (abs(MoveVector.X) > 100.0f)
+	else if (abs(Speed) > 10.0f)
 	{
 		CurAnimName = "Speed1";
 	}
@@ -314,16 +406,30 @@ void AHelicopter::DeathStart()
 
 void AHelicopter::DirCheck()
 {
-	FVector AimVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
-	AimVector.Normalize2D();
 	std::string DirCheckedName = CurAnimName;
-	if (AimVector.X < 0.0f)
+	if (CurState == HelicopterState::Aiming)
 	{
-		DirCheckedName += "_Left";
+		FVector AimVector = UContentsHelper::Player->GetActorLocation() - GetActorLocation();
+		AimVector.Normalize2D();
+		if (AimVector.X < 0.0f)
+		{
+			DirCheckedName += "_Left";
+		}
+		else
+		{
+			DirCheckedName += "_Right";
+		}
 	}
 	else
 	{
-		DirCheckedName += "_Right";
+		if (MoveVector.X < 0.0f)
+		{
+			DirCheckedName += "_Left";
+		}
+		else
+		{
+			DirCheckedName += "_Right";
+		}
 	}
 
 	if (nullptr == Renderer->GetCurAnimation())

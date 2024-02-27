@@ -151,6 +151,9 @@
     <ClInclude Include="ManZombie3Projectile.h">
       <Filter>Object\Projectile\ZombieProjectile</Filter>
     </ClInclude>
+    <ClInclude Include="LeaderHelicopter.h">
+      <Filter>Object\Enemy\Helicopter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -299,6 +302,9 @@
     </ClCompile>
     <ClCompile Include="ManZombie3Projectile.cpp">
       <Filter>Object\Projectile\ZombieProjectile</Filter>
+    </ClCompile>
+    <ClCompile Include="LeaderHelicopter.cpp">
+      <Filter>Object\Enemy\Helicopter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

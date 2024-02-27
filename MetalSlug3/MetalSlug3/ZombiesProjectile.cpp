@@ -45,9 +45,6 @@ void AZombiesProjectile::BeginPlay()
 	Renderer->CreateAnimation("CollideGround_Left", "Zombies_Projectile.png", 64, 82, 0.08f, false);
 	Renderer->CreateAnimation("CollideObject_Left", "Zombies_Projectile.png", 83, 98, 0.08f, false);
 
-	ShootVector.Normalize2D();
-	ResultVector = ShootVector * ShootPower;
-
 	StateChange(State::None);
 }
 
@@ -171,6 +168,9 @@ void AZombiesProjectile::FlyingStart()
 	CurAnimName = "Flying";
 	std::string DirectedName = DirCheck(CurAnimName);
 	Renderer->ChangeAnimation(DirectedName);
+
+	ShootVector.Normalize2D();
+	ResultVector = ShootVector * ShootPower;
 }
 
 void AZombiesProjectile::CollideGroundStart()
