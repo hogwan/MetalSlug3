@@ -7,6 +7,7 @@
 #include "ContentsHelper.h"
 #include "Soldier.h"
 #include "Helicopter.h"
+#include "LeaderHelicopter.h"
 #include "ManZombie3.h"
 
 PlayLevel::PlayLevel()
@@ -97,7 +98,34 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("NormalExplosion.png", 10, 3);
 	SpawnActor<SpawnManager>();
 	
-	AHelicopter* aaa = SpawnActor<AHelicopter>();
-	aaa->SetActorLocation({ 1100,800 });
+	ALeaderHelicopter* a = SpawnActor<ALeaderHelicopter>();
+	a->SetActorLocation({ 1100,800 });
+	
+	
+	AHelicopter* b = SpawnActor<AHelicopter>();
+	b->SetActorLocation({ 1300,800 });
+	b->SetLeader(a);
+	
+	
+	AHelicopter* c = SpawnActor<AHelicopter>();
+	c->SetActorLocation({ 1500,800 });
+	c->SetLeader(a);
+	
+	
+	AHelicopter* d = SpawnActor<AHelicopter>();
+	d->SetActorLocation({ 1700,800 });
+	d->SetLeader(a);
+	
+	
+	AHelicopter* e = SpawnActor<AHelicopter>();
+	e->SetActorLocation({ 1900,800 });
+	e->SetLeader(a);
+
+	a->HeliList.push_back(b);
+	a->HeliList.push_back(c);
+	a->HeliList.push_back(d);
+	a->HeliList.push_back(e);
+	
+	
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 }

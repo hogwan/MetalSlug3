@@ -184,7 +184,6 @@ void AHelicopter::Move(float _DeltaTime)
 				Speed -= Accel*_DeltaTime;
 			}
 
-			float aa = GetActorLocation().Y;
 
 			if (GetActorLocation().Y < CP_Bottom)
 			{
@@ -193,7 +192,6 @@ void AHelicopter::Move(float _DeltaTime)
 		}
 		else
 		{
-			float aa = GetActorLocation().Y;
 			if (Speed < 300.0f)
 			{
 				Speed += Accel*_DeltaTime;

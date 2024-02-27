@@ -1,15 +1,30 @@
 #pragma once
-class LeaderHelicopter
+#include "Helicopter.h"
+class ALeaderHelicopter : public AHelicopter
 {
 public:
 	// constructor destructor
-	LeaderHelicopter();
-	~LeaderHelicopter();
+	ALeaderHelicopter();
+	~ALeaderHelicopter();
 
 	// delete Function
-	LeaderHelicopter(const LeaderHelicopter& _Other) = delete;
-	LeaderHelicopter(LeaderHelicopter&& _Other) noexcept = delete;
-	LeaderHelicopter& operator=(const LeaderHelicopter& _Other) = delete;
-	LeaderHelicopter& operator=(LeaderHelicopter&& _Other) = delete;
+	ALeaderHelicopter(const ALeaderHelicopter& _Other) = delete;
+	ALeaderHelicopter(ALeaderHelicopter&& _Other) noexcept = delete;
+	ALeaderHelicopter& operator=(const ALeaderHelicopter& _Other) = delete;
+	ALeaderHelicopter& operator=(ALeaderHelicopter&& _Other) = delete;
+
+	std::list<AHelicopter*> HeliList;
+protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+	void Shoot(float _DeltaTime) override;
+	void ShootStart() override;
+
+	void Move(float _DeltaTime) override;
+	void MoveStart() override;
+
+	float AccAttack = 0.0f;
+	float AttackCoolTime = 3.0f;
 };
 

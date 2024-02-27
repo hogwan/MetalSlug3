@@ -32,22 +32,22 @@ protected:
 
 	void StateUpdate(float _DeltaTime);
 	void None(float _DeltaTime);
-	void Move(float _DeltaTime);
+	virtual void Move(float _DeltaTime);
 	void Aiming(float _DeltaTime);
-	void Shoot(float _DeltaTime);
+	virtual void Shoot(float _DeltaTime);
 	void Death(float _DeltaTime);
 
 	void NoneStart();
-	void MoveStart();
+	virtual void MoveStart();
 	void AimingStart();
-	void ShootStart();
+	virtual void ShootStart();
 	void DeathStart();
-private:
+
 	HelicopterState CurState = HelicopterState::None;
 	std::string CurAnimName = "None";
 
 	class ALeaderHelicopter* Leader = nullptr;
-	bool IsDependent = false;
+	bool IsDependent = true;
 
 	FVector MoveVector = FVector::Left;
 	FVector ShootVector = FVector::Zero;
