@@ -139,9 +139,6 @@
     <ClInclude Include="SoldierBomb.h">
       <Filter>Object\Projectile</Filter>
     </ClInclude>
-    <ClInclude Include="ExplosionEffect.h">
-      <Filter>Object\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="Helicopter.h">
       <Filter>Object\Enemy\Helicopter</Filter>
     </ClInclude>
@@ -153,6 +150,15 @@
     </ClInclude>
     <ClInclude Include="LeaderHelicopter.h">
       <Filter>Object\Enemy\Helicopter</Filter>
+    </ClInclude>
+    <ClInclude Include="Van.h">
+      <Filter>Object\Enemy\Van</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionEffect.h">
+      <Filter>Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="HugeExplosionEffect.h">
+      <Filter>Object\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -291,9 +297,6 @@
     <ClCompile Include="SoldierBomb.cpp">
       <Filter>Object\Projectile</Filter>
     </ClCompile>
-    <ClCompile Include="ExplosionEffect.cpp">
-      <Filter>Object\Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="Helicopter.cpp">
       <Filter>Object\Enemy\Helicopter</Filter>
     </ClCompile>
@@ -305,6 +308,15 @@
     </ClCompile>
     <ClCompile Include="LeaderHelicopter.cpp">
       <Filter>Object\Enemy\Helicopter</Filter>
+    </ClCompile>
+    <ClCompile Include="Van.cpp">
+      <Filter>Object\Enemy\Van</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionEffect.cpp">
+      <Filter>Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="HugeExplosionEffect.cpp">
+      <Filter>Object\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,6 +367,12 @@
     </Filter>
     <Filter Include="Object\Enemy\Helicopter">
       <UniqueIdentifier>{9e8d0e4d-f1d7-434f-938f-22216f79b6da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Van">
+      <UniqueIdentifier>{c082232f-89c2-497d-b1c7-673ca39858dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Effect">
+      <UniqueIdentifier>{4230a5e0-2671-4111-9b49-5f9b3cc7091f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

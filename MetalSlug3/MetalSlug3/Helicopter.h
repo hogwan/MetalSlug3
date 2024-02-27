@@ -16,16 +16,13 @@ public:
 	void StateChange(HelicopterState _State);
 	FVector Offset = { 0,-300 };
 
-	void SetLeader(class ALeaderHelicopter* _Leader)
-	{
-		Leader = _Leader;
-		IsDependent = true;
-	}
+	bool IsDependent = false;
+	bool IsDeath = false;;
 
-	float CP_Left = 150.0f;
-	float CP_Right = 650.0f;
-	float CP_Top = 800.0f;
-	float CP_Bottom = 900.0f;
+	float CP_Left = 6615.0f;
+	float CP_Right = 7130.0f;
+	float CP_Top = 1035.0f;
+	float CP_Bottom = 1135.0f;
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -47,7 +44,6 @@ protected:
 	std::string CurAnimName = "None";
 
 	class ALeaderHelicopter* Leader = nullptr;
-	bool IsDependent = true;
 
 	FVector MoveVector = FVector::Left;
 	FVector ShootVector = FVector::Zero;
@@ -70,6 +66,7 @@ protected:
 
 	float DamagedEffectTime = 0.02f;
 	float DamagedEffectAcc = 0.0f;
+
 
 
 	int PrevHp = -1;

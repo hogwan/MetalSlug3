@@ -2,6 +2,8 @@
 #include "HelicopterBullet.h"
 #include "ExplosionEffect.h"
 
+std::list<AHelicopter*> ALeaderHelicopter::HeliList;
+
 ALeaderHelicopter::ALeaderHelicopter()
 {
 }
@@ -13,9 +15,10 @@ ALeaderHelicopter::~ALeaderHelicopter()
 	for (int i = 1; iter != HeliList.end(); ++iter,++i)
 	{
 		(*iter)->Destroy(i * 0.3f);
+		(*iter) = nullptr;
 	}
 
-	ExplosionEffect* Explosion = GetWorld()->SpawnActor<ExplosionEffect>();
+	AExplosionEffect* Explosion = GetWorld()->SpawnActor<AExplosionEffect>();
 	Explosion->SetActorLocation(GetActorLocation());
 	Explosion->SetSize(FVector{ 800,800 });
 }
@@ -61,7 +64,7 @@ void ALeaderHelicopter::BeginPlay()
 	StateChange(HelicopterState::Move);
 	Renderer->ChangeAnimation("Speed4_Right");
 
-	BulletCoolDown = 0.3f;
+	BulletCoolDown = 0.5f;
 	AccBullet = 0.0f;
 	Bullet = 6;
 

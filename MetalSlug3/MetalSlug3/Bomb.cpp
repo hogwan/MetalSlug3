@@ -12,7 +12,7 @@ ABomb::ABomb()
 ABomb::~ABomb()
 {
 	++UContentsHelper::Player->RemainBomb;
-	ExplosionEffect* Explosion = GetWorld()->SpawnActor<ExplosionEffect>();
+	AExplosionEffect* Explosion = GetWorld()->SpawnActor<AExplosionEffect>();
 	Explosion->SetActorLocation(GetActorLocation());
 }
 

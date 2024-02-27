@@ -5,10 +5,7 @@
 #include "SpawnManager.h"
 #include "CameraManager.h"
 #include "ContentsHelper.h"
-#include "Soldier.h"
-#include "Helicopter.h"
-#include "LeaderHelicopter.h"
-#include "ManZombie3.h"
+#include "Van.h"
 
 PlayLevel::PlayLevel()
 {
@@ -91,41 +88,16 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Soldier.png", 10, 14);
 	UEngineResourcesManager::GetInst().CuttingImage("SoldierBomb.png", 10, 2);
 
+	UEngineResourcesManager::GetInst().CuttingImage("Van_SoldierSpawn.png", 10, 1);
+
 	UEngineResourcesManager::GetInst().CuttingImage("Helicopter.png", 10, 12);
 	UEngineResourcesManager::GetInst().CuttingImage("LeaderHelicopter.png", 10, 12);
 	UEngineResourcesManager::GetInst().CuttingImage("HelicopterProjectile.png", 10, 1);
 
 	UEngineResourcesManager::GetInst().CuttingImage("NormalExplosion.png", 10, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("HugeExplosion.png", 10, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("BombExplosion.png", 10, 3);
 	SpawnActor<SpawnManager>();
-	
-	ALeaderHelicopter* a = SpawnActor<ALeaderHelicopter>();
-	a->SetActorLocation({ 1100,800 });
-	
-	
-	AHelicopter* b = SpawnActor<AHelicopter>();
-	b->SetActorLocation({ 1300,800 });
-	b->SetLeader(a);
-	
-	
-	AHelicopter* c = SpawnActor<AHelicopter>();
-	c->SetActorLocation({ 1500,800 });
-	c->SetLeader(a);
-	
-	
-	AHelicopter* d = SpawnActor<AHelicopter>();
-	d->SetActorLocation({ 1700,800 });
-	d->SetLeader(a);
-	
-	
-	AHelicopter* e = SpawnActor<AHelicopter>();
-	e->SetActorLocation({ 1900,800 });
-	e->SetLeader(a);
-
-	a->HeliList.push_back(b);
-	a->HeliList.push_back(c);
-	a->HeliList.push_back(d);
-	a->HeliList.push_back(e);
-	
 	
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 }

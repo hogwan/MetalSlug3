@@ -27,6 +27,8 @@
 #include "CameraManager.h"
 #include "Soldier.h"
 #include "Helicopter.h"
+#include "LeaderHelicopter.h"
+#include "Van.h"
 
 SpawnManager::SpawnManager()
 {
@@ -122,6 +124,31 @@ void SpawnManager::BeginPlay()
 
 void SpawnManager::Tick(float _DeltaTime)
 {
+	if (ALeaderHelicopter::HeliList.size())
+	{
+		std::list<AHelicopter*>::iterator iter = ALeaderHelicopter::HeliList.begin();
+		for (; iter != ALeaderHelicopter::HeliList.end();)
+		{
+			if ((*iter == nullptr))
+			{
+				std::list<AHelicopter*>::iterator Previter = iter++;
+				ALeaderHelicopter::HeliList.erase(Previter);
+				continue;
+			}
+
+			if ((*iter)->IsDeath)
+			{
+				(*iter)->Destroy();
+				std::list<AHelicopter*>::iterator Previter = iter++;
+				ALeaderHelicopter::HeliList.erase(Previter);
+			}
+			else
+			{
+				++iter;
+			}
+		}
+	}
+
 	float CameraPos = GetWorld()->GetCameraPos().X;
 	float TargetPos = CameraPos + 800.0f;
 
@@ -328,19 +355,19 @@ void SpawnManager::Tick(float _DeltaTime)
 
 		AWomanZombie* WomanZombie_0 = GetWorld()->SpawnActor<AWomanZombie>();
 		WomanZombie_0->SetActorLocation({ 4830,930 });
-		WomanZombie_0->StateChange(EnemyZombieState::Idle);
+		WomanZombie_0->StateChange(EnemyZombieState::Lying);
 
 		AWomanZombie* WomanZombie_1 = GetWorld()->SpawnActor<AWomanZombie>();
 		WomanZombie_1->SetActorLocation({ 4920,930 });
-		WomanZombie_1->StateChange(EnemyZombieState::Idle);
+		WomanZombie_1->StateChange(EnemyZombieState::Lying);
 
 		AWomanZombie* WomanZombie_2 = GetWorld()->SpawnActor<AWomanZombie>();
 		WomanZombie_2->SetActorLocation({ 5020,930 });
-		WomanZombie_2->StateChange(EnemyZombieState::Idle);
+		WomanZombie_2->StateChange(EnemyZombieState::Lying);
 
 		AWomanZombie* WomanZombie_3 = GetWorld()->SpawnActor<AWomanZombie>();
 		WomanZombie_3->SetActorLocation({ 5400,930 });
-		WomanZombie_3->StateChange(EnemyZombieState::Idle);
+		WomanZombie_3->StateChange(EnemyZombieState::Lying);
 
 		++SpawnNumber;
 	}
@@ -462,33 +489,162 @@ void SpawnManager::Tick(float _DeltaTime)
 
 	if (SpawnNumber == 11 && TargetPos > 7200)
 	{
+		ALeaderHelicopter* LeaderHelicopter = GetWorld()->SpawnActor<ALeaderHelicopter>();
+		LeaderHelicopter->SetActorLocation({ 7300,1135 });
+
 		AHelicopter* Helicopter_0 = GetWorld()->SpawnActor<AHelicopter>();
-		Helicopter_0->SetActorLocation({ 6300,970 });
-		Helicopter_0->Offset = { 0.f,-200.0f };
-		Helicopter_0->StateChange(HelicopterState::Move);
+		Helicopter_0->SetActorLocation({ 7500,1135 });
+		Helicopter_0->IsDependent = true;
 
 		AHelicopter* Helicopter_1 = GetWorld()->SpawnActor<AHelicopter>();
-		Helicopter_1->SetActorLocation({ 7650,1400 });
-		Helicopter_1->Offset = { 0.f,-300.0f };
-		Helicopter_1->StateChange(HelicopterState::Move);
+		Helicopter_1->SetActorLocation({ 7700,1135 });
+		Helicopter_1->IsDependent = true;
+
+		AHelicopter* Helicopter_2 = GetWorld()->SpawnActor<AHelicopter>();
+		Helicopter_2->SetActorLocation({ 7900,1135 });
+		Helicopter_2->IsDependent = true;
+
+		AHelicopter* Helicopter_3 = GetWorld()->SpawnActor<AHelicopter>();
+		Helicopter_3->SetActorLocation({ 8100,1135 });
+		Helicopter_3->IsDependent = true;
+
+		ALeaderHelicopter::HeliList.push_back(Helicopter_0);
+		ALeaderHelicopter::HeliList.push_back(Helicopter_1);
+		ALeaderHelicopter::HeliList.push_back(Helicopter_2);
+		ALeaderHelicopter::HeliList.push_back(Helicopter_3);
 
 		AUncleZombie* UncleZombie_0 = GetWorld()->SpawnActor<AUncleZombie>();
-		UncleZombie_0->SetActorLocation({ 6150,1050 });
+		UncleZombie_0->SetActorLocation({ 6250,1050 });
 		UncleZombie_0->StateChange(EnemyZombieState::Move);
 
+		ADoctorZombie* DoctorZombie_0 = GetWorld()->SpawnActor<ADoctorZombie>();
+		DoctorZombie_0->SetActorLocation({ 6150,1050 });
+		DoctorZombie_0->StateChange(EnemyZombieState::Move);
+
+		AUncleZombie* UncleZombie_1 = GetWorld()->SpawnActor<AUncleZombie>();
+		UncleZombie_1->SetActorLocation({ 6050,1000 });
+		UncleZombie_1->StateChange(EnemyZombieState::Move);
+
+		ADoctorZombie* DoctorZombie_1 = GetWorld()->SpawnActor<ADoctorZombie>();
+		DoctorZombie_1->SetActorLocation({ 5950,1000 });
+		DoctorZombie_1->StateChange(EnemyZombieState::Move);
 
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 12 && UContentsHelper::CameraManager->CameraMode == 5)
+	if (SpawnNumber == 12)
 	{
 		std::vector<UCollision*> Result;
-		UContentsHelper::CameraManager->CameraMode;
+		if (
+			!UContentsHelper::ScreenCol->GetCollider()->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+			)
+		{
+			++SpawnNumber;
+		}
+	}
+
+	if (SpawnNumber == 13)
+	{
+		AHelicopter* Helicopter_0 = GetWorld()->SpawnActor<AHelicopter>();
+		Helicopter_0->SetActorLocation({ 7380,1450 });
+		Helicopter_0->Offset = { 0,-300 };
+		Helicopter_0->StateChange(HelicopterState::Move);
+
+		AHelicopter* Helicopter_1 = GetWorld()->SpawnActor<AHelicopter>();
+		Helicopter_1->SetActorLocation({ 6500,830 });
+		Helicopter_1->Offset = { 0,-200 };
+		Helicopter_1->StateChange(HelicopterState::Move);
+
+		ASoldier* Soldier_0 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_0->SetActorLocation({ 6600,1300 });
+		Soldier_0->StateChange(SoldierState::Move);
+		Soldier_0->SetPattern(SoldierPattern::Throw);
+
+		ASoldier* Soldier_1 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_1->SetActorLocation({ 7300,1420 });
+		Soldier_1->StateChange(SoldierState::Move);
+		Soldier_1->SetPattern(SoldierPattern::Throw);
+
+		ASoldier* Soldier_2 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_2->SetActorLocation({ 6400,1000 });
+		Soldier_2->StateChange(SoldierState::Move);
+		Soldier_2->SetPattern(SoldierPattern::Throw);
+
+		ASoldier* Soldier_3 = GetWorld()->SpawnActor<ASoldier>();
+		Soldier_3->SetActorLocation({ 7500,1520 });
+		Soldier_3->StateChange(SoldierState::Move);
+		Soldier_3->SetPattern(SoldierPattern::Throw);
+
+		AUncleZombie* UncleZombie_0 = GetWorld()->SpawnActor<AUncleZombie>();
+		UncleZombie_0->SetActorLocation({ 6700,1300 });
+		UncleZombie_0->StateChange(EnemyZombieState::Move);
+
+		ADoctorZombie* DoctorZombie_0 = GetWorld()->SpawnActor<ADoctorZombie>();
+		DoctorZombie_0->SetActorLocation({ 7400,1400 });
+		DoctorZombie_0->StateChange(EnemyZombieState::Move);
+
+		++SpawnNumber;
+	}
+		
+
+	if (SpawnNumber == 14)
+	{
+		std::vector<UCollision*> Result;
+		if (
+			!UContentsHelper::ScreenCol->GetCollider()->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+			)
+		{
+			++SpawnNumber;
+		}
+	}
+
+	if (SpawnNumber == 15)
+	{
+		AWomanZombie* WomanZombie_0 = GetWorld()->SpawnActor<AWomanZombie>();
+		WomanZombie_0->SetActorLocation({ 7580,1780 });
+		WomanZombie_0->StateChange(EnemyZombieState::Lying);
+
+		AWomanZombie* WomanZombie_1 = GetWorld()->SpawnActor<AWomanZombie>();
+		WomanZombie_1->SetActorLocation({ 7660,1780 });
+		WomanZombie_1->StateChange(EnemyZombieState::Lying);
+
+		AManZombie1* ManZombie1_0 = GetWorld()->SpawnActor<AManZombie1>();
+		ManZombie1_0->SetActorLocation({ 7860,1780 });
+		ManZombie1_0->StateChange(EnemyZombieState::Lying);
+
+		ADoctorZombie* ADoctorZombie_0 = GetWorld()->SpawnActor<ADoctorZombie>();
+		ADoctorZombie_0->SetActorLocation({ 7975,1780 });
+		ADoctorZombie_0->StateChange(EnemyZombieState::Lying);
+		
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 16)
+	{
+		std::vector<UCollision*> Result;
 		if (
 			!UContentsHelper::ScreenCol->GetCollider()->CollisionCheck(MT3CollisionOrder::Enemy, Result)
 			)
 		{
 			++UContentsHelper::CameraManager->CameraMode;
+			++SpawnNumber;
 		}
+	}
+
+	if (SpawnNumber == 17 && TargetPos > 8950.0f)
+	{
+		AVan* Van_0 = GetWorld()->SpawnActor<AVan>();
+		Van_0->SetActorLocation({ 9050,2200 });
+
+		AVan* Van_1 = GetWorld()->SpawnActor<AVan>();
+		Van_1->SetActorLocation({ 9280,2200 });
+
+		AVan* Van_2 = GetWorld()->SpawnActor<AVan>();
+		Van_2->SetActorLocation({ 9510,2200 });
+
+		AVan* Van_3 = GetWorld()->SpawnActor<AVan>();
+		Van_3->SetActorLocation({ 9640,2200 });
+
+		++SpawnNumber;
 	}
 }

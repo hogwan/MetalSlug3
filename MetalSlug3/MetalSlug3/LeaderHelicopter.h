@@ -13,7 +13,7 @@ public:
 	ALeaderHelicopter& operator=(const ALeaderHelicopter& _Other) = delete;
 	ALeaderHelicopter& operator=(ALeaderHelicopter&& _Other) = delete;
 
-	std::list<AHelicopter*> HeliList;
+	static std::list<AHelicopter*> HeliList;
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

@@ -1,16 +1,18 @@
 #include "ExplosionEffect.h"
 #include "ContentsHelper.h"
 
-ExplosionEffect::ExplosionEffect()
+AExplosionEffect::AExplosionEffect()
 {
 }
 
-ExplosionEffect::~ExplosionEffect()
+AExplosionEffect::~AExplosionEffect()
 {
 }
 
-void ExplosionEffect::BeginPlay()
+void AExplosionEffect::BeginPlay()
 {
+	AActor::BeginPlay();
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Particle);
 	Renderer->SetImage("NormalExplosion.png");
 	Renderer->SetTransform({ {0,0},Size });
@@ -18,8 +20,9 @@ void ExplosionEffect::BeginPlay()
 	Renderer->ChangeAnimation("Explosion",false,0,0.03f);
 }
 
-void ExplosionEffect::Tick(float _DeltaTime)
+void AExplosionEffect::Tick(float _DeltaTime)
 {
+	AActor::Tick(_DeltaTime);
 	if (Renderer->IsCurAnimationEnd())
 	{
 		Destroy();

@@ -9,6 +9,7 @@ enum MT3RenderOrder
 	Back,
 	Map,
 	Projectile,
+	Van,
 	Enemy,
 	LowerBody,
 	UpperBody,

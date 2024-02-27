@@ -9,7 +9,7 @@ AHelicopter::AHelicopter()
 
 AHelicopter::~AHelicopter()
 {
-	ExplosionEffect* Explosion = GetWorld()->SpawnActor<ExplosionEffect>();
+	AExplosionEffect* Explosion = GetWorld()->SpawnActor<AExplosionEffect>();
 	Explosion->SetActorLocation(GetActorLocation());
 	Explosion->SetSize(FVector{ 800,800 });
 }
@@ -101,6 +101,7 @@ void AHelicopter::Tick(float _DeltaTime)
 
 	if (Hp <= 0)
 	{
+		IsDeath = true;
 		StateChange(HelicopterState::Death);
 		return;
 	}
@@ -324,7 +325,14 @@ void AHelicopter::Death(float _DeltaTime)
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
-		Destroy();
+		if (IsDependent)
+		{
+			IsDeath = true;
+		}
+		else
+		{
+			Destroy();
+		}
 	}
 }
 

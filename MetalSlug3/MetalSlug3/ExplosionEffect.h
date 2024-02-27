@@ -1,17 +1,17 @@
 #pragma once
 #include <EngineCore/Actor.h>
-class ExplosionEffect : public AActor
+class AExplosionEffect : public AActor
 {
 public:
 	// constructor destructor
-	ExplosionEffect();
-	~ExplosionEffect();
+	AExplosionEffect();
+	~AExplosionEffect();
 
 	// delete Function
-	ExplosionEffect(const ExplosionEffect& _Other) = delete;
-	ExplosionEffect(ExplosionEffect&& _Other) noexcept = delete;
-	ExplosionEffect& operator=(const ExplosionEffect& _Other) = delete;
-	ExplosionEffect& operator=(ExplosionEffect&& _Other) = delete;
+	AExplosionEffect(const AExplosionEffect& _Other) = delete;
+	AExplosionEffect(AExplosionEffect&& _Other) noexcept = delete;
+	AExplosionEffect& operator=(const AExplosionEffect& _Other) = delete;
+	AExplosionEffect& operator=(AExplosionEffect&& _Other) = delete;
 
 	void SetSize(FVector _Size)
 	{
@@ -23,7 +23,6 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-private:
 	UImageRenderer* Renderer = nullptr;
 	FVector Size = { 500,500 };
 };

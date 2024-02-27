@@ -8,7 +8,7 @@ ASoldierBomb::ASoldierBomb()
 
 ASoldierBomb::~ASoldierBomb()
 {
-	ExplosionEffect* Explosion = GetWorld()->SpawnActor<ExplosionEffect>();
+	AExplosionEffect* Explosion = GetWorld()->SpawnActor<AExplosionEffect>();
 	Explosion->SetActorLocation(GetActorLocation());
 }
 
