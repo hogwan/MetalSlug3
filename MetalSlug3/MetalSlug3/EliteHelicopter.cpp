@@ -15,6 +15,8 @@ AEliteHelicopter::~AEliteHelicopter()
 
 void AEliteHelicopter::BeginPlay()
 {
+	AEnemy::BeginPlay();
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ {0,0},{500,500} });
 	Renderer->SetImage("Flying0.png");
@@ -41,6 +43,38 @@ void AEliteHelicopter::BeginPlay()
 
 void AEliteHelicopter::Tick(float _DeltaTime)
 {
+	AEnemy::Tick(_DeltaTime);
+	if (IsShooting)
+	{
+		AccLaunchTime += _DeltaTime;
+		if (AccLaunchTime > LaunchCoolTime)
+		{
+			AccLaunchTime = 0.0f;
+			AEliteHelicopterProjectile* Projectile = GetWorld()->SpawnActor<AEliteHelicopterProjectile>();
+			Projectile->SetActorLocation(GetActorLocation());
+			--Bullet;
+		}
+
+
+		if (Bullet <= 0)
+		{
+			AccLaunchTime = 0.0f;
+			IsShooting = false;
+			Bullet = 3;
+		}
+	}
+	else
+	{
+		AccShootTime += _DeltaTime;
+		if (AccShootTime > ShootCoolTime)
+		{
+			AccShootTime = 0.0f;
+			IsShooting = true;
+		}
+	}
+
+
+
 	if (Hp <= 0)
 	{
 		Destroy();

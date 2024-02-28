@@ -13,6 +13,8 @@ AHelicopterBullet::~AHelicopterBullet()
 
 void AHelicopterBullet::BeginPlay()
 {
+	AMT3Object::BeginPlay();
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
 	Renderer->SetTransform({ {0,0},{500,500} });
 	Renderer->SetImage("HelicopterProjectile.png");
@@ -33,6 +35,8 @@ void AHelicopterBullet::BeginPlay()
 
 void AHelicopterBullet::Tick(float _DeltaTime)
 {
+	AMT3Object::Tick(_DeltaTime);
+
 	AddActorLocation(Dir * Speed * _DeltaTime);
 	if (IsDestroy && ColRenderer->IsCurAnimationEnd())
 	{

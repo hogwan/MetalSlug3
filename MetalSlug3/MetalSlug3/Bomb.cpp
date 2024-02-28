@@ -3,7 +3,7 @@
 #include "ContentsHelper.h"
 #include "Marco.h"
 #include "Enemy.h"
-#include "ExplosionEffect.h"
+#include "BombExplosionEffect.h"
 
 ABomb::ABomb()
 {
@@ -12,12 +12,14 @@ ABomb::ABomb()
 ABomb::~ABomb()
 {
 	++UContentsHelper::Player->RemainBomb;
-	AExplosionEffect* Explosion = GetWorld()->SpawnActor<AExplosionEffect>();
+	ABombExplosionEffect* Explosion = GetWorld()->SpawnActor<ABombExplosionEffect>();
 	Explosion->SetActorLocation(GetActorLocation());
 }
 
 void ABomb::BeginPlay()
 {
+	AMT3Object::BeginPlay();
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
 	Collider = CreateCollision(MT3CollisionOrder::PlayerBullet);
 	FVector MarcoSize = { 527.27273f, 527.27273f };
@@ -60,6 +62,8 @@ void ABomb::HitCheck()
 }
 void ABomb::Tick(float _DeltaTime)
 {
+	AMT3Object::Tick(_DeltaTime);
+
 	AddActorLocation(MoveVector * _DeltaTime);
 	GravityCheck(_DeltaTime);
 	ReflectionCheck();

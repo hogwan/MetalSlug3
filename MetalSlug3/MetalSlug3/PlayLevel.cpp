@@ -5,8 +5,6 @@
 #include "SpawnManager.h"
 #include "CameraManager.h"
 #include "ContentsHelper.h"
-#include "Van.h"
-#include "EliteHelicopter.h"
 
 PlayLevel::PlayLevel()
 {
@@ -101,10 +99,8 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("NormalExplosion.png", 10, 3);
 	UEngineResourcesManager::GetInst().CuttingImage("HugeExplosion.png", 10, 3);
 	UEngineResourcesManager::GetInst().CuttingImage("BombExplosion.png", 10, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("HugeBombExplosion.png", 10, 3);
 	SpawnActor<SpawnManager>();
-
-	AEliteHelicopter* Hel = SpawnActor<AEliteHelicopter>();
-	Hel->SetActorLocation({ 500,1000 });
 	
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 }

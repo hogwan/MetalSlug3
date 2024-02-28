@@ -11,7 +11,7 @@ AHugeBombExplosionEffect::~AHugeBombExplosionEffect()
 
 void AHugeBombExplosionEffect::BeginPlay()
 {
-	AActor::BeginPlay();
+	AMT3Object::BeginPlay();
 
 	Size = { 700,700 };
 

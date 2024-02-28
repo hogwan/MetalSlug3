@@ -11,7 +11,7 @@ AHuman::~AHuman()
 
 void AHuman::BeginPlay()
 {
-	AActor::BeginPlay();
+	AMT3Object::BeginPlay();
 	DetectCollider = CreateCollision(MT3CollisionOrder::Detect);
 	DetectCollider->SetTransform({{0,0},{DetectRange * 2.0f, 200.0f}});
 	DetectCollider->SetColType(ECollisionType::Rect);
@@ -19,7 +19,7 @@ void AHuman::BeginPlay()
 
 void AHuman::Tick(float _DeltaTime)
 {
-	AActor::Tick(_DeltaTime);
+	AMT3Object::Tick(_DeltaTime);
 
 	GravityCheck(_DeltaTime);
 	GroundUp();

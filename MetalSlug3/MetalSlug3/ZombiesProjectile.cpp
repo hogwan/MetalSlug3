@@ -11,7 +11,7 @@ AZombiesProjectile::~AZombiesProjectile()
 
 void AZombiesProjectile::Tick(float _DeltaTime)
 {
-	AActor::Tick(_DeltaTime);
+	AMT3Object::Tick(_DeltaTime);
 	StateUpdate(_DeltaTime);
 	if (Dir.X < 0.0f)
 	{
@@ -26,7 +26,7 @@ void AZombiesProjectile::Tick(float _DeltaTime)
 
 void AZombiesProjectile::BeginPlay()
 {
-	AActor::BeginPlay();
+	AMT3Object::BeginPlay();
 
 	Collider = CreateCollision(MT3CollisionOrder::ZombieProjectile);
 	Collider->SetScale({ 30,30 });

@@ -1,9 +1,9 @@
 #pragma once
-#include <EngineCore\Actor.h>
+#include "MT3Object.h"
 #include "ContentsHelper.h"
 
 // Ό³Έν :
-class ABullet : public AActor
+class ABullet : public AMT3Object
 {
 public:
 	// constrcuter destructer

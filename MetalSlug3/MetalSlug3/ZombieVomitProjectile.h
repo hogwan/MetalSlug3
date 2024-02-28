@@ -1,6 +1,6 @@
 #pragma once
-#include <EngineCore/Actor.h>
-class AZombieVomitProjectile : public AActor
+#include "MT3Object.h"
+class AZombieVomitProjectile : public AMT3Object
 {
 public:
 	// constructor destructor

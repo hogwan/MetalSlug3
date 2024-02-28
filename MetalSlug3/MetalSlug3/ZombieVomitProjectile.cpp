@@ -11,7 +11,7 @@ AZombieVomitProjectile::~AZombieVomitProjectile()
 
 void AZombieVomitProjectile::BeginPlay()
 {
-	AActor::BeginPlay();
+	AMT3Object::BeginPlay();
 
 	Collider = CreateCollision(MT3CollisionOrder::PlayerBullet);
 	Collider->SetScale({ 50,20 });
@@ -102,7 +102,7 @@ void AZombieVomitProjectile::BeginPlay()
 
 void AZombieVomitProjectile::Tick(float _DeltaTime)
 {
-	AActor::Tick(_DeltaTime);
+	AMT3Object::Tick(_DeltaTime);
 
 
 	if (RendererEnd)

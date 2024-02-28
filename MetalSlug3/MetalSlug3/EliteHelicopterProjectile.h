@@ -1,17 +1,17 @@
 #pragma once
-#include <EngineCore/Actor.h>
-class EliteHelicopterProjectile : public AActor
+#include "MT3Object.h"
+class AEliteHelicopterProjectile : public AMT3Object
 {
 public:
 	// constructor destructor
-	EliteHelicopterProjectile();
-	~EliteHelicopterProjectile();
+	AEliteHelicopterProjectile();
+	~AEliteHelicopterProjectile();
 
 	// delete Function
-	EliteHelicopterProjectile(const EliteHelicopterProjectile& _Other) = delete;
-	EliteHelicopterProjectile(EliteHelicopterProjectile&& _Other) noexcept = delete;
-	EliteHelicopterProjectile& operator=(const EliteHelicopterProjectile& _Other) = delete;
-	EliteHelicopterProjectile& operator=(EliteHelicopterProjectile&& _Other) = delete;
+	AEliteHelicopterProjectile(const AEliteHelicopterProjectile& _Other) = delete;
+	AEliteHelicopterProjectile(AEliteHelicopterProjectile&& _Other) noexcept = delete;
+	AEliteHelicopterProjectile& operator=(const AEliteHelicopterProjectile& _Other) = delete;
+	AEliteHelicopterProjectile& operator=(AEliteHelicopterProjectile&& _Other) = delete;
 
 protected:
 	void BeginPlay() override;
@@ -19,6 +19,9 @@ protected:
 
 	UImageRenderer* Renderer = nullptr;
 	UCollision* Collider = nullptr;
+
+	float Speed = 0.0f;
+	float Accel = 300.0f;
 
 	void FallCheck();
 	void HitCheck();

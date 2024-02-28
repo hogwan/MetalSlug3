@@ -29,6 +29,7 @@
 #include "Helicopter.h"
 #include "LeaderHelicopter.h"
 #include "Van.h"
+#include "EliteHelicopter.h"
 
 SpawnManager::SpawnManager()
 {
@@ -651,7 +652,6 @@ void SpawnManager::Tick(float _DeltaTime)
 
 	if (SpawnNumber == 18)
 	{
-		//Çï±â ½ºÆù
 		std::vector<UCollision*> Result;
 		if (
 			!UContentsHelper::ScreenCol->GetCollider()->CollisionCheck(MT3CollisionOrder::Enemy, Result)
@@ -663,7 +663,8 @@ void SpawnManager::Tick(float _DeltaTime)
 
 	if (SpawnNumber == 19 && UContentsHelper::CameraManager->CameraMode == 9)
 	{
-		//¿¤¸®Æ®Çï±â½ºÆù
+		AEliteHelicopter* EliteHelicopter = GetWorld()->SpawnActor<AEliteHelicopter>();
+		EliteHelicopter->SetActorLocation({ 8759,2100 });
 		++SpawnNumber;
 	}
 

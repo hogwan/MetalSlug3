@@ -1,6 +1,6 @@
 #pragma once
-#include <EngineCore/Actor.h>
-class ASoldierBomb : public AActor
+#include "MT3Object.h"
+class ASoldierBomb : public AMT3Object
 {
 public:
 	// constructor destructor

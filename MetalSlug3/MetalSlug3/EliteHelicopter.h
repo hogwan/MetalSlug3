@@ -21,6 +21,15 @@ protected:
 
 
 	float Speed = 0.0f;
-	float TargetY = 700.0f;
+	float TargetY = 1860.0f;
+
+	float ShootCoolTime = 2.5f;
+	float AccShootTime = 0.0f;
+
+	float LaunchCoolTime = 0.3f;
+	float AccLaunchTime = 0.0f;
+
+	bool IsShooting = false;
+	int Bullet = 3;
 };
 

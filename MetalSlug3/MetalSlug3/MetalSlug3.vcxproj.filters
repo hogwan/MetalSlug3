@@ -169,6 +169,10 @@
     <ClInclude Include="HugeBombExplosionEffect.h">
       <Filter>Object\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="BombExplosionEffect.h">
+      <Filter>Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="MT3Object.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -336,6 +340,10 @@
     <ClCompile Include="HugeBombExplosionEffect.cpp">
       <Filter>Object\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="BombExplosionEffect.cpp">
+      <Filter>Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="MT3Object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">

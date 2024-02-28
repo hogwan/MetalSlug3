@@ -1,13 +1,11 @@
 #pragma once
-#include <EngineCore/Actor.h>
-class ABomb : public AActor
+#include "MT3Object.h"
+class ABomb : public AMT3Object
 {
 public:
 	// constructor destructor
 	ABomb();
 	~ABomb();
-
-	ABomb(FVector _Force);
 
 	// delete Function
 	ABomb(const ABomb& _Other) = delete;

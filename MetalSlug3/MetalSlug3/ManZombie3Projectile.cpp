@@ -10,6 +10,8 @@ AManZombie3Projectile::~AManZombie3Projectile()
 
 void AManZombie3Projectile::BeginPlay()
 {
+	AMT3Object::BeginPlay();
+
 	Collider = CreateCollision(MT3CollisionOrder::ZombieProjectile);
 	Collider->SetScale({ 30,30 });
 	Collider->SetPosition({ 0,-30 });

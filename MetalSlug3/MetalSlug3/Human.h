@@ -1,7 +1,7 @@
 #pragma once
-#include <EngineCore/Actor.h>
+#include "MT3Object.h"
 #include "ContentsHelper.h"
-class AHuman : public AActor
+class AHuman : public AMT3Object
 {
 public:
 	// constructor destructor

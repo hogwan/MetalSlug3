@@ -2,18 +2,20 @@
 #include "ContentsHelper.h"
 #include "HugeBombExplosionEffect.h"
 
-EliteHelicopterProjectile::EliteHelicopterProjectile()
+AEliteHelicopterProjectile::AEliteHelicopterProjectile()
 {
 }
 
-EliteHelicopterProjectile::~EliteHelicopterProjectile()
+AEliteHelicopterProjectile::~AEliteHelicopterProjectile()
 {
 	AHugeBombExplosionEffect* Effect = GetWorld()->SpawnActor<AHugeBombExplosionEffect>();
 	Effect->SetActorLocation(GetActorLocation());
 }
 
-void EliteHelicopterProjectile::BeginPlay()
+void AEliteHelicopterProjectile::BeginPlay()
 {
+	AMT3Object::BeginPlay();
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
 	Renderer->SetTransform({ {0,0},{500,500} });
 	Renderer->SetImage("EliteHelicopter_Projectile.png");
@@ -27,15 +29,18 @@ void EliteHelicopterProjectile::BeginPlay()
 
 }
 
-void EliteHelicopterProjectile::Tick(float _DeltaTime)
+void AEliteHelicopterProjectile::Tick(float _DeltaTime)
 {
-	AddActorLocation(FVector::Down * 300.0f * _DeltaTime);
+	AMT3Object::Tick(_DeltaTime);
+
+	Speed += Accel * _DeltaTime;
+	AddActorLocation(FVector::Down * Speed * _DeltaTime);
 
 	FallCheck();
 	HitCheck();
 }
 
-void EliteHelicopterProjectile::FallCheck()
+void AEliteHelicopterProjectile::FallCheck()
 {
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
@@ -44,7 +49,7 @@ void EliteHelicopterProjectile::FallCheck()
 	}
 }
 
-void EliteHelicopterProjectile::HitCheck()
+void AEliteHelicopterProjectile::HitCheck()
 {
 	std::vector<UCollision*> Result;
 	if (Collider->CollisionCheck(MT3CollisionOrder::Player, Result))

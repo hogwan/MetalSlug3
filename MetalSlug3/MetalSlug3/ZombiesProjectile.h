@@ -1,5 +1,5 @@
 #pragma once
-#include <EngineCore\Actor.h>
+#include "MT3Object.h"
 #include "ContentsHelper.h"
 
 // Ό³Έν :
@@ -10,7 +10,7 @@ enum class State {
 	CollideObject,
 };
 
-class AZombiesProjectile : public AActor
+class AZombiesProjectile : public AMT3Object
 {
 public:
 	// constrcuter destructer

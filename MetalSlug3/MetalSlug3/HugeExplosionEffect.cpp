@@ -11,7 +11,7 @@ AHugeExplosionEffect::~AHugeExplosionEffect()
 
 void AHugeExplosionEffect::BeginPlay()
 {
-	AActor::BeginPlay();
+	AMT3Object::BeginPlay();
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Particle);
 	Renderer->SetImage("HugeExplosion.png");

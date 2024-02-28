@@ -19,6 +19,8 @@ AVan::~AVan()
 
 void AVan::BeginPlay()
 {
+	AEnemy::BeginPlay();
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Van);
 	Renderer->SetImage("Van_Idle.png");
 	Renderer->SetTransform({ {0,0},{500,500} });
@@ -40,6 +42,8 @@ void AVan::BeginPlay()
 
 void AVan::Tick(float _DeltaTime)
 {
+	AEnemy::Tick(_DeltaTime);
+
 	if (Spawning)
 	{
 		int CurFrame = SoldierSpawnRenderer->GetCurAnimationFrame();

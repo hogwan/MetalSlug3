@@ -11,7 +11,7 @@ AExplosionEffect::~AExplosionEffect()
 
 void AExplosionEffect::BeginPlay()
 {
-	AActor::BeginPlay();
+	AMT3Object::BeginPlay();
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Particle);
 	Renderer->SetImage("NormalExplosion.png");
@@ -22,7 +22,7 @@ void AExplosionEffect::BeginPlay()
 
 void AExplosionEffect::Tick(float _DeltaTime)
 {
-	AActor::Tick(_DeltaTime);
+	AMT3Object::Tick(_DeltaTime);
 	if (Renderer->IsCurAnimationEnd())
 	{
 		Destroy();

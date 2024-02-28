@@ -1,7 +1,7 @@
 #pragma once
-#include <EngineCore/Actor.h>
+#include "MT3Object.h"
 #include "ContentsHelper.h"
-class AEnemy : public AActor
+class AEnemy : public AMT3Object
 {
 public:
 	// constrcuter destructer

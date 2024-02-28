@@ -14,6 +14,8 @@ ASoldierBomb::~ASoldierBomb()
 
 void ASoldierBomb::BeginPlay()
 {
+	AMT3Object::BeginPlay();
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
 	Renderer->SetTransform({ {0,0}, {500,500} });
 	Renderer->SetImage("SoldierBomb.png");
@@ -27,6 +29,8 @@ void ASoldierBomb::BeginPlay()
 
 void ASoldierBomb::Tick(float _DeltaTime)
 {
+	AMT3Object::Tick(_DeltaTime);
+
 	AddActorLocation(MoveVector * _DeltaTime);
 	GravityCheck(_DeltaTime);
 	FallCheck();

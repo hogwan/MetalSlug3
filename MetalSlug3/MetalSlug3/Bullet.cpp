@@ -14,11 +14,13 @@ ABullet::~ABullet()
 
 void ABullet::BeginPlay()
 {
-	
+	AMT3Object::BeginPlay();
 }
 
 void ABullet::Tick(float _DeltaTime)
 {
+	AMT3Object::Tick(_DeltaTime);
+
 	AddActorLocation(Dir * Speed * _DeltaTime);
 	if (IsDestroy && Renderer->IsCurAnimationEnd())
 	{
