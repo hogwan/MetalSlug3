@@ -32,7 +32,7 @@ void ASoldierZombie::BeginPlay()
 	Renderer->CreateAnimation("Idle_Right", "SoldierZombie.png", 0, 6, 0.1f, true);
 	Renderer->CreateAnimation("Move_Right", "SoldierZombie.png", 7, 22, 0.1f, true);
 	Renderer->CreateAnimation("Attack_Right", "SoldierZombie.png", 23, 33, 0.1f, false);
-	Renderer->CreateAnimation("DeathExplosion_Right", "SoldierZombie.png", 34, 53, 0.1f, false);
+	Renderer->CreateAnimation("DeathExplosion_Right", "SoldierZombie.png", 34, 53, 0.05f, false);
 	Renderer->CreateAnimation("Stun_Right", "SoldierZombie.png", 54, 78, 0.1f, false);
 	Renderer->CreateAnimation("Turn_Right", "SoldierZombie.png", 79, 87, 0.1f, false);
 	Renderer->CreateAnimation("Death_Right", "ManZombie1.png", 77, 91, 0.05f, false);
@@ -40,7 +40,7 @@ void ASoldierZombie::BeginPlay()
 	Renderer->CreateAnimation("Idle_Left", "SoldierZombie.png", 90, 96, 0.1f, true);
 	Renderer->CreateAnimation("Move_Left", "SoldierZombie.png", 97, 112, 0.1f, true);
 	Renderer->CreateAnimation("Attack_Left", "SoldierZombie.png", 113, 123, 0.1f, false);
-	Renderer->CreateAnimation("DeathExplosion_Left", "SoldierZombie.png", 124, 143, 0.1f, false);
+	Renderer->CreateAnimation("DeathExplosion_Left", "SoldierZombie.png", 124, 143, 0.05f, false);
 	Renderer->CreateAnimation("Stun_Left", "SoldierZombie.png", 144, 168, 0.1f, false);
 	Renderer->CreateAnimation("Turn_Left", "SoldierZombie.png", 169, 177, 0.1f, false);
 
@@ -191,6 +191,6 @@ void ASoldierZombie::HitCheck()
 
 		Renderer->ChangeAnimation(CurAnimName, false, 0, 0.1f);
 		IsDeath = true;
-		Destroy(1.0f);
+		Destroy(0.6f);
 	}
 }
