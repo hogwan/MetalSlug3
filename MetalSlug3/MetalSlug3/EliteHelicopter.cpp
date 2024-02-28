@@ -83,7 +83,7 @@ void AEliteHelicopter::Tick(float _DeltaTime)
 	FVector PlayerPos = UContentsHelper::Player->GetActorLocation();
 	FVector TargetVector = { PlayerPos.X, TargetY };
 	FVector MoveVector = TargetVector - GetActorLocation();
-	Speed = MoveVector.Size2D() / 1.5f;
+	Speed = MoveVector.Size2D();
 	MoveVector.Normalize2D();
 
 	AddActorLocation(MoveVector * Speed * _DeltaTime);

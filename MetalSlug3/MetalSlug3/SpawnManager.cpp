@@ -678,6 +678,137 @@ void SpawnManager::Tick(float _DeltaTime)
 			++UContentsHelper::CameraManager->CameraMode;
 		}
 	}
+
+	if (SpawnNumber == 21 && TargetPos > 9980.f)
+	{
+		AManZombie2* ManZombie2 = GetWorld()->SpawnActor<AManZombie2>();
+		ManZombie2->SetActorLocation({ 10100,2200 });
+		ManZombie2->StateChange(EnemyZombieState::Lying);
+
+		ADoctorZombie* DoctorZombie = GetWorld()->SpawnActor<ADoctorZombie>();
+		DoctorZombie->SetActorLocation({ 10200,2200 });
+		DoctorZombie->StateChange(EnemyZombieState::Lying);
+
+		AManZombie1* ManZombie1 = GetWorld()->SpawnActor<AManZombie1>();
+		ManZombie1->SetActorLocation({ 10300,2200 });
+		ManZombie1->StateChange(EnemyZombieState::Lying);
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 22 && TargetPos > 10500.f)
+	{
+		AWomanZombie* WomanZombie = GetWorld()->SpawnActor<AWomanZombie>();
+		WomanZombie->SetActorLocation({ 10600,2200 });
+		WomanZombie->StateChange(EnemyZombieState::Lying);
+
+		AUncleZombie* UncleZombie_0 = GetWorld()->SpawnActor<AUncleZombie>();
+		UncleZombie_0->SetActorLocation({ 10800,2200 });
+		UncleZombie_0->StateChange(EnemyZombieState::Lying);
+
+		AManZombie1* ManZombie1 = GetWorld()->SpawnActor<AManZombie1>();
+		ManZombie1->SetActorLocation({ 11000,2200 });
+		ManZombie1->StateChange(EnemyZombieState::Lying);
+
+		AUncleZombie* UncleZombie_1 = GetWorld()->SpawnActor<AUncleZombie>();
+		UncleZombie_1->SetActorLocation({ 11300,2200 });
+		UncleZombie_1->StateChange(EnemyZombieState::Lying);
+
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 23 && TargetPos > 11300.f)
+	{
+		AManZombie2* ManZombie2 = GetWorld()->SpawnActor<AManZombie2>();
+		ManZombie2->SetActorLocation({ 11400,2200 });
+		ManZombie2->StateChange(EnemyZombieState::Lying);
+
+		ADoctorZombie* DoctorZombie = GetWorld()->SpawnActor<ADoctorZombie>();
+		DoctorZombie->SetActorLocation({ 11600,2200 });
+		DoctorZombie->StateChange(EnemyZombieState::Lying);
+
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 24 && TargetPos > 12000.f)
+	{
+		ASoldierZombie* SoldierZombie_0 = GetWorld()->SpawnActor<ASoldierZombie>();
+		SoldierZombie_0->SetActorLocation({ 12100,2200 });
+		SoldierZombie_0->StateChange(EnemyZombieState::Lying);
+
+		ASoldierZombie* SoldierZombie_1 = GetWorld()->SpawnActor<ASoldierZombie>();
+		SoldierZombie_1->SetActorLocation({ 12300,2200 });
+		SoldierZombie_1->StateChange(EnemyZombieState::Lying);
+
+		ASoldierZombie* SoldierZombie_2 = GetWorld()->SpawnActor<ASoldierZombie>();
+		SoldierZombie_2->SetActorLocation({ 12500,2200 });
+		SoldierZombie_2->StateChange(EnemyZombieState::Lying);
+
+		ASoldierZombie* SoldierZombie_3 = GetWorld()->SpawnActor<ASoldierZombie>();
+		SoldierZombie_3->SetActorLocation({ 12600,2200 });
+		SoldierZombie_3->StateChange(EnemyZombieState::Lying);
+
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 25 && TargetPos > 12700.f)
+	{
+		ASoldierZombie* SoldierZombie_0 = GetWorld()->SpawnActor<ASoldierZombie>();
+		SoldierZombie_0->SetActorLocation({ 12800,2200 });
+		SoldierZombie_0->StateChange(EnemyZombieState::Lying);
+
+		ASoldierZombie* SoldierZombie_1 = GetWorld()->SpawnActor<ASoldierZombie>();
+		SoldierZombie_1->SetActorLocation({ 13100,2200 });
+		SoldierZombie_1->StateChange(EnemyZombieState::Lying);
+
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 26 && TargetPos > 13000.f)
+	{
+		ASoldierZombie* SoldierZombie_0 = GetWorld()->SpawnActor<ASoldierZombie>();
+		SoldierZombie_0->SetActorLocation({ 13300,2300 });
+		SoldierZombie_0->StateChange(EnemyZombieState::Move);
+
+		ASoldierZombie* SoldierZombie_1 = GetWorld()->SpawnActor<ASoldierZombie>();
+		SoldierZombie_1->SetActorLocation({ 13600,2300 });
+		SoldierZombie_1->StateChange(EnemyZombieState::Move);
+
+		ASoldierZombie* SoldierZombie_2 = GetWorld()->SpawnActor<ASoldierZombie>();
+		SoldierZombie_2->SetActorLocation({ 14000,2300 });
+		SoldierZombie_2->StateChange(EnemyZombieState::Move);
+
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 27 && TargetPos > 13600.f)
+	{
+		ASoldierZombie* SoldierZombie_0 = GetWorld()->SpawnActor<ASoldierZombie>();
+		SoldierZombie_0->SetActorLocation({ 13800,2370 });
+		SoldierZombie_0->StateChange(EnemyZombieState::Lying);
+
+		ASoldierZombie* SoldierZombie_1 = GetWorld()->SpawnActor<ASoldierZombie>();
+		SoldierZombie_1->SetActorLocation({ 14000,2370 });
+		SoldierZombie_1->StateChange(EnemyZombieState::Lying);
+
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 28 && TargetPos > 13960.f)
+	{
+		ADoctorZombie* DoctorZombie_0 = GetWorld()->SpawnActor<ADoctorZombie>();
+		DoctorZombie_0->SetActorLocation({ 14050,2370 });
+		DoctorZombie_0->StateChange(EnemyZombieState::Lying);
+
+		ADoctorZombie* DoctorZombie_1 = GetWorld()->SpawnActor<ADoctorZombie>();
+		DoctorZombie_1->SetActorLocation({ 14250,2370 });
+		DoctorZombie_1->StateChange(EnemyZombieState::Lying);
+
+		ADoctorZombie* DoctorZombie_2 = GetWorld()->SpawnActor<ADoctorZombie>();
+		DoctorZombie_2->SetActorLocation({ 14430,2370 });
+		DoctorZombie_2->StateChange(EnemyZombieState::Lying);
+
+		++SpawnNumber;
+	}
 }
 
 void SpawnManager::TestSpawn()
