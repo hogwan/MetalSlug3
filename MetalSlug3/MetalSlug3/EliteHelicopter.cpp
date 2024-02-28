@@ -18,7 +18,7 @@ void AEliteHelicopter::BeginPlay()
 	Renderer->SetImage("Flying0.png");
 
 	Propeller = CreateImageRenderer(MT3RenderOrder::Propeller);
-	Propeller->SetTransform({ {0,-20},{500,500} });
+	Propeller->SetTransform({ {20,-110},{500,500} });
 	Propeller->SetImage("Propeller.png");
 
 	Propeller->CreateAnimation("Flying6", "Propeller.png", 0, 4, 0.08f, true);
@@ -28,7 +28,7 @@ void AEliteHelicopter::BeginPlay()
 	Propeller->CreateAnimation("Flying2", "Propeller.png", 20, 24, 0.08f, true);
 	Propeller->CreateAnimation("Flying1", "Propeller.png", 25, 29, 0.08f, true);
 	Propeller->CreateAnimation("Flying0", "Propeller.png", 30, 34, 0.08f, true);
-
+	Propeller->ChangeAnimation("Flying0");
 	Collider = CreateCollision(MT3CollisionOrder::Enemy);
 	Collider->SetScale({150,150});
 	Collider->SetPosition({ 0,-75 });
@@ -40,7 +40,7 @@ void AEliteHelicopter::Tick(float _DeltaTime)
 	FVector PlayerPos = UContentsHelper::Player->GetActorLocation();
 	FVector TargetVector = { PlayerPos.X, TargetY };
 	FVector MoveVector = TargetVector - GetActorLocation();
-	Speed = MoveVector.Size2D() / 2;
+	Speed = MoveVector.Size2D() / 1.5f;
 	MoveVector.Normalize2D();
 
 	AddActorLocation(MoveVector * Speed * _DeltaTime);
@@ -50,12 +50,12 @@ void AEliteHelicopter::Tick(float _DeltaTime)
 		if (MoveVector.X < 0.0f)
 		{
 			Renderer->SetImage("Flying0.png");
-			Propeller->ChangeAnimation("Flying0");
+			Propeller->ChangeAnimation("Flying0",false,0,0.08f);
 		}
 		else
 		{
 			Renderer->SetImage("Flying6.png");
-			Propeller->ChangeAnimation("Flying6");
+			Propeller->ChangeAnimation("Flying6", false, 0, 0.08f);
 		}
 	}
 	else if (Speed > 30.0f)
@@ -63,12 +63,12 @@ void AEliteHelicopter::Tick(float _DeltaTime)
 		if (MoveVector.X < 0.0f)
 		{
 			Renderer->SetImage("Flying1.png");
-			Propeller->ChangeAnimation("Flying1");
+			Propeller->ChangeAnimation("Flying1", false, 0, 0.08f);
 		}
 		else
 		{
 			Renderer->SetImage("Flying5.png");
-			Propeller->ChangeAnimation("Flying5");
+			Propeller->ChangeAnimation("Flying5", false, 0, 0.08f);
 		}
 	}
 	else if (Speed > 10.0f)
@@ -76,17 +76,17 @@ void AEliteHelicopter::Tick(float _DeltaTime)
 		if (MoveVector.X < 0.0f)
 		{
 			Renderer->SetImage("Flying2.png");
-			Propeller->ChangeAnimation("Flying2");
+			Propeller->ChangeAnimation("Flying2", false, 0, 0.08f);
 		}
 		else
 		{
 			Renderer->SetImage("Flying4.png");
-			Propeller->ChangeAnimation("Flying4");
+			Propeller->ChangeAnimation("Flying4", false, 0, 0.08f);
 		}
 	}
 	else
 	{
 		Renderer->SetImage("Flying3.png");
-		Propeller->ChangeAnimation("Flying3");
+		Propeller->ChangeAnimation("Flying3", false, 0, 0.08f);
 	}
 }

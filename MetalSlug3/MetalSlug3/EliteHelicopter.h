@@ -21,7 +21,6 @@ protected:
 
 
 	float Speed = 0.0f;
-	float TargetY = 1790.0f;
-	FVector Offset = { 0,-300 };
+	float TargetY = 700.0f;
 };
 
