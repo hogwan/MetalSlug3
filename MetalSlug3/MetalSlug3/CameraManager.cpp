@@ -201,6 +201,28 @@ void CameraManager::CameraUpdate(float _DeltaTime)
 	break;
 	case 10:
 	{
+		float TargetY = 2255;
+		float CameraBottomPos = CameraPos.Y + 600.0f;
+		if (XGap > 300.0f)
+		{
+			CameraSpeed = XGap - 180.0f;
+			GetWorld()->AddCameraPos(FVector::Right * CameraSpeed * _DeltaTime);
+		}
+
+		FVector DirVector = { 0.f,TargetY - CameraBottomPos };
+
+		if (abs(TargetY - CameraBottomPos) < 1.0f)
+		{
+			return;
+		}
+
+		DirVector.Normalize2D();
+		CameraSpeed = 1000.0f;
+		GetWorld()->AddCameraPos(DirVector * CameraSpeed * _DeltaTime);
+	}
+	break;
+	case 11:
+	{
 		float TargetY = PlayerPos.Y + 100;
 		float CameraBottomPos = CameraPos.Y + 600.0f;
 		if (XGap > 300.0f)
@@ -216,7 +238,7 @@ void CameraManager::CameraUpdate(float _DeltaTime)
 		}
 	}
 	break;
-	case 11:
+	case 12:
 	{
 		float EndX = 14572;
 		float TargetY = 2427;

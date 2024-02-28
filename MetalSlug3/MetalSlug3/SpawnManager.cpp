@@ -552,12 +552,12 @@ void SpawnManager::Tick(float _DeltaTime)
 		Helicopter_0->StateChange(HelicopterState::Move);
 
 		AHelicopter* Helicopter_1 = GetWorld()->SpawnActor<AHelicopter>();
-		Helicopter_1->SetActorLocation({ 6500,830 });
+		Helicopter_1->SetActorLocation({ 6500,1030 });
 		Helicopter_1->Offset = { 0,-200 };
 		Helicopter_1->StateChange(HelicopterState::Move);
 
 		ASoldier* Soldier_0 = GetWorld()->SpawnActor<ASoldier>();
-		Soldier_0->SetActorLocation({ 6600,1300 });
+		Soldier_0->SetActorLocation({ 6400,1300 });
 		Soldier_0->StateChange(SoldierState::Move);
 		Soldier_0->SetPattern(SoldierPattern::Throw);
 
@@ -567,22 +567,18 @@ void SpawnManager::Tick(float _DeltaTime)
 		Soldier_1->SetPattern(SoldierPattern::Throw);
 
 		ASoldier* Soldier_2 = GetWorld()->SpawnActor<ASoldier>();
-		Soldier_2->SetActorLocation({ 6400,1000 });
+		Soldier_2->SetActorLocation({ 6300,1000 });
 		Soldier_2->StateChange(SoldierState::Move);
 		Soldier_2->SetPattern(SoldierPattern::Throw);
 
 		ASoldier* Soldier_3 = GetWorld()->SpawnActor<ASoldier>();
-		Soldier_3->SetActorLocation({ 7500,1520 });
+		Soldier_3->SetActorLocation({ 7800,1520 });
 		Soldier_3->StateChange(SoldierState::Move);
 		Soldier_3->SetPattern(SoldierPattern::Throw);
 
 		AUncleZombie* UncleZombie_0 = GetWorld()->SpawnActor<AUncleZombie>();
-		UncleZombie_0->SetActorLocation({ 6700,1300 });
+		UncleZombie_0->SetActorLocation({ 6400,1300 });
 		UncleZombie_0->StateChange(EnemyZombieState::Move);
-
-		ADoctorZombie* DoctorZombie_0 = GetWorld()->SpawnActor<ADoctorZombie>();
-		DoctorZombie_0->SetActorLocation({ 7400,1400 });
-		DoctorZombie_0->StateChange(EnemyZombieState::Move);
 
 		++SpawnNumber;
 	}
@@ -632,7 +628,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		}
 	}
 
-	if (SpawnNumber == 17 && TargetPos > 8950.0f)
+	if (SpawnNumber == 17 && TargetPos > 9060.0f)
 	{
 		AVan* Van_0 = GetWorld()->SpawnActor<AVan>();
 		Van_0->SetActorLocation({ 9050,2200 });
@@ -664,13 +660,12 @@ void SpawnManager::Tick(float _DeltaTime)
 	if (SpawnNumber == 19 && UContentsHelper::CameraManager->CameraMode == 9)
 	{
 		AEliteHelicopter* EliteHelicopter = GetWorld()->SpawnActor<AEliteHelicopter>();
-		EliteHelicopter->SetActorLocation({ 8759,2100 });
+		EliteHelicopter->SetActorLocation({ 8759,2000 });
 		++SpawnNumber;
 	}
 
 	if (SpawnNumber == 20)
 	{
-		//Çï±â ½ºÆù
 		std::vector<UCollision*> Result;
 		if (
 			!UContentsHelper::ScreenCol->GetCollider()->CollisionCheck(MT3CollisionOrder::Enemy, Result)

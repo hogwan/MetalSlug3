@@ -12,7 +12,7 @@ AScreenCollision::~AScreenCollision()
 void AScreenCollision::BeginPlay()
 {
 	Collider = CreateCollision(MT3CollisionOrder::Screen);
-	Collider->SetTransform({ { 900,500 }, { 1800,1000 } });
+	Collider->SetTransform({ { 400,300 }, { 1800,1000 } });
 	Collider->SetColType(ECollisionType::Rect);
 }
 
