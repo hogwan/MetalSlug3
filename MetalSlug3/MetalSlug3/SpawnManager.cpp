@@ -649,8 +649,34 @@ void SpawnManager::Tick(float _DeltaTime)
 		++UContentsHelper::CameraManager->CameraMode;
 	}
 
-	if (SpawnNumber == 18 && TargetPos > 9500.0f)
+	if (SpawnNumber == 18)
 	{
 		//Çï±â ½ºÆù
+		std::vector<UCollision*> Result;
+		if (
+			!UContentsHelper::ScreenCol->GetCollider()->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+			)
+		{
+			++SpawnNumber;
+		}
+	}
+
+	if (SpawnNumber == 19 && UContentsHelper::CameraManager->CameraMode == 9)
+	{
+		//¿¤¸®Æ®Çï±â½ºÆù
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 20)
+	{
+		//Çï±â ½ºÆù
+		std::vector<UCollision*> Result;
+		if (
+			!UContentsHelper::ScreenCol->GetCollider()->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+			)
+		{
+			++SpawnNumber;
+			++UContentsHelper::CameraManager->CameraMode;
+		}
 	}
 }

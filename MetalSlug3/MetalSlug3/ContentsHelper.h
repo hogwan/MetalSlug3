@@ -11,6 +11,7 @@ enum MT3RenderOrder
 	Projectile,
 	Van,
 	Enemy,
+	Propeller,
 	LowerBody,
 	UpperBody,
 	ZombieArm,

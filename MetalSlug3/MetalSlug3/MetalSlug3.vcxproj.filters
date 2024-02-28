@@ -160,6 +160,12 @@
     <ClInclude Include="HugeExplosionEffect.h">
       <Filter>Object\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="EliteHelicopter.h">
+      <Filter>Object\Enemy\Helicopter</Filter>
+    </ClInclude>
+    <ClInclude Include="EliteHelicopterProjectile.h">
+      <Filter>Object\Enemy\Helicopter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -317,6 +323,12 @@
     </ClCompile>
     <ClCompile Include="HugeExplosionEffect.cpp">
       <Filter>Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EliteHelicopter.cpp">
+      <Filter>Object\Enemy\Helicopter</Filter>
+    </ClCompile>
+    <ClCompile Include="EliteHelicopterProjectile.cpp">
+      <Filter>Object\Enemy\Helicopter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

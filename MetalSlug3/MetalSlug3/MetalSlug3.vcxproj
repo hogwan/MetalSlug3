@@ -197,6 +197,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EliteHelicopter.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EliteHelicopterProjectile.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ExplosionEffect.h">
       <SubType>
@@ -385,6 +393,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="DoctorZombie.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EliteHelicopter.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EliteHelicopterProjectile.cpp">
       <SubType>
       </SubType>
     </ClCompile>
