@@ -22,9 +22,5 @@ void AHugeExplosionEffect::BeginPlay()
 
 void AHugeExplosionEffect::Tick(float _DeltaTime)
 {
-	AActor::Tick(_DeltaTime);
-	if (Renderer->IsCurAnimationEnd())
-	{
-		Destroy();
-	}
+	AExplosionEffect::Tick(_DeltaTime);
 }

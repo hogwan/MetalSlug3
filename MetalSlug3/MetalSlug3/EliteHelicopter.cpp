@@ -2,13 +2,15 @@
 #include "EliteHelicopterProjectile.h"
 #include "Marco.h"
 #include "ContentsHelper.h"
-
+#include "HugeExplosionEffect.h"
 AEliteHelicopter::AEliteHelicopter()
 {
 }
 
 AEliteHelicopter::~AEliteHelicopter()
 {
+	AHugeExplosionEffect* Effect = GetWorld()->SpawnActor<AHugeExplosionEffect>();
+	Effect->SetActorLocation(GetActorLocation());
 }
 
 void AEliteHelicopter::BeginPlay()
@@ -33,10 +35,17 @@ void AEliteHelicopter::BeginPlay()
 	Collider->SetScale({150,150});
 	Collider->SetPosition({ 0,-75 });
 	Collider->SetColType(ECollisionType::Rect);
+
+	Hp = 20;
 }
 
 void AEliteHelicopter::Tick(float _DeltaTime)
 {
+	if (Hp <= 0)
+	{
+		Destroy();
+	}
+
 	FVector PlayerPos = UContentsHelper::Player->GetActorLocation();
 	FVector TargetVector = { PlayerPos.X, TargetY };
 	FVector MoveVector = TargetVector - GetActorLocation();
