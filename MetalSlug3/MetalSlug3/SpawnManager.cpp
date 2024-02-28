@@ -30,6 +30,7 @@
 #include "LeaderHelicopter.h"
 #include "Van.h"
 #include "EliteHelicopter.h"
+#include "SoldierZombie.h"
 
 SpawnManager::SpawnManager()
 {
@@ -41,6 +42,8 @@ SpawnManager::~SpawnManager()
 
 void SpawnManager::BeginPlay()
 {
+	TestSpawn();
+
 	UContentsHelper::ScreenCol = GetWorld()->SpawnActor<AScreenCollision>();
 	//UContentsHelper::ScreenCol->GetCollider()->ActiveOff();
 
@@ -101,7 +104,7 @@ void SpawnManager::BeginPlay()
 	ACameraModeSwitch* CameraSwitch_7 = GetWorld()->SpawnActor<ACameraModeSwitch>();
 	CameraSwitch_7->SetActorLocation({ 13200,2370 });
 
-	ADoctor* Doctor_0 = GetWorld()->SpawnActor<ADoctor>();
+	/*ADoctor* Doctor_0 = GetWorld()->SpawnActor<ADoctor>();
 	Doctor_0->SetActorLocation({ 300,1000 }); 
 	Doctor_0->StateChange(HumanState::Run); 
 	
@@ -119,7 +122,7 @@ void SpawnManager::BeginPlay()
 	
 	ADoctor* Doctor_4 = GetWorld()->SpawnActor<ADoctor>();
 	Doctor_4->SetActorLocation({ 450,1000 }); 
-	Doctor_4->StateChange(HumanState::Run); 
+	Doctor_4->StateChange(HumanState::Run); */
 	
 }
 
@@ -675,4 +678,11 @@ void SpawnManager::Tick(float _DeltaTime)
 			++UContentsHelper::CameraManager->CameraMode;
 		}
 	}
+}
+
+void SpawnManager::TestSpawn()
+{
+	ASoldierZombie* Zombie = GetWorld()->SpawnActor<ASoldierZombie>();
+	Zombie->SetActorLocation({ 500,1000 });
+	Zombie->StateChange(EnemyZombieState::Idle);
 }
