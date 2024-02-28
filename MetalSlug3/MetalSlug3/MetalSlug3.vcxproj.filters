@@ -173,6 +173,9 @@
       <Filter>Object\Effect</Filter>
     </ClInclude>
     <ClInclude Include="MT3Object.h" />
+    <ClInclude Include="SoldierZombie.h">
+      <Filter>Object\Enemy\Zombies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -344,6 +347,9 @@
       <Filter>Object\Effect</Filter>
     </ClCompile>
     <ClCompile Include="MT3Object.cpp" />
+    <ClCompile Include="SoldierZombie.cpp">
+      <Filter>Object\Enemy\Zombies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
