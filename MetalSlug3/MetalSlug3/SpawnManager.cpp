@@ -813,7 +813,5 @@ void SpawnManager::Tick(float _DeltaTime)
 
 void SpawnManager::TestSpawn()
 {
-	ASoldierZombie* Zombie = GetWorld()->SpawnActor<ASoldierZombie>();
-	Zombie->SetActorLocation({ 500,1000 });
-	Zombie->StateChange(EnemyZombieState::Idle);
+	
 }
