@@ -637,14 +637,20 @@ void SpawnManager::Tick(float _DeltaTime)
 		Van_0->SetActorLocation({ 9050,2200 });
 
 		AVan* Van_1 = GetWorld()->SpawnActor<AVan>();
-		Van_1->SetActorLocation({ 9250,2200 });
+		Van_1->SetActorLocation({ 9200,2200 });
 
 		AVan* Van_2 = GetWorld()->SpawnActor<AVan>();
-		Van_2->SetActorLocation({ 9450,2200 });
+		Van_2->SetActorLocation({ 9350,2200 });
 
 		AVan* Van_3 = GetWorld()->SpawnActor<AVan>();
-		Van_3->SetActorLocation({ 9650,2200 });
+		Van_3->SetActorLocation({ 9500,2200 });
 
 		++SpawnNumber;
+		++UContentsHelper::CameraManager->CameraMode;
+	}
+
+	if (SpawnNumber == 18 && TargetPos > 9500.0f)
+	{
+		//Çï±â ½ºÆù
 	}
 }

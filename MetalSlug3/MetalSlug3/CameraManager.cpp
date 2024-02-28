@@ -183,6 +183,24 @@ void CameraManager::CameraUpdate(float _DeltaTime)
 	break;
 	case 9:
 	{
+		if (CameraPos.X + 800.0f > 9550.0f)
+		{
+			return;
+		}
+
+		if (XGap > 300.0f)
+		{
+			CameraSpeed = XGap - 180.0f;
+			GetWorld()->AddCameraPos(FVector::Right * CameraSpeed * _DeltaTime);
+		}
+		else
+		{
+			CameraSpeed = 0.0f;
+		}
+	}
+	break;
+	case 10:
+	{
 		float TargetY = PlayerPos.Y + 100;
 		float CameraBottomPos = CameraPos.Y + 600.0f;
 		if (XGap > 300.0f)
@@ -198,7 +216,7 @@ void CameraManager::CameraUpdate(float _DeltaTime)
 		}
 	}
 	break;
-	case 10:
+	case 11:
 	{
 		float EndX = 14572;
 		float TargetY = 2427;
