@@ -15,9 +15,9 @@ void ABossMap::BeginPlay()
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::BossMap);
 	Renderer->SetImage("BossStartEvent.png");
-	Renderer->SetTransform({ {0,0},{808,602} });
-	Renderer->CreateAnimation("Opening", "BossStartEvent.png", 0, 3, 1.0f, false);
-	Renderer->ChangeAnimation("Opening", false, 0, 1.0f);
+	Renderer->SetTransform({ {0,0},{858,652} });
+	Renderer->CreateAnimation("Opening", "BossStartEvent.png", 0, 3, 0.6f, false);
+	Renderer->ChangeAnimation("Opening", false, 0, 0.6f);
 }
 
 void ABossMap::Tick(float _DeltaTime)

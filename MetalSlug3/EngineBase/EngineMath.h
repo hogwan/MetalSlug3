@@ -116,6 +116,7 @@ public:
 		Result.X = (_OriginVector.X * cosf(_Angle)) - (_OriginVector.Y * sinf(_Angle));
 		Result.Y = (_OriginVector.X * sinf(_Angle)) + (_OriginVector.Y * cosf(_Angle));
 		return Result;
+
 	}
 
 	static float4 DegToDir(float _Angle)

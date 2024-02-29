@@ -17,7 +17,6 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-
 	void TestSpawn();
 	int SpawnNumber = 0;
 };

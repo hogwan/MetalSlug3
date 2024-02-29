@@ -32,6 +32,7 @@
 #include "EliteHelicopter.h"
 #include "SoldierZombie.h"
 #include "BossMap.h"
+#include "SphereConstructor.h"
 
 SpawnManager::SpawnManager()
 {
@@ -62,7 +63,7 @@ void SpawnManager::BeginPlay()
 	F2->SetActorLocation({ 4270,807 });
 
 	UContentsHelper::Player = GetWorld()->SpawnActor<Marco>();
-	UContentsHelper::Player->SetActorLocation({ 100,1000 });
+	UContentsHelper::Player->SetActorLocation({ 12000,2100 });
 
 	AGo* Go = GetWorld()->SpawnActor<AGo>();
 	Go->SetActorLocation({ 650,230 });
@@ -834,13 +835,18 @@ void SpawnManager::Tick(float _DeltaTime)
 
 	if (SpawnNumber == 31)
 	{
+
 		ABossMap* BossMap = GetWorld()->SpawnActor<ABossMap>();
 		BossMap->SetActorLocation({ 14168, 2127});
+
+		ASphereConstructor* SphereConstructor = GetWorld()->SpawnActor<ASphereConstructor>();
+		SphereConstructor->SetActorLocation({ 13655,2215 });
 		++SpawnNumber;
 	}
 }
 
 void SpawnManager::TestSpawn()
 {
-	
+	UContentsHelper::CameraManager->CameraMode = 11;
+	SpawnNumber = 29;
 }

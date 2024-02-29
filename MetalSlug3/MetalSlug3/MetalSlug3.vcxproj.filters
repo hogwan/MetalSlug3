@@ -179,6 +179,12 @@
     <ClInclude Include="BossMap.h">
       <Filter>Object\Map</Filter>
     </ClInclude>
+    <ClInclude Include="UnknownSphere.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereConstructor.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -356,6 +362,12 @@
     <ClCompile Include="BossMap.cpp">
       <Filter>Object\Map</Filter>
     </ClCompile>
+    <ClCompile Include="UnknownSphere.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereConstructor.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -408,6 +420,9 @@
     </Filter>
     <Filter Include="Object\Map">
       <UniqueIdentifier>{5dc31ca5-19d0-4999-92d2-a4b96f092a72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Boss">
+      <UniqueIdentifier>{4138536b-fdb1-47cf-9f70-6df6738e0a49}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
