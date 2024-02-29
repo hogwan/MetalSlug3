@@ -8,6 +8,7 @@ enum MT3RenderOrder
 {
 	Back,
 	Map,
+	BossMap,
 	Projectile,
 	Van,
 	Enemy,

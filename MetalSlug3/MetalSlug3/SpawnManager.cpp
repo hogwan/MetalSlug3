@@ -31,6 +31,7 @@
 #include "Van.h"
 #include "EliteHelicopter.h"
 #include "SoldierZombie.h"
+#include "BossMap.h"
 
 SpawnManager::SpawnManager()
 {
@@ -817,6 +818,24 @@ void SpawnManager::Tick(float _DeltaTime)
 		DoctorZombie_2->SetActorLocation({ 14430,2370 });
 		DoctorZombie_2->StateChange(EnemyZombieState::Lying);
 
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 30)
+	{
+		std::vector<UCollision*> Result;
+		if (
+			!UContentsHelper::ScreenCol->GetCollider()->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+			)
+		{
+			++SpawnNumber;
+		}
+	}
+
+	if (SpawnNumber == 31)
+	{
+		ABossMap* BossMap = GetWorld()->SpawnActor<ABossMap>();
+		BossMap->SetActorLocation({ 14168, 2127});
 		++SpawnNumber;
 	}
 }

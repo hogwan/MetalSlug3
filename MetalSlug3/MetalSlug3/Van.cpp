@@ -37,7 +37,7 @@ void AVan::BeginPlay()
 	Collider->SetScale({ 150,150 });
 	Collider->SetPosition({ 0,-75 });
 
-	Hp = 8;
+	Hp = MaxHp;
 }
 
 void AVan::Tick(float _DeltaTime)
@@ -73,7 +73,7 @@ void AVan::Tick(float _DeltaTime)
 	}
 
 
-	if (Hp <= 10)
+	if (Hp <= MaxHp / 2)
 	{
 		Renderer->SetImage("Van_Damaged.png");
 	}
