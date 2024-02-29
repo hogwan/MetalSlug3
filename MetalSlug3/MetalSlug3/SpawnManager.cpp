@@ -528,19 +528,19 @@ void SpawnManager::Tick(float _DeltaTime)
 		ALeaderHelicopter::HeliList.push_back(Helicopter_3);
 
 		AUncleZombie* UncleZombie_0 = GetWorld()->SpawnActor<AUncleZombie>();
-		UncleZombie_0->SetActorLocation({ 6250,1050 });
+		UncleZombie_0->SetActorLocation({ 6450,1050 });
 		UncleZombie_0->StateChange(EnemyZombieState::Move);
 
 		ADoctorZombie* DoctorZombie_0 = GetWorld()->SpawnActor<ADoctorZombie>();
-		DoctorZombie_0->SetActorLocation({ 6150,1050 });
+		DoctorZombie_0->SetActorLocation({ 6350,1050 });
 		DoctorZombie_0->StateChange(EnemyZombieState::Move);
 
 		AUncleZombie* UncleZombie_1 = GetWorld()->SpawnActor<AUncleZombie>();
-		UncleZombie_1->SetActorLocation({ 6050,1000 });
+		UncleZombie_1->SetActorLocation({ 6250,1000 });
 		UncleZombie_1->StateChange(EnemyZombieState::Move);
 
 		ADoctorZombie* DoctorZombie_1 = GetWorld()->SpawnActor<ADoctorZombie>();
-		DoctorZombie_1->SetActorLocation({ 5950,1000 });
+		DoctorZombie_1->SetActorLocation({ 6150,1000 });
 		DoctorZombie_1->StateChange(EnemyZombieState::Move);
 
 		++SpawnNumber;
@@ -565,7 +565,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		Helicopter_0->StateChange(HelicopterState::Move);
 
 		AHelicopter* Helicopter_1 = GetWorld()->SpawnActor<AHelicopter>();
-		Helicopter_1->SetActorLocation({ 6500,1030 });
+		Helicopter_1->SetActorLocation({ 6400,1130 });
 		Helicopter_1->Offset = { 0,-200 };
 		Helicopter_1->StateChange(HelicopterState::Move);
 
