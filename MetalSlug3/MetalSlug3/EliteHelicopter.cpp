@@ -38,7 +38,7 @@ void AEliteHelicopter::BeginPlay()
 	Collider->SetPosition({ 0,-75 });
 	Collider->SetColType(ECollisionType::Rect);
 
-	Hp = 20;
+	Hp = 10;
 }
 
 void AEliteHelicopter::Tick(float _DeltaTime)

@@ -37,7 +37,7 @@ void AVan::BeginPlay()
 	Collider->SetScale({ 150,150 });
 	Collider->SetPosition({ 0,-75 });
 
-	Hp = 20;
+	Hp = 8;
 }
 
 void AVan::Tick(float _DeltaTime)

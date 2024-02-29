@@ -491,7 +491,17 @@ void SpawnManager::Tick(float _DeltaTime)
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 11 && TargetPos > 7200)
+	if (SpawnNumber == 11 && TargetPos > 7000)
+	{
+		AUncleZombie* UncleZombie = GetWorld()->SpawnActor<AUncleZombie>();
+		UncleZombie->StateChange(EnemyZombieState::Lying);
+		UncleZombie->SetActorLocation({ 7200,1400 });
+
+
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 12 && TargetPos > 7200)
 	{
 		ALeaderHelicopter* LeaderHelicopter = GetWorld()->SpawnActor<ALeaderHelicopter>();
 		LeaderHelicopter->SetActorLocation({ 7300,1135 });
@@ -536,7 +546,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 12)
+	if (SpawnNumber == 13)
 	{
 		std::vector<UCollision*> Result;
 		if (
@@ -547,7 +557,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		}
 	}
 
-	if (SpawnNumber == 13)
+	if (SpawnNumber == 14)
 	{
 		AHelicopter* Helicopter_0 = GetWorld()->SpawnActor<AHelicopter>();
 		Helicopter_0->SetActorLocation({ 7380,1450 });
@@ -587,7 +597,7 @@ void SpawnManager::Tick(float _DeltaTime)
 	}
 		
 
-	if (SpawnNumber == 14)
+	if (SpawnNumber == 15)
 	{
 		std::vector<UCollision*> Result;
 		if (
@@ -598,7 +608,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		}
 	}
 
-	if (SpawnNumber == 15)
+	if (SpawnNumber == 16)
 	{
 		AWomanZombie* WomanZombie_0 = GetWorld()->SpawnActor<AWomanZombie>();
 		WomanZombie_0->SetActorLocation({ 7580,1780 });
@@ -619,7 +629,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 16)
+	if (SpawnNumber == 17)
 	{
 		std::vector<UCollision*> Result;
 		if (
@@ -631,7 +641,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		}
 	}
 
-	if (SpawnNumber == 17 && TargetPos > 9060.0f)
+	if (SpawnNumber == 18 && TargetPos > 9060.0f)
 	{
 		AVan* Van_0 = GetWorld()->SpawnActor<AVan>();
 		Van_0->SetActorLocation({ 9050,2200 });
@@ -649,7 +659,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		++UContentsHelper::CameraManager->CameraMode;
 	}
 
-	if (SpawnNumber == 18)
+	if (SpawnNumber == 19)
 	{
 		std::vector<UCollision*> Result;
 		if (
@@ -660,14 +670,14 @@ void SpawnManager::Tick(float _DeltaTime)
 		}
 	}
 
-	if (SpawnNumber == 19 && UContentsHelper::CameraManager->CameraMode == 9)
+	if (SpawnNumber == 20 && UContentsHelper::CameraManager->CameraMode == 9)
 	{
 		AEliteHelicopter* EliteHelicopter = GetWorld()->SpawnActor<AEliteHelicopter>();
 		EliteHelicopter->SetActorLocation({ 8759,2000 });
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 20)
+	if (SpawnNumber == 21)
 	{
 		std::vector<UCollision*> Result;
 		if (
@@ -679,7 +689,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		}
 	}
 
-	if (SpawnNumber == 21 && TargetPos > 9980.f)
+	if (SpawnNumber == 22 && TargetPos > 9980.f)
 	{
 		AManZombie2* ManZombie2 = GetWorld()->SpawnActor<AManZombie2>();
 		ManZombie2->SetActorLocation({ 10100,2200 });
@@ -695,7 +705,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 22 && TargetPos > 10500.f)
+	if (SpawnNumber == 23 && TargetPos > 10500.f)
 	{
 		AWomanZombie* WomanZombie = GetWorld()->SpawnActor<AWomanZombie>();
 		WomanZombie->SetActorLocation({ 10600,2200 });
@@ -716,7 +726,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 23 && TargetPos > 11300.f)
+	if (SpawnNumber == 24 && TargetPos > 11300.f)
 	{
 		AManZombie2* ManZombie2 = GetWorld()->SpawnActor<AManZombie2>();
 		ManZombie2->SetActorLocation({ 11400,2200 });
@@ -729,7 +739,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 24 && TargetPos > 12000.f)
+	if (SpawnNumber == 25 && TargetPos > 12000.f)
 	{
 		ASoldierZombie* SoldierZombie_0 = GetWorld()->SpawnActor<ASoldierZombie>();
 		SoldierZombie_0->SetActorLocation({ 12100,2200 });
@@ -750,7 +760,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 25 && TargetPos > 12700.f)
+	if (SpawnNumber == 26 && TargetPos > 12700.f)
 	{
 		ASoldierZombie* SoldierZombie_0 = GetWorld()->SpawnActor<ASoldierZombie>();
 		SoldierZombie_0->SetActorLocation({ 12800,2200 });
@@ -763,7 +773,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 26 && TargetPos > 13000.f)
+	if (SpawnNumber == 27 && TargetPos > 13000.f)
 	{
 		ASoldierZombie* SoldierZombie_0 = GetWorld()->SpawnActor<ASoldierZombie>();
 		SoldierZombie_0->SetActorLocation({ 13300,2300 });
@@ -780,7 +790,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 27 && TargetPos > 13600.f)
+	if (SpawnNumber == 28 && TargetPos > 13600.f)
 	{
 		ASoldierZombie* SoldierZombie_0 = GetWorld()->SpawnActor<ASoldierZombie>();
 		SoldierZombie_0->SetActorLocation({ 13800,2370 });
@@ -793,7 +803,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 28 && TargetPos > 13960.f)
+	if (SpawnNumber == 29 && TargetPos > 13960.f)
 	{
 		ADoctorZombie* DoctorZombie_0 = GetWorld()->SpawnActor<ADoctorZombie>();
 		DoctorZombie_0->SetActorLocation({ 14050,2370 });

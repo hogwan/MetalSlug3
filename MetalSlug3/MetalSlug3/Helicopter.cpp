@@ -56,7 +56,7 @@ void AHelicopter::BeginPlay()
 	StateChange(HelicopterState::Move);
 	Renderer->ChangeAnimation("Speed4_Right");
 
-	Hp = 20;
+	Hp = 10;
 }
 
 void AHelicopter::Tick(float _DeltaTime)
