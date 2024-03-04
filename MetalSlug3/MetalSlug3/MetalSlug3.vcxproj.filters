@@ -185,6 +185,9 @@
     <ClInclude Include="SphereConstructor.h">
       <Filter>Boss</Filter>
     </ClInclude>
+    <ClInclude Include="MonoEyes.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -366,6 +369,9 @@
       <Filter>Boss</Filter>
     </ClCompile>
     <ClCompile Include="SphereConstructor.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="MonoEyes.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
   </ItemGroup>

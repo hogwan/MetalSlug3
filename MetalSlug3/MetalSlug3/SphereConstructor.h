@@ -16,7 +16,7 @@ public:
 	void SetOriginTargetVector(FVector _Origin, FVector _Target, bool _ClockDir)
 	{
 		OriginVector = _Origin;
-		TargetVector = _Target;
+		TargetVector = _Target - OriginVector;
 
 		InitialVector = (GetActorLocation() - OriginVector).Normalize2DReturn();
 		LastVector = (GetActorLocation() - TargetVector).Normalize2DReturn();
@@ -30,7 +30,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	float Speed = 0.0f;
-	float Accel = 10.0f;
+	float Accel = 100.0f;
 
 	float AccSpawnTime = 0.0f;
 	float SpawnCoolTime = 0.2f;
@@ -41,8 +41,9 @@ protected:
 	FVector InitialVector = FVector::Zero;
 	FVector LastVector = FVector::Zero;
 	FVector MidVector = FVector::Zero;
-	FVector RotateVector = FVector::Zero;
 
 	bool ClockDir = false;
+
+	float AngleBetween(FVector _Initial, FVector _Last);
 };
 

@@ -840,7 +840,8 @@ void SpawnManager::Tick(float _DeltaTime)
 		BossMap->SetActorLocation({ 14168, 2127});
 
 		ASphereConstructor* SphereConstructor = GetWorld()->SpawnActor<ASphereConstructor>();
-		SphereConstructor->SetActorLocation({ 13655,2215 });
+		SphereConstructor->SetActorLocation({ 14150,2222 });
+		SphereConstructor->SetOriginTargetVector({ 14000,2222 }, { 14100,2100 }, false);
 		++SpawnNumber;
 	}
 }
