@@ -219,59 +219,87 @@ void AMonoEyes::Idle(float _DeltaTime)
 	{
 		if (XGap > 150.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {0,200},{200,200 } });
+			CurImageName = "Left_10";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else if (XGap > 100.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {200,200},{200,200 } });
+			CurImageName = "Left_11";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else if (XGap > 80.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {400,200},{200,200 } });
+			CurImageName = "Left_12";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else if (XGap > 60.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {600,200},{200,200 } });
+			CurImageName = "Left_13";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else if (XGap > 40.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {800,200},{200,200 } });
+			CurImageName = "Left_14";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else if (XGap > 20.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {1000,200},{200,200 } });
+			CurImageName = "Left_15";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else if (XGap > 0.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {1200,200},{200,200 } });
+			CurImageName = "Left_16";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else if (XGap > -20.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {1200,600},{200,200 } });
+			CurImageName = "Right_16";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else if (XGap > -40.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {1000,600},{200,200 } });
+			CurImageName = "Right_15";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else if (XGap > -60.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {800,600},{200,200 } });
+			CurImageName = "Right_14";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else if (XGap > -80.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {600,600},{200,200 } });
+			CurImageName = "Right_13";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else if (XGap > -100.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {400,600},{200,200 } });
+			CurImageName = "Right_12";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else if (XGap > -150.0f)
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {200,600},{200,200 } });
+			CurImageName = "Right_11";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 		else
 		{
-			Renderer->GetImage()->SetCuttingTransform({ {0,600},{200,200 } });
+			CurImageName = "Right_10";
+			std::string CurAnimName = AttachName + CurImageName;
+			Renderer->SetImage(CurAnimName);
 		}
 	}
 }
