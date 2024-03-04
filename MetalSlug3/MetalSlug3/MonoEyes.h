@@ -42,6 +42,9 @@ protected:
 	FVector InitialPosition = FVector::Zero;
 	FVector Ratio = FVector::Zero;
 
+	std::string CurImageName = "None";
+	std::string AttachName = "None";
+
 	void Spawn(float _DeltaTime);
 	void Idle(float _DeltaTime);
 
