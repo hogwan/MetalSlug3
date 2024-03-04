@@ -15,7 +15,6 @@ void AMonoEyes::BeginPlay()
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ {0,0},{600,600} });
-	Renderer->SetImage("MonoEyes_TurningBack.png");
 
 	Collider = CreateCollision(MT3CollisionOrder::Enemy);
 	Collider->SetScale({ 100,300 });
@@ -46,7 +45,6 @@ void AMonoEyes::Tick(float _DeltaTime)
 	{
 		CurZPos = ZPos::Back;
 		Renderer->SetTransform({ {0,0},{550,550} });
-		Renderer->SetImage("MonoEyes_TurningBack.png");
 
 		AttachName = "Back_";
 	}
@@ -54,7 +52,6 @@ void AMonoEyes::Tick(float _DeltaTime)
 	{
 		CurZPos = ZPos::Mid;
 		Renderer->SetTransform({ {0,0},{580,580} });
-		Renderer->SetImage("MonoEyes_TurningMid.png");
 
 		AttachName = "Mid_";
 	}
@@ -62,7 +59,6 @@ void AMonoEyes::Tick(float _DeltaTime)
 	{
 		CurZPos = ZPos::Front;
 		Renderer->SetTransform({ {0,0},{600,600} });
-		Renderer->SetImage("MonoEyes_TurningFront.png");
 
 		AttachName = "Front_";
 	}
