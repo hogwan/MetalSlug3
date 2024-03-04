@@ -33,6 +33,7 @@
 #include "SoldierZombie.h"
 #include "BossMap.h"
 #include "SphereConstructor.h"
+#include "MonoEyeCenter.h"
 
 SpawnManager::SpawnManager()
 {
@@ -839,9 +840,13 @@ void SpawnManager::Tick(float _DeltaTime)
 		ABossMap* BossMap = GetWorld()->SpawnActor<ABossMap>();
 		BossMap->SetActorLocation({ 14168, 2127});
 
-		ASphereConstructor* SphereConstructor = GetWorld()->SpawnActor<ASphereConstructor>();
+		/*ASphereConstructor* SphereConstructor = GetWorld()->SpawnActor<ASphereConstructor>();
 		SphereConstructor->SetActorLocation({ 14150,2222 });
-		SphereConstructor->SetOriginTargetVector({ 14000,2222 }, { 14100,2100 }, false);
+		SphereConstructor->SetOriginTargetVector({ 14000,2222 }, { 14100,2100 }, false);*/
+
+		MonoEyeCenter* mono = GetWorld()->SpawnActor<MonoEyeCenter>();
+		mono->SetActorLocation({ 14150,2050 });
+
 		++SpawnNumber;
 	}
 }
@@ -850,4 +855,5 @@ void SpawnManager::TestSpawn()
 {
 	UContentsHelper::CameraManager->CameraMode = 11;
 	SpawnNumber = 29;
+
 }

@@ -13,10 +13,13 @@ enum MT3RenderOrder
 	Van,
 	Enemy,
 	Propeller,
+	MonoEye_Back,
+	MonoEye_Mid,
 	LowerBody,
 	UpperBody,
 	ZombieArm,
 	AllBody,
+	MonoEye_Front,
 	Particle,
 	Front,
 	UI,
@@ -189,6 +192,13 @@ enum class HelicopterState
 	Aiming,
 	Shoot,
 	Death,
+};
+
+enum class ZPos
+{
+	Back,
+	Front,
+	Mid,
 };
 
 class UContentsHelper

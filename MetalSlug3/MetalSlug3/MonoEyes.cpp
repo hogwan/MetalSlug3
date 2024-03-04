@@ -1,64 +1,231 @@
 #include "MonoEyes.h"
+#include "Marco.h"
 
-MonoEyes::MonoEyes()
+AMonoEyes::AMonoEyes()
 {
 }
 
-MonoEyes::~MonoEyes()
+AMonoEyes::~AMonoEyes()
 {
 }
 
-void MonoEyes::BeginPlay()
+void AMonoEyes::BeginPlay()
 {
+	AEnemy::BeginPlay();
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
-	Renderer->SetTransform({ {0,0},{500,500} });
+	Renderer->SetTransform({ {0,0},{600,600} });
+	Renderer->SetImage("MonoEyes_TurningBack.png");
 
 	Collider = CreateCollision(MT3CollisionOrder::Enemy);
 	Collider->SetScale({ 100,300 });
 	Collider->SetPosition({ 0,-150 });
 	Collider->SetColType(ECollisionType::Rect);
+
+	SetActorLocation({ 14150,2050 });
+	InitialPosition = { 14150,2050 };
+
 }
 
-void MonoEyes::Tick(float _DeltaTime)
+void AMonoEyes::Tick(float _DeltaTime)
+{
+	AEnemy::Tick(_DeltaTime);
+
+	RotAngle += (UEngineMath::PI/3.0f) * _DeltaTime;
+
+	// -1 ~ 1
+	float CurY = sinf(RotAngle);
+	float CurX = cosf(RotAngle);
+
+	FVector YPos = FVector::Down * Ratio.Y * CurY;
+	FVector XPos = FVector::Right * Ratio.X * CurX;
+
+	SetActorLocation(InitialPosition + YPos + XPos);
+
+	if (CurY > 0.4f)
+	{
+		CurZPos = ZPos::Back;
+		Renderer->SetTransform({ {0,0},{550,550} });
+		Renderer->SetImage("MonoEyes_TurningBack.png");
+	}
+	else if (CurY <= 0.4f && CurY >= -0.2f)
+	{
+		CurZPos = ZPos::Mid;
+		Renderer->SetTransform({ {0,0},{580,580} });
+		Renderer->SetImage("MonoEyes_TurningMid.png");
+	}
+	else if(CurY < -0.2f)
+	{
+		CurZPos = ZPos::Front;
+		Renderer->SetTransform({ {0,0},{600,600} });
+		Renderer->SetImage("MonoEyes_TurningFront.png");
+	}
+
+	Idle(_DeltaTime);
+}
+void AMonoEyes::Spawn(float _DeltaTime)
 {
 }
 
-void MonoEyes::StateUpdate()
+void AMonoEyes::Idle(float _DeltaTime)
 {
-}
+	FVector PlayerPos = UContentsHelper::Player->GetActorLocation();
+	float XGap = GetActorLocation().X - PlayerPos.X;
 
-void MonoEyes::StateChange()
-{
-}
+	if (CurZPos == ZPos::Front)
+	{
+		Renderer->SetOrder(MT3RenderOrder::MonoEye_Front);
+	}
+	else if (CurZPos == ZPos::Mid)
+	{
+		Renderer->SetOrder(MT3RenderOrder::MonoEye_Mid);
+	}
+	else
+	{
+		Renderer->SetOrder(MT3RenderOrder::MonoEye_Back);
+	}
 
-void MonoEyes::None(float _DeltaTime)
-{
-}
 
-void MonoEyes::Spawn(float _DeltaTime)
-{
-}
-
-void MonoEyes::Idle(float _DeltaTime)
-{
-}
-
-void MonoEyes::Attack(float _DeltaTime)
-{
-}
-
-void MonoEyes::NoneStart()
-{
-}
-
-void MonoEyes::SpawnStart()
-{
-}
-
-void MonoEyes::IdleStart()
-{
-}
-
-void MonoEyes::AttackStart()
-{
+	if (CurZPos == ZPos::Back || CurZPos == ZPos::Mid)
+	{
+		if (XGap > 300.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1800,0},{200,200 }});
+		}
+		else if (XGap > 250.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1600,0},{200,200 } });
+		}
+		else if (XGap > 200.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1400,0},{200,200 } });
+		}
+		else if (XGap > 150.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1200,0},{200,200 } });
+		}
+		else if (XGap > 100.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1000,0},{200,200 } });
+		}
+		else if (XGap > 80.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {800,0},{200,200 } });
+		}
+		else if (XGap > 60.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {600,0},{200,200 } });
+		}
+		else if (XGap > 40.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {400,0},{200,200 } });
+		}
+		else if (XGap > 20.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {200,0},{200,200 } });
+		}
+		else if (XGap > 0.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {0,0},{200,200 } });
+		}
+		else if (XGap > -20.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {0,400},{200,200 } });
+		}
+		else if (XGap > -40.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {200,400},{200,200 } });
+		}
+		else if (XGap > -60.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {400,400},{200,200 } });
+		}
+		else if (XGap > -80.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {600,400},{200,200 } });
+		}
+		else if (XGap > -100.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {800,400},{200,200 } });
+		}
+		else if (XGap > -150.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1000,400},{200,200 } });
+		}
+		else if (XGap > -200.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1200,400},{200,200 } });
+		}
+		else if (XGap > -250.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1400,400},{200,200 } });
+		}
+		else if (XGap > -300.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1600,400},{200,200 } });
+		}
+		else
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1800,400},{200,200 } });
+		}
+	}
+	else
+	{
+		if (XGap > 150.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {0,200},{200,200 } });
+		}
+		else if (XGap > 100.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {200,200},{200,200 } });
+		}
+		else if (XGap > 80.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {400,200},{200,200 } });
+		}
+		else if (XGap > 60.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {600,200},{200,200 } });
+		}
+		else if (XGap > 40.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {800,200},{200,200 } });
+		}
+		else if (XGap > 20.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1000,200},{200,200 } });
+		}
+		else if (XGap > 0.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1200,200},{200,200 } });
+		}
+		else if (XGap > -20.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1200,600},{200,200 } });
+		}
+		else if (XGap > -40.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {1000,600},{200,200 } });
+		}
+		else if (XGap > -60.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {800,600},{200,200 } });
+		}
+		else if (XGap > -80.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {600,600},{200,200 } });
+		}
+		else if (XGap > -100.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {400,600},{200,200 } });
+		}
+		else if (XGap > -150.0f)
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {200,600},{200,200 } });
+		}
+		else
+		{
+			Renderer->GetImage()->SetCuttingTransform({ {0,600},{200,200 } });
+		}
+	}
 }

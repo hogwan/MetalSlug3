@@ -179,14 +179,17 @@
     <ClInclude Include="BossMap.h">
       <Filter>Object\Map</Filter>
     </ClInclude>
-    <ClInclude Include="UnknownSphere.h">
-      <Filter>Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="SphereConstructor.h">
-      <Filter>Boss</Filter>
+    <ClInclude Include="MonoEyeCenter.h">
+      <Filter>Object\Enemy\Boss\Phase1</Filter>
     </ClInclude>
     <ClInclude Include="MonoEyes.h">
-      <Filter>Boss</Filter>
+      <Filter>Object\Enemy\Boss\Phase1</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereConstructor.h">
+      <Filter>Object\Enemy\Boss\Phase1</Filter>
+    </ClInclude>
+    <ClInclude Include="UnknownSphere.h">
+      <Filter>Object\Enemy\Boss\Phase1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -365,14 +368,17 @@
     <ClCompile Include="BossMap.cpp">
       <Filter>Object\Map</Filter>
     </ClCompile>
-    <ClCompile Include="UnknownSphere.cpp">
-      <Filter>Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereConstructor.cpp">
-      <Filter>Boss</Filter>
+    <ClCompile Include="MonoEyeCenter.cpp">
+      <Filter>Object\Enemy\Boss\Phase1</Filter>
     </ClCompile>
     <ClCompile Include="MonoEyes.cpp">
-      <Filter>Boss</Filter>
+      <Filter>Object\Enemy\Boss\Phase1</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereConstructor.cpp">
+      <Filter>Object\Enemy\Boss\Phase1</Filter>
+    </ClCompile>
+    <ClCompile Include="UnknownSphere.cpp">
+      <Filter>Object\Enemy\Boss\Phase1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -427,8 +433,11 @@
     <Filter Include="Object\Map">
       <UniqueIdentifier>{5dc31ca5-19d0-4999-92d2-a4b96f092a72}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Boss">
+    <Filter Include="Object\Enemy\Boss">
       <UniqueIdentifier>{4138536b-fdb1-47cf-9f70-6df6738e0a49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Boss\Phase1">
+      <UniqueIdentifier>{e7d975ab-6cae-481f-8fd9-b2988a90eee4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

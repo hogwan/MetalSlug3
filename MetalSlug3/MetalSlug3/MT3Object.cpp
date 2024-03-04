@@ -21,6 +21,7 @@ void AMT3Object::Tick(float _DeltaTime)
 
 void AMT3Object::Release()
 {
+	FVector Pos = GetActorLocation();
 	if (GetActorLocation().X < GetWorld()->GetCameraPos().X - 300.0f
 		 || GetActorLocation().X > GetWorld()->GetCameraPos().X + 1800.0f)
 	{
