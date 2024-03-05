@@ -48,8 +48,19 @@ void AMonoEyes::Tick(float _DeltaTime)
 	FVector YPos = FVector::Up * Ratio.Y * CurY;
 	FVector XPos = FVector::Right * Ratio.X * CurX;
 	FVector Vib = FVector::Up * amplitude * Vibration;
+	
+	TargetPosition = InitialPosition + YPos + XPos + Vib;
 
-	SetActorLocation(InitialPosition + YPos + XPos + Vib);
+	FVector MoveVector = TargetPosition - GetActorLocation();
+	if (MoveVector.Size2D() > 5.0f)
+	{
+		MoveVector.Normalize2D();
+		AddActorLocation(MoveVector * Speed * _DeltaTime);
+	}
+	else
+	{
+		SetActorLocation(TargetPosition);
+	}
 
 	if (CurY > 0.4f)
 	{

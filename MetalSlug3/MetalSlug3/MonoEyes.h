@@ -56,7 +56,7 @@ protected:
 	FVector Ratio = FVector::Zero;
 	FVector LaunchEffectOffset = { 0, -200 };
 	FVector TargetPosition = FVector::Zero;
-	float Speed = 500.0f;
+	float Speed = 300.0f;
 	float amplitude = 15.0f;
 
 	std::string CurImageName = "None";
