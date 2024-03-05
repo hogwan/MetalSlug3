@@ -17,7 +17,7 @@ void AMonoEyes::BeginPlay()
 	Renderer->SetTransform({ {0,0},{600,600} });
 
 	LaunchRenderer = CreateImageRenderer(MT3RenderOrder::Particle);
-	LaunchRenderer->SetTransform({ { 0,0 }, { 500,500 } });
+	LaunchRenderer->SetTransform({ LaunchEffectOffset, { 500,500 } });
 	LaunchRenderer->SetImage("LaunchEffect.png");
 	LaunchRenderer->CreateAnimation("Launch", "LaunchEffect.png", 0, 15, 0.05f, false);
 	LaunchRenderer->ActiveOff();
@@ -30,7 +30,7 @@ void AMonoEyes::BeginPlay()
 	SetActorLocation({ 14150,2050 });
 	InitialPosition = { 14150,2050 };
 
-	LaunchCoolTime = rand() % 5 + 5;
+	LaunchCoolTime = static_cast<float>(rand() % 5 + 5);
 }
 
 void AMonoEyes::Tick(float _DeltaTime)
@@ -98,6 +98,17 @@ void AMonoEyes::Idle(float _DeltaTime)
 {
 	FVector PlayerPos = UContentsHelper::Player->GetActorLocation();
 	float XGap = GetActorLocation().X - PlayerPos.X;
+
+	if (XGap > 0.0f)
+	{
+		LaunchEffectOffset = { -50,-200 };
+		LaunchRenderer->SetTransform({ LaunchEffectOffset, { 500,500 } });
+	}
+	else
+	{
+		LaunchEffectOffset = { 50,-200 };
+		LaunchRenderer->SetTransform({ LaunchEffectOffset, { 500,500 } });
+	}
 
 	if (CurZPos == ZPos::Front)
 	{
@@ -331,7 +342,7 @@ void AMonoEyes::Launch(float _DeltaTime)
 	{
 		LaunchRenderer->ActiveOff();
 		IsLaunch = false;
-		LaunchCoolTime = rand() % 5 + 5;
+		LaunchCoolTime = static_cast<float>(rand() % 5 + 5);
 		//발사체 생성
 	}
 }

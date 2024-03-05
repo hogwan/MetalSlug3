@@ -48,6 +48,7 @@ protected:
 	ZPos CurZPos = ZPos::Back;
 	FVector InitialPosition = FVector::Zero;
 	FVector Ratio = FVector::Zero;
+	FVector LaunchEffectOffset = { 0, -200 };
 	float amplitude = 15.0f;
 
 	std::string CurImageName = "None";
