@@ -18,6 +18,10 @@ void ABossMap::BeginPlay()
 	Renderer->SetTransform({ {0,0},{858,652} });
 	Renderer->CreateAnimation("Opening", "BossStartEvent.png", 0, 3, 0.6f, false);
 	Renderer->ChangeAnimation("Opening", false, 0, 0.6f);
+
+	SphereRenderer = CreateImageRenderer(MT3RenderOrder::BossMapSphere);
+	SphereRenderer->SetImage("CenterSphere.png");
+	SphereRenderer->SetTransform({ {-8,167},{300,300} });
 }
 
 void ABossMap::Tick(float _DeltaTime)

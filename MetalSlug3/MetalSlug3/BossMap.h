@@ -18,5 +18,6 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	UImageRenderer* Renderer = nullptr;
+	UImageRenderer* SphereRenderer = nullptr;
 };
 
