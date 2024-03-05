@@ -72,6 +72,12 @@ void AMonoEyeCenter::Tick(float _DeltaTime)
 		}
 	}
 
+	for (AMonoEyes* mono : MonoEyes)
+	{
+		mono->SetInitialPos(GetActorLocation());
+	}
+
+
 	PatternUpdate(_DeltaTime);
 
 
