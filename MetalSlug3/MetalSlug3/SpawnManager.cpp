@@ -64,7 +64,7 @@ void SpawnManager::BeginPlay()
 	F2->SetActorLocation({ 4270,807 });
 
 	UContentsHelper::Player = GetWorld()->SpawnActor<Marco>();
-	UContentsHelper::Player->SetActorLocation({ 12000,2100 });
+	UContentsHelper::Player->SetActorLocation({ 13050,2340 });
 
 	AGo* Go = GetWorld()->SpawnActor<AGo>();
 	Go->SetActorLocation({ 650,230 });
