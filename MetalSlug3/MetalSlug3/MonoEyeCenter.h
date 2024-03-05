@@ -1,18 +1,18 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include "MonoEyes.h"
-class MonoEyeCenter : public AActor
+class AMonoEyeCenter : public AActor
 {
 public:
 	// constructor destructor
-	MonoEyeCenter();
-	~MonoEyeCenter();
+	AMonoEyeCenter();
+	~AMonoEyeCenter();
 
 	// delete Function
-	MonoEyeCenter(const MonoEyeCenter& _Other) = delete;
-	MonoEyeCenter(MonoEyeCenter&& _Other) noexcept = delete;
-	MonoEyeCenter& operator=(const MonoEyeCenter& _Other) = delete;
-	MonoEyeCenter& operator=(MonoEyeCenter&& _Other) = delete;
+	AMonoEyeCenter(const AMonoEyeCenter& _Other) = delete;
+	AMonoEyeCenter(AMonoEyeCenter&& _Other) noexcept = delete;
+	AMonoEyeCenter& operator=(const AMonoEyeCenter& _Other) = delete;
+	AMonoEyeCenter& operator=(AMonoEyeCenter&& _Other) = delete;
 
 protected:
 	void BeginPlay() override;

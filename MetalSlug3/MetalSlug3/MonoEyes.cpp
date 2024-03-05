@@ -1,5 +1,6 @@
 #include "MonoEyes.h"
 #include "Marco.h"
+#include "DeathBall.h"
 
 AMonoEyes::AMonoEyes()
 {
@@ -101,12 +102,12 @@ void AMonoEyes::Idle(float _DeltaTime)
 
 	if (XGap > 0.0f)
 	{
-		LaunchEffectOffset = { -50,-200 };
+		LaunchEffectOffset = { -50,-180 };
 		LaunchRenderer->SetTransform({ LaunchEffectOffset, { 500,500 } });
 	}
 	else
 	{
-		LaunchEffectOffset = { 50,-200 };
+		LaunchEffectOffset = { 50,-180 };
 		LaunchRenderer->SetTransform({ LaunchEffectOffset, { 500,500 } });
 	}
 
@@ -351,6 +352,16 @@ void AMonoEyes::LaunchStart()
 {
 	LaunchRenderer->ActiveOn();
 	LaunchRenderer->ChangeAnimation("Launch", true, 0 , 0.05f);
+
+	FVector PlayerPos = UContentsHelper::Player->GetActorLocation();
+
+	ADeathBall* DeathBall = GetWorld()->SpawnActor<ADeathBall>();
+	DeathBall->SetActorLocation(GetActorLocation() + LaunchEffectOffset);
+
+	FVector DirVector = GetActorLocation() - PlayerPos;
+	DirVector.Normalize2D();
+
+	DeathBall->SetDir(DirVector);
 }
 
 void AMonoEyes::LaunchOn()

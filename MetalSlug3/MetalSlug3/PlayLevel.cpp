@@ -106,6 +106,8 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("BossStartEvent.png", 4, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("MonoEyes_UnknownSphere.png", 10, 2);;
 	UEngineResourcesManager::GetInst().CuttingImage("LaunchEffect.png", 10, 2);;
+	UEngineResourcesManager::GetInst().CuttingImage("DeathBall.png", 10, 1);;
+	UEngineResourcesManager::GetInst().CuttingImage("DeathBallExplosion.png", 10, 3);;
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 	SpawnActor<SpawnManager>();
 	

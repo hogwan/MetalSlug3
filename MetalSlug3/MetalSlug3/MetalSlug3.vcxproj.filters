@@ -191,6 +191,12 @@
     <ClInclude Include="UnknownSphere.h">
       <Filter>Object\Enemy\Boss\Phase1</Filter>
     </ClInclude>
+    <ClInclude Include="DeathBall.h">
+      <Filter>Object\Enemy\Boss\Phase1</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathBallExplosion.h">
+      <Filter>Object\Enemy\Boss\Phase1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -378,6 +384,12 @@
       <Filter>Object\Enemy\Boss\Phase1</Filter>
     </ClCompile>
     <ClCompile Include="UnknownSphere.cpp">
+      <Filter>Object\Enemy\Boss\Phase1</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathBall.cpp">
+      <Filter>Object\Enemy\Boss\Phase1</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathBallExplosion.cpp">
       <Filter>Object\Enemy\Boss\Phase1</Filter>
     </ClCompile>
   </ItemGroup>

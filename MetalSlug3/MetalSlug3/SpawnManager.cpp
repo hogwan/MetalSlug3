@@ -844,7 +844,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		SphereConstructor->SetActorLocation({ 14150,2222 });
 		SphereConstructor->SetOriginTargetVector({ 14000,2222 }, { 14100,2100 }, false);*/
 
-		MonoEyeCenter* mono = GetWorld()->SpawnActor<MonoEyeCenter>();
+		AMonoEyeCenter* mono = GetWorld()->SpawnActor<AMonoEyeCenter>();
 		mono->SetActorLocation({ 14150,2050 });
 
 		++SpawnNumber;

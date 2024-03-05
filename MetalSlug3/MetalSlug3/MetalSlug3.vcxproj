@@ -197,6 +197,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="CreateMarcoAnimation.h" />
+    <ClInclude Include="DeathBall.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="DeathBallExplosion.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Doctor.h">
       <SubType>
       </SubType>
@@ -429,6 +437,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ContentsHelper.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="DeathBall.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="DeathBallExplosion.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -1,14 +1,14 @@
 #include "MonoEyeCenter.h"
 
-MonoEyeCenter::MonoEyeCenter()
+AMonoEyeCenter::AMonoEyeCenter()
 {
 }
 
-MonoEyeCenter::~MonoEyeCenter()
+AMonoEyeCenter::~AMonoEyeCenter()
 {
 }
 
-void MonoEyeCenter::BeginPlay()
+void AMonoEyeCenter::BeginPlay()
 {
 
 	AMonoEyes* Mono0 = GetWorld()->SpawnActor<AMonoEyes>();
@@ -57,7 +57,7 @@ void MonoEyeCenter::BeginPlay()
 	}
 }
 
-void MonoEyeCenter::Tick(float _DeltaTime)
+void AMonoEyeCenter::Tick(float _DeltaTime)
 {
 	
 }
