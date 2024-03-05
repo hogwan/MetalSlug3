@@ -63,11 +63,19 @@ protected:
 	std::string AttachName = "None";
 
 	void Spawn(float _DeltaTime);
+	void Death(float _DeltaTime);
 	void Idle(float _DeltaTime);
 	void Launch(float _DeltaTime);
 
+	void SpawnStart();
+	void DeathStart();
+
 	void LaunchStart();
 	void LaunchOn();
+
+	bool IsSpawn = false;
+	bool IsDeath = false;
+
 
 	bool IsLaunch = false;
 	float LaunchCoolTime = 1.0f;

@@ -101,9 +101,34 @@ void AMonoEyes::Tick(float _DeltaTime)
 	{
 		AccLaunch += _DeltaTime;
 	}
+
+
+	if (Hp < 0)
+	{
+		DeathStart();
+	}
+
+	if (IsDeath)
+	{
+		Death(_DeltaTime);
+	}
+
+	if (IsSpawn)
+	{
+		Spawn(_DeltaTime);
+	}
 }
 void AMonoEyes::Spawn(float _DeltaTime)
 {
+}
+
+void AMonoEyes::Death(float _DeltaTime)
+{
+	Collider->ActiveOff();
+	if(Renderer->IsCurAnimationEnd())
+	{
+		Destroy();
+	}
 }
 
 void AMonoEyes::Idle(float _DeltaTime)
@@ -367,6 +392,14 @@ void AMonoEyes::Launch(float _DeltaTime)
 
 		DeathBall->SetDir(DirVector);
 	}
+}
+
+void AMonoEyes::SpawnStart()
+{
+}
+
+void AMonoEyes::DeathStart()
+{
 }
 
 void AMonoEyes::LaunchStart()
