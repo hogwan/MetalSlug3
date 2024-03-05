@@ -58,12 +58,23 @@ void AMonoEyeCenter::BeginPlay()
 
 void AMonoEyeCenter::Tick(float _DeltaTime)
 {
+	std::list<AMonoEyes*>::iterator iter = MonoEyes.begin();
+	for (; iter != MonoEyes.end();)
+	{
+		if ((*iter)->GetIsDeath())
+		{
+			(*iter)->Destroy();
+			iter = MonoEyes.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
+
 	PatternUpdate(_DeltaTime);
 
-	for (AMonoEyes* mono : MonoEyes)
-	{
-		mono->SetInitialPos(GetActorLocation());
-	}
+
 }
 
 void AMonoEyeCenter::PatternUpdate(float _DeltaTime)

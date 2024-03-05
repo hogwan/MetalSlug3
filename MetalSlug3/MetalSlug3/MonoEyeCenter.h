@@ -52,6 +52,6 @@ protected:
 
 	FVector Center = { 14150,2050 };
 
-	std::vector<AMonoEyes*> MonoEyes;
+	std::list<AMonoEyes*> MonoEyes;
 };
 

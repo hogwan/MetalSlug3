@@ -16,6 +16,7 @@ void AMonoEyes::BeginPlay()
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ {0,0},{500,500} });
+	Renderer->CreateAnimation("Death", "MonoEyes_Death.png", 0, 7, 0.08, false);
 
 	LaunchRenderer = CreateImageRenderer(MT3RenderOrder::Particle);
 	LaunchRenderer->SetTransform({ LaunchEffectOffset, { 500,500 } });
@@ -103,12 +104,12 @@ void AMonoEyes::Tick(float _DeltaTime)
 	}
 
 
-	if (Hp < 0)
+	if (Hp < 0 && !IsDeathStart)
 	{
 		DeathStart();
 	}
 
-	if (IsDeath)
+	if (IsDeathStart)
 	{
 		Death(_DeltaTime);
 	}
@@ -127,7 +128,7 @@ void AMonoEyes::Death(float _DeltaTime)
 	Collider->ActiveOff();
 	if(Renderer->IsCurAnimationEnd())
 	{
-		Destroy();
+		IsMonoDeath = true;
 	}
 }
 
@@ -400,6 +401,8 @@ void AMonoEyes::SpawnStart()
 
 void AMonoEyes::DeathStart()
 {
+	IsDeathStart = true;
+	Renderer->ChangeAnimation("Death", false, 0, 0.08f);
 }
 
 void AMonoEyes::LaunchStart()

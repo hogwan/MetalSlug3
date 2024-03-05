@@ -44,6 +44,10 @@ public:
 		YRotSpeed = _YRotSpeed;
 	}
 
+	bool GetIsDeath()
+	{
+		return IsMonoDeath;
+	}
 
 protected:
 	void BeginPlay() override;
@@ -74,7 +78,8 @@ protected:
 	void LaunchOn();
 
 	bool IsSpawn = false;
-	bool IsDeath = false;
+	bool IsDeathStart = false;
+	bool IsMonoDeath = false;
 
 
 	bool IsLaunch = false;
