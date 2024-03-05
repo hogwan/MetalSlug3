@@ -29,10 +29,15 @@ public:
 		RotAngle = _Angle;
 	}
 
+	void SetVibAngle(float _VibAngle)
+	{
+		VibAngle = _VibAngle;
+	}
 	void SetRatio(FVector _Ratio)
 	{
 		Ratio = _Ratio;
 	}
+
 
 protected:
 	void BeginPlay() override;
@@ -41,7 +46,7 @@ protected:
 	ZPos CurZPos = ZPos::Back;
 	FVector InitialPosition = FVector::Zero;
 	FVector Ratio = FVector::Zero;
-	float amplitude = 30.0f;
+	float amplitude = 15.0f;
 
 	std::string CurImageName = "None";
 	std::string AttachName = "None";
@@ -54,6 +59,6 @@ protected:
 	float AttackCoolTime = 3.0f;
 
 	float RotAngle = 0.0f;
-	float VibrationAngle = 0.0f;
+	float VibAngle = 0.0f;
 };
 

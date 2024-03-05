@@ -31,16 +31,17 @@ void AMonoEyes::Tick(float _DeltaTime)
 	AEnemy::Tick(_DeltaTime);
 
 	RotAngle += (UEngineMath::PI/3.0f) * _DeltaTime;
-	VibrationAngle += UEngineMath::PI * _DeltaTime;
+	VibAngle += UEngineMath::PI * _DeltaTime;
 	// -1 ~ 1
 	float CurY = sinf(RotAngle);
 	float CurX = cosf(RotAngle);
-	float vibration = sinf(VibrationAngle);
+	float Vibration = sinf(VibAngle);
 
 	FVector YPos = FVector::Up * Ratio.Y * CurY;
 	FVector XPos = FVector::Right * Ratio.X * CurX;
+	FVector Vib = FVector::Up * amplitude * Vibration;
 
-	SetActorLocation(InitialPosition + YPos + XPos);
+	SetActorLocation(InitialPosition + YPos + XPos + Vib);
 
 	if (CurY > 0.4f)
 	{

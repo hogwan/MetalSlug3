@@ -37,12 +37,12 @@ void MonoEyeCenter::BeginPlay()
 	Mono4->SetRotAngle((UEngineMath::PI / 3.0f) * 4.f);
 	Mono5->SetRotAngle((UEngineMath::PI / 3.0f) * 5.f);
 
-	MonoEyes.push_back(Mono0);
-	MonoEyes.push_back(Mono1);
-	MonoEyes.push_back(Mono2);
-	MonoEyes.push_back(Mono3);
-	MonoEyes.push_back(Mono4);
-	MonoEyes.push_back(Mono5);
+	Mono0->SetVibAngle((UEngineMath::PI) * 0.f);
+	Mono1->SetVibAngle((UEngineMath::PI) * 1.f);
+	Mono2->SetVibAngle((UEngineMath::PI) * 2.f);
+	Mono3->SetVibAngle((UEngineMath::PI) * 3.f);
+	Mono4->SetVibAngle((UEngineMath::PI) * 4.f);
+	Mono5->SetVibAngle((UEngineMath::PI) * 5.f);
 
 	MonoEyes.push_back(Mono0);
 	MonoEyes.push_back(Mono1);
