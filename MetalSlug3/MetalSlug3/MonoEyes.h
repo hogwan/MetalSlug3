@@ -43,6 +43,8 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	UImageRenderer* LaunchRenderer = nullptr;
+
 	ZPos CurZPos = ZPos::Back;
 	FVector InitialPosition = FVector::Zero;
 	FVector Ratio = FVector::Zero;
@@ -53,6 +55,14 @@ protected:
 
 	void Spawn(float _DeltaTime);
 	void Idle(float _DeltaTime);
+	void Launch(float _DeltaTime);
+
+	void LaunchStart();
+	void LaunchOn();
+
+	bool IsLaunch = false;
+	float LaunchCoolTime = 1.0f;
+	float AccLaunch = 0.0f;
 
 	float Speed = 800.0f;
 	float AccAttack = 0.0f;

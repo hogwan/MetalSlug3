@@ -16,6 +16,12 @@ void AMonoEyes::BeginPlay()
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ {0,0},{600,600} });
 
+	LaunchRenderer = CreateImageRenderer(MT3RenderOrder::Particle);
+	LaunchRenderer->SetTransform({ { 0,0 }, { 500,500 } });
+	LaunchRenderer->SetImage("LaunchEffect.png");
+	LaunchRenderer->CreateAnimation("Launch", "LaunchEffect.png", 0, 15, 0.05f, false);
+	LaunchRenderer->ActiveOff();
+
 	Collider = CreateCollision(MT3CollisionOrder::Enemy);
 	Collider->SetScale({ 100,300 });
 	Collider->SetPosition({ 0,-150 });
@@ -24,6 +30,7 @@ void AMonoEyes::BeginPlay()
 	SetActorLocation({ 14150,2050 });
 	InitialPosition = { 14150,2050 };
 
+	LaunchCoolTime = rand() % 5 + 5;
 }
 
 void AMonoEyes::Tick(float _DeltaTime)
@@ -66,6 +73,22 @@ void AMonoEyes::Tick(float _DeltaTime)
 	}
 
 	Idle(_DeltaTime);
+
+
+	if (AccLaunch > LaunchCoolTime)
+	{
+		LaunchOn();
+		LaunchStart();
+	}
+
+	if (IsLaunch)
+	{
+		Launch(_DeltaTime);
+	}
+	else
+	{
+		AccLaunch += _DeltaTime;
+	}
 }
 void AMonoEyes::Spawn(float _DeltaTime)
 {
@@ -300,4 +323,27 @@ void AMonoEyes::Idle(float _DeltaTime)
 			Renderer->SetImage(CurAnimName);
 		}
 	}
+}
+
+void AMonoEyes::Launch(float _DeltaTime)
+{
+	if (LaunchRenderer->IsCurAnimationEnd())
+	{
+		LaunchRenderer->ActiveOff();
+		IsLaunch = false;
+		LaunchCoolTime = rand() % 5 + 5;
+		//발사체 생성
+	}
+}
+
+void AMonoEyes::LaunchStart()
+{
+	LaunchRenderer->ActiveOn();
+	LaunchRenderer->ChangeAnimation("Launch", true, 0 , 0.05f);
+}
+
+void AMonoEyes::LaunchOn()
+{
+	IsLaunch = true;
+	AccLaunch = 0.0f;
 }
