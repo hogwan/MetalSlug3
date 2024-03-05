@@ -1,4 +1,5 @@
 #include "MonoEyeCenter.h"
+#include "Marco.h"
 
 AMonoEyeCenter::AMonoEyeCenter()
 {
@@ -10,6 +11,7 @@ AMonoEyeCenter::~AMonoEyeCenter()
 
 void AMonoEyeCenter::BeginPlay()
 {
+	SetActorLocation(Center);
 
 	AMonoEyes* Mono0 = GetWorld()->SpawnActor<AMonoEyes>();
 	Mono0->SetActorLocation({ 14200,2100 });
@@ -51,13 +53,125 @@ void AMonoEyeCenter::BeginPlay()
 	MonoEyes.push_back(Mono4);
 	MonoEyes.push_back(Mono5);
 
-	for (AMonoEyes* mono : MonoEyes)
-	{
-		mono->SetRatio({ 200,25 });
-	}
+	ChangePattern(MonoEyesPattern::Pattern0);
 }
 
 void AMonoEyeCenter::Tick(float _DeltaTime)
 {
-	
+	PatternUpdate(_DeltaTime);
+
+	for (AMonoEyes* mono : MonoEyes)
+	{
+		mono->SetInitialPos(GetActorLocation());
+	}
+}
+
+void AMonoEyeCenter::PatternUpdate(float _DeltaTime)
+{
+	switch (CurPattern)
+	{
+	case MonoEyesPattern::Pattern0:
+		Pattern0(_DeltaTime);
+		break;
+	case MonoEyesPattern::Pattern1:
+		Pattern1(_DeltaTime);
+		break;
+	case MonoEyesPattern::Pattern2:
+		Pattern2(_DeltaTime);
+		break;
+	}
+}
+
+void AMonoEyeCenter::ChangePattern(MonoEyesPattern _Pattern)
+{
+	if (CurPattern != _Pattern)
+	{
+		switch (_Pattern)
+		{
+		case MonoEyesPattern::Pattern0:
+			Pattern0Start();
+			break;
+		case MonoEyesPattern::Pattern1:
+			Pattern1Start();
+			break;
+		case MonoEyesPattern::Pattern2:
+			Pattern2Start();
+			break;
+		}
+	}
+
+	CurPattern = _Pattern;
+}
+
+void AMonoEyeCenter::Pattern0(float _DeltaTime)
+{
+	AccPattern += _DeltaTime;
+	if (AccPattern > PatternCoolTime)
+	{
+		AccPattern = 0.0f;
+		++turn;
+		if (turn % 2 == 0)
+		{
+			ChangePattern(MonoEyesPattern::Pattern2);
+		}
+		else
+		{
+			ChangePattern(MonoEyesPattern::Pattern1);
+		}
+	}
+}
+
+void AMonoEyeCenter::Pattern1(float _DeltaTime)
+{
+	AccPattern += _DeltaTime;
+	if (AccPattern > PatternCoolTime)
+	{
+		AccPattern = 0.0f;
+		ChangePattern(MonoEyesPattern::Pattern0);
+	}
+}
+
+void AMonoEyeCenter::Pattern2(float _DeltaTime)
+{
+	float XPlayerPos = UContentsHelper::Player->GetActorLocation().X;
+	float Gap = Center.X - XPlayerPos;
+	XTargetPosition = Center.X + Gap;
+
+	AddActorLocation(FVector::Right * (XTargetPosition - GetActorLocation().X) * _DeltaTime);
+
+	AccPattern += _DeltaTime;
+	if (AccPattern > PatternCoolTime)
+	{
+		AccPattern = 0.0f;
+		ChangePattern(MonoEyesPattern::Pattern0);
+	}
+}
+
+void AMonoEyeCenter::Pattern0Start()
+{
+	SetActorLocation(Center);
+	for (AMonoEyes* mono : MonoEyes)
+	{
+		mono->SetRatio({ 200,25 });
+		mono->SetRotSpeed(UEngineMath::PI / 2.5f, UEngineMath::PI);
+	}
+}
+
+void AMonoEyeCenter::Pattern1Start()
+{
+	SetActorLocation(Center);
+	for (AMonoEyes* mono : MonoEyes)
+	{
+		mono->SetRatio({ 350,50 });
+		mono->SetRotSpeed(UEngineMath::PI / 2.5f, UEngineMath::PI);
+	}
+}
+
+void AMonoEyeCenter::Pattern2Start()
+{
+	for (AMonoEyes* mono : MonoEyes)
+	{
+		mono->SetRatio({ 100,25 });
+		mono->SetRotSpeed(UEngineMath::PI / 2.5f, UEngineMath::PI);
+	}
 }

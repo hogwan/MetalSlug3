@@ -38,6 +38,12 @@ public:
 		Ratio = _Ratio;
 	}
 
+	void SetRotSpeed(float _XRotSpeed, float _YRotSpeed)
+	{
+		XRotSpeed = _XRotSpeed;
+		YRotSpeed = _YRotSpeed;
+	}
+
 
 protected:
 	void BeginPlay() override;
@@ -49,6 +55,8 @@ protected:
 	FVector InitialPosition = FVector::Zero;
 	FVector Ratio = FVector::Zero;
 	FVector LaunchEffectOffset = { 0, -200 };
+	FVector TargetPosition = FVector::Zero;
+	float Speed = 500.0f;
 	float amplitude = 15.0f;
 
 	std::string CurImageName = "None";
@@ -65,11 +73,13 @@ protected:
 	float LaunchCoolTime = 1.0f;
 	float AccLaunch = 0.0f;
 
-	float Speed = 800.0f;
 	float AccAttack = 0.0f;
 	float AttackCoolTime = 3.0f;
 
 	float RotAngle = 0.0f;
 	float VibAngle = 0.0f;
+
+	float XRotSpeed = 0.0f;
+	float YRotSpeed = 0.0f;
 };
 

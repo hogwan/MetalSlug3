@@ -15,7 +15,7 @@ void AMonoEyes::BeginPlay()
 	AEnemy::BeginPlay();
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
-	Renderer->SetTransform({ {0,0},{600,600} });
+	Renderer->SetTransform({ {0,0},{500,500} });
 
 	LaunchRenderer = CreateImageRenderer(MT3RenderOrder::Particle);
 	LaunchRenderer->SetTransform({ LaunchEffectOffset, { 500,500 } });
@@ -31,15 +31,15 @@ void AMonoEyes::BeginPlay()
 	SetActorLocation({ 14150,2050 });
 	InitialPosition = { 14150,2050 };
 
-	LaunchCoolTime = static_cast<float>(rand() % 5 + 5);
+	LaunchCoolTime = static_cast<float>(rand() % 20);
 }
 
 void AMonoEyes::Tick(float _DeltaTime)
 {
 	AEnemy::Tick(_DeltaTime);
 
-	RotAngle += (UEngineMath::PI/3.0f) * _DeltaTime;
-	VibAngle += UEngineMath::PI * _DeltaTime;
+	RotAngle += XRotSpeed * _DeltaTime;
+	VibAngle += YRotSpeed * _DeltaTime;
 	// -1 ~ 1
 	float CurY = sinf(RotAngle);
 	float CurX = cosf(RotAngle);
@@ -54,21 +54,21 @@ void AMonoEyes::Tick(float _DeltaTime)
 	if (CurY > 0.4f)
 	{
 		CurZPos = ZPos::Back;
-		Renderer->SetTransform({ {0,0},{550,550} });
+		Renderer->SetTransform({ {0,0},{450,450} });
 
 		AttachName = "Back_";
 	}
 	else if (CurY <= 0.4f && CurY >= -0.2f)
 	{
 		CurZPos = ZPos::Mid;
-		Renderer->SetTransform({ {0,0},{580,580} });
+		Renderer->SetTransform({ {0,0},{480,480} });
 
 		AttachName = "Mid_";
 	}
 	else if(CurY < -0.2f)
 	{
 		CurZPos = ZPos::Front;
-		Renderer->SetTransform({ {0,0},{600,600} });
+		Renderer->SetTransform({ {0,0},{500,500} });
 
 		AttachName = "Front_";
 	}
@@ -343,8 +343,18 @@ void AMonoEyes::Launch(float _DeltaTime)
 	{
 		LaunchRenderer->ActiveOff();
 		IsLaunch = false;
-		LaunchCoolTime = static_cast<float>(rand() % 5 + 5);
-		//발사체 생성
+		LaunchCoolTime = static_cast<float>(rand() % 20);
+		
+		FVector PlayerPos = UContentsHelper::Player->GetActorLocation();
+		FVector SpawnLocation = GetActorLocation() + LaunchEffectOffset;
+
+		ADeathBall* DeathBall = GetWorld()->SpawnActor<ADeathBall>();
+		DeathBall->SetActorLocation(SpawnLocation);
+
+		FVector DirVector = PlayerPos - GetActorLocation();
+		DirVector.Normalize2D();
+
+		DeathBall->SetDir(DirVector);
 	}
 }
 
@@ -352,16 +362,6 @@ void AMonoEyes::LaunchStart()
 {
 	LaunchRenderer->ActiveOn();
 	LaunchRenderer->ChangeAnimation("Launch", true, 0 , 0.05f);
-
-	FVector PlayerPos = UContentsHelper::Player->GetActorLocation();
-
-	ADeathBall* DeathBall = GetWorld()->SpawnActor<ADeathBall>();
-	DeathBall->SetActorLocation(GetActorLocation() + LaunchEffectOffset);
-
-	FVector DirVector = GetActorLocation() - PlayerPos;
-	DirVector.Normalize2D();
-
-	DeathBall->SetDir(DirVector);
 }
 
 void AMonoEyes::LaunchOn()

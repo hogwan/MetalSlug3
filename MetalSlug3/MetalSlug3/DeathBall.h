@@ -23,7 +23,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 	
 	FVector DirVector = FVector::Zero;
-	float Speed = 50.0f;
+	float Speed = 150.0f;
 
 	UImageRenderer* Renderer = nullptr;
 	UCollision* Collider = nullptr;
