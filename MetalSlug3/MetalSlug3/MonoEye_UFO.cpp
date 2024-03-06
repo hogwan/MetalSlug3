@@ -1,14 +1,15 @@
 #include "MonoEye_UFO.h"
+#include "Laser.h"
 
-MonoEye_UFO::MonoEye_UFO()
+AMonoEye_UFO::AMonoEye_UFO()
 {
 }
 
-MonoEye_UFO::~MonoEye_UFO()
+AMonoEye_UFO::~AMonoEye_UFO()
 {
 }
 
-void MonoEye_UFO::BeginPlay()
+void AMonoEye_UFO::BeginPlay()
 {
 	SetActorLocation({ 14150,2098 });
 
@@ -37,12 +38,12 @@ void MonoEye_UFO::BeginPlay()
 	Collider->SetColType(ECollisionType::Rect);
 }
 
-void MonoEye_UFO::Tick(float _DeltaTime)
+void AMonoEye_UFO::Tick(float _DeltaTime)
 {
 	StateUpdate(_DeltaTime);
 }
 
-void MonoEye_UFO::StateUpdate(float _DeltaTime)
+void AMonoEye_UFO::StateUpdate(float _DeltaTime)
 {
 	switch (CurState)
 	{
@@ -63,7 +64,7 @@ void MonoEye_UFO::StateUpdate(float _DeltaTime)
 	}
 }
 
-void MonoEye_UFO::StateChange(UFOState _State)
+void AMonoEye_UFO::StateChange(UFOState _State)
 {
 	if (CurState != _State)
 	{
@@ -85,13 +86,13 @@ void MonoEye_UFO::StateChange(UFOState _State)
 	CurState = _State;
 }
 
-void MonoEye_UFO::None(float _DeltaTime)
+void AMonoEye_UFO::None(float _DeltaTime)
 {
 	StateChange(UFOState::Idle);
 	return;
 }
 
-void MonoEye_UFO::Idle(float _DeltaTime)
+void AMonoEye_UFO::Idle(float _DeltaTime)
 {
 	AccCoolTime += _DeltaTime;
 	if (AccCoolTime > CoolTime)
@@ -101,7 +102,7 @@ void MonoEye_UFO::Idle(float _DeltaTime)
 	}
 }
 
-void MonoEye_UFO::Charging(float _DeltaTime)
+void AMonoEye_UFO::Charging(float _DeltaTime)
 {
 	if (Renderer->IsCurAnimationEnd())
 	{
@@ -109,7 +110,7 @@ void MonoEye_UFO::Charging(float _DeltaTime)
 	}
 }
 
-void MonoEye_UFO::Firing(float _DeltaTime)
+void AMonoEye_UFO::Firing(float _DeltaTime)
 {
 	float AncientYSize = AncientCharactor->GetTransform().GetScale().Y;
 	AncientCharactor->SetPosition({ 0,static_cast<int>(AncientCharactor->GetPosition().Y) % MaxYPosition });
@@ -128,22 +129,25 @@ void MonoEye_UFO::Firing(float _DeltaTime)
 		AccFiring = 0.0f;
 		AncientCharactor->SetTransform({ {0,0},{600,200} });
 		AncientCharactor->ActiveOff();
+
+		ALaser* Laser = GetWorld()->SpawnActor<ALaser>();
+
 		StateChange(UFOState::Idle);
 		return;
 	}
 }
 
-void MonoEye_UFO::IdleStart()
+void AMonoEye_UFO::IdleStart()
 {
 	Renderer->ChangeAnimation("Idle", false, 0, 0.08f);
 }
 
-void MonoEye_UFO::ChargingStart()
+void AMonoEye_UFO::ChargingStart()
 {
 	Renderer->ChangeAnimation("Charging", false, 0, 0.08f);
 }
 
-void MonoEye_UFO::FiringStart()
+void AMonoEye_UFO::FiringStart()
 {
 	Renderer->ChangeAnimation("Firing", false, 0, 0.08f);
 	AncientCharactor->SetTransform({ {0,0},{600,200} });

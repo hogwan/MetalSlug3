@@ -9,18 +9,18 @@ enum class UFOState
 	Firing,
 };
 
-class MonoEye_UFO : public AEnemy
+class AMonoEye_UFO : public AEnemy
 {
 public:
 	// constructor destructor
-	MonoEye_UFO();
-	~MonoEye_UFO();
+	AMonoEye_UFO();
+	~AMonoEye_UFO();
 
 	// delete Function
-	MonoEye_UFO(const MonoEye_UFO& _Other) = delete;
-	MonoEye_UFO(MonoEye_UFO&& _Other) noexcept = delete;
-	MonoEye_UFO& operator=(const MonoEye_UFO& _Other) = delete;
-	MonoEye_UFO& operator=(MonoEye_UFO&& _Other) = delete;
+	AMonoEye_UFO(const AMonoEye_UFO& _Other) = delete;
+	AMonoEye_UFO(AMonoEye_UFO&& _Other) noexcept = delete;
+	AMonoEye_UFO& operator=(const AMonoEye_UFO& _Other) = delete;
+	AMonoEye_UFO& operator=(AMonoEye_UFO&& _Other) = delete;
 
 protected:
 	void BeginPlay() override;

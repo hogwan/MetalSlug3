@@ -45,7 +45,7 @@ protected:
 	int turn = 0;
 
 	float AccPattern = 0.0f;
-	float PatternCoolTime = 5.0f;
+	float PatternCoolTime = 3.0f;
 
 	float MoveSpeed = 200.0f;
 	float XTargetPosition = 14150.0f;

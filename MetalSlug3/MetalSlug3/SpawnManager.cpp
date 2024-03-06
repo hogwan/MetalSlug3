@@ -865,7 +865,7 @@ void SpawnManager::Tick(float _DeltaTime)
 	if (SpawnNumber == 33)
 	{
 
-		MonoEye_UFO* UFO = GetWorld()->SpawnActor<MonoEye_UFO>();
+		AMonoEye_UFO* UFO = GetWorld()->SpawnActor<AMonoEye_UFO>();
 
 		++SpawnNumber;
 	}

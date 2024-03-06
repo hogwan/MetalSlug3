@@ -18,6 +18,7 @@ enum MT3RenderOrder
 	Enemy,
 	UFO_AncientCharactor,
 	UFO_Lazer,
+	UFO_LazerGroundEffect,
 	Propeller,
 	Projectile,
 	LowerBody,
@@ -43,6 +44,8 @@ enum class MT3CollisionOrder
 	CameraSwitch,
 	EnemyKnife,
 	PlayerKnife,
+	Lazer,
+	Monoliths,
 };
 
 enum class EActorDir
