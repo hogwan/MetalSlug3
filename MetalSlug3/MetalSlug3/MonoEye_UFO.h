@@ -44,9 +44,13 @@ protected:
 	UImageRenderer* BrokenBackBody = nullptr;
 	UImageRenderer* AncientCharactor = nullptr;
 
+	float CoolTime = 3.0f;
+	float AccCoolTime = 0.0f;
+
 	float FiringTime = 3.0f;
 	float AccFiring= 0.0f;
 
-	float CharactorMaxSize = 1500;
+	float CharactorMaxSize = 800.f;
+	int MaxYPosition = 700;
 };
 

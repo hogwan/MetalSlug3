@@ -34,6 +34,7 @@
 #include "BossMap.h"
 #include "SphereConstructor.h"
 #include "MonoEyeCenter.h"
+#include "MonoEye_UFO.h"
 
 SpawnManager::SpawnManager()
 {
@@ -846,6 +847,25 @@ void SpawnManager::Tick(float _DeltaTime)
 
 		AMonoEyeCenter* mono = GetWorld()->SpawnActor<AMonoEyeCenter>();
 		mono->SetActorLocation({ 14150,2050 });
+
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 32)
+	{
+		std::vector<UCollision*> Result;
+		if (
+			!UContentsHelper::ScreenCol->GetCollider()->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+			)
+		{
+			++SpawnNumber;
+		}
+	}
+
+	if (SpawnNumber == 33)
+	{
+
+		MonoEye_UFO* UFO = GetWorld()->SpawnActor<MonoEye_UFO>();
 
 		++SpawnNumber;
 	}
