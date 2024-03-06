@@ -39,6 +39,21 @@ void Marco::BeginPlay()
 	KnifeReach->SetPosition(KnifeReachCollisionPosition_Right);
 	KnifeReach->SetColType(ECollisionType::Rect);
 
+	GroundCheckCol = CreateCollision(MT3CollisionOrder::Player);
+	GroundCheckCol->SetScale({1,1});
+	GroundCheckCol->SetPosition({ 0,5 });
+	GroundCheckCol->SetColType(ECollisionType::Rect);
+
+	RightCheckCol = CreateCollision(MT3CollisionOrder::Player);
+	RightCheckCol->SetScale({ 1,1 });
+	RightCheckCol->SetPosition({ 25,-30 });
+	RightCheckCol->SetColType(ECollisionType::Rect);
+
+	LeftCheckCol = CreateCollision(MT3CollisionOrder::Player);
+	LeftCheckCol->SetScale({ 1,1 });
+	LeftCheckCol->SetPosition({ -25,-30 });
+	LeftCheckCol->SetColType(ECollisionType::Rect);
+
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetImage("Marco_UpperBody.png");
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransform({ MarcoDefaultUpperBodyOffset, MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->SetTransColor({ 0,0,0,255 });
@@ -86,7 +101,7 @@ void Marco::Tick(float _DeltaTime)
 		ManipulateUpdate(_DeltaTime);
 	}
 
-	InAirCheck();
+	InAirCheck(_DeltaTime);
 	GravityCheck(_DeltaTime);
 	GroundUp();
 
@@ -121,8 +136,10 @@ void Marco::Tick(float _DeltaTime)
 void Marco::GravityCheck(float _DeltaTime)
 {
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	GroundCheckCol->SetPosition({ 0,0 });
 	CalGravityVector(_DeltaTime);
-	if (Color != Color8Bit(255, 0, 255, 0))
+	std::vector<UCollision*> Result;
+	if (Color != Color8Bit(255, 0, 255, 0) && !(GroundCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result)))
 	{
 		JumpVector += GravityVector * _DeltaTime;
 	}
@@ -133,14 +150,25 @@ void Marco::GravityCheck(float _DeltaTime)
 	AddActorLocation(JumpVector * _DeltaTime);
 }
 
-void Marco::InAirCheck()
+void Marco::InAirCheck(float _DeltaTime)
 {
-	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY()+20, Color8Bit::MagentaA);
-	if (Color == Color8Bit(255, 0, 255, 0))
+	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY()+3, Color8Bit::MagentaA);
+	GroundCheckCol->SetPosition({ 0,3 });
+	std::vector<UCollision*> Result;
+	if (Color == Color8Bit(255, 0, 255, 0) || GroundCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
 	{
+		AccInAir = 0.0f;
 		InAir = false;
 	}
-	else InAir = true;
+	else
+	{
+		AccInAir += _DeltaTime;
+		if (AccInAir > InAirTime)
+		{
+			AccInAir = 0.0f;
+			InAir = true;
+		}
+	}
 }
 
 void Marco::DeathCheck()
@@ -265,6 +293,24 @@ void Marco::ManipulateUpdate(float _DeltaTime)
 		CheckPos.X > GetWorld()->GetCameraPos().X + GEngine->MainWindow.GetWindowScale().X)
 	{
 		return;
+	}
+
+	{
+		std::vector<UCollision*> Result;
+		if ((RightCheckCol->CollisionCheck(MT3CollisionOrder::Enemy, Result) && true == UEngineInput::IsPress(VK_RIGHT))
+			|| (RightCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result) && true == UEngineInput::IsPress(VK_RIGHT)))
+		{
+			return;
+		}
+	}
+
+	{
+		std::vector<UCollision*> Result;
+		if ((LeftCheckCol->CollisionCheck(MT3CollisionOrder::Enemy, Result) && true == UEngineInput::IsPress(VK_LEFT))
+			|| (LeftCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result) && true == UEngineInput::IsPress(VK_LEFT)))
+		{
+			return;
+		}
 	}
 
 
@@ -4355,7 +4401,9 @@ void Marco::CalGravityVector(float _DeltaTime)
 {
 	GravityVector += Gravity * _DeltaTime;
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
-	if (Color == Color8Bit(255, 0, 255, 0))
+	GroundCheckCol->SetPosition({ 0,0 });
+	std::vector<UCollision*> Result;
+	if (Color == Color8Bit(255, 0, 255, 0) || GroundCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
 	{
 		GravityVector = FVector::Zero;
 	}
@@ -4366,7 +4414,9 @@ void Marco::GroundUp()
 	while (true)
 	{
 		Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY()-15, Color8Bit::MagentaA);
-		if (Color == Color8Bit(255, 0, 255, 0))
+		GroundCheckCol->SetPosition({ 0,-15 });
+		std::vector<UCollision*> Result;
+		if (Color == Color8Bit(255, 0, 255, 0) || GroundCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
 		{
 			AddActorLocation(FVector::Up);
 		}

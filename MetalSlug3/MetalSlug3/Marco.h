@@ -40,7 +40,7 @@ protected:
 
 	// 상태 보조 함수
 	void GravityCheck(float _DeltaTime);
-	void InAirCheck();
+	void InAirCheck(float _DeltaTime);
 	void DeathCheck();
 	void ManipulateUpdate(float _DeltaTime);
 
@@ -221,6 +221,9 @@ private:
 	std::vector<UImageRenderer*> Renderer;
 	UCollision* Collision = nullptr;
 	UCollision* KnifeReach = nullptr;
+	UCollision* GroundCheckCol = nullptr;
+	UCollision* RightCheckCol = nullptr;
+	UCollision* LeftCheckCol = nullptr;
 
 	std::string CurUpperBodyName = "UpperBody_Idle";
 	std::string CurLowerBodyName = "LowerBody_Idle";
@@ -363,6 +366,9 @@ private:
 	std::vector<UImageRenderer*> VomitRenderer;
 	float AccDeltaTime = 0.0f;
 	void CameraUpdate(float _DeltaTime);
+
+	float AccInAir = 0.0f;
+	float InAirTime = 0.2f;
 
 };
 

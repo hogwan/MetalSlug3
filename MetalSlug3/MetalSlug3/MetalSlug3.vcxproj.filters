@@ -203,6 +203,9 @@
     <ClInclude Include="Laser.h">
       <Filter>Object\Enemy\Boss\Phase2</Filter>
     </ClInclude>
+    <ClInclude Include="Monoliths.h">
+      <Filter>Object\Enemy\Boss\Phase2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -402,6 +405,9 @@
       <Filter>Object\Enemy\Boss\Phase2</Filter>
     </ClCompile>
     <ClCompile Include="Laser.cpp">
+      <Filter>Object\Enemy\Boss\Phase2</Filter>
+    </ClCompile>
+    <ClCompile Include="Monoliths.cpp">
       <Filter>Object\Enemy\Boss\Phase2</Filter>
     </ClCompile>
   </ItemGroup>

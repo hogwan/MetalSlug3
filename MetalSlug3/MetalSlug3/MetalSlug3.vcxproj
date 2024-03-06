@@ -317,6 +317,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Monoliths.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MT3Object.h">
       <SubType>
       </SubType>
@@ -565,6 +569,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MonoEye_UFO.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monoliths.cpp">
       <SubType>
       </SubType>
     </ClCompile>

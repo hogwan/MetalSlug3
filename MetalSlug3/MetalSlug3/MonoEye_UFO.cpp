@@ -34,7 +34,7 @@ void AMonoEye_UFO::BeginPlay()
 	AncientCharactor->ActiveOff();
 
 	Collider = CreateCollision(MT3CollisionOrder::Enemy);
-	Collider->SetTransform({ {0,0},{300,200} });
+	Collider->SetTransform({ {0,-100},{300,200} });
 	Collider->SetColType(ECollisionType::Rect);
 }
 
