@@ -135,17 +135,17 @@ void MonoEye_UFO::Firing(float _DeltaTime)
 
 void MonoEye_UFO::IdleStart()
 {
-	Renderer->ChangeAnimation("Idle", false, 0, 0.08);
+	Renderer->ChangeAnimation("Idle", false, 0, 0.08f);
 }
 
 void MonoEye_UFO::ChargingStart()
 {
-	Renderer->ChangeAnimation("Charging", false, 0, 0.08);
+	Renderer->ChangeAnimation("Charging", false, 0, 0.08f);
 }
 
 void MonoEye_UFO::FiringStart()
 {
-	Renderer->ChangeAnimation("Firing", false, 0, 0.08);
+	Renderer->ChangeAnimation("Firing", false, 0, 0.08f);
 	AncientCharactor->SetTransform({ {0,0},{600,200} });
 	AncientCharactor->ActiveOn();
 }
