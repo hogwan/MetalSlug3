@@ -26,5 +26,8 @@ protected:
 	FVector InitScale = { 150.f,330.f };
 
 	bool IsLand = false;
+	bool Lay = false;
+
+	UCollision* LayCheck = nullptr;
 };
 
