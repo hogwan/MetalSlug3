@@ -54,6 +54,7 @@ void ALaser::Tick(float _DeltaTime)
 	}
 
 	GroundUp();
+	GravityCheck();
 }
 
 void ALaser::GroundUp()
@@ -71,5 +72,15 @@ void ALaser::GroundUp()
 		{
 			break;
 		}
+	}
+}
+
+void ALaser::GravityCheck()
+{
+	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY() - 15, Color8Bit::MagentaA);
+	std::vector<UCollision*> Result;
+	if (Color != Color8Bit(255, 0, 255, 0) && !(Collider->CollisionCheck(MT3CollisionOrder::Monoliths, Result)))
+	{
+		AddActorLocation(FVector::Down);
 	}
 }
