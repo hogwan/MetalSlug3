@@ -10,21 +10,22 @@ MonoEye_UFO::~MonoEye_UFO()
 
 void MonoEye_UFO::BeginPlay()
 {
-	SetActorLocation({ 14150,2050 });
+	SetActorLocation({ 14150,2098 });
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
-	Renderer->SetTransform({ {0,0},{750,750} });
+	Renderer->SetTransform({ {0,0},{800,850} });
 	Renderer->CreateAnimation("Idle", "MonoEye_UFO_Idle.png", 0, 4,0.08f, true);
 	Renderer->CreateAnimation("Charging", "MonoEye_UFO_Charging.png", 0, 3,0.08f, false);
 	Renderer->CreateAnimation("Firing", "MonoEye_UFO_Firing.png", 0, 5, 0.08f, true);
 
 	Body = CreateImageRenderer(MT3RenderOrder::UFO_Body);
 	Body->SetImage("MonoEye_UFO_Body.png");
-	Body->SetTransform({ {0,205},{750,750} });
+	Body->SetTransform({ {0,232},{800,850} });
 
 	BrokenBackBody = CreateImageRenderer(MT3RenderOrder::UFO_BackBody);
 	BrokenBackBody->SetImage("MonoEye_UFO_DestroyedBack.png");
-	BrokenBackBody->SetTransform({ {0,205},{750,750} });
+	BrokenBackBody->SetTransform({ {0,230},{800,850} });
+	BrokenBackBody->ActiveOff();
 
 	AncientCharactor = CreateImageRenderer(MT3RenderOrder::UFO_AncientCharactor);
 	AncientCharactor->SetImage("AncientCharacter.png");
