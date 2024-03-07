@@ -22,15 +22,23 @@ void AMonoliths::BeginPlay()
 	Collider->SetTransform({ {0.f,-InitScale.Y/2.0f},InitScale });
 	Collider->SetColType(ECollisionType::Rect);
 
-	LayCheck = CreateCollision(MT3CollisionOrder::Detect);
-	LayCheck->SetScale({ 30,30 });
-	LayCheck->SetColType(ECollisionType::Rect);
+	UpLayCheck = CreateCollision(MT3CollisionOrder::Detect);
+	UpLayCheck->SetScale({ 100,30 });
+	UpLayCheck->SetColType(ECollisionType::Rect);
+
+	DownLayCheck = CreateCollision(MT3CollisionOrder::Detect);
+	DownLayCheck->SetScale({ 100,10 });
+	DownLayCheck->SetColType(ECollisionType::Rect);
+	DownLayCheck->SetPosition({ 0.f, 6.f });
 }
 
 void AMonoliths::Tick(float _DeltaTime)
 {
 	Collider->SetTransform({ {0.f,-InitScale.Y / 2.0f},InitScale });
-	LayCheck->SetPosition({ 0.f,-InitScale.Y - 50.0f });
+	UpLayCheck->SetPosition({ 0.f,-InitScale.Y - 16.0f });
+
+
+	float a = -InitScale.Y - 50.0f;
 
 	if (IsLand)
 	{
@@ -38,7 +46,7 @@ void AMonoliths::Tick(float _DeltaTime)
 		InitScale.Y -= 24.f * _DeltaTime;
 		
 	}
-	else if (Lay)
+	else if (UpLay)
 	{
 		int CurFrame = Renderer->GetCurAnimationFrame();
 		Renderer->ChangeAnimation("FastSmaller", false, CurFrame, 0.1f);
@@ -67,9 +75,19 @@ void AMonoliths::Gravity(float _DeltaTime)
 		IsLand = true;
 	}
 
-	std::vector<UCollision*> Result;
-	if (LayCheck->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
 	{
-		Lay = true;
+		std::vector<UCollision*> Result;
+		if (DownLayCheck->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
+		{
+			Speed = 0.0f;
+		}
+	}
+
+	{
+		std::vector<UCollision*> Result;
+		if (UpLayCheck->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
+		{
+			UpLay = true;
+		}
 	}
 }
