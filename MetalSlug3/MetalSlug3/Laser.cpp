@@ -54,7 +54,7 @@ void ALaser::Tick(float _DeltaTime)
 	}
 
 	GroundUp();
-	GravityCheck();
+	AirCheck();
 }
 
 void ALaser::GroundUp()
@@ -75,7 +75,7 @@ void ALaser::GroundUp()
 	}
 }
 
-void ALaser::GravityCheck()
+void ALaser::AirCheck()
 {
 	while (true)
 	{

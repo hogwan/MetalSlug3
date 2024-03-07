@@ -18,7 +18,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	void GroundUp();
-	void GravityCheck();
+	void AirCheck();
 
 	float Speed = 200.0f;
 
