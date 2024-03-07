@@ -206,6 +206,9 @@
     <ClInclude Include="Monoliths.h">
       <Filter>Object\Enemy\Boss\Phase2</Filter>
     </ClInclude>
+    <ClInclude Include="VomitLauncher.h">
+      <Filter>Object\Projectile\PlayerProjectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -409,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="Monoliths.cpp">
       <Filter>Object\Enemy\Boss\Phase2</Filter>
+    </ClCompile>
+    <ClCompile Include="VomitLauncher.cpp">
+      <Filter>Object\Projectile\PlayerProjectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

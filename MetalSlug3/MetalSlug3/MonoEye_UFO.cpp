@@ -25,7 +25,7 @@ void AMonoEye_UFO::BeginPlay()
 
 	BrokenBackBody = CreateImageRenderer(MT3RenderOrder::UFO_BackBody);
 	BrokenBackBody->SetImage("MonoEye_UFO_DestroyedBack.png");
-	BrokenBackBody->SetTransform({ {0,230},{800,850} });
+	BrokenBackBody->SetTransform({ {0,40},{800,850} });
 	BrokenBackBody->ActiveOff();
 
 	AncientCharactor = CreateImageRenderer(MT3RenderOrder::UFO_AncientCharactor);
@@ -41,6 +41,12 @@ void AMonoEye_UFO::BeginPlay()
 void AMonoEye_UFO::Tick(float _DeltaTime)
 {
 	StateUpdate(_DeltaTime);
+
+	if (Hp <= 0)
+	{
+		StateChange(UFOState::Destroyed);
+		return;
+	}
 }
 
 void AMonoEye_UFO::StateUpdate(float _DeltaTime)
@@ -59,6 +65,8 @@ void AMonoEye_UFO::StateUpdate(float _DeltaTime)
 	case UFOState::Firing:
 		Firing(_DeltaTime);
 		break;
+	case UFOState::Destroyed:
+		Destroyed(_DeltaTime);
 	default:
 		break;
 	}
@@ -79,6 +87,8 @@ void AMonoEye_UFO::StateChange(UFOState _State)
 		case UFOState::Firing:
 			FiringStart();
 			break;
+		case UFOState::Destroyed:
+			DestroyedStart();
 		default:
 			break;
 		}
@@ -137,6 +147,10 @@ void AMonoEye_UFO::Firing(float _DeltaTime)
 	}
 }
 
+void AMonoEye_UFO::Destroyed(float _DeltaTime)
+{
+}
+
 void AMonoEye_UFO::IdleStart()
 {
 	Renderer->ChangeAnimation("Idle", false, 0, 0.08f);
@@ -152,4 +166,12 @@ void AMonoEye_UFO::FiringStart()
 	Renderer->ChangeAnimation("Firing", false, 0, 0.08f);
 	AncientCharactor->SetTransform({ {0,0},{600,200} });
 	AncientCharactor->ActiveOn();
+}
+
+void AMonoEye_UFO::DestroyedStart()
+{
+	Body->SetImage("MonoEye_UFO_DestroyedFront.png");
+	BrokenBackBody->ActiveOn();
+	Collider->ActiveOff();
+	Renderer->ActiveOff();
 }

@@ -35,6 +35,7 @@
 #include "SphereConstructor.h"
 #include "MonoEyeCenter.h"
 #include "MonoEye_UFO.h"
+#include "VomitLauncher.h"
 
 SpawnManager::SpawnManager()
 {
@@ -46,7 +47,6 @@ SpawnManager::~SpawnManager()
 
 void SpawnManager::BeginPlay()
 {
-	TestSpawn();
 
 	UContentsHelper::ScreenCol = GetWorld()->SpawnActor<AScreenCollision>();
 	//UContentsHelper::ScreenCol->GetCollider()->ActiveOff();
@@ -65,7 +65,7 @@ void SpawnManager::BeginPlay()
 	F2->SetActorLocation({ 4270,807 });
 
 	UContentsHelper::Player = GetWorld()->SpawnActor<Marco>();
-	UContentsHelper::Player->SetActorLocation({ 13050,2340 });
+	UContentsHelper::Player->SetActorLocation({ 100,1000 });
 
 	AGo* Go = GetWorld()->SpawnActor<AGo>();
 	Go->SetActorLocation({ 650,230 });
@@ -128,6 +128,7 @@ void SpawnManager::BeginPlay()
 	Doctor_4->SetActorLocation({ 450,1000 }); 
 	Doctor_4->StateChange(HumanState::Run); 
 	
+	TestSpawn();
 }
 
 void SpawnManager::Tick(float _DeltaTime)
@@ -873,7 +874,6 @@ void SpawnManager::Tick(float _DeltaTime)
 
 void SpawnManager::TestSpawn()
 {
-	UContentsHelper::CameraManager->CameraMode = 11;
-	SpawnNumber = 29;
-
+	AVomitLauncher* VomitLauncher = GetWorld()->SpawnActor< AVomitLauncher>();
+	VomitLauncher->SetActorLocation({400,900});
 }

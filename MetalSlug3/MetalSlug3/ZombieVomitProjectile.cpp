@@ -11,7 +11,7 @@ AZombieVomitProjectile::~AZombieVomitProjectile()
 
 void AZombieVomitProjectile::BeginPlay()
 {
-	AMT3Object::BeginPlay();
+	AActor::BeginPlay();
 
 	Collider = CreateCollision(MT3CollisionOrder::PlayerBullet);
 	Collider->SetScale({ 50,20 });
@@ -102,8 +102,7 @@ void AZombieVomitProjectile::BeginPlay()
 
 void AZombieVomitProjectile::Tick(float _DeltaTime)
 {
-	AMT3Object::Tick(_DeltaTime);
-
+	AActor::Tick(_DeltaTime);
 
 	if (RendererEnd)
 	{
@@ -116,12 +115,6 @@ void AZombieVomitProjectile::Tick(float _DeltaTime)
 			Renderer->ChangeAnimation("End_Left");
 		}
 		RendererEnd = false;
-	}
-
-	if (End)
-	{
-		GravityCheck(_DeltaTime);
-		return;
 	}
 
 	if (Dir.Y < -0.97f)
@@ -578,9 +571,4 @@ void AZombieVomitProjectile::Tick(float _DeltaTime)
 
 void AZombieVomitProjectile::DamageLogic()
 {
-}
-
-void AZombieVomitProjectile::GravityCheck(float _DeltaTime)
-{
-	AddActorLocation(FVector::Down * Gravity * _DeltaTime);
 }

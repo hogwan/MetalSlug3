@@ -1,6 +1,6 @@
 #pragma once
-#include "MT3Object.h"
-class AZombieVomitProjectile : public AMT3Object
+#include <EngineCore/Actor.h>
+class AZombieVomitProjectile : public AActor
 {
 public:
 	// constructor destructor
@@ -40,7 +40,6 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	void DamageLogic();
-	void GravityCheck(float _DeltaTime);
 	FVector Dir = FVector::Zero;
 	int Number = 0;
 	UImageRenderer* Renderer = nullptr;

@@ -27,7 +27,6 @@ void Marco::BeginPlay()
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::LowerBody));          // LowerBody
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::AllBody));          // AllBody
 	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::ZombieArm));          //ZombieArm
-	Renderer.push_back(CreateImageRenderer(MT3RenderOrder::Projectile));      //ZombieLaunchEffect
 
 	Collision = CreateCollision(MT3CollisionOrder::Player);
 	Collision->SetScale(DefaultCollisionScale);
@@ -69,10 +68,6 @@ void Marco::BeginPlay()
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetImage("Marco_ZombieArm.png");
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransform({ {10,-60} ,MarcoSize });
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->SetTransColor({ 0,0,0,255 });
-	
-	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetImage("Marco_VomitLaunchEffect.png");
-	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransform({ {0,-70}, MarcoSize });
-	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->SetTransColor({ 0,0,0,255 });
 
 	CreateMarcoAnimation;
 
@@ -81,7 +76,6 @@ void Marco::BeginPlay()
 
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
-	Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ActiveOff();
 
 	UpperStateChange(UpperBodyState::Idle);
 	LowerStateChange(LowerBodyState::Idle);
@@ -203,6 +197,7 @@ void Marco::DeathCheck()
 		//if(좀비 DNA 피격 시)
 		if (
 			true == Collision->CollisionCheck(MT3CollisionOrder::ZombieProjectile, Result)
+			|| true == UEngineInput::IsDown('Q')
 			)
 		{
 			IsZombie = true;
@@ -256,9 +251,7 @@ void Marco::ManipulateUpdate(float _DeltaTime)
 		{
 			if (IsZombie)
 			{
-				//AddForce()
-				AddActorLocation(FVector::Up * 50);
-				JumpVector = ZombieJumpPower;
+				AllStateChange(AllBodyState::Zombie_Jump);
 			}
 			else
 			{
@@ -3658,12 +3651,6 @@ void Marco::Zombie_AllIdle(float _DeltaTime)
 	DirCheck(BodyRenderer::AllBody, CurAllBodyName);
 
 
-	if (InAir)
-	{
-		AllStateChange(AllBodyState::Zombie_Jump);
-		return;
-	}
-
 
 	if (
 		true == UEngineInput::IsDown('D') ||
@@ -3703,12 +3690,6 @@ void Marco::Zombie_AllMove(float _DeltaTime)
 		)
 	{
 		AllStateChange(AllBodyState::Zombie_Idle);
-		return;
-	}
-
-	if (InAir)
-	{
-		AllStateChange(AllBodyState::Zombie_Jump);
 		return;
 	}
 
@@ -3752,8 +3733,18 @@ void Marco::Zombie_AllAimupTurn(float _DeltaTime)
 
 void Marco::Zombie_AllJump(float _DeltaTime)
 {
+	int CurFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
+	
+	if (CurFrame == 7 && Jump_PrevFrame != CurFrame)
+	{
+		AddActorLocation(FVector::Up * 50);
+		JumpVector = ZombieJumpPower;
+
+		Jump_PrevFrame = CurFrame;
+	}
 	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
+		Jump_PrevFrame = -1;
 		AllStateChange(AllBodyState::Zombie_Idle);
 		return;
 	}
@@ -3766,89 +3757,6 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 	int CurFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
 	int LaunchFrame = 21;
 	int LaunchEndFrame = 38;
-
-	if (CurFrame >= LaunchFrame && CurFrame <=LaunchEndFrame && Vomit_PrevFrame != CurFrame)
-	{
-		Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ActiveOn();
-		Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ChangeAnimation("VombitLaunchEffect_Right", false, 0, 0.05f);
-		for (AZombieVomitProjectile* Projectile : VomitProjectileVec)
-		{
-			Projectile->Destroy();
-		}
-		VomitProjectileVec.clear();
-
-		for (int i = 0; i < 30; i++)
-		{
-			if (IsVomitProjectileCol) continue;
-
-			AZombieVomitProjectile* ZombieProjectile = GetWorld()->SpawnActor<AZombieVomitProjectile>();
-			VomitProjectileVec.push_back(ZombieProjectile);
-			FVector ProjectileVector = VomitProjectileVectorArr[iterator * 2];
-			int VectorLength = 70;
-			ProjectileVector.Normalize2D();
-			FVector ResultVector = FVector::Zero;
-			FVector VomitLaunchOffset = { 40,-100 };
-			if (DirState == EActorDir::Left)
-			{
-				ProjectileVector.X = -ProjectileVector.X;
-				VomitLaunchOffset = { -40,-100 };
-			}
-		
-			ResultVector.X = ProjectileVector.X * VectorLength * i;
-			ResultVector.Y = ProjectileVector.Y * VectorLength * i + 0.5f*4.5f*i*i;
-
-
-			ZombieProjectile->SetActorLocation(GetActorLocation()+ VomitLaunchOffset + ResultVector);
-			ZombieProjectile->SetDir(ProjectileVector);
-			ZombieProjectile->SetNumber(i);
-
-			UCollision* ZombieProjectileCollider = ZombieProjectile->GetCollider();
-			std::vector<UCollision*> Result;
-			if (ZombieProjectileCollider->CollisionCheck(MT3CollisionOrder::Enemy, Result))
-			{
-				//데미지로직
-				IsVomitProjectileCol = true;
-			}
-
-			Color8Bit Color = UContentsHelper::ColMapImage->GetColor(ZombieProjectile->GetActorLocation().iX(), ZombieProjectile->GetActorLocation().iY(), Color8Bit::MagentaA);
-			if (Color == Color8Bit(255, 0, 255, 0))
-			{
-				IsVomitProjectileCol = true;
-			}
-
-		}
-		if (CurFrame == LaunchEndFrame)
-		{
-			for (AZombieVomitProjectile* Projectile : VomitProjectileVec)
-			{
-				Projectile->End = true;
-				Projectile->RendererEnd = true;
-				Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ActiveOff();
-				Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ChangeAnimation("Pistol_UpperBody_Idle_Right");
-			}
-		}
-
-		iterator++;
-		IsVomitProjectileCol = false;
-		Vomit_PrevFrame = CurFrame;
-	}
-
-	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
-	{
-		ManipulateOn();
-		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
-		AllStateChange(AllBodyState::Zombie_Idle);
-		Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->ActiveOff();
-
-		for (AZombieVomitProjectile* Projectile : VomitProjectileVec)
-		{
-			Projectile->Destroy();
-		}
-		VomitProjectileVec.clear();
-		Vomit_PrevFrame = -1;
-		iterator = 0;
-		return;
-	}
 }
 
 void Marco::Zombie_AllDeath(float _DeltaTime)
@@ -3930,6 +3838,7 @@ void Marco::Zombie_AllDeathStart()
 {
 	ManipulateOff();
 	CurAllBodyName = "Zombie_AllBody_Death";
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
 	ZombieStart();
 }
 
@@ -3937,6 +3846,7 @@ void Marco::Zombie_AllDeathInAirStart()
 {
 	ManipulateOff();
 	CurAllBodyName = "Zombie_AllBody_DeathInAir";
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
 	ZombieStart();
 }
 
@@ -4137,7 +4047,8 @@ void Marco::ZombieArm_Jump_AimUp(float _DeltaTime)
 
 	if (true == UEngineInput::IsFree(VK_UP))
 	{
-		ZombieArmStateChange(ZombieArmState::AimUpToNormal);
+		
+		(ZombieArmState::AimUpToNormal);
 		return;
 	}
 
@@ -4364,9 +4275,7 @@ void Marco::ZombieArmStart()
 {
 	std::string DirectedName = AddDirectionName(CurZArmName);
 	ZombieArm_Syncro();
-	int BodyFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
-	float BodyTime = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationTime();
-	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName, true, BodyFrame, BodyTime);
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(DirectedName);
 }
 
 void Marco::Jumping_UpperBodySyncro()

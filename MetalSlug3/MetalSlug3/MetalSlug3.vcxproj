@@ -396,6 +396,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Van.h" />
+    <ClInclude Include="VomitLauncher.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Woman.h">
       <SubType>
       </SubType>
@@ -651,6 +655,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Van.cpp" />
+    <ClCompile Include="VomitLauncher.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Woman.cpp">
       <SubType>
       </SubType>

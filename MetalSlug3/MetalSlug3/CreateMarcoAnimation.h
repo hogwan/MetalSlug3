@@ -183,11 +183,7 @@ Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CreateAnimation("ZombieArm_
 Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CreateAnimation("ZombieArm_Idle_AimUp_Left", "Marco_ZombieArm.png", 210, 221, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CreateAnimation("ZombieArm_Move_AimUp_Left", "Marco_ZombieArm.png", 222, 245, 0.08f, true);\
 Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CreateAnimation("ZombieArm_Jump_AimUp_Left", "Marco_ZombieArm.png", 246, 261, 0.08f, true);\
-Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CreateAnimation("ZombieArm_Shoot_AimUp_Left", "Marco_ZombieArm.png", 262, 271, 0.08f, false);\
-\
-Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->CreateAnimation("VombitLaunchEffect_Right", "Marco_VomitLaunchEffect.png", 0, 38, 0.06f, false);\
-Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->CreateAnimation("VombitLaunchEffect_Left", "Marco_VomitLaunchEffect.png", 40, 78, 0.06f, false);\
-Renderer[static_cast<int>(BodyRenderer::ZombieLaunchEffect)]->CreateAnimation("Pistol_UpperBody_Idle_Right", "Marco_UpperBody.png", 0, 5, 0.12f, true);
+Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->CreateAnimation("ZombieArm_Shoot_AimUp_Left", "Marco_ZombieArm.png", 262, 271, 0.08f, false);
 
 
 

@@ -7,6 +7,7 @@ enum class UFOState
 	Idle,
 	Charging,
 	Firing,
+	Destroyed,
 };
 
 class AMonoEye_UFO : public AEnemy
@@ -35,10 +36,12 @@ protected:
 	void Idle(float _DeltaTime);
 	void Charging(float _DeltaTime);
 	void Firing(float _DeltaTime);
+	void Destroyed(float _DeltaTime);
 	
 	void IdleStart();
 	void ChargingStart();
 	void FiringStart();
+	void DestroyedStart();
 
 	UImageRenderer* Body = nullptr;
 	UImageRenderer* BrokenBackBody = nullptr;

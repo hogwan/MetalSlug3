@@ -9,7 +9,6 @@ enum class BodyRenderer
 	LowerBody,
 	AllBody,
 	ZombieArm,
-	ZombieLaunchEffect,
 };
 
 class Marco : public AActor
@@ -34,6 +33,7 @@ public:
 
 	EGunType GunType = EGunType::Rifle;
 	EGunList Gun = EGunList::HeavyMachineGun;
+	EActorDir DirState = EActorDir::Right;
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -58,7 +58,6 @@ protected:
 	LowerBodyState LowerState = LowerBodyState::Idle;
 	AllBodyState AllState = AllBodyState::None;
 	ZombieArmState ZArmState = ZombieArmState::None;
-	EActorDir DirState = EActorDir::Right;
 
 	void UpperStateUpdate(float _DeltaTime);
 	void LowerStateUpdate(float _DeltaTime);
@@ -244,7 +243,7 @@ private:
 	bool IsHeavyMachineGun = false;
 	bool CrouchShooting = false;
 	bool Manipulate = true;
-	bool NoHit = true;
+	bool NoHit = false;
 
 	inline void ManipulateOn()
 	{
@@ -292,6 +291,7 @@ private:
 
 	int HeavyMachineGun_PrevFrame = -1;
 	int Vomit_PrevFrame = -1;
+	int Jump_PrevFrame = -1;
 
 	bool IsVomitProjectileCol = false;
 	int iterator = 0;
