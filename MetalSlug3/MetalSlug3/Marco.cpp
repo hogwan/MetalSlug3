@@ -257,7 +257,7 @@ void Marco::ManipulateUpdate(float _DeltaTime)
 			else
 			{
 				//AddForce()
-				AddActorLocation(FVector::Up * 50);
+				AddActorLocation(FVector::Up * 20);
 				JumpVector = JumpPower;
 			}
 		}
@@ -3738,10 +3738,11 @@ void Marco::Zombie_AllJump(float _DeltaTime)
 	
 	if (CurFrame == 7 && Jump_PrevFrame != CurFrame)
 	{
-		AddActorLocation(FVector::Up * 50);
+		AddActorLocation(FVector::Up * 20);
 		JumpVector = ZombieJumpPower;
 
 		Jump_PrevFrame = CurFrame;
+		ManipulateOn();
 	}
 	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
 	{
@@ -3841,6 +3842,7 @@ void Marco::Zombie_AllAimupTurnStart()
 void Marco::Zombie_AllJumpStart()
 {
 	CurAllBodyName = "Zombie_AllBody_Jump";
+	ManipulateOff();
 	ZombieStart();
 }
 

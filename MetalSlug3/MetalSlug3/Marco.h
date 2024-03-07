@@ -262,7 +262,7 @@ private:
 
 	float Move_Speed = 300.0f;
 	float Run_Speed = 300.0f;
-	float Jump_Speed = 100.0f;
+	float Jump_Speed = 150.0f;
 	float ForwardJump_Speed = 200.0f;
 	float Crouch_Speed = 50.0f;
 	float Zombie_Speed = 75.0f;
@@ -330,7 +330,7 @@ private:
 	FVector Gravity = FVector::Down * 1300.0f;
 
 	FVector JumpPower = FVector::Up * 300.0f;
-	FVector ZombieJumpPower = FVector::Up * 100.0f;
+	FVector ZombieJumpPower = FVector::Up * 75.0f;
 	FVector JumpVector = FVector::Zero;
 
 
