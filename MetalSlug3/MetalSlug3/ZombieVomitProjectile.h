@@ -39,7 +39,6 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void DamageLogic();
 	FVector Dir = FVector::Zero;
 	int Number = 0;
 	UImageRenderer* Renderer = nullptr;

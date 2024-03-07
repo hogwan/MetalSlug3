@@ -568,7 +568,3 @@ void AZombieVomitProjectile::Tick(float _DeltaTime)
 		}
 	}
 }
-
-void AZombieVomitProjectile::DamageLogic()
-{
-}
