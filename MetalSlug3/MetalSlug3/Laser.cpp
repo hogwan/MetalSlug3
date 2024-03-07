@@ -77,10 +77,14 @@ void ALaser::GroundUp()
 
 void ALaser::GravityCheck()
 {
-	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY() - 15, Color8Bit::MagentaA);
-	std::vector<UCollision*> Result;
-	if (Color != Color8Bit(255, 0, 255, 0) && !(Collider->CollisionCheck(MT3CollisionOrder::Monoliths, Result)))
+	while (true)
 	{
-		AddActorLocation(FVector::Down);
+		Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY() - 15, Color8Bit::MagentaA);
+		std::vector<UCollision*> Result;
+		if (Color != Color8Bit(255, 0, 255, 0) && !(Collider->CollisionCheck(MT3CollisionOrder::Monoliths, Result)))
+		{
+			AddActorLocation(FVector::Down);
+		}
+		else break;
 	}
 }

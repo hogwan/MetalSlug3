@@ -19,6 +19,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	void Gravity(float _DeltaTime);
+	void UpLayCheck();
 
 	float Speed = 0.0f;
 	float Accel = 500.0f;
@@ -29,7 +30,8 @@ protected:
 	bool UpLay = false;
 	bool DownLay = false;
 
-	UCollision* UpLayCheck = nullptr;
-	UCollision* DownLayCheck = nullptr;
+	float UpLayerSpeed = 0.0f;
+
+	UCollision* UpLayCollision = nullptr;
 };
 
