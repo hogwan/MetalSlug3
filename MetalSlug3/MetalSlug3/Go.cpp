@@ -22,7 +22,8 @@ void AGo::Tick(float _DeltaTime)
 {
 	UCollision* ScreenCollider = UContentsHelper::ScreenCol->GetCollider();
 	std::vector<UCollision*> Result;
-	if (ScreenCollider->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+	if (ScreenCollider->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+		|| ScreenCollider->CollisionCheck(MT3CollisionOrder::Boss, Result))
 	{
 		Renderer->ActiveOff();
 		Renderer->AnimationReset();

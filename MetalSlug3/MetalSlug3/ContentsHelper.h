@@ -17,6 +17,12 @@ enum MT3RenderOrder
 	UFO_Body,
 	UFO_AncientCharactor,
 	Enemy,
+	Monolith_0,
+	Monolith_1,
+	Monolith_2,
+	Monolith_3,
+	Monolith_4,
+	Monolith_5,
 	UFO_Lazer,
 	UFO_LazerGroundEffect,
 	Propeller,
@@ -46,6 +52,7 @@ enum class MT3CollisionOrder
 	PlayerKnife,
 	Lazer,
 	Monoliths,
+	Boss,
 };
 
 enum class EActorDir

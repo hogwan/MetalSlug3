@@ -56,7 +56,8 @@ void ATime::Tick(float _DeltaTime)
 
 	UCollision* ScreenCollider = UContentsHelper::ScreenCol->GetCollider();
 	std::vector<UCollision*> Result;
-	if (false == ScreenCollider->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+	if (false == ScreenCollider->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+		&& false == ScreenCollider->CollisionCheck(MT3CollisionOrder::Boss, Result))
 	{
 		RemainTime -= _DeltaTime/2.0f;
 	}

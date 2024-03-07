@@ -855,7 +855,7 @@ void SpawnManager::Tick(float _DeltaTime)
 	{
 		std::vector<UCollision*> Result;
 		if (
-			!UContentsHelper::ScreenCol->GetCollider()->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+			!UContentsHelper::ScreenCol->GetCollider()->CollisionCheck(MT3CollisionOrder::Boss, Result)
 			)
 		{
 			++SpawnNumber;

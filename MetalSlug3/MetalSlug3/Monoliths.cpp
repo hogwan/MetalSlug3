@@ -36,14 +36,12 @@ void AMonoliths::Tick(float _DeltaTime)
 
 	if (IsLand && !UpLay)
 	{
-		Renderer->ChangeAnimation("Smaller", false, 0, 0.4f);
+		
 		InitScale.Y -= 24.f * _DeltaTime;
 		
 	}
 	else if (UpLay)
 	{
-		int CurFrame = Renderer->GetCurAnimationFrame();
-		Renderer->ChangeAnimation("FastSmaller", false, CurFrame, 0.01f);
 		InitScale.Y -= UpLayerSpeed * _DeltaTime;
 	}
 	else
@@ -64,7 +62,29 @@ void AMonoliths::UpLayCheck()
 	{
 		AMonoliths* UpLayer = dynamic_cast<AMonoliths*>(Result[0]->GetOwner());
 		UpLayerSpeed = UpLayer->Speed;
+
+		int CurFrame = Renderer->GetCurAnimationFrame();
+		Renderer->ChangeAnimation("FastSmaller", true, CurFrame, 0.01f);
+		CurAnim = "FastSmaller";
+
 		UpLay = true;
+	}
+}
+
+void AMonoliths::GoDown()
+{
+	InitScale.Y -= 15;
+	int CurFrame = Renderer->GetCurAnimationFrame();
+	if (CurFrame + 5 <= 32)
+	{
+		if (CurAnim == "Smaller")
+		{
+			Renderer->ChangeAnimation("Smaller", true, CurFrame+1, 0.04f);
+		}
+		else if (CurAnim == "FastSmaller")
+		{
+			Renderer->ChangeAnimation("FastSmaller", true, CurFrame+1, 0.01f);
+		}
 	}
 }
 
@@ -77,6 +97,8 @@ void AMonoliths::Gravity(float _DeltaTime)
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
 		Speed = 0.0f;
+		Renderer->ChangeAnimation("Smaller", true, 0, 0.4f);
+		CurAnim = "Smaller";
 		IsLand = true;
 	}
 }

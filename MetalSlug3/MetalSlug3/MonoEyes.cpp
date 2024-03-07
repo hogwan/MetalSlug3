@@ -24,7 +24,7 @@ void AMonoEyes::BeginPlay()
 	LaunchRenderer->CreateAnimation("Launch", "LaunchEffect.png", 0, 15, 0.05f, false);
 	LaunchRenderer->ActiveOff();
 
-	Collider = CreateCollision(MT3CollisionOrder::Enemy);
+	Collider = CreateCollision(MT3CollisionOrder::Boss);
 	Collider->SetScale({ 100,300 });
 	Collider->SetPosition({ 0,-150 });
 	Collider->SetColType(ECollisionType::Rect);

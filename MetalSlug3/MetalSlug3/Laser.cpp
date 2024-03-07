@@ -10,8 +10,59 @@ ALaser::ALaser()
 ALaser::~ALaser()
 {
 	FVector CameraPos = GetWorld()->GetCameraPos();
+
+	std::vector<float> SpawnX;
+	float Interval = 800.f / 7.f;
+	float Initial = 0.f;
+	for (int i = 0; i < 7; i++)
+	{
+		float X = 0.f;
+		if (i == 0)
+		{
+			X = CameraPos.X + Interval/2.f;
+			Initial = X;
+		}
+		else
+		{
+			X = Initial + Interval * i;
+		}
+
+		SpawnX.push_back(X);
+	}
+
+	int SpawnNum = 0;
+	if (GetActorLocation().X > CameraPos.X + Interval * 6.f)
+	{
+		SpawnNum = 6;
+	}
+	else if (GetActorLocation().X > CameraPos.X + Interval * 5.f)
+	{
+		SpawnNum = 5;
+	}
+	else if (GetActorLocation().X > CameraPos.X + Interval * 4.f)
+	{
+		SpawnNum = 4;
+	}
+	else if (GetActorLocation().X > CameraPos.X + Interval * 3.f)
+	{
+		SpawnNum = 3;
+	}
+	else if (GetActorLocation().X > CameraPos.X + Interval * 2.f)
+	{
+		SpawnNum = 2;
+	}
+	else if (GetActorLocation().X > CameraPos.X + Interval * 1.f)
+	{
+		SpawnNum = 1;
+	}
+	else
+	{
+		SpawnNum = 0;
+	}
+
 	AMonoliths* Monoliths = GetWorld()->SpawnActor<AMonoliths>();
-	Monoliths->SetActorLocation({ GetActorLocation().X,CameraPos.Y + 1 });
+	Monoliths->SetActorLocation({ SpawnX[SpawnNum],CameraPos.Y + 1});
+	Monoliths->GetRenderer()->SetOrder(static_cast<MT3RenderOrder>(SpawnNum + 11));
 }
 
 void ALaser::BeginPlay()

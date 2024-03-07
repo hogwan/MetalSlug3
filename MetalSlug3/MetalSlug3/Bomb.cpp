@@ -53,7 +53,8 @@ void ABomb::ReflectionCheck()
 void ABomb::HitCheck()
 {
 	std::vector<UCollision*> Result;
-	if (Collider->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+	if (Collider->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+		|| Collider->CollisionCheck(MT3CollisionOrder::Boss, Result))
 	{
 		AEnemy* Enemy = dynamic_cast<AEnemy*>(Result[0]->GetOwner());
 		Enemy->Damaged(Damage);

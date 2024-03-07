@@ -33,7 +33,7 @@ void AMonoEye_UFO::BeginPlay()
 	AncientCharactor->SetTransform({ {0,0},{600,200} });
 	AncientCharactor->ActiveOff();
 
-	Collider = CreateCollision(MT3CollisionOrder::Enemy);
+	Collider = CreateCollision(MT3CollisionOrder::Boss);
 	Collider->SetTransform({ {0,-100},{300,200} });
 	Collider->SetColType(ECollisionType::Rect);
 }

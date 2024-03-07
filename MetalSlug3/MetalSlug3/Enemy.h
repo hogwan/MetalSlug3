@@ -19,6 +19,11 @@ public:
 		Hp -= _Damage;
 	}
 
+	UImageRenderer* GetRenderer()
+	{
+		return Renderer;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime)	override;
