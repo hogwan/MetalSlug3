@@ -11,6 +11,7 @@
 #include "ZombieVomitProjectile.h"
 #include "CameraManager.h"
 #include "Enemy.h"
+#include "VomitLauncher.h"
 
 
 Marco::Marco()
@@ -3756,7 +3757,22 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
 	int CurFrame = Renderer[static_cast<int>(BodyRenderer::AllBody)]->GetCurAnimationFrame();
 	int LaunchFrame = 21;
-	int LaunchEndFrame = 38;
+
+	if (Vomit_PrevFrame != CurFrame && CurFrame == LaunchFrame)
+	{
+		AVomitLauncher* VomitLauncher = GetWorld()->SpawnActor<AVomitLauncher>();
+		FVector Offset = { 0,-100 };
+		VomitLauncher->SetActorLocation(GetActorLocation() + Offset);
+		Vomit_PrevFrame = CurFrame;
+	}
+	
+	if (Renderer[static_cast<int>(BodyRenderer::AllBody)]->IsCurAnimationEnd())
+	{
+		Vomit_PrevFrame = -1;
+		ManipulateOn();
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
+		AllStateChange(AllBodyState::Zombie_Idle);
+	}
 }
 
 void Marco::Zombie_AllDeath(float _DeltaTime)

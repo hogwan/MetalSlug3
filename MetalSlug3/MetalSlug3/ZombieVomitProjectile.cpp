@@ -53,7 +53,27 @@ void AZombieVomitProjectile::BeginPlay()
 	Renderer->CreateAnimation("16-1_Right", "Marco_ZombieVomitProjectile.png", 33, 33, 0.05f);
 	Renderer->CreateAnimation("17-0_Right", "Marco_ZombieVomitProjectile.png", 34, 34, 0.05f);
 	Renderer->CreateAnimation("17-1_Right", "Marco_ZombieVomitProjectile.png", 35, 35, 0.05f);
-	Renderer->CreateAnimation("End_Right", "Marco_ZombieVomitProjectile.png", 36, 51, 0.05f);
+
+	Renderer->CreateAnimation("End_Right0", "Marco_ZombieVomitProjectile.png", 36, 36, 0.03f);
+	Renderer->CreateAnimation("End_Right1", "Marco_ZombieVomitProjectile.png", 37, 37, 0.03f);
+	Renderer->CreateAnimation("End_Right2", "Marco_ZombieVomitProjectile.png", 38, 38, 0.03f);
+	Renderer->CreateAnimation("End_Right3", "Marco_ZombieVomitProjectile.png", 39, 39, 0.03f);
+	Renderer->CreateAnimation("End_Right4", "Marco_ZombieVomitProjectile.png", 40, 40, 0.03f);
+	Renderer->CreateAnimation("End_Right5", "Marco_ZombieVomitProjectile.png", 41, 41, 0.03f);
+	Renderer->CreateAnimation("End_Right6", "Marco_ZombieVomitProjectile.png", 42, 42, 0.03f);
+	Renderer->CreateAnimation("End_Right7", "Marco_ZombieVomitProjectile.png", 43, 43, 0.03f);
+	Renderer->CreateAnimation("End_Right8", "Marco_ZombieVomitProjectile.png", 44, 44, 0.03f);
+	Renderer->CreateAnimation("End_Right9", "Marco_ZombieVomitProjectile.png", 45, 45, 0.03f);
+	Renderer->CreateAnimation("End_Right10", "Marco_ZombieVomitProjectile.png", 46, 46, 0.03f);
+	Renderer->CreateAnimation("End_Right11", "Marco_ZombieVomitProjectile.png", 47, 47, 0.03f);
+	Renderer->CreateAnimation("End_Right12", "Marco_ZombieVomitProjectile.png", 48, 48, 0.03f);
+	Renderer->CreateAnimation("End_Right13", "Marco_ZombieVomitProjectile.png", 49, 49, 0.03f);
+	Renderer->CreateAnimation("End_Right14", "Marco_ZombieVomitProjectile.png", 50, 50, 0.03f);
+	Renderer->CreateAnimation("End_Right15", "Marco_ZombieVomitProjectile.png", 51, 51, 0.03f);
+	Renderer->CreateAnimation("End_Right16", "Marco_ZombieVomitProjectile.png", 52, 52, 0.03f);
+	Renderer->CreateAnimation("End_Right17", "Marco_ZombieVomitProjectile.png", 53, 53, 0.03f);
+	Renderer->CreateAnimation("End_Right18", "Marco_ZombieVomitProjectile.png", 54, 54, 0.03f);
+	Renderer->CreateAnimation("End_Right19", "Marco_ZombieVomitProjectile.png", 55, 55, 0.03f);
 
 	Renderer->CreateAnimation("0-0_Left", "Marco_ZombieVomitProjectile.png", 60, 60, 0.05f);
 	Renderer->CreateAnimation("0-1_Left", "Marco_ZombieVomitProjectile.png", 61, 61, 0.05f);
@@ -91,8 +111,27 @@ void AZombieVomitProjectile::BeginPlay()
 	Renderer->CreateAnimation("16-1_Left", "Marco_ZombieVomitProjectile.png", 93, 93, 0.05f);
 	Renderer->CreateAnimation("17-0_Left", "Marco_ZombieVomitProjectile.png", 94, 94, 0.05f);
 	Renderer->CreateAnimation("17-1_Left", "Marco_ZombieVomitProjectile.png", 95, 95, 0.05f);
-	Renderer->CreateAnimation("End_Left", "Marco_ZombieVomitProjectile.png", 96, 111, 0.05f);
 
+	Renderer->CreateAnimation("End_Left0", "Marco_ZombieVomitProjectile.png", 96, 96, 0.03f);
+	Renderer->CreateAnimation("End_Left1", "Marco_ZombieVomitProjectile.png", 97, 97, 0.03f);
+	Renderer->CreateAnimation("End_Left2", "Marco_ZombieVomitProjectile.png", 98, 98, 0.03f);
+	Renderer->CreateAnimation("End_Left3", "Marco_ZombieVomitProjectile.png", 99, 99, 0.03f);
+	Renderer->CreateAnimation("End_Left4", "Marco_ZombieVomitProjectile.png", 100, 100, 0.03f);
+	Renderer->CreateAnimation("End_Left5", "Marco_ZombieVomitProjectile.png", 101, 101, 0.03f);
+	Renderer->CreateAnimation("End_Left6", "Marco_ZombieVomitProjectile.png", 102, 102, 0.03f);
+	Renderer->CreateAnimation("End_Left7", "Marco_ZombieVomitProjectile.png", 103, 103, 0.03f);
+	Renderer->CreateAnimation("End_Left8", "Marco_ZombieVomitProjectile.png", 104, 104, 0.03f);
+	Renderer->CreateAnimation("End_Left9", "Marco_ZombieVomitProjectile.png", 105, 105, 0.03f);
+	Renderer->CreateAnimation("End_Left10", "Marco_ZombieVomitProjectile.png", 106, 106, 0.03f);
+	Renderer->CreateAnimation("End_Left11", "Marco_ZombieVomitProjectile.png", 107, 107, 0.03f);
+	Renderer->CreateAnimation("End_Left12", "Marco_ZombieVomitProjectile.png", 108, 108, 0.03f);
+	Renderer->CreateAnimation("End_Left13", "Marco_ZombieVomitProjectile.png", 109, 109, 0.03f);
+	Renderer->CreateAnimation("End_Left14", "Marco_ZombieVomitProjectile.png", 110, 110, 0.03f);
+	Renderer->CreateAnimation("End_Left15", "Marco_ZombieVomitProjectile.png", 111, 111, 0.03f);
+	Renderer->CreateAnimation("End_Left16", "Marco_ZombieVomitProjectile.png", 112, 112, 0.03f);
+	Renderer->CreateAnimation("End_Left17", "Marco_ZombieVomitProjectile.png", 113, 113, 0.03f);
+	Renderer->CreateAnimation("End_Left18", "Marco_ZombieVomitProjectile.png", 114, 114, 0.03f);
+	Renderer->CreateAnimation("End_Left19", "Marco_ZombieVomitProjectile.png", 115, 115, 0.03f);
 
 
 	Renderer->SetImage("Marco_ZombieVomitProjectile.png");
@@ -104,17 +143,28 @@ void AZombieVomitProjectile::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
+	if (IsDeath)
+	{
+		Destroy();
+		return;
+	}
+
 	if (RendererEnd)
 	{
 		if (Dir.X > 0)
 		{
-			Renderer->ChangeAnimation("End_Right");
+			std::string AnimName = "End_Right";
+			AnimName += std::to_string(EndFrame);
+			Renderer->ChangeAnimation(AnimName, false, 0, 0.03f);
+			
 		}
 		else
 		{
-			Renderer->ChangeAnimation("End_Left");
+			std::string AnimName = "End_Left";
+			AnimName += std::to_string(EndFrame);
+			Renderer->ChangeAnimation(AnimName, false, 0, 0.03f);
 		}
-		RendererEnd = false;
+		return;
 	}
 
 	if (Dir.Y < -0.97f)

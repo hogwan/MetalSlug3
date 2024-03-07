@@ -29,15 +29,16 @@ protected:
 	FVector InitialPosition = FVector::Zero;
 	FVector InitialVelocity = FVector::Zero;
 
-	float ShootPower = 100.0f;
-	float Gravity = 9.8f;
+	float ShootPower = 200.0f;
+	float Gravity = 9.0f;
 
 	float AccTime = 0.0f;
 	float CoolTime = 0.05f;
 
 	void LaunchLogic();
-	void DamageLogic();
 
-	int Damage = 1;
+	bool IsEnd = false;
+
+	int Damage = 5;
 };
 

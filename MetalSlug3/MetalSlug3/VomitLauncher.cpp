@@ -11,6 +11,10 @@ AVomitLauncher::AVomitLauncher()
 
 AVomitLauncher::~AVomitLauncher()
 {
+	for (AZombieVomitProjectile* Projectile : VomitProjectiles)
+	{
+		Projectile->IsDeath = true;
+	}
 }
 
 void AVomitLauncher::BeginPlay()
@@ -20,7 +24,7 @@ void AVomitLauncher::BeginPlay()
 
 	if (UContentsHelper::Player->DirState == EActorDir::Right)
 	{
-		Renderer->CreateAnimation("Launch_Right", "Marco_VomitLaunchEffect.png", 0, 38, 0.08f, false);
+		Renderer->CreateAnimation("Launch_Right", "Marco_VomitLaunchEffect.png", 0, 43, 0.03f, false);
 		InitialShootVector = { 12.f,10.f };
 		LastShootVector = { 12.f,-37.f };
 		Renderer->ChangeAnimation("Launch_Right");
@@ -28,7 +32,7 @@ void AVomitLauncher::BeginPlay()
 	}
 	else if (UContentsHelper::Player->DirState == EActorDir::Left)
 	{
-		Renderer->CreateAnimation("Launch_Left", "Marco_VomitLaunchEffect.png", 40, 78, 0.08f, false);
+		Renderer->CreateAnimation("Launch_Left", "Marco_VomitLaunchEffect.png", 50, 93, 0.03f, false);
 		InitialShootVector = { -12.f,10.f };
 		LastShootVector = { -12.f,-37.f };
 		Renderer->ChangeAnimation("Launch_Left");
@@ -37,12 +41,40 @@ void AVomitLauncher::BeginPlay()
 	InitialShootVector.Normalize2D();
 	LastShootVector.Normalize2D();
 	ShootVector = InitialShootVector;
-
 }
 
 void AVomitLauncher::Tick(float _DeltaTime)
 {
-	ShootVector.RotationZToDeg(-10.f * _DeltaTime);
+	int CurFrame = Renderer->GetCurAnimationFrame();
+	EActorDir PlayerDir = UContentsHelper::Player->DirState;
+	if (CurFrame < 24)
+	{
+		if (PlayerDir == EActorDir::Right)
+		{
+			ShootVector.RotationZToDeg(-120.f * _DeltaTime);
+		}
+		else
+		{
+			ShootVector.RotationZToDeg(120.f * _DeltaTime);
+		}
+	}
+	else
+	{
+		IsEnd = true;
+		if (PlayerDir == EActorDir::Right)
+		{
+			ShootVector.RotationZToDeg(25.f * _DeltaTime);
+		}
+		else
+		{
+			ShootVector.RotationZToDeg(-25.f * _DeltaTime);
+		}
+
+		if (Renderer->IsCurAnimationEnd())
+		{
+			Destroy();
+		}
+	}
 
 	AccTime += _DeltaTime;
 	if (AccTime > CoolTime)
@@ -51,6 +83,7 @@ void AVomitLauncher::Tick(float _DeltaTime)
 		for (AZombieVomitProjectile* Projectile : VomitProjectiles)
 		{
 			Projectile->Destroy();
+			Projectile = nullptr;
 		}
 		VomitProjectiles.clear();
 
@@ -67,10 +100,17 @@ void AVomitLauncher::LaunchLogic()
 	{
 		AZombieVomitProjectile* VomitProjectile = GetWorld()->SpawnActor<AZombieVomitProjectile>();
 		VomitProjectiles.push_back(VomitProjectile);
+		
+		int CurFrame = Renderer->GetCurAnimationFrame();
+		if (CurFrame > 23)
+		{
+			VomitProjectile->RendererEnd = true;
+			VomitProjectile->SetEndFrame(CurFrame - 24);
+		}
 
 		FVector ProjectilePosition = FVector::Zero;
-		ProjectilePosition.X = InitialVelocity.X * t;
-		ProjectilePosition.Y = InitialVelocity.Y * t + 0.5f * Gravity * pow(t, 2);
+		ProjectilePosition.X = InitialVelocity.X/2.f * (t+1);
+		ProjectilePosition.Y = InitialVelocity.Y/2.f * (t+1) + 0.5f * Gravity * pow((t+1), 2);
 
 		VomitProjectile->SetActorLocation(GetActorLocation() + ProjectilePosition);
 		VomitProjectile->SetNumber(t);
@@ -108,8 +148,3 @@ void AVomitLauncher::LaunchLogic()
 		}
 	}
 }
-
-void AVomitLauncher::DamageLogic()
-{
-}
-

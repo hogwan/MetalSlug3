@@ -32,8 +32,14 @@ public:
 	{
 		Number = _Number;
 	}
+
+	void SetEndFrame(int _Frame)
+	{
+		EndFrame = _Frame;
+	}
 	bool End = false;
 	bool RendererEnd = false;
+	bool IsDeath = false;
 
 protected:
 	void BeginPlay() override;
@@ -41,6 +47,7 @@ protected:
 
 	FVector Dir = FVector::Zero;
 	int Number = 0;
+	int EndFrame = 0;
 	UImageRenderer* Renderer = nullptr;
 	UCollision* Collider = nullptr;
 
