@@ -212,6 +212,9 @@
     <ClInclude Include="VomitExplosionEffect.h">
       <Filter>Object\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="POWs.h">
+      <Filter>Object\NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -421,6 +424,9 @@
     </ClCompile>
     <ClCompile Include="VomitExplosionEffect.cpp">
       <Filter>Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="POWs.cpp">
+      <Filter>Object\NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
