@@ -874,6 +874,5 @@ void SpawnManager::Tick(float _DeltaTime)
 
 void SpawnManager::TestSpawn()
 {
-	AVomitLauncher* VomitLauncher = GetWorld()->SpawnActor< AVomitLauncher>();
-	VomitLauncher->SetActorLocation({400,900});
+	
 }

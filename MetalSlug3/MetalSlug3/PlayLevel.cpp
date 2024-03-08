@@ -102,6 +102,7 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("HugeExplosion.png", 10, 3);
 	UEngineResourcesManager::GetInst().CuttingImage("BombExplosion.png", 10, 3);
 	UEngineResourcesManager::GetInst().CuttingImage("HugeBombExplosion.png", 10, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("VomitExplosion.png", 10, 3);
 
 	UEngineResourcesManager::GetInst().CuttingImage("BossStartEvent.png", 4, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("MonoEyes_UnknownSphere.png", 10, 2);;

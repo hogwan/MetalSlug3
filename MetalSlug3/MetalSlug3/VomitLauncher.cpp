@@ -4,6 +4,7 @@
 #include "ZombieVomitProjectile.h"
 #include "Enemy.h"
 #include "ExplosionEffect.h"
+#include "VomitExplosionEffect.h"
 
 AVomitLauncher::AVomitLauncher()
 {
@@ -134,7 +135,7 @@ void AVomitLauncher::LaunchLogic()
 			AEnemy* Enemy = dynamic_cast<AEnemy*>(Result[0]->GetOwner());
 			Enemy->Damaged(Damage);
 
-			AExplosionEffect* Effect = GetWorld()->SpawnActor<AExplosionEffect>();
+			AExplosionEffect* Effect = GetWorld()->SpawnActor<AVomitExplosionEffect>();
 			Effect->SetActorLocation(VomitProjectile->GetActorLocation());
 			break;
 		}
@@ -142,7 +143,7 @@ void AVomitLauncher::LaunchLogic()
 		Color8Bit Color = UContentsHelper::ColMapImage->GetColor(VomitProjectile->GetActorLocation().iX(), VomitProjectile->GetActorLocation().iY(), Color8Bit::MagentaA);
 		if (Color == Color8Bit(255, 0, 255, 0))
 		{
-			AExplosionEffect* Effect = GetWorld()->SpawnActor<AExplosionEffect>();
+			AExplosionEffect* Effect = GetWorld()->SpawnActor<AVomitExplosionEffect>();
 			Effect->SetActorLocation(VomitProjectile->GetActorLocation());
 			break;
 		}

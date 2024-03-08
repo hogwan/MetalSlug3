@@ -209,6 +209,9 @@
     <ClInclude Include="VomitLauncher.h">
       <Filter>Object\Projectile\PlayerProjectile</Filter>
     </ClInclude>
+    <ClInclude Include="VomitExplosionEffect.h">
+      <Filter>Object\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -415,6 +418,9 @@
     </ClCompile>
     <ClCompile Include="VomitLauncher.cpp">
       <Filter>Object\Projectile\PlayerProjectile</Filter>
+    </ClCompile>
+    <ClCompile Include="VomitExplosionEffect.cpp">
+      <Filter>Object\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

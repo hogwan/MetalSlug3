@@ -3763,6 +3763,16 @@ void Marco::Zombie_AllVomit(float _DeltaTime)
 	{
 		AVomitLauncher* VomitLauncher = GetWorld()->SpawnActor<AVomitLauncher>();
 		FVector Offset = { 0,-100 };
+		if (DirState == EActorDir::Right)
+		{
+			Offset.X = 30;
+		}
+		else if(DirState == EActorDir::Left)
+		{
+			Offset.X = -100;
+		}
+
+
 		VomitLauncher->SetActorLocation(GetActorLocation() + Offset);
 		Vomit_PrevFrame = CurFrame;
 	}
