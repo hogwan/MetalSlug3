@@ -27,6 +27,15 @@ void ABackGroundMap::SetColMapImage(std::string_view _MapImageName)
 	ColRenderer->SetTransform({ ImageScale.Half2D(), ImageScale });
 }
 
+void ABackGroundMap::SetCrouchColMapImage(std::string_view _MapImageName)
+{
+	CrouchColRenderer->SetImage(_MapImageName);
+	UWindowImage* Image = CrouchColRenderer->GetImage();
+	UContentsHelper::CrouchColMapImage = Image;
+	FVector ImageScale = Image->GetScale();
+	CrouchColRenderer->SetTransform({ ImageScale.Half2D(), ImageScale });
+}
+
 void ABackGroundMap::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
@@ -59,7 +68,9 @@ void ABackGroundMap::BeginPlay()
 	// 여기서 상수로 고정시키면.
 	Renderer = CreateImageRenderer(MT3RenderOrder::Map);
 	ColRenderer = CreateImageRenderer(MT3RenderOrder::Map);
+	CrouchColRenderer = CreateImageRenderer(MT3RenderOrder::Map);
 	ColRenderer->SetActive(false);
+	CrouchColRenderer->SetActive(false);
 
 
 }

@@ -36,6 +36,8 @@
 #include "MonoEyeCenter.h"
 #include "MonoEye_UFO.h"
 #include "VomitLauncher.h"
+#include "POWs.h"
+#include "CEO.h"
 
 SpawnManager::SpawnManager()
 {
@@ -57,6 +59,7 @@ void SpawnManager::BeginPlay()
 	ABackGroundMap* Map = GetWorld()->SpawnActor<ABackGroundMap>();
 	Map->SetMapImage("BackGround1.png");
 	Map->SetColMapImage("BackGround1_Col.png");
+	Map->SetCrouchColMapImage("BackGround1_Col_Crouch.png");
 
 	AFront1* F1 = GetWorld()->SpawnActor<AFront1>();
 	F1->SetActorLocation({ 2733,930 });
@@ -288,6 +291,20 @@ void SpawnManager::Tick(float _DeltaTime)
 		ADoctorZombie* DoctorZombie_1 = GetWorld()->SpawnActor<ADoctorZombie>();
 		DoctorZombie_1->SetActorLocation({ 3850,800 });
 		DoctorZombie_1->StateChange(EnemyZombieState::Move);
+
+		APOWs* POW0 = GetWorld()->SpawnActor<APOWs>();
+		POW0->SetActorLocation({ 3500,1100 });
+		POW0->SetInitialPos({ 3500,1100 });
+		POW0->StateChange(POWsState::Tied);
+
+		APOWs* POW1 = GetWorld()->SpawnActor<APOWs>();
+		POW1->SetActorLocation({ 3650,1100 });
+		POW1->SetInitialPos({ 3650,1100 });
+		POW1->StateChange(POWsState::Tied);
+
+		APOWs* CEO = GetWorld()->SpawnActor<ACEO>();
+		CEO->SetActorLocation({ 3600,1100 });
+		CEO->StateChange(POWsState::Tied);
 
 		++SpawnNumber;
 	}
@@ -874,5 +891,7 @@ void SpawnManager::Tick(float _DeltaTime)
 
 void SpawnManager::TestSpawn()
 {
-	
+	/*POWs* POW = GetWorld()->SpawnActor<POWs>();
+	POW->SetActorLocation({ 500,900 });
+	POW->SetInitialPos({ 500,900 });*/
 }

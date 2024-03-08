@@ -76,6 +76,9 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Man2.png", 10, 4);
 	UEngineResourcesManager::GetInst().CuttingImage("Woman.png", 10, 3);
 	UEngineResourcesManager::GetInst().CuttingImage("Uncle.png", 10, 2);
+	UEngineResourcesManager::GetInst().CuttingImage("POWs.png", 10, 7);
+	UEngineResourcesManager::GetInst().CuttingImage("CEOsecretary.png", 10, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("CEO.png", 10, 16);
 
 	UEngineResourcesManager::GetInst().CuttingImage("Go.png", 10, 2);
 	UEngineResourcesManager::GetInst().CuttingImage("In.png", 10, 1);

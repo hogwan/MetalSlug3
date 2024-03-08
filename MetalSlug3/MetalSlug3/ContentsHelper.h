@@ -53,6 +53,7 @@ enum class MT3CollisionOrder
 	Lazer,
 	Monoliths,
 	Boss,
+	TiedNPC,
 };
 
 enum class EActorDir
@@ -220,6 +221,7 @@ class UContentsHelper
 {
 public:
 	static UWindowImage* ColMapImage;
+	static UWindowImage* CrouchColMapImage;
 	static AScreenCollision* ScreenCol;
 	static class Marco* Player;
 	static class CameraManager* CameraManager;

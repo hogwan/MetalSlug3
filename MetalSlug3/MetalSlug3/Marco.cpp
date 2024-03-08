@@ -12,6 +12,7 @@
 #include "CameraManager.h"
 #include "Enemy.h"
 #include "VomitLauncher.h"
+#include "POWs.h"
 
 
 Marco::Marco()
@@ -131,26 +132,50 @@ void Marco::Tick(float _DeltaTime)
 void Marco::GravityCheck(float _DeltaTime)
 {
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	Color8Bit CrouchColor = UContentsHelper::CrouchColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY() + 3, Color8Bit::MagentaA);
 	GroundCheckCol->SetPosition({ 0,0 });
 	CalGravityVector(_DeltaTime);
 	std::vector<UCollision*> Result;
-	if (Color != Color8Bit(255, 0, 255, 0) && !(GroundCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result)))
+	if (Color == Color8Bit(255, 0, 255, 0) && !IsCrouching)
 	{
-		JumpVector += GravityVector * _DeltaTime;
+		JumpVector = FVector::Zero;
+	}
+	else if (CrouchColor == Color8Bit(255, 255, 0, 0) && IsCrouching)
+	{
+		JumpVector = FVector::Zero;
+	}
+	else if (GroundCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
+	{
+		JumpVector = FVector::Zero;
+	}
+	else if (IsCrouching)
+	{
+		JumpVector = FVector::Down * 10000.f * _DeltaTime;
 	}
 	else
 	{
-		JumpVector = FVector::Zero;
+		JumpVector += GravityVector * _DeltaTime;
 	}
 	AddActorLocation(JumpVector * _DeltaTime);
 }
 
 void Marco::InAirCheck(float _DeltaTime)
 {
+	Color8Bit CrouchColor = UContentsHelper::CrouchColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY()+3, Color8Bit::MagentaA);
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY()+3, Color8Bit::MagentaA);
 	GroundCheckCol->SetPosition({ 0,3 });
 	std::vector<UCollision*> Result;
-	if (Color == Color8Bit(255, 0, 255, 0) || GroundCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
+	if (Color == Color8Bit(255, 0, 255, 0))
+	{
+		AccInAir = 0.0f;
+		InAir = false;
+	}
+	else if (CrouchColor == Color8Bit(255, 255, 0, 0))
+	{
+		AccInAir = 0.0f;
+		InAir = false;
+	}
+	else if (GroundCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
 	{
 		AccInAir = 0.0f;
 		InAir = false;
@@ -267,15 +292,15 @@ void Marco::ManipulateUpdate(float _DeltaTime)
 	switch (DirState)
 	{
 	case EActorDir::Left:
-		CheckPos.X -= 30;
+		CheckPos.X -= 20;
 		break;
 	case EActorDir::Right:
-		CheckPos.X += 30;
+		CheckPos.X += 20;
 		break;
 	default:
 		break;
 	}
-	CheckPos.Y -= 60;
+	CheckPos.Y -= 20;
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(CheckPos.iX(), CheckPos.iY(), Color8Bit::MagentaA);
 
 	if (Color == Color8Bit(255, 0, 255, 0))
@@ -1019,7 +1044,8 @@ void Marco::UpperIdle(float _DeltaTime)
 			)
 		{
 			std::vector<UCollision*> Result;
-			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+				|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 			{
 				int random = rand() % 2;
 				if (random == 0)
@@ -1102,7 +1128,8 @@ void Marco::UpperMove(float _DeltaTime)
 			)
 		{
 			std::vector<UCollision*> Result;
-			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+				|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 			{
 				int random = rand() % 2;
 				if (random == 0)
@@ -1158,7 +1185,8 @@ void Marco::UpperJump(float _DeltaTime)
 			)
 		{
 			std::vector<UCollision*> Result;
-			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+				|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 			{
 				int random = rand() % 2;
 				if (random == 0)
@@ -1222,7 +1250,8 @@ void Marco::UpperForwardJump(float _DeltaTime)
 			)
 		{
 			std::vector<UCollision*> Result;
-			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+				|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 			{
 				int random = rand() % 2;
 				if (random == 0)
@@ -1307,7 +1336,8 @@ void Marco::UpperShoot(float _DeltaTime)
 				)
 			{
 				std::vector<UCollision*> Result;
-				if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+				if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+					|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 				{
 					int random = rand() % 2;
 					if (random == 0)
@@ -1387,7 +1417,8 @@ void Marco::UpperShoot(float _DeltaTime)
 				{
 					*AccTime = 0.0f;
 					std::vector<UCollision*> Result;
-					if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+					if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+						|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 					{
 						int random = rand() % 2;
 						if (random == 0)
@@ -1449,7 +1480,8 @@ void Marco::UpperShoot(float _DeltaTime)
 				{
 					*AccTime = 0.0f;
 					std::vector<UCollision*> Result;
-					if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+					if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+						|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 					{
 						int random = rand() % 2;
 						if (random == 0)
@@ -1525,7 +1557,8 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 			if (CurFrame >= 3)
 			{
 				std::vector<UCollision*> Result;
-				if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+				if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+					|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 				{
 					int random = rand() % 2;
 					if (random == 0)
@@ -1601,7 +1634,8 @@ void Marco::UpperForwardJumpShoot(float _DeltaTime)
 				{
 					*AccTime = 0.0f;
 					std::vector<UCollision*> Result;
-					if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+					if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+						|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 					{
 						int random = rand() % 2;
 						if (random == 0)
@@ -2515,6 +2549,12 @@ void Marco::UpperKnifeAttack1Start()
 		}
 	}
 
+	if (KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
+	{
+		APOWs* Pow = dynamic_cast<APOWs*>(Result[0]->GetOwner());
+		Pow->StateChange(POWsState::Liberate);
+	}
+
 	CurUpperBodyName = "UpperBody_KnifeAttack1";
 	UpperStart();
 }
@@ -2529,6 +2569,12 @@ void Marco::UpperKnifeAttack2Start()
 			AEnemy* Enemy = dynamic_cast<AEnemy*>(EnemyCol->GetOwner());
 			Enemy->Damaged(KnifeDamage);
 		}
+	}
+
+	if (KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
+	{
+		APOWs* Pow = dynamic_cast<APOWs*>(Result[0]->GetOwner());
+		Pow->StateChange(POWsState::Liberate);
 	}
 	CurUpperBodyName = "UpperBody_KnifeAttack2";
 	UpperStart();
@@ -2943,7 +2989,8 @@ void Marco::AllCrouch_Idle(float _DeltaTime)
 		)
 	{
 		std::vector<UCollision*> Result;
-		if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+		if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+			|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 		{
 			int random = rand() % 2;
 			if (random == 0)
@@ -3020,7 +3067,8 @@ void Marco::AllCrouch_Move(float _DeltaTime)
 		)
 	{
 		std::vector<UCollision*> Result;
-		if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+		if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+			|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 		{
 			int random = rand() % 2;
 			if (random == 0)
@@ -3080,7 +3128,8 @@ void Marco::AllCrouch_Shoot(float _DeltaTime)
 		{
 			*AccTime = 0.0f;
 			std::vector<UCollision*> Result;
-			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+				|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 			{
 				int random = rand() % 2;
 				if (random == 0)
@@ -3167,7 +3216,8 @@ void Marco::AllCrouch_HeavyMachineGun_Shoot(float _DeltaTime)
 		{
 			HeavyMachineGun_PrevFrame = -1;
 			std::vector<UCollision*> Result;
-			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
+			if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+				|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
 			{
 				int random = rand() % 2;
 				if (random == 0)
@@ -3367,6 +3417,7 @@ void Marco::AllNoneStart()
 void Marco::AllCrouch_IntroStart()
 {
 	Move_Speed = Crouch_Speed;
+	IsCrouching = true;
 	Collision->SetScale(CrouchCollisionScale);
 	Collision->SetPosition(CrouchCollisionPosition);
 	KnifeReach->SetScale(CrouchKnifeReachCollisionScale);
@@ -3385,6 +3436,7 @@ void Marco::AllCrouch_IntroStart()
 void Marco::AllCrouch_OutroStart()
 {
 	Move_Speed = Run_Speed;
+	IsCrouching = false;
 	Collision->SetScale(DefaultCollisionScale);
 	Collision->SetPosition(DefaultCollisionPosition);
 	KnifeReach->SetScale(KnifeReachCollisionScale);
@@ -3493,6 +3545,12 @@ void Marco::AllCrouch_KnifeAttack1Start()
 			Enemy->Damaged(KnifeDamage);
 		}
 	}
+
+	if (KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
+	{
+		APOWs* Pow = dynamic_cast<APOWs*>(Result[0]->GetOwner());
+		Pow->StateChange(POWsState::Liberate);
+	}
 	CrouchShooting = true;
 	CurAllBodyName = "AllBody_Crouch_KnifeAttack1";
 	AllStart();
@@ -3508,6 +3566,11 @@ void Marco::AllCrouch_KnifeAttack2Start()
 			AEnemy* Enemy = dynamic_cast<AEnemy*>(EnemyCol->GetOwner());
 			Enemy->Damaged(KnifeDamage);
 		}
+	}
+	if (KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
+	{
+		APOWs* Pow = dynamic_cast<APOWs*>(Result[0]->GetOwner());
+		Pow->StateChange(POWsState::Liberate);
 	}
 	CrouchShooting = true;
 	CurAllBodyName = "AllBody_Crouch_KnifeAttack2";
@@ -4338,9 +4401,18 @@ void Marco::CalGravityVector(float _DeltaTime)
 {
 	GravityVector += Gravity * _DeltaTime;
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
+	Color8Bit CrouchColor = UContentsHelper::CrouchColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 	GroundCheckCol->SetPosition({ 0,0 });
 	std::vector<UCollision*> Result;
-	if (Color == Color8Bit(255, 0, 255, 0) || GroundCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
+	if (Color == Color8Bit(255, 0, 255, 0) && !IsCrouching)
+	{
+		GravityVector = FVector::Zero;
+	}
+	else if (CrouchColor == Color8Bit(255, 255, 0, 0) && IsCrouching)
+	{
+		GravityVector = FVector::Zero;
+	}
+	else if (GroundCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
 	{
 		GravityVector = FVector::Zero;
 	}
@@ -4350,10 +4422,19 @@ void Marco::GroundUp()
 {
 	while (true)
 	{
-		Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY()-15, Color8Bit::MagentaA);
-		GroundCheckCol->SetPosition({ 0,-15 });
+		Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY()-3, Color8Bit::MagentaA);
+		Color8Bit CrouchColor = UContentsHelper::CrouchColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY() - 3, Color8Bit::MagentaA);
+		GroundCheckCol->SetPosition({ 0,-3 });
 		std::vector<UCollision*> Result;
-		if (Color == Color8Bit(255, 0, 255, 0) || GroundCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
+		if (Color == Color8Bit(255, 0, 255, 0) && !IsCrouching )
+		{
+			AddActorLocation(FVector::Up);
+		}
+		else if (CrouchColor == Color8Bit(255, 255, 0, 0) && IsCrouching)
+		{
+			AddActorLocation(FVector::Up);
+		}
+		else if (GroundCheckCol->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
 		{
 			AddActorLocation(FVector::Up);
 		}

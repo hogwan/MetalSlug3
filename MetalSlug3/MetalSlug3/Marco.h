@@ -241,9 +241,10 @@ private:
 
 	bool InAir = false;
 	bool IsHeavyMachineGun = false;
+	bool IsCrouching = false;
 	bool CrouchShooting = false;
 	bool Manipulate = true;
-	bool NoHit = false;
+	bool NoHit = true;
 
 	inline void ManipulateOn()
 	{

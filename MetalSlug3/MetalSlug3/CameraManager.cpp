@@ -62,6 +62,11 @@ void CameraManager::CameraUpdate(float _DeltaTime)
 	break;
 	case 2:
 	{
+		if (CameraPos.X + 800.0f > 3720.0f)
+		{
+			return;
+		}
+
 		if (XGap > 300.0f)
 		{
 			CameraSpeed = XGap - 180.0f;
