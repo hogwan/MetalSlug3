@@ -31,9 +31,10 @@ public:
 	int BombsCount = 10;
 	int RemainBomb = 2;
 
-	EGunType GunType = EGunType::Rifle;
-	EGunList Gun = EGunList::HeavyMachineGun;
+	EGunType GunType = EGunType::Pistol;
+	EGunList Gun = EGunList::Pistol;
 	EActorDir DirState = EActorDir::Right;
+	void ZombieToHuman();
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -267,7 +268,7 @@ private:
 	float ForwardJump_Speed = 200.0f;
 	float Crouch_Speed = 50.0f;
 	float Zombie_Speed = 75.0f;
-
+	
 	float Pistol_Shoot_CoolTime = 0.1f;
 	float Pistol_Shoot_AccTime = 0.0f;
 

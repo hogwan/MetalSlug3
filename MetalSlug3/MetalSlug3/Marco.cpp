@@ -193,6 +193,19 @@ void Marco::InAirCheck(float _DeltaTime)
 
 void Marco::DeathCheck()
 {
+	if(true == UEngineInput::IsDown('Q'))
+	{
+		IsZombie = true;
+		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+		Collision->SetScale(DefaultCollisionScale);
+		Collision->SetPosition(DefaultCollisionPosition);
+		AllStateChange(AllBodyState::TransformToZombie_Intro);
+		return;
+	}
+
+
 	if (NoHit) return;
 
 	std::vector<UCollision*> Result;
@@ -223,7 +236,6 @@ void Marco::DeathCheck()
 		//if(좀비 DNA 피격 시)
 		if (
 			true == Collision->CollisionCheck(MT3CollisionOrder::ZombieProjectile, Result)
-			|| true == UEngineInput::IsDown('Q')
 			)
 		{
 			IsZombie = true;
@@ -4443,6 +4455,19 @@ void Marco::GroundUp()
 			break;
 		}
 	}
+}
+
+void Marco::ZombieToHuman()
+{
+	IsZombie = false;
+	Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
+	Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
+	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
+	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
+	UpperStateChange(UpperBodyState::None);
+	LowerStateChange(LowerBodyState::None);
+	AllStateChange(AllBodyState::None);
+	Move_Speed = Run_Speed;
 }
 
 void Marco::CameraUpdate(float _DeltaTime)

@@ -32,6 +32,7 @@ enum MT3RenderOrder
 	ZombieArm,
 	AllBody,
 	MonoEye_Front,
+	Item,
 	Particle,
 	Front,
 	UI,
@@ -54,6 +55,7 @@ enum class MT3CollisionOrder
 	Monoliths,
 	Boss,
 	TiedNPC,
+	Item,
 };
 
 enum class EActorDir

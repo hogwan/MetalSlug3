@@ -122,6 +122,10 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("Rubble.png", 10, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("Monoliths.png", 10, 4);
 
+	UEngineResourcesManager::GetInst().CuttingImage("BombBox.png", 10, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("ThunderCloud.png", 10, 2);
+	UEngineResourcesManager::GetInst().CuttingImage("Medicine.png", 10, 4);
+
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 	SpawnActor<SpawnManager>();
 	

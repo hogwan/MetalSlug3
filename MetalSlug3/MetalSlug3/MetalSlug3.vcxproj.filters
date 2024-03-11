@@ -28,9 +28,6 @@
     <ClInclude Include="ContentsHelper.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="BackGroundMap.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="TestLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -82,7 +79,6 @@
     <ClInclude Include="Go.h">
       <Filter>Object\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ScreenCollision.h" />
     <ClInclude Include="Time.h">
       <Filter>Object\UI</Filter>
     </ClInclude>
@@ -116,11 +112,9 @@
     <ClInclude Include="Uncle.h">
       <Filter>Object\NPC</Filter>
     </ClInclude>
-    <ClInclude Include="CameraModeSwitch.h" />
     <ClInclude Include="SpawnManager.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Soldier.h">
       <Filter>Object\Enemy\Solider</Filter>
     </ClInclude>
@@ -160,7 +154,6 @@
     <ClInclude Include="BombExplosionEffect.h">
       <Filter>Object\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="MT3Object.h" />
     <ClInclude Include="SoldierZombie.h">
       <Filter>Object\Enemy\Zombies</Filter>
     </ClInclude>
@@ -218,6 +211,45 @@
     <ClInclude Include="CEO.h">
       <Filter>Object\NPC</Filter>
     </ClInclude>
+    <ClInclude Include="BackGroundMap.h">
+      <Filter>Object\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MT3Object.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraModeSwitch.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenCollision.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="HeavyMachineGun.h">
+      <Filter>Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="RocketLauncher.h">
+      <Filter>Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="FlameShot.h">
+      <Filter>Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Medicine.h">
+      <Filter>Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BombBox.h">
+      <Filter>Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ThunderCloud.h">
+      <Filter>Object\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="CEOsecretary.h">
+      <Filter>Object\NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -242,9 +274,6 @@
       <Filter>Object\CharacterSelect</Filter>
     </ClCompile>
     <ClCompile Include="ContentsHelper.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="BackGroundMap.cpp">
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="TestLevel.cpp">
@@ -298,7 +327,6 @@
     <ClCompile Include="Go.cpp">
       <Filter>Object\UI</Filter>
     </ClCompile>
-    <ClCompile Include="ScreenCollision.cpp" />
     <ClCompile Include="Time.cpp">
       <Filter>Object\UI</Filter>
     </ClCompile>
@@ -332,11 +360,9 @@
     <ClCompile Include="Uncle.cpp">
       <Filter>Object\NPC</Filter>
     </ClCompile>
-    <ClCompile Include="CameraModeSwitch.cpp" />
     <ClCompile Include="SpawnManager.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Soldier.cpp">
       <Filter>Object\Enemy\Solider</Filter>
     </ClCompile>
@@ -376,7 +402,6 @@
     <ClCompile Include="BombExplosionEffect.cpp">
       <Filter>Object\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="MT3Object.cpp" />
     <ClCompile Include="SoldierZombie.cpp">
       <Filter>Object\Enemy\Zombies</Filter>
     </ClCompile>
@@ -432,6 +457,45 @@
       <Filter>Object\NPC</Filter>
     </ClCompile>
     <ClCompile Include="CEO.cpp">
+      <Filter>Object\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGroundMap.cpp">
+      <Filter>Object\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MT3Object.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraModeSwitch.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenCollision.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="HeavyMachineGun.cpp">
+      <Filter>Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="RocketLauncher.cpp">
+      <Filter>Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="FlameShot.cpp">
+      <Filter>Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Medicine.cpp">
+      <Filter>Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BombBox.cpp">
+      <Filter>Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ThunderCloud.cpp">
+      <Filter>Object\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="CEOsecretary.cpp">
       <Filter>Object\NPC</Filter>
     </ClCompile>
   </ItemGroup>
@@ -495,6 +559,9 @@
     </Filter>
     <Filter Include="Object\Enemy\Boss\Phase2">
       <UniqueIdentifier>{6444869a-5e48-481a-b637-7a5f7b35e392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Items">
+      <UniqueIdentifier>{b078bb4a-8eef-4b59-ad3f-2b5a43c319d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -38,6 +38,12 @@
 #include "VomitLauncher.h"
 #include "POWs.h"
 #include "CEO.h"
+#include "HeavyMachineGun.h"
+#include "RocketLauncher.h"
+#include "FlameShot.h"
+#include "Medicine.h"
+#include "BombBox.h"
+#include "ThunderCloud.h"
 
 SpawnManager::SpawnManager()
 {
@@ -891,7 +897,21 @@ void SpawnManager::Tick(float _DeltaTime)
 
 void SpawnManager::TestSpawn()
 {
-	/*POWs* POW = GetWorld()->SpawnActor<POWs>();
-	POW->SetActorLocation({ 500,900 });
-	POW->SetInitialPos({ 500,900 });*/
+	AItem* HMG = GetWorld()->SpawnActor<HeavyMachineGun>();
+	HMG->SetActorLocation({ 500,900 });
+
+	AItem* RL = GetWorld()->SpawnActor<RocketLauncher>();
+	RL->SetActorLocation({ 600,900 });
+
+	AItem* FS= GetWorld()->SpawnActor<FlameShot>();
+	FS->SetActorLocation({ 700,900 });
+
+	AItem* MC = GetWorld()->SpawnActor <Medicine> ();
+	MC->SetActorLocation({ 800,900 });
+
+	AItem* BB = GetWorld()->SpawnActor <BombBox>();
+	BB->SetActorLocation({ 900,900 });
+
+	AItem* TC = GetWorld()->SpawnActor <ThunderCloud>();
+	TC->SetActorLocation({ 1000,900 });
 }
