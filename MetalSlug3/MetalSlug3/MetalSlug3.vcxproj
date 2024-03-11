@@ -423,7 +423,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ThunderCloudEffect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ThunderCloudObj.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ThunderGround.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -738,7 +746,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="ThunderCloudEffect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ThunderCloudObj.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ThunderGround.cpp">
       <SubType>
       </SubType>
     </ClCompile>

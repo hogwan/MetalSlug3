@@ -136,6 +136,10 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("RocketLauncher_Up.png", 10, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("RocketLauncher_Down.png", 10, 1);
 
+	UEngineResourcesManager::GetInst().CuttingImage("ThunderCloudObj.png", 10, 4);
+	UEngineResourcesManager::GetInst().CuttingImage("ThunderCloudObjEffect.png", 10, 2);
+	UEngineResourcesManager::GetInst().CuttingImage("ThunderCloudObjLaunch.png", 10, 1);
+
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 	SpawnActor<SpawnManager>();
 	

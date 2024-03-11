@@ -22,7 +22,7 @@ void AExplosionEffect::BeginPlay()
 
 void AExplosionEffect::Tick(float _DeltaTime)
 {
-	AMT3Object::Tick(_DeltaTime);
+	AActor::Tick(_DeltaTime);
 	if (Renderer->IsCurAnimationEnd())
 	{
 		Destroy();

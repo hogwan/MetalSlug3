@@ -35,6 +35,11 @@ public:
 	EGunList Gun = EGunList::Pistol;
 	EActorDir DirState = EActorDir::Right;
 	void ZombieToHuman();
+
+	void UpperStateChange(UpperBodyState _State);
+	void LowerStateChange(LowerBodyState _State);
+	void AllStateChange(AllBodyState _AllState);
+	void ZombieArmStateChange(ZombieArmState _State);
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -66,10 +71,6 @@ protected:
 	void AllBodyStateUpdate(float _DeltaTime);
 	void ZombieArmStateUpdate(float _DeltaTime);
 
-	void UpperStateChange(UpperBodyState _State);
-	void LowerStateChange(LowerBodyState _State);
-	void AllStateChange(AllBodyState _AllState);
-	void ZombieArmStateChange(ZombieArmState _State);
 
 	void UpperNone(float _DeltaTime);
 	void UpperIdle(float _DeltaTime);

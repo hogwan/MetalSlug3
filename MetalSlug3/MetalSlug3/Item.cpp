@@ -1,5 +1,6 @@
 #include "Item.h"
 #include "ContentsHelper.h"
+#include "Marco.h"
 
 AItem::AItem()
 {
@@ -35,6 +36,12 @@ void AItem::Tick(float _DeltaTime)
 
 void AItem::Action()
 {
+	if (!UContentsHelper::Player->IsZombie)
+	{
+		UContentsHelper::Player->UpperStateChange(UpperBodyState::None);
+		UContentsHelper::Player->LowerStateChange(LowerBodyState::None);
+		UContentsHelper::Player->AllStateChange(AllBodyState::None);
+	}
 }
 
 void AItem::GravityCheck(float _DeltaTime)

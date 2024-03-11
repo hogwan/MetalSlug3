@@ -1,6 +1,7 @@
 #include "ThunderCloud.h"
 #include "ContentsHelper.h"
 #include "Marco.h"
+#include "ThunderCloudObj.h"
 
 ThunderCloud::ThunderCloud()
 {
@@ -27,7 +28,8 @@ void ThunderCloud::Action()
 	AItem:: Action();
 	if (!UContentsHelper::Player->IsZombie)
 	{
-		
+		ThunderCloudObj* TCO = GetWorld()->SpawnActor<ThunderCloudObj>();
+		TCO->SetActorLocation(GetActorLocation());
 	}
 
 	Destroy();

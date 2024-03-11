@@ -898,7 +898,7 @@ void SpawnManager::Tick(float _DeltaTime)
 
 void SpawnManager::TestSpawn()
 {
-	AItem* HMG = GetWorld()->SpawnActor<HeavyMachineGun>();
+	/*AItem* HMG = GetWorld()->SpawnActor<HeavyMachineGun>();
 	HMG->SetActorLocation({ 500,900 });
 
 	AItem* RL = GetWorld()->SpawnActor<RocketLauncher>();
@@ -914,5 +914,5 @@ void SpawnManager::TestSpawn()
 	BB->SetActorLocation({ 900,900 });
 
 	AItem* TC = GetWorld()->SpawnActor <ThunderCloud>();
-	TC->SetActorLocation({ 1000,900 });
+	TC->SetActorLocation({ 1000,900 });*/
 }

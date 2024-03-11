@@ -259,6 +259,12 @@
     <ClInclude Include="RocketLauncherBullet.h">
       <Filter>Object\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="ThunderGround.h">
+      <Filter>Object\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="ThunderCloudEffect.h">
+      <Filter>Object\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -514,6 +520,12 @@
       <Filter>Object\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="RocketLauncherBullet.cpp">
+      <Filter>Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="ThunderGround.cpp">
+      <Filter>Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="ThunderCloudEffect.cpp">
       <Filter>Object\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
