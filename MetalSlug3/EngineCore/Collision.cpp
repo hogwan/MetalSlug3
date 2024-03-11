@@ -35,7 +35,7 @@ void UCollision::BeginPlay()
 }
 
 // true 충돌한 객체가 있다.
-bool UCollision::CollisionCheck(int _Order, std::vector<UCollision*>& _Result, FVector _NextPos = FVector::Zero)
+bool UCollision::CollisionCheck(int _Order, std::vector<UCollision*>& _Result, FVector _NextPos)
 {
 	if (false == IsActive())
 	{
