@@ -1,7 +1,8 @@
 #include "RocketLauncherBullet.h"
 #include "Enemy.h"
 #include "Monoliths.h"
-#include "ExplosionEffect.h"
+#include "HugeExplosionEffect.h"
+#include "RocketLauncher_LaunchEffect.h"
 
 RocketLauncherBullet::RocketLauncherBullet()
 {
@@ -32,6 +33,14 @@ void RocketLauncherBullet::Tick(float _DeltaTime)
 {
 	AMT3Object::Tick(_DeltaTime);
 
+	if (!Trigger)
+	{
+		RocketLauncher_LaunchEffect* Effect = GetWorld()->SpawnActor<RocketLauncher_LaunchEffect>();
+		Effect->SetActorLocation(GetActorLocation());
+		Trigger = true;
+	}
+
+
 	if (Dir.X > 0.f)
 	{
 		Renderer->ChangeAnimation("Right", false, 0, 0.08f);
@@ -59,7 +68,7 @@ void RocketLauncherBullet::Tick(float _DeltaTime)
 			AEnemy* Enemy = dynamic_cast<AEnemy*>(Result[0]->GetOwner());
 			Enemy->Damaged(Damage);
 
-			AExplosionEffect* Effect = GetWorld()->SpawnActor<AExplosionEffect>();
+			AExplosionEffect* Effect = GetWorld()->SpawnActor<AHugeExplosionEffect>();
 			Effect->SetActorLocation(GetActorLocation());
 
 			Destroy();

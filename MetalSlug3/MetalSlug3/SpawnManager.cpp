@@ -303,11 +303,13 @@ void SpawnManager::Tick(float _DeltaTime)
 		POW0->SetActorLocation({ 3500,1100 });
 		POW0->SetInitialPos({ 3500,1100 });
 		POW0->StateChange(POWsState::Tied);
+		POW0->SetItem(ItemReward::HeavyMachineGun);
 
 		APOWs* POW1 = GetWorld()->SpawnActor<APOWs>();
 		POW1->SetActorLocation({ 3650,1100 });
 		POW1->SetInitialPos({ 3650,1100 });
 		POW1->StateChange(POWsState::Tied);
+		POW1->SetItem(ItemReward::BombBox);
 
 		APOWs* CEO = GetWorld()->SpawnActor<ACEO>();
 		CEO->SetActorLocation({ 3600,1100 });
@@ -898,11 +900,11 @@ void SpawnManager::Tick(float _DeltaTime)
 
 void SpawnManager::TestSpawn()
 {
+	AItem* RL = GetWorld()->SpawnActor<RocketLauncher>();
+	RL->SetActorLocation({ 600,900 });
 	/*AItem* HMG = GetWorld()->SpawnActor<HeavyMachineGun>();
 	HMG->SetActorLocation({ 500,900 });
 
-	AItem* RL = GetWorld()->SpawnActor<RocketLauncher>();
-	RL->SetActorLocation({ 600,900 });
 
 	AItem* FS= GetWorld()->SpawnActor<FlameShot>();
 	FS->SetActorLocation({ 700,900 });

@@ -72,6 +72,8 @@ void ACEO::Compensation(float _DeltaTime)
 	{
 		CEOsecretary* CEOsec = GetWorld()->SpawnActor<CEOsecretary>();
 		CEOsec->SetActorLocation({ GetActorLocation().X + 50.f, GetActorLocation().Y });
+
+		PrevFrame = CurFrame;
 	}
 
 	if (Renderer->IsCurAnimationEnd())

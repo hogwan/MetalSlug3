@@ -265,6 +265,9 @@
     <ClInclude Include="ThunderCloudEffect.h">
       <Filter>Object\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="RocketLauncher_LaunchEffect.h">
+      <Filter>Object\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -527,6 +530,9 @@
     </ClCompile>
     <ClCompile Include="ThunderCloudEffect.cpp">
       <Filter>Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="RocketLauncher_LaunchEffect.cpp">
+      <Filter>Object\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

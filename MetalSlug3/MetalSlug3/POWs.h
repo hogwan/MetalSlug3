@@ -9,6 +9,14 @@ enum class POWsState
 	Runaway,
 
 };
+
+enum class ItemReward
+{
+	HeavyMachineGun,
+	RocketLauncher,
+	FlameShot,
+	BombBox,
+};
 class APOWs : public AMT3Object
 {
 public:
@@ -27,6 +35,10 @@ public:
 	{
 		InitialPos = _Pos;
 	}
+	void SetItem(ItemReward _Reward)
+	{
+		Reward = _Reward;
+	}
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -44,6 +56,8 @@ protected:
 	virtual void PatrolStart();
 	virtual void CompensationStart();
 	virtual void RunAwayStart();
+
+	ItemReward Reward;
 
 	int CompensationFrame = 8;
 	int PrevFrame = -1;

@@ -28,6 +28,7 @@ void CEOsecretary::Tick(float _DeltaTime)
 		TC->SetActorLocation(GetActorLocation());
 
 		PrevFrame = CurFrame;
+
 	}
 
 	if (Renderer->IsCurAnimationEnd())

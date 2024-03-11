@@ -1,6 +1,7 @@
 #include "LeaderHelicopter.h"
 #include "HelicopterBullet.h"
 #include "ExplosionEffect.h"
+#include "FlameShot.h"
 
 std::list<AHelicopter*> ALeaderHelicopter::HeliList;
 
@@ -10,6 +11,8 @@ ALeaderHelicopter::ALeaderHelicopter()
 
 ALeaderHelicopter::~ALeaderHelicopter()
 {
+	FlameShot* FS = GetWorld()->SpawnActor<FlameShot>();
+	FS->SetActorLocation(GetActorLocation());
 	
 	std::list<AHelicopter*>::iterator iter = HeliList.begin();
 	for (int i = 1; iter != HeliList.end(); ++iter,++i)

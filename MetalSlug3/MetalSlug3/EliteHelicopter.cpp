@@ -3,12 +3,16 @@
 #include "Marco.h"
 #include "ContentsHelper.h"
 #include "HugeExplosionEffect.h"
+#include "RocketLauncher.h"
 AEliteHelicopter::AEliteHelicopter()
 {
 }
 
 AEliteHelicopter::~AEliteHelicopter()
 {
+	RocketLauncher* RL = GetWorld()->SpawnActor<RocketLauncher>();
+	RL->SetActorLocation(GetActorLocation());
+
 	AHugeExplosionEffect* Effect = GetWorld()->SpawnActor<AHugeExplosionEffect>();
 	Effect->SetActorLocation(GetActorLocation());
 }

@@ -135,6 +135,8 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("RocketLauncher_Left.png", 10, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("RocketLauncher_Up.png", 10, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("RocketLauncher_Down.png", 10, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("RocketLauncher_LaunchEffect_Right.png", 10, 2);
+	UEngineResourcesManager::GetInst().CuttingImage("RocketLauncher_LaunchEffect_Left.png", 10, 2);
 
 	UEngineResourcesManager::GetInst().CuttingImage("ThunderCloudObj.png", 10, 4);
 	UEngineResourcesManager::GetInst().CuttingImage("ThunderCloudObjEffect.png", 10, 2);

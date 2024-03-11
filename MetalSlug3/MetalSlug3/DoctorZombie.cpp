@@ -1,4 +1,5 @@
 #include "DoctorZombie.h"
+#include "Medicine.h"
 
 ADoctorZombie::ADoctorZombie()
 {
@@ -6,6 +7,8 @@ ADoctorZombie::ADoctorZombie()
 
 ADoctorZombie::~ADoctorZombie()
 {
+	Medicine* MC = GetWorld()->SpawnActor<Medicine>();
+	MC->SetActorLocation(GetActorLocation());
 }
 
 void ADoctorZombie::BeginPlay()

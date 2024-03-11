@@ -1,5 +1,9 @@
 #include "POWs.h"
 #include "ContentsHelper.h"
+#include "BombBox.h"
+#include "HeavyMachineGun.h"
+#include "RocketLauncher.h"
+#include "FlameShot.h"
 
 APOWs::APOWs()
 {
@@ -7,6 +11,7 @@ APOWs::APOWs()
 
 APOWs::~APOWs()
 {
+	
 }
 
 void APOWs::BeginPlay()
@@ -149,7 +154,37 @@ void APOWs::Compensation(float _DeltaTime)
 	int CurFrame = Renderer->GetCurAnimationFrame();
 	if (CurFrame != PrevFrame && CurFrame == CompensationFrame)
 	{
-		//아이템생성
+		switch (Reward)
+		{
+		case ItemReward::BombBox:
+		{
+			BombBox* BB = GetWorld()->SpawnActor<BombBox>();
+			BB->SetActorLocation({ GetActorLocation().X - 30, GetActorLocation().Y });
+			break;
+		}
+		case ItemReward::FlameShot:
+		{
+			FlameShot* FS = GetWorld()->SpawnActor<FlameShot>();
+			FS->SetActorLocation({ GetActorLocation().X - 30, GetActorLocation().Y });
+			break;
+		}
+		case ItemReward::RocketLauncher:
+		{
+			RocketLauncher* RL = GetWorld()->SpawnActor<RocketLauncher>();
+			RL->SetActorLocation({ GetActorLocation().X - 30, GetActorLocation().Y });
+			break;
+		}
+		case ItemReward::HeavyMachineGun:
+		{
+			HeavyMachineGun* HM = GetWorld()->SpawnActor<HeavyMachineGun>();
+			HM->SetActorLocation({ GetActorLocation().X - 30, GetActorLocation().Y });
+			break;
+		}
+		default:
+			break;
+		}
+
+		PrevFrame = CurFrame;
 	}
 
 	if (Renderer->IsCurAnimationEnd())
