@@ -56,6 +56,7 @@ enum class MT3CollisionOrder
 	Boss,
 	TiedNPC,
 	Item,
+	Flame,
 };
 
 enum class EActorDir

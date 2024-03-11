@@ -253,6 +253,9 @@
     <ClInclude Include="ThunderCloudObj.h">
       <Filter>Object\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="FlameShotBullet.h">
+      <Filter>Object\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -502,6 +505,9 @@
       <Filter>Object\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="ThunderCloudObj.cpp">
+      <Filter>Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="FlameShotBullet.cpp">
       <Filter>Object\Weapon</Filter>
     </ClCompile>
   </ItemGroup>

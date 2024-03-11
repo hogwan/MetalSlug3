@@ -152,3 +152,11 @@ void AManZombie3::Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFr
 		return;
 	}
 }
+
+void AManZombie3::DeathStart()
+{
+	CurAnimName = "Death";
+	Collider->ActiveOff();
+	DirCheck(CurAnimName);
+	Renderer->ChangeAnimation(CurAnimName);
+}

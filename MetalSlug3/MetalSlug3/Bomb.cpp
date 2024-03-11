@@ -21,7 +21,7 @@ void ABomb::BeginPlay()
 	AMT3Object::BeginPlay();
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
-	Collider = CreateCollision(MT3CollisionOrder::PlayerBullet);
+	Collider = CreateCollision(MT3CollisionOrder::Flame);
 	FVector MarcoSize = { 527.27273f, 527.27273f };
 	Renderer->SetImage("Bomb.png");
 	Renderer->SetTransform({ {0,0},MarcoSize });

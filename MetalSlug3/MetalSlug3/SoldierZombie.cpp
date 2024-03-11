@@ -161,6 +161,14 @@ void ASoldierZombie::AttackStart()
 	}
 }
 
+void ASoldierZombie::DeathStart()
+{
+	CurAnimName = "Death";
+	Collider->ActiveOff();
+	DirCheck(CurAnimName);
+	Renderer->ChangeAnimation(CurAnimName);
+}
+
 void ASoldierZombie::FallCheck()
 {
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);

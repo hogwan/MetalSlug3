@@ -126,6 +126,11 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("ThunderCloud.png", 10, 2);
 	UEngineResourcesManager::GetInst().CuttingImage("Medicine.png", 10, 4);
 
+	UEngineResourcesManager::GetInst().CuttingImage("FlameShot_Right.png", 10, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("FlameShot_Left.png", 10, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("FlameShot_Up.png", 10, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("FlameShot_Down.png", 10, 3);
+
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 	SpawnActor<SpawnManager>();
 	

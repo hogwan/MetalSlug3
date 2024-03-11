@@ -393,8 +393,17 @@ void AZombies::AttackStart()
 
 void AZombies::DeathStart()
 {
+	std::vector<UCollision*> Result;
+	if (Collider->CollisionCheck(MT3CollisionOrder::Flame, Result))
+	{
+		CurAnimName = "DeathInFlame";
+	}
+	else
+	{
+		CurAnimName = "Death";
+	}
+	
 	Collider->ActiveOff();
-	CurAnimName = "Death";
 	DirCheck(CurAnimName);
 	Renderer->ChangeAnimation(CurAnimName);
 }

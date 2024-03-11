@@ -13,6 +13,7 @@
 #include "Enemy.h"
 #include "VomitLauncher.h"
 #include "POWs.h"
+#include "FlameShotBullet.h"
 
 
 Marco::Marco()
@@ -2478,7 +2479,21 @@ void Marco::UpperShootStart()
 			BulletDir = FVector::Left;
 		}
 
-		ABullet* Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
+		ABullet* Bullet = nullptr;
+		switch (Gun)
+		{
+		case EGunList::Pistol:
+			Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
+			break;
+		case EGunList::FlameShot:
+			Bullet = GetWorld()->SpawnActor<AFlameShotBullet>(MT3RenderOrder::Projectile);
+			break;
+		/*case EGunList::RocketLauncher:
+			ABullet* Bullet = GetWorld()->SpawnActor<*/
+		default:
+			break;
+		}
+
 		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
 		Bullet->SetActorLocation(BulletLocation);
 		Bullet->SetDir(BulletDir);
