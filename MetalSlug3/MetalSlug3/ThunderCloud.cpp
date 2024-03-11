@@ -24,7 +24,7 @@ void ThunderCloud::Tick(float _DeltaTime)
 
 void ThunderCloud::Action()
 {
-	AItem:; Action();
+	AItem:: Action();
 	if (!UContentsHelper::Player->IsZombie)
 	{
 		

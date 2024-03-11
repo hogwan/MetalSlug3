@@ -44,6 +44,7 @@
 #include "Medicine.h"
 #include "BombBox.h"
 #include "ThunderCloud.h"
+#include "CEOsecretary.h"
 
 SpawnManager::SpawnManager()
 {

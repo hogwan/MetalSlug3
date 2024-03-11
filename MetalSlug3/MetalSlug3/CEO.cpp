@@ -1,5 +1,6 @@
 #include "CEO.h"
 #include "ContentsHelper.h"
+#include "CEOsecretary.h"
 
 ACEO::ACEO()
 {
@@ -12,6 +13,8 @@ ACEO::~ACEO()
 void ACEO::BeginPlay()
 {
 	AMT3Object::BeginPlay();
+
+	CompensationFrame = 40;
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ { 0,0 }, { 500,500 } });
@@ -67,7 +70,8 @@ void ACEO::Compensation(float _DeltaTime)
 	int CurFrame = Renderer->GetCurAnimationFrame();
 	if (CurFrame != PrevFrame && CurFrame == CompensationFrame)
 	{
-		//아이템생성
+		CEOsecretary* CEOsec = GetWorld()->SpawnActor<CEOsecretary>();
+		CEOsec->SetActorLocation({ GetActorLocation().X + 50.f, GetActorLocation().Y });
 	}
 
 	if (Renderer->IsCurAnimationEnd())
