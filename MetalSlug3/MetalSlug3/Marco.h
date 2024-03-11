@@ -54,6 +54,7 @@ protected:
 	void HeavyMachineGunCheckName(std::string& CurAnimName);
 	void GunTypeShootCheck();
 	void TriggerDirCheck(BodyRenderer _BodyRenderer, std::string _Name);
+	
 
 	UpperBodyState UpperState = UpperBodyState::Idle;
 	LowerBodyState LowerState = LowerBodyState::Idle;
@@ -238,6 +239,7 @@ private:
 	void ZombieArm_Syncro();
 	void CalGravityVector(float _DeltaTime);
 	void GroundUp();
+	void BulletSpawn(FVector _SpawnLocation, FVector _BulletDir);
 
 
 	bool InAir = false;

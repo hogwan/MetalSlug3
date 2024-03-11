@@ -256,6 +256,9 @@
     <ClInclude Include="FlameShotBullet.h">
       <Filter>Object\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="RocketLauncherBullet.h">
+      <Filter>Object\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -508,6 +511,9 @@
       <Filter>Object\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="FlameShotBullet.cpp">
+      <Filter>Object\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="RocketLauncherBullet.cpp">
       <Filter>Object\Weapon</Filter>
     </ClCompile>
   </ItemGroup>

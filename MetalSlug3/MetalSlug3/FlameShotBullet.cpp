@@ -24,7 +24,7 @@ void AFlameShotBullet::BeginPlay()
 	Collider = CreateCollision(MT3CollisionOrder::Flame);
 	Collider->SetTransform({ {0,0},{50,50} });
 
-	Speed = 200.0f;
+	Speed = 300.0f;
 }
 
 void AFlameShotBullet::Tick(float _DeltaTime)
@@ -33,18 +33,18 @@ void AFlameShotBullet::Tick(float _DeltaTime)
 
 	if (Dir.X > 0.f)
 	{
-		Renderer->ChangeAnimation("Right", false, 0, 0.08f);
+		Renderer->ChangeAnimation("Right", false, 0, 0.04f);
 	}
 	else if (Dir.X < 0.f)
 	{
-		Renderer->ChangeAnimation("Left", false, 0, 0.08f);
+		Renderer->ChangeAnimation("Left", false, 0, 0.04f);
 	}
 	else if (Dir.Y > 0)
 	{
-		Renderer->ChangeAnimation("Down", false, 0, 0.08f);
+		Renderer->ChangeAnimation("Down", false, 0, 0.04f);
 	}
 	else {
-		Renderer->ChangeAnimation("Up", false, 0, 0.08f);
+		Renderer->ChangeAnimation("Up", false, 0, 0.04f);
 	}
 
 	AddActorLocation(Dir * Speed * _DeltaTime);

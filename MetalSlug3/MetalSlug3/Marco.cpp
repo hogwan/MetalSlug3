@@ -14,6 +14,7 @@
 #include "VomitLauncher.h"
 #include "POWs.h"
 #include "FlameShotBullet.h"
+#include "RocketLauncherBullet.h"
 
 
 Marco::Marco()
@@ -2478,25 +2479,7 @@ void Marco::UpperShootStart()
 			BulletSpawnLocation += BulletSpawnOffset_Left;
 			BulletDir = FVector::Left;
 		}
-
-		ABullet* Bullet = nullptr;
-		switch (Gun)
-		{
-		case EGunList::Pistol:
-			Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
-			break;
-		case EGunList::FlameShot:
-			Bullet = GetWorld()->SpawnActor<AFlameShotBullet>(MT3RenderOrder::Projectile);
-			break;
-		/*case EGunList::RocketLauncher:
-			ABullet* Bullet = GetWorld()->SpawnActor<*/
-		default:
-			break;
-		}
-
-		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
-		Bullet->SetActorLocation(BulletLocation);
-		Bullet->SetDir(BulletDir);
+		BulletSpawn(BulletSpawnLocation, BulletDir);
 	}
 }
 
@@ -2524,10 +2507,7 @@ void Marco::UpperForwardJumpShootStart()
 			BulletDir = FVector::Left;
 		}
 
-		ABullet* Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
-		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
-		Bullet->SetActorLocation(BulletLocation);
-		Bullet->SetDir(BulletDir);
+		BulletSpawn(BulletSpawnLocation, BulletDir);
 	}
 }
 
@@ -2649,10 +2629,7 @@ void Marco::UpperAimUpShootStart()
 
 		BulletDir = FVector::Up;
 
-		ABullet* Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
-		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
-		Bullet->SetActorLocation(BulletLocation);
-		Bullet->SetDir(BulletDir);
+		BulletSpawn(BulletSpawnLocation, BulletDir);
 	}
 }
 
@@ -2692,10 +2669,7 @@ void Marco::UpperAimDownShootStart()
 
 		BulletDir = FVector::Down;
 
-		ABullet* Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
-		FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
-		Bullet->SetActorLocation(BulletLocation);
-		Bullet->SetDir(BulletDir);
+		BulletSpawn(BulletSpawnLocation, BulletDir);
 	}
 }
 
@@ -3514,10 +3488,7 @@ void Marco::AllCrouch_ShootStart()
 		BulletDir = FVector::Left;
 	}
 
-	ABullet* Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
-	FVector BulletLocation = GetActorLocation() + BulletSpawnLocation;
-	Bullet->SetActorLocation(BulletLocation);
-	Bullet->SetDir(BulletDir);
+	BulletSpawn(BulletSpawnLocation, BulletDir);
 }
 
 void Marco::AllCrouch_HeavyMachineGun_ShootStart()
@@ -4470,6 +4441,31 @@ void Marco::GroundUp()
 			break;
 		}
 	}
+}
+
+void Marco::BulletSpawn(FVector _SpawnLocation, FVector _BulletDir)
+{
+	ABullet* Bullet = nullptr;
+	switch (Gun)
+	{
+	case EGunList::Pistol:
+		Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
+		break;
+	case EGunList::FlameShot:
+		Bullet = GetWorld()->SpawnActor<AFlameShotBullet>(MT3RenderOrder::Projectile);
+		break;
+	case EGunList::RocketLauncher:
+		Bullet = GetWorld()->SpawnActor<RocketLauncherBullet>();
+		break;
+	default:
+		break;
+	}
+
+	FVector BulletLocation = GetActorLocation() + _SpawnLocation;
+	Bullet->SetActorLocation(BulletLocation);
+	Bullet->SetDir(_BulletDir);
+
+	--ArmsCount;
 }
 
 void Marco::ZombieToHuman()

@@ -131,6 +131,11 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("FlameShot_Up.png", 10, 3);
 	UEngineResourcesManager::GetInst().CuttingImage("FlameShot_Down.png", 10, 3);
 
+	UEngineResourcesManager::GetInst().CuttingImage("RocketLauncher_Right.png", 10, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("RocketLauncher_Left.png", 10, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("RocketLauncher_Up.png", 10, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("RocketLauncher_Down.png", 10, 1);
+
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 	SpawnActor<SpawnManager>();
 	

@@ -18,6 +18,6 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	float AccDamageTick = 0.0f;
-	float DamageTick = 0.05f;
+	float DamageTick = 0.03f;
 };
 
