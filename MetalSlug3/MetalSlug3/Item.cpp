@@ -20,6 +20,7 @@ void AItem::BeginPlay()
 	Collider->SetScale({ 50,50 });
 	Collider->SetPosition({ 0,-25 });
 	Collider->SetColType(ECollisionType::Rect);
+	Collider->ActiveOff();
 }
 
 void AItem::Tick(float _DeltaTime)
@@ -31,6 +32,12 @@ void AItem::Tick(float _DeltaTime)
 	if (Collider->CollisionCheck(MT3CollisionOrder::Player, Result))
 	{
 		Action();
+	}
+
+	AccActive += _DeltaTime;
+	if (AccActive > ActiveTime)
+	{
+		Collider->ActiveOn();
 	}
 }
 

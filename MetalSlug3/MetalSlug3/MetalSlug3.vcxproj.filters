@@ -280,6 +280,9 @@
     <ClInclude Include="DoorEffect.h">
       <Filter>Object\CharacterSelect</Filter>
     </ClInclude>
+    <ClInclude Include="Marco_Idle.h">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -556,6 +559,9 @@
       <Filter>Object\CharacterSelect</Filter>
     </ClCompile>
     <ClCompile Include="DoorEffect.cpp">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="Marco_Idle.cpp">
       <Filter>Object\CharacterSelect</Filter>
     </ClCompile>
   </ItemGroup>

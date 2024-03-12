@@ -21,6 +21,9 @@ protected:
 	UCollision* Collider = nullptr;
 	UImageRenderer* Renderer = nullptr;
 
+	float AccActive = 0.0f;
+	float ActiveTime = 0.8f;
+
 	virtual void Action();
 
 	void GravityCheck(float _DeltaTime);

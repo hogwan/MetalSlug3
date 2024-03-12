@@ -18,6 +18,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	UImageRenderer* Renderer = nullptr;
+	class Marco_Idle* MI = nullptr;
 
 	float Speed = 0.0f;
 	float Accel = 500.0f;

@@ -32,6 +32,7 @@ void CharacterSelect::BeginPlay()
 
 	UEngineResourcesManager::GetInst().CuttingImage("MarcoSelectedAnim.png", 2, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("DoorEffect.png", 10, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("Marco_Idle.png", 10, 1);
 
 	SpawnActor<Panel>();
 	SpawnActor<P1>();

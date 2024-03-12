@@ -15,6 +15,13 @@ public:
 
 private:
 	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+	float Acc = 0.0f;
+	float CoolTime = 0.2f;
+
+	int ColorNum = 0;
+
 	UImageRenderer* Renderer = nullptr;
 };
 
