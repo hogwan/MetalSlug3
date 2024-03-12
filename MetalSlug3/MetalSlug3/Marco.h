@@ -40,6 +40,16 @@ public:
 	void LowerStateChange(LowerBodyState _State);
 	void AllStateChange(AllBodyState _AllState);
 	void ZombieArmStateChange(ZombieArmState _State);
+
+	inline void ManipulateOn()
+	{
+		Manipulate = true;
+	}
+
+	inline void ManipulateOff()
+	{
+		Manipulate = false;
+	}
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -249,16 +259,6 @@ private:
 	bool CrouchShooting = false;
 	bool Manipulate = true;
 	bool NoHit = true;
-
-	inline void ManipulateOn()
-	{
-		Manipulate = true;
-	}
-
-	inline void ManipulateOff()
-	{
-		Manipulate = false;
-	}
 
 	float FreeMoveSpeed = 1000.0f;
 

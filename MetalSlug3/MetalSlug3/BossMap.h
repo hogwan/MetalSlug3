@@ -13,11 +13,14 @@ public:
 	ABossMap& operator=(const ABossMap& _Other) = delete;
 	ABossMap& operator=(ABossMap&& _Other) = delete;
 
+	static bool LoadComplete;
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 	UImageRenderer* Renderer = nullptr;
 	UImageRenderer* SphereRenderer = nullptr;
+
 };
 

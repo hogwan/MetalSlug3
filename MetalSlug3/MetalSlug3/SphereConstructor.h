@@ -13,16 +13,10 @@ public:
 	ASphereConstructor& operator=(const ASphereConstructor& _Other) = delete;
 	ASphereConstructor& operator=(ASphereConstructor&& _Other) = delete;
 
-	void SetOriginTargetVector(FVector _Origin, FVector _Target, bool _ClockDir)
+	void SetTarget(FVector _FirstTarget, FVector _SecondTarget)
 	{
-		OriginVector = _Origin;
-		TargetVector = _Target - OriginVector;
-
-		InitialVector = (GetActorLocation() - OriginVector).Normalize2DReturn();
-		LastVector = (GetActorLocation() - TargetVector).Normalize2DReturn();
-		MidVector = (InitialVector + LastVector).Normalize2DReturn();
-
-		ClockDir = _ClockDir;
+		FirstTarget = _FirstTarget;
+		SecondTarget = _SecondTarget;
 	}
 
 protected:
@@ -35,15 +29,11 @@ protected:
 	float AccSpawnTime = 0.0f;
 	float SpawnCoolTime = 0.2f;
 
-	FVector OriginVector = FVector::Zero;
-	FVector TargetVector = FVector::Zero;
+	FVector FirstTarget = FVector::Zero;
+	FVector SecondTarget = FVector::Zero;
 
-	FVector InitialVector = FVector::Zero;
-	FVector LastVector = FVector::Zero;
-	FVector MidVector = FVector::Zero;
+	bool FirstStep = false;
+	bool SecondStep = false;
 
-	bool ClockDir = false;
-
-	float AngleBetween(FVector _Initial, FVector _Last);
 };
 

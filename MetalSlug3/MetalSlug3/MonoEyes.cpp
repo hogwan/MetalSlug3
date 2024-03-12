@@ -1,6 +1,7 @@
 #include "MonoEyes.h"
 #include "Marco.h"
 #include "DeathBall.h"
+#include "MonoEyeCenter.h"
 
 AMonoEyes::AMonoEyes()
 {
@@ -16,6 +17,7 @@ void AMonoEyes::BeginPlay()
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ {0,0},{500,500} });
+	Renderer->SetImage("MonoEyes_Death.png");
 	Renderer->CreateAnimation("Death", "MonoEyes_Death.png", 0, 7, 0.08, false);
 
 	LaunchRenderer = CreateImageRenderer(MT3RenderOrder::Particle);
@@ -29,9 +31,6 @@ void AMonoEyes::BeginPlay()
 	Collider->SetPosition({ 0,-150 });
 	Collider->SetColType(ECollisionType::Rect);
 
-	SetActorLocation({ 14150,2050 });
-	InitialPosition = { 14150,2050 };
-
 	LaunchCoolTime = static_cast<float>(rand() % 20);
 }
 
@@ -39,29 +38,9 @@ void AMonoEyes::Tick(float _DeltaTime)
 {
 	AEnemy::Tick(_DeltaTime);
 
-	RotAngle += XRotSpeed * _DeltaTime;
-	VibAngle += YRotSpeed * _DeltaTime;
-	// -1 ~ 1
 	float CurY = sinf(RotAngle);
 	float CurX = cosf(RotAngle);
 	float Vibration = sinf(VibAngle);
-
-	FVector YPos = FVector::Up * Ratio.Y * CurY;
-	FVector XPos = FVector::Right * Ratio.X * CurX;
-	FVector Vib = FVector::Up * amplitude * Vibration;
-	
-	TargetPosition = InitialPosition + YPos + XPos + Vib;
-
-	FVector MoveVector = TargetPosition - GetActorLocation();
-	if (MoveVector.Size2D() > 5.0f)
-	{
-		MoveVector.Normalize2D();
-		AddActorLocation(MoveVector * Speed * _DeltaTime);
-	}
-	else
-	{
-		SetActorLocation(TargetPosition);
-	}
 
 	if (CurY > 0.4f)
 	{
@@ -77,7 +56,7 @@ void AMonoEyes::Tick(float _DeltaTime)
 
 		AttachName = "Mid_";
 	}
-	else if(CurY < -0.2f)
+	else if (CurY < -0.2f)
 	{
 		CurZPos = ZPos::Front;
 		Renderer->SetTransform({ {0,0},{500,500} });
@@ -86,6 +65,31 @@ void AMonoEyes::Tick(float _DeltaTime)
 	}
 
 	Idle(_DeltaTime);
+
+	if (!MoveStart) return;
+
+	RotAngle += XRotSpeed * _DeltaTime;
+	VibAngle += YRotSpeed * _DeltaTime;
+	// -1 ~ 1
+
+	FVector YPos = FVector::Up * Ratio.Y * CurY;
+	FVector XPos = FVector::Right * Ratio.X * CurX;
+	FVector Vib = FVector::Up * amplitude * Vibration;
+	
+	InitialPosition;
+
+	TargetPosition = InitialPosition + YPos + XPos + Vib;
+
+	FVector MoveVector = TargetPosition - GetActorLocation();
+	if (MoveVector.Size2D() > 5.0f)
+	{
+		MoveVector.Normalize2D();
+		AddActorLocation(MoveVector * Speed * _DeltaTime);
+	}
+	else
+	{
+		SetActorLocation(TargetPosition);
+	}
 
 
 	if (AccLaunch > LaunchCoolTime)

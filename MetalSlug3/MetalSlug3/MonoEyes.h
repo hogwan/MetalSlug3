@@ -49,6 +49,8 @@ public:
 		return IsMonoDeath;
 	}
 
+	bool MoveStart = false;
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

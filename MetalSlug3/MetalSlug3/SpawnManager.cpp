@@ -76,7 +76,7 @@ void SpawnManager::BeginPlay()
 	F2->SetActorLocation({ 4270,807 });
 
 	UContentsHelper::Player = GetWorld()->SpawnActor<Marco>();
-	UContentsHelper::Player->SetActorLocation({ 100,1000 });
+	UContentsHelper::Player->SetActorLocation({ 13000,2300 });
 
 	AGo* Go = GetWorld()->SpawnActor<AGo>();
 	Go->SetActorLocation({ 650,230 });
@@ -118,6 +118,8 @@ void SpawnManager::BeginPlay()
 
 	ACameraModeSwitch* CameraSwitch_7 = GetWorld()->SpawnActor<ACameraModeSwitch>();
 	CameraSwitch_7->SetActorLocation({ 13200,2370 });
+
+	MissionStart* MS = GetWorld()->SpawnActor<MissionStart>();
 
 	ADoctor* Doctor_0 = GetWorld()->SpawnActor<ADoctor>();
 	Doctor_0->SetActorLocation({ 300,1000 }); 
@@ -863,23 +865,43 @@ void SpawnManager::Tick(float _DeltaTime)
 		}
 	}
 
-	if (SpawnNumber == 31)
+	if (TargetPos > 14560.f && SpawnNumber == 31)
 	{
 
 		ABossMap* BossMap = GetWorld()->SpawnActor<ABossMap>();
 		BossMap->SetActorLocation({ 14168, 2127});
-
-		/*ASphereConstructor* SphereConstructor = GetWorld()->SpawnActor<ASphereConstructor>();
-		SphereConstructor->SetActorLocation({ 14150,2222 });
-		SphereConstructor->SetOriginTargetVector({ 14000,2222 }, { 14100,2100 }, false);*/
-
-		AMonoEyeCenter* mono = GetWorld()->SpawnActor<AMonoEyeCenter>();
-		mono->SetActorLocation({ 14150,2050 });
-
 		++SpawnNumber;
 	}
 
-	if (SpawnNumber == 32)
+	if (ABossMap::LoadComplete && SpawnNumber == 32)
+	{
+		if (!Trigger)
+		{
+			MC = GetWorld()->SpawnActor<AMonoEyeCenter>();
+			MC->SetActorLocation({ 14155,2230 });
+			Trigger = true;
+		}
+
+		if (MonoSpawnNum < 6)
+		{
+			AccTime += _DeltaTime;
+			if (AccTime > MonoEyeSpawnTime)
+			{
+				AccTime = 0.0f;
+				ASphereConstructor* SC = GetWorld()->SpawnActor<ASphereConstructor>();
+				SC->SetTarget(AMonoEyeCenter::MonoEyeFirstTargetPosInfo[MonoSpawnNum], AMonoEyeCenter::MonoEyeInitPosInfo[MonoSpawnNum]);
+				++MonoSpawnNum;
+			}
+		}
+		
+		if (AMonoEyeCenter::MonoEyes.size() == 6)
+		{
+			MC->PatternStart = true;
+			++SpawnNumber;
+		}
+	}
+
+	if (SpawnNumber == 33)
 	{
 		std::vector<UCollision*> Result;
 		if (
@@ -890,7 +912,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		}
 	}
 
-	if (SpawnNumber == 33)
+	if (SpawnNumber == 34)
 	{
 
 		AMonoEye_UFO* UFO = GetWorld()->SpawnActor<AMonoEye_UFO>();
@@ -901,23 +923,6 @@ void SpawnManager::Tick(float _DeltaTime)
 
 void SpawnManager::TestSpawn()
 {
-	AItem* RL = GetWorld()->SpawnActor<RocketLauncher>();
-	RL->SetActorLocation({ 600,900 });
-
-	MissionStart* MS = GetWorld()->SpawnActor<MissionStart>();
-	/*AItem* HMG = GetWorld()->SpawnActor<HeavyMachineGun>();
-	HMG->SetActorLocation({ 500,900 });
-
-
-	AItem* FS= GetWorld()->SpawnActor<FlameShot>();
-	FS->SetActorLocation({ 700,900 });
-
-	AItem* MC = GetWorld()->SpawnActor <Medicine> ();
-	MC->SetActorLocation({ 800,900 });
-
-	AItem* BB = GetWorld()->SpawnActor <BombBox>();
-	BB->SetActorLocation({ 900,900 });
-
-	AItem* TC = GetWorld()->SpawnActor <ThunderCloud>();
-	TC->SetActorLocation({ 1000,900 });*/
+	SpawnNumber = 30;
+	UContentsHelper::CameraManager->CameraMode = 11;
 }

@@ -1,5 +1,7 @@
 #include "SphereConstructor.h"
 #include "UnknownSphere.h"
+#include "MonoEyes.h"
+#include "MonoEyeCenter.h"
 
 ASphereConstructor::ASphereConstructor()
 {
@@ -11,20 +13,11 @@ ASphereConstructor::~ASphereConstructor()
 
 void ASphereConstructor::BeginPlay()
 {
-
+	SetActorLocation({ 14155,2270 });
 }
 
 void ASphereConstructor::Tick(float _DeltaTime)
 {
-
-	FVector CurPos = GetActorLocation();
-
-	float InitialToTargetAngle = AngleBetween(InitialVector,TargetVector);
-	float MidAngle = InitialToTargetAngle / 2;
-
-	FVector CurVector = CurPos - OriginVector;
-	float InitialToCurAngle = AngleBetween(InitialVector, CurVector);
-
 	AccSpawnTime += _DeltaTime;
 	if (AccSpawnTime > SpawnCoolTime)
 	{
@@ -33,44 +26,35 @@ void ASphereConstructor::Tick(float _DeltaTime)
 		Sphere->SetActorLocation(GetActorLocation());
 	}
 
-	if (InitialToCurAngle > InitialToTargetAngle)
+	if (FirstStep == false)
 	{
-		Speed = 0.f;
-		ClockDir = !ClockDir;
+		FVector Gap = FirstTarget - GetActorLocation();
+
+		if (Gap.Size2D() < 10.f)
+		{
+			FirstStep = true;
+		}
+
+		AddActorLocation(Gap * 2.0f * _DeltaTime);
 	}
 
-	if (InitialToCurAngle < MidAngle)
+	if (FirstStep == true && SecondStep == false)
 	{
-		Speed += Accel * _DeltaTime;
-	}
-	else
-	{
-		Speed -= Accel * _DeltaTime;
-	}
+		FVector Gap = SecondTarget - GetActorLocation();
 
-	if (ClockDir)
-	{
-		CurVector.RotationZToDeg(Speed);
-	}
-	else
-	{
-		CurVector.RotationZToDeg(-Speed);
-	}
+		if (Gap.Size2D() < 1.f)
+		{
+			AMonoEyes* mono = GetWorld()->SpawnActor<AMonoEyes>();
+			mono->SetActorLocation(GetActorLocation());
+			mono->SetRotAngle(AMonoEyeCenter::MonoEyeInitRotInfo[AMonoEyeCenter::MonoEyeSpawnCount]);
+			mono->SetVibAngle(AMonoEyeCenter::MonoEyeInitVibInfo[AMonoEyeCenter::MonoEyeSpawnCount]);
+			AMonoEyeCenter::MonoEyes.push_back(mono);
+			++AMonoEyeCenter::MonoEyeSpawnCount;
 
-	SetActorLocation(CurPos + CurVector);
+			Destroy();
+		}
+
+		AddActorLocation(Gap * 2.0f * _DeltaTime);
+	}
 }
 
-float ASphereConstructor::AngleBetween(FVector _Initial, FVector _Last)
-{
-	
-	float InnerProduct = (_Initial.X * _Last.X) + (_Initial.Y * _Last.Y);
-	float InitialVectorSize = _Initial.Size2D();
-	float LastVectorSize = _Last.Size2D();
-
-	float Data = InnerProduct / (InitialVectorSize * LastVectorSize);
-
-	float Angle = acosf(Data);
-
-	return Angle;
-	
-}

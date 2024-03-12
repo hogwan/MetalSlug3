@@ -1,6 +1,8 @@
 #include "BossMap.h"
 #include "ContentsHelper.h"
 
+bool ABossMap::LoadComplete = false;
+
 ABossMap::ABossMap()
 {
 }
@@ -27,4 +29,9 @@ void ABossMap::BeginPlay()
 void ABossMap::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
+
+	if (Renderer->IsCurAnimationEnd())
+	{
+		LoadComplete = true;
+	}
 }

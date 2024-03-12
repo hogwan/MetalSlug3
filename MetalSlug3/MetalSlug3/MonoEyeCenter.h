@@ -25,6 +25,15 @@ public:
 	AMonoEyeCenter& operator=(const AMonoEyeCenter& _Other) = delete;
 	AMonoEyeCenter& operator=(AMonoEyeCenter&& _Other) = delete;
 
+	static std::list<AMonoEyes*> MonoEyes;
+	static std::vector<FVector> MonoEyeInitPosInfo;
+	static std::vector<FVector> MonoEyeFirstTargetPosInfo;
+	static std::vector<float> MonoEyeInitRotInfo;
+	static std::vector<float> MonoEyeInitVibInfo;
+	static int MonoEyeSpawnCount;
+
+	bool PatternStart = false;
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -43,6 +52,7 @@ protected:
 	void Pattern2Start();
 
 	int turn = 0;
+	bool Trigger = false;
 
 	float AccPattern = 0.0f;
 	float PatternCoolTime = 3.0f;
@@ -52,6 +62,5 @@ protected:
 
 	FVector Center = { 14150,2050 };
 
-	std::list<AMonoEyes*> MonoEyes;
 };
 

@@ -1,6 +1,45 @@
 #include "MonoEyeCenter.h"
 #include "Marco.h"
 
+std::list<AMonoEyes*> AMonoEyeCenter::MonoEyes;
+std::vector<FVector> AMonoEyeCenter::MonoEyeInitPosInfo = {
+		FVector{14070,2100},
+		FVector{14230,2100},
+		FVector{14340,2100},
+		FVector{14230,2100},
+		FVector{14070,2100},
+		FVector{13950,2100}
+};
+
+std::vector<FVector> AMonoEyeCenter::MonoEyeFirstTargetPosInfo = {
+	FVector{13950,1920},
+	FVector{14400,1920},
+	FVector{14000,1920},
+	FVector{14440,1920},
+	FVector{14060,1920},
+	FVector{14130,1920}
+};
+
+std::vector<float> AMonoEyeCenter::MonoEyeInitRotInfo = {
+	(UEngineMath::PI / 3.0f) * 4.f,
+	(UEngineMath::PI / 3.0f) * 5.f,
+	(UEngineMath::PI / 3.0f) * 0.f,
+	(UEngineMath::PI / 3.0f) * 1.f,
+	(UEngineMath::PI / 3.0f) * 2.f,
+	(UEngineMath::PI / 3.0f) * 3.f
+};
+
+std::vector<float> AMonoEyeCenter::MonoEyeInitVibInfo = {
+	(UEngineMath::PI) * 0.f,
+	(UEngineMath::PI) * 1.f,
+	(UEngineMath::PI) * 2.f,
+	(UEngineMath::PI) * 3.f,
+	(UEngineMath::PI) * 4.f,
+	(UEngineMath::PI) * 5.f
+};
+
+int AMonoEyeCenter::MonoEyeSpawnCount = 0;
+
 AMonoEyeCenter::AMonoEyeCenter()
 {
 }
@@ -12,48 +51,6 @@ AMonoEyeCenter::~AMonoEyeCenter()
 void AMonoEyeCenter::BeginPlay()
 {
 	SetActorLocation(Center);
-
-	AMonoEyes* Mono0 = GetWorld()->SpawnActor<AMonoEyes>();
-	Mono0->SetActorLocation({ 14200,2100 });
-
-	AMonoEyes* Mono1 = GetWorld()->SpawnActor<AMonoEyes>();
-	Mono1->SetActorLocation({ 14100,2100 });
-
-	AMonoEyes* Mono2 = GetWorld()->SpawnActor<AMonoEyes>();
-	Mono2->SetActorLocation({ 14200,2100 });
-
-	AMonoEyes* Mono3 = GetWorld()->SpawnActor<AMonoEyes>();
-	Mono3->SetActorLocation({ 14300,2100 });
-
-	AMonoEyes* Mono4 = GetWorld()->SpawnActor<AMonoEyes>();
-	Mono4->SetActorLocation({ 14200,2100 });
-
-	AMonoEyes* Mono5 = GetWorld()->SpawnActor<AMonoEyes>();
-	Mono5->SetActorLocation({ 14100,2100 });
-
-
-	Mono0->SetRotAngle((UEngineMath::PI / 3.0f) * 0.f);
-	Mono1->SetRotAngle((UEngineMath::PI / 3.0f) * 1.f);
-	Mono2->SetRotAngle((UEngineMath::PI / 3.0f) * 2.f);
-	Mono3->SetRotAngle((UEngineMath::PI / 3.0f) * 3.f);
-	Mono4->SetRotAngle((UEngineMath::PI / 3.0f) * 4.f);
-	Mono5->SetRotAngle((UEngineMath::PI / 3.0f) * 5.f);
-
-	Mono0->SetVibAngle((UEngineMath::PI) * 0.f);
-	Mono1->SetVibAngle((UEngineMath::PI) * 1.f);
-	Mono2->SetVibAngle((UEngineMath::PI) * 2.f);
-	Mono3->SetVibAngle((UEngineMath::PI) * 3.f);
-	Mono4->SetVibAngle((UEngineMath::PI) * 4.f);
-	Mono5->SetVibAngle((UEngineMath::PI) * 5.f);
-
-	MonoEyes.push_back(Mono0);
-	MonoEyes.push_back(Mono1);
-	MonoEyes.push_back(Mono2);
-	MonoEyes.push_back(Mono3);
-	MonoEyes.push_back(Mono4);
-	MonoEyes.push_back(Mono5);
-
-	ChangePattern(MonoEyesPattern::Pattern0);
 }
 
 void AMonoEyeCenter::Tick(float _DeltaTime)
@@ -72,13 +69,29 @@ void AMonoEyeCenter::Tick(float _DeltaTime)
 		}
 	}
 
+	if (PatternStart && !Trigger)
+	{
+		for (AMonoEyes* mono : MonoEyes)
+		{
+			mono->MoveStart = true;
+		}
+
+		ChangePattern(MonoEyesPattern::Pattern0);
+		Trigger = true;
+	}
+
+
+
 	for (AMonoEyes* mono : MonoEyes)
 	{
 		mono->SetInitialPos(GetActorLocation());
 	}
 
-
-	PatternUpdate(_DeltaTime);
+	
+	if (PatternStart == true)
+	{
+		PatternUpdate(_DeltaTime);
+	}
 
 
 }
