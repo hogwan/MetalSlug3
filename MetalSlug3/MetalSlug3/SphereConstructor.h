@@ -27,7 +27,7 @@ protected:
 	float Accel = 100.0f;
 
 	float AccSpawnTime = 0.0f;
-	float SpawnCoolTime = 0.2f;
+	float SpawnCoolTime = 0.1f;
 
 	FVector FirstTarget = FVector::Zero;
 	FVector SecondTarget = FVector::Zero;

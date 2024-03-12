@@ -283,6 +283,9 @@
     <ClInclude Include="Marco_Idle.h">
       <Filter>Object\CharacterSelect</Filter>
     </ClInclude>
+    <ClInclude Include="Rubble.h">
+      <Filter>Object\Enemy\Boss\Phase2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -563,6 +566,9 @@
     </ClCompile>
     <ClCompile Include="Marco_Idle.cpp">
       <Filter>Object\CharacterSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="Rubble.cpp">
+      <Filter>Object\Enemy\Boss\Phase2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

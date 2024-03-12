@@ -1,5 +1,7 @@
 #include "MonoEye_UFO.h"
 #include "Laser.h"
+#include "Rubble.h"
+#include <EngineBase/EngineRandom.h>
 
 AMonoEye_UFO::AMonoEye_UFO()
 {
@@ -36,6 +38,24 @@ void AMonoEye_UFO::BeginPlay()
 	Collider = CreateCollision(MT3CollisionOrder::Boss);
 	Collider->SetTransform({ {0,-100},{300,200} });
 	Collider->SetColType(ECollisionType::Rect);
+
+	Hp = 100;
+
+	for (int i = 0; i < 30; i++)
+	{
+		Rubble* Rub = GetWorld()->SpawnActor<Rubble>();
+		Rub->SetActorLocation(GetActorLocation());
+
+		FVector DirVector = FVector::Right;
+		int DirRandom = -(UEngineRandom::MainRandom.RandomInt(30, 150));
+		int ForceRandom = UEngineRandom::MainRandom.RandomInt(100, 600);
+		int SizeRandom = UEngineRandom::MainRandom.RandomInt(500, 1500);
+		DirVector.RotationZToDeg(static_cast<float>(DirRandom));
+
+		Rub->SetVector(DirVector, ForceRandom);
+		Rub->GetRenderer()->SetScale({ SizeRandom, SizeRandom });
+	}
+
 }
 
 void AMonoEye_UFO::Tick(float _DeltaTime)
