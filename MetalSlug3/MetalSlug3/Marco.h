@@ -50,6 +50,17 @@ public:
 	{
 		Manipulate = false;
 	}
+
+	void AutoMoveOn()
+	{
+		IsAutoMove = true;
+	}
+
+	void AutoMoveOff()
+	{
+		IsAutoMove = false;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -375,5 +386,7 @@ private:
 	float AccInAir = 0.0f;
 	float InAirTime = 0.2f;
 
+	bool IsAutoMove = false;
+	void AutoMove(float _DeltaTime);
 };
 

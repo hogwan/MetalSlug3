@@ -22,6 +22,7 @@ protected:
 
 	float AccTime = 0.0f;
 	float MonoEyeSpawnTime = 1.0f;
+	float WaitTime = 2.0f;
 	int MonoSpawnNum = 0;
 
 	class AMonoEyeCenter* MC = nullptr;

@@ -94,6 +94,12 @@ void Marco::Tick(float _DeltaTime)
 {
 	CameraUpdate(_DeltaTime);
 
+	if (IsAutoMove)
+	{
+		AutoMove(_DeltaTime);
+		return;
+	}
+
 	if (Manipulate)
 	{
 		ManipulateUpdate(_DeltaTime);
@@ -104,8 +110,6 @@ void Marco::Tick(float _DeltaTime)
 	GroundUp();
 
 	DeathCheck();
-
-
 
 	AllBodyStateUpdate(_DeltaTime);
 	if (!IsZombie)
@@ -4490,5 +4494,49 @@ void Marco::CameraUpdate(float _DeltaTime)
 		Switch->Destroy();
 
 		++UContentsHelper::CameraManager->CameraMode;
+	}
+}
+
+void Marco::AutoMove(float _DeltaTime)
+{
+	float TargetX = 13900.f;
+
+	std::string GunName = "None";
+	switch (GunType)
+	{
+	case EGunType::Pistol:
+		GunName = "Pistol_";
+		break;
+	case EGunType::Rifle:
+		GunName = "Rifle_";
+		break;
+	}
+
+	if (GetActorLocation().X > TargetX)
+	{
+		DirState = EActorDir::Left;
+		AddActorLocation(FVector::Left * Run_Speed * _DeltaTime);
+		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
+		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
+		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
+		
+		std::string UpperAnimName = GunName + "UpperBody_Move_Left";
+		std::string LowerAnimName = "LowerBody_Move_Left";
+		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(UpperAnimName);
+		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(LowerAnimName);
+	}
+	else
+	{
+		DirState = EActorDir::Right;
+		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOn();
+		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOn();
+		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
+
+		std::string UpperAnimName = GunName + "UpperBody_Idle_Right";
+		std::string LowerAnimName = "LowerBody_Idle_Right";
+		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(UpperAnimName);
+		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(LowerAnimName);
 	}
 }

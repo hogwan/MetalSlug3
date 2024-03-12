@@ -18,6 +18,7 @@ void AMonoEyes::BeginPlay()
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ {0,0},{500,500} });
 	Renderer->SetImage("MonoEyes_Death.png");
+	Renderer->CreateAnimation("Spawn", "MonoEyes_Spawn.png", 0, 13, 0.05f, false);
 	Renderer->CreateAnimation("Death", "MonoEyes_Death.png", 0, 7, 0.08, false);
 
 	LaunchRenderer = CreateImageRenderer(MT3RenderOrder::Particle);
@@ -32,11 +33,24 @@ void AMonoEyes::BeginPlay()
 	Collider->SetColType(ECollisionType::Rect);
 
 	LaunchCoolTime = static_cast<float>(rand() % 20);
+
+	Renderer->ChangeAnimation("Spawn", false, 0, 0.08f);
 }
 
 void AMonoEyes::Tick(float _DeltaTime)
 {
 	AEnemy::Tick(_DeltaTime);
+
+	if (!IsSpawn)
+	{
+		if (Renderer->IsCurAnimationEnd())
+		{
+			IsSpawn = true;
+			Renderer->AnimationReset();
+		}
+
+		return;
+	}
 
 	float CurY = sinf(RotAngle);
 	float CurX = cosf(RotAngle);
@@ -116,11 +130,6 @@ void AMonoEyes::Tick(float _DeltaTime)
 	if (IsDeathStart)
 	{
 		Death(_DeltaTime);
-	}
-
-	if (IsSpawn)
-	{
-		Spawn(_DeltaTime);
 	}
 }
 void AMonoEyes::Spawn(float _DeltaTime)

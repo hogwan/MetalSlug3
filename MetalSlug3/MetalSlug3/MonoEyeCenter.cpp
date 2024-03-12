@@ -3,12 +3,12 @@
 
 std::list<AMonoEyes*> AMonoEyeCenter::MonoEyes;
 std::vector<FVector> AMonoEyeCenter::MonoEyeInitPosInfo = {
-		FVector{14070,2100},
-		FVector{14230,2100},
-		FVector{14340,2100},
-		FVector{14230,2100},
-		FVector{14070,2100},
-		FVector{13950,2100}
+		FVector{14070,2050},
+		FVector{14230,2050},
+		FVector{14340,2050},
+		FVector{14230,2050},
+		FVector{14070,2050},
+		FVector{13950,2050}
 };
 
 std::vector<FVector> AMonoEyeCenter::MonoEyeFirstTargetPosInfo = {

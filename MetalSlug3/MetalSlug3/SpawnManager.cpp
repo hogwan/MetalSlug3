@@ -879,6 +879,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		{
 			MC = GetWorld()->SpawnActor<AMonoEyeCenter>();
 			MC->SetActorLocation({ 14155,2230 });
+			UContentsHelper::Player->AutoMoveOn();
 			Trigger = true;
 		}
 
@@ -896,8 +897,14 @@ void SpawnManager::Tick(float _DeltaTime)
 		
 		if (AMonoEyeCenter::MonoEyes.size() == 6)
 		{
-			MC->PatternStart = true;
-			++SpawnNumber;
+			AccTime += _DeltaTime;
+			if (AccTime > WaitTime)
+			{
+				AccTime = 0.f;
+				MC->PatternStart = true; 
+				UContentsHelper::Player->AutoMoveOff();
+				++SpawnNumber;
+			}
 		}
 	}
 

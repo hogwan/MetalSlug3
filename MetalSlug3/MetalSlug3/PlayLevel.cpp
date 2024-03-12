@@ -113,6 +113,7 @@ void PlayLevel::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("DeathBall.png", 10, 1);;
 	UEngineResourcesManager::GetInst().CuttingImage("DeathBallExplosion.png", 10, 3);;
 	UEngineResourcesManager::GetInst().CuttingImage("MonoEyes_Death.png", 10, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("MonoEyes_Spawn.png", 10, 2);
 
 	UEngineResourcesManager::GetInst().CuttingImage("LazerAiming.png", 10, 1);
 	UEngineResourcesManager::GetInst().CuttingImage("LazerAiming_GroundEffect.png", 10, 1);
