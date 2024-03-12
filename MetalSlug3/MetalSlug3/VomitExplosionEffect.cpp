@@ -17,7 +17,7 @@ void AVomitExplosionEffect::BeginPlay()
 	Renderer = CreateImageRenderer(MT3RenderOrder::Particle);
 	Renderer->SetImage("VomitExplosion.png");
 	Renderer->SetTransform({ {0,0},Size });
-	Renderer->CreateAnimation("Explosion", "VomitExplosion.png", 0, 27, 0.03f);
+	Renderer->CreateAnimation("Explosion", "VomitExplosion.png", 0, 27, 0.03f,false);
 	Renderer->ChangeAnimation("Explosion", false, 0, 0.03f);
 }
 

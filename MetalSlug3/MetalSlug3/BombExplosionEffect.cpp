@@ -15,7 +15,7 @@ void ABombExplosionEffect::BeginPlay()
 	Renderer = CreateImageRenderer(MT3RenderOrder::Particle);
 	Renderer->SetImage("BombExplosion.png");
 	Renderer->SetTransform({ {0,0},Size });
-	Renderer->CreateAnimation("Explosion", "BombExplosion.png", 0, 25, 0.03f);
+	Renderer->CreateAnimation("Explosion", "BombExplosion.png", 0, 25, 0.03f,false);
 	Renderer->ChangeAnimation("Explosion", false, 0, 0.03f);
 }
 

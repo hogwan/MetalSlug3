@@ -19,13 +19,13 @@ void RocketLauncher_LaunchEffect::BeginPlay()
 
 	if (UContentsHelper::Player->DirState == EActorDir::Right)
 	{
-		Renderer->CreateAnimation("Effect", "RocketLauncher_LaunchEffect_Right.png", 0, 15, 0.03f);
+		Renderer->CreateAnimation("Effect", "RocketLauncher_LaunchEffect_Right.png", 0, 15, 0.03f,false);
 		Renderer->ChangeAnimation("Effect", false, 0, 0.03f);
 		Dir = FVector::Right;
 	}
 	else
 	{
-		Renderer->CreateAnimation("Effect", "RocketLauncher_LaunchEffect_Left.png", 0, 15, 0.03f);
+		Renderer->CreateAnimation("Effect", "RocketLauncher_LaunchEffect_Left.png", 0, 15, 0.03f,false);
 		Renderer->ChangeAnimation("Effect", false, 0, 0.03f);
 		Dir = FVector::Left;
 	}

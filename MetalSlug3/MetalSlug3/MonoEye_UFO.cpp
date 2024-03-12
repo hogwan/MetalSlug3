@@ -174,4 +174,5 @@ void AMonoEye_UFO::DestroyedStart()
 	BrokenBackBody->ActiveOn();
 	Collider->ActiveOff();
 	Renderer->ActiveOff();
+	AncientCharactor->ActiveOff();
 }
