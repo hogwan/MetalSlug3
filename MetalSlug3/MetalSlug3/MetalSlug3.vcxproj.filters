@@ -274,6 +274,12 @@
     <ClInclude Include="MissionStartChar.h">
       <Filter>Object\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorEffect.h">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -545,6 +551,12 @@
     </ClCompile>
     <ClCompile Include="MissionStartChar.cpp">
       <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Object\CharacterSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorEffect.cpp">
+      <Filter>Object\CharacterSelect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

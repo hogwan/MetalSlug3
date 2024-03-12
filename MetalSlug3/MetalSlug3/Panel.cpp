@@ -13,7 +13,7 @@ Panel::~Panel()
 
 void Panel::BeginPlay()
 {
-	ThisRenderer = CreateImageRenderer(0);
+	ThisRenderer = CreateImageRenderer(4);
 	ThisRenderer->SetImage("Panel.png");
 	ThisRenderer->SetTransform({ {0,0} , {800, 600} });
 	SetActorLocation({ 400.0f, 300.0f });

@@ -2,7 +2,7 @@
 #include <EngineCore\EngineCore.h>
 #include <EngineBase/EngineTime.h>
 #include <EnginePlatform/EngineInput.h>
-#include <EngineCore/ImageRenderer.h>
+#include "Door.h"
 
 MarcoPhoto::MarcoPhoto()
 {
@@ -14,7 +14,7 @@ MarcoPhoto::~MarcoPhoto()
 
 void MarcoPhoto::BeginPlay()
 {
-	ThisRenderer = CreateImageRenderer(5);
+	ThisRenderer = CreateImageRenderer(2);
 	ThisRenderer->SetImage("MarcoSelectedAnim.png");
 	ThisRenderer->SetTransform({ {0,0} , {170, 325} });
 	ThisRenderer->SetImageCuttingTransform({ {0,0}, {64, 120} });
@@ -41,6 +41,7 @@ void MarcoPhoto::Tick(float _DeltaTime)
 		if (true == UEngineInput::IsDown(VK_RETURN))
 		{
 			ThisRenderer->ChangeAnimation("Marco_Selected");
+			GetWorld()->SpawnActor<Door>();
 			isEntered = true;
 		}
 	}

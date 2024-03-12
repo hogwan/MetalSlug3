@@ -24,7 +24,7 @@ void MetalSlug3Core::BeginPlay()
 	CreateLevel<PlayLevel>("Play");
 	//CreateLevel<TestLevel>("Test");
 
-	ChangeLevel("Play");
+	ChangeLevel("CharacterSelect");
 	
 }
 

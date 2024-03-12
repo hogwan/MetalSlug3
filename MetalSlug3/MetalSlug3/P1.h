@@ -12,9 +12,9 @@ public:
 	P1(P1&& _Other) noexcept = delete;
 	P1& operator=(const P1& _Other) = delete;
 	P1& operator=(P1&& _Other) = delete;
-	void BeginPlay() override;
 
 private:
-	UImageRenderer* ThisRenderer = nullptr;
+	void BeginPlay() override;
+	UImageRenderer* Renderer = nullptr;
 };
 
