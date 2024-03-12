@@ -27,6 +27,7 @@ void RocketLauncherBullet::BeginPlay()
 	Collider->SetTransform({ {0,0},{100,20} });
 
 	Speed = 700.0f;
+	Damage = 10;
 }
 
 void RocketLauncherBullet::Tick(float _DeltaTime)
