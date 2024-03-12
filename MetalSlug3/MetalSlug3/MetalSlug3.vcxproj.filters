@@ -268,6 +268,12 @@
     <ClInclude Include="RocketLauncher_LaunchEffect.h">
       <Filter>Object\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="MissionStart.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionStartChar.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -533,6 +539,12 @@
     </ClCompile>
     <ClCompile Include="RocketLauncher_LaunchEffect.cpp">
       <Filter>Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="MissionStart.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MissionStartChar.cpp">
+      <Filter>Object\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

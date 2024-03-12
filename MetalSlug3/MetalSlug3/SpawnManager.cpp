@@ -45,6 +45,7 @@
 #include "BombBox.h"
 #include "ThunderCloud.h"
 #include "CEOsecretary.h"
+#include "MissionStart.h"
 
 SpawnManager::SpawnManager()
 {
@@ -902,6 +903,8 @@ void SpawnManager::TestSpawn()
 {
 	AItem* RL = GetWorld()->SpawnActor<RocketLauncher>();
 	RL->SetActorLocation({ 600,900 });
+
+	MissionStart* MS = GetWorld()->SpawnActor<MissionStart>();
 	/*AItem* HMG = GetWorld()->SpawnActor<HeavyMachineGun>();
 	HMG->SetActorLocation({ 500,900 });
 

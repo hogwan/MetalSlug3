@@ -337,6 +337,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MissionStart.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MissionStartChar.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MonoEyeCenter.h">
       <SubType>
       </SubType>
@@ -661,6 +669,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MetalSlug3Core.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MissionStart.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MissionStartChar.cpp">
       <SubType>
       </SubType>
     </ClCompile>
