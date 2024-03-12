@@ -13,13 +13,14 @@ AMonoEye_UFO::~AMonoEye_UFO()
 
 void AMonoEye_UFO::BeginPlay()
 {
-	SetActorLocation({ 14150,2098 });
+	SetActorLocation({ 14150,2350 });
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ {0,0},{800,850} });
 	Renderer->CreateAnimation("Idle", "MonoEye_UFO_Idle.png", 0, 4,0.08f, true);
 	Renderer->CreateAnimation("Charging", "MonoEye_UFO_Charging.png", 0, 3,0.08f, false);
 	Renderer->CreateAnimation("Firing", "MonoEye_UFO_Firing.png", 0, 5, 0.08f, true);
+	Renderer->ChangeAnimation("Idle", false, 0, 0.08f);
 
 	Body = CreateImageRenderer(MT3RenderOrder::UFO_Body);
 	Body->SetImage("MonoEye_UFO_Body.png");
@@ -60,6 +61,13 @@ void AMonoEye_UFO::BeginPlay()
 
 void AMonoEye_UFO::Tick(float _DeltaTime)
 {
+	if (GetActorLocation().Y > 2098.f)
+	{
+		AddActorLocation(FVector::Up * 1500.f * _DeltaTime);
+		return;
+	}
+	SetActorLocation({ 14150,2098 });
+
 	StateUpdate(_DeltaTime);
 
 	if (Hp <= 0)

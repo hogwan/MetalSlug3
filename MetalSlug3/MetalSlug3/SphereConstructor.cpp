@@ -54,7 +54,7 @@ void ASphereConstructor::Tick(float _DeltaTime)
 			Destroy();
 		}
 
-		AddActorLocation(Gap * 2.0f * _DeltaTime);
+		AddActorLocation(Gap * 5.0f * _DeltaTime);
 	}
 }
 
