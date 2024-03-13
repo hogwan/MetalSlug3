@@ -2,9 +2,11 @@
 #include "ContentsHelper.h"
 #include "Marco.h"
 #include "Monoliths.h"
+#include <EnginePlatform/EngineSound.h>
 
 ALaser::ALaser()
 {
+	UEngineSound::SoundPlay("MonoEyes_UFO_Lazer.mp3");
 }
 
 ALaser::~ALaser()
@@ -85,7 +87,7 @@ void ALaser::BeginPlay()
 	Collider->SetPosition({ 0,-10 });
 	Collider->SetColType(ECollisionType::Rect);
 
-	Destroy(3.0f);
+	Destroy(2.7f);
 }
 
 void ALaser::Tick(float _DeltaTime)

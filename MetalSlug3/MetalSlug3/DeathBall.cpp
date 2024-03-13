@@ -1,6 +1,7 @@
 #include "DeathBall.h"
 #include "ContentsHelper.h"
 #include "DeathBallExplosion.h"
+#include <EnginePlatform/EngineSound.h>
 
 ADeathBall::ADeathBall()
 {
@@ -10,6 +11,8 @@ ADeathBall::~ADeathBall()
 {
 	ADeathBallExplosion* Explosion = GetWorld()->SpawnActor<ADeathBallExplosion>();
 	Explosion->SetActorLocation(GetActorLocation());
+
+	UEngineSound::SoundPlay("RocketLauncher_Hit.mp3");
 }
 
 void ADeathBall::BeginPlay()

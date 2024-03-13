@@ -49,7 +49,7 @@ void APistolBullet::BeginPlay()
 	Collider->SetScale({ 20,20 });
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
-	Renderer->CreateAnimation("Destroy", "BulletDestroy.png", 0, 9, 0.05f);
+	Renderer->CreateAnimation("Destroy", "BulletDestroy.png", 0, 9, 0.05f, false);
 	Renderer->CreateAnimation("Normal", "PistolBullet_Normal.png", 0, 0, 1.0f);
 	Renderer->CreateAnimation("Down", "PistolBullet_Up.png", 0, 0, 1.0f);
 	Renderer->CreateAnimation("Up", "PistolBullet_Up.png", 0, 0, 1.0f);

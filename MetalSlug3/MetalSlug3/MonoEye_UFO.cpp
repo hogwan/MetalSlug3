@@ -2,6 +2,7 @@
 #include "Laser.h"
 #include "Rubble.h"
 #include <EngineBase/EngineRandom.h>
+#include <EnginePlatform/EngineSound.h>
 
 AMonoEye_UFO::AMonoEye_UFO()
 {
@@ -186,6 +187,7 @@ void AMonoEye_UFO::IdleStart()
 
 void AMonoEye_UFO::ChargingStart()
 {
+	UEngineSound::SoundPlay("MonoEyes_UFO_Attack.mp3");
 	Renderer->ChangeAnimation("Charging", false, 0, 0.08f);
 }
 

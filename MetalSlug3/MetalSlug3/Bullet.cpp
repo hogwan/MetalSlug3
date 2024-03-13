@@ -43,8 +43,6 @@ void ABullet::Tick(float _DeltaTime)
 			Renderer->SetImage("BulletDestroy.png");
 			Renderer->ChangeAnimation("Destroy");
 			Renderer->SetTransform({ {0,0}, {30,30} });
-
-			UEngineSound::SoundPlay("BulletHit.mp3");
 		}
 	}
 
@@ -61,8 +59,6 @@ void ABullet::Tick(float _DeltaTime)
 			Renderer->SetImage("BulletDestroy.png");
 			Renderer->ChangeAnimation("Destroy");
 			Renderer->SetTransform({ {0,0}, {30,30} });
-
-			UEngineSound::SoundPlay("BulletHit.mp3");
 		}
 	}
 }

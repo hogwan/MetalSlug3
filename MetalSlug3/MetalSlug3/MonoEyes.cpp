@@ -2,13 +2,16 @@
 #include "Marco.h"
 #include "DeathBall.h"
 #include "MonoEyeCenter.h"
+#include <EnginePlatform/EngineSound.h>
 
 AMonoEyes::AMonoEyes()
 {
+	UEngineSound::SoundPlay("MonoEyes_Spawn.mp3");
 }
 
 AMonoEyes::~AMonoEyes()
 {
+	UEngineSound::SoundPlay("MonoEyes_Destroy.mp3");
 }
 
 void AMonoEyes::BeginPlay()
@@ -391,6 +394,8 @@ void AMonoEyes::Launch(float _DeltaTime)
 {
 	if (LaunchRenderer->IsCurAnimationEnd())
 	{
+		UEngineSound::SoundPlay("MonoEyes_DeathBallLaunch.mp3");
+
 		LaunchRenderer->ActiveOff();
 		IsLaunch = false;
 		LaunchCoolTime = static_cast<float>(rand() % 20);
@@ -420,6 +425,8 @@ void AMonoEyes::DeathStart()
 
 void AMonoEyes::LaunchStart()
 {
+	UEngineSound::SoundPlay("MonoEyes_DeathBallCharging.mp3");
+
 	LaunchRenderer->ActiveOn();
 	LaunchRenderer->ChangeAnimation("Launch", true, 0 , 0.05f);
 }

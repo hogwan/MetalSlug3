@@ -221,7 +221,7 @@ void AHeavyMachineGunBullet::BeginPlay()
 	Collider->SetScale({ 50,20 });
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
-	Renderer->CreateAnimation("Destroy", "BulletDestroy.png", 0, 9, 0.05f);
+	Renderer->CreateAnimation("Destroy", "BulletDestroy.png", 0, 9, 0.05f, false);
 
 	Renderer->CreateAnimation("Right0", "HeavyMachineGunBullet_Right_0.png", 0, 0, 1.0f);
 	Renderer->CreateAnimation("Right1", "HeavyMachineGunBullet_Right_1.png", 0, 0, 1.0f);

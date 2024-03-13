@@ -2,6 +2,7 @@
 #include "UnknownSphere.h"
 #include "MonoEyes.h"
 #include "MonoEyeCenter.h"
+#include <EnginePlatform/EngineSound.h>
 
 ASphereConstructor::ASphereConstructor()
 {
@@ -14,6 +15,8 @@ ASphereConstructor::~ASphereConstructor()
 void ASphereConstructor::BeginPlay()
 {
 	SetActorLocation({ 14155,2270 });
+
+	UEngineSound::SoundPlay("MonoEyes_UnknownSphere.mp3");
 }
 
 void ASphereConstructor::Tick(float _DeltaTime)

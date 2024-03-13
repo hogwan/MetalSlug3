@@ -1,6 +1,7 @@
 #include "SoldierBomb.h"
 #include "ContentsHelper.h"
 #include "ExplosionEffect.h"
+#include <EnginePlatform/EngineSound.h>
 
 ASoldierBomb::ASoldierBomb()
 {
@@ -10,6 +11,8 @@ ASoldierBomb::~ASoldierBomb()
 {
 	AExplosionEffect* Explosion = GetWorld()->SpawnActor<AExplosionEffect>();
 	Explosion->SetActorLocation(GetActorLocation());
+
+	UEngineSound::SoundPlay("RocketLauncher_Hit.mp3");
 }
 
 void ASoldierBomb::BeginPlay()

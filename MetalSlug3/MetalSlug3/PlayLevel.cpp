@@ -195,5 +195,7 @@ void PlayLevel::BeginPlay()
 	UEngineSound::Load(NewPath.AppendPath("Effect\\MonoEyes_UFO_Attack.mp3"));
 	UEngineSound::Load(NewPath.AppendPath("Effect\\MonoEyes_UFO_Lazer.mp3"));
 	UEngineSound::Load(NewPath.AppendPath("Effect\\MonoEyes_UnknownSphere.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Effect\\MonoEyes_DeathBallCharging.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Effect\\MonoEyes_DeathBallLaunch.mp3"));
 
 }
