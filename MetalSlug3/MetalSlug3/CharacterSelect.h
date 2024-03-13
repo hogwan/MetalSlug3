@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Level.h>
+#include <EnginePlatform/EngineSound.h>
 class CharacterSelect : public ULevel
 {
 public:
@@ -13,6 +14,7 @@ public:
 	CharacterSelect& operator=(const CharacterSelect& _Other) = delete;
 	CharacterSelect& operator=(CharacterSelect&& _Other) = delete;
 
+protected:
 	void BeginPlay() override;
 };
 

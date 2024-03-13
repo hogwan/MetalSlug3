@@ -5,6 +5,7 @@
 #include "SpawnManager.h"
 #include "CameraManager.h"
 #include "ContentsHelper.h"
+#include <EnginePlatform/EngineSound.h>
 
 PlayLevel::PlayLevel()
 {
@@ -147,4 +148,14 @@ void PlayLevel::BeginPlay()
 	UContentsHelper::CameraManager = SpawnActor<CameraManager>();
 	SpawnActor<SpawnManager>();
 	
+	NewPath.Move("Sound");
+	UEngineSound::Load(NewPath.AppendPath("BGM\\MainBGM.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("BGM\\EndBGM.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Voice\\Mission2Start.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Voice\\MissonComplete.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Voice\\Okey.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Voice\\RocketLauncher.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Voice\\FlameShot.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Voice\\HeavyMachineGun.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Voice\\ThunderCloud.mp3"));
 }

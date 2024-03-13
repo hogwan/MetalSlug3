@@ -1,3 +1,4 @@
+#include <EnginePlatform/EngineSound.h>
 #include "SpawnManager.h"
 #include "Marco.h"
 #include "BackGroundMap.h"
@@ -58,7 +59,6 @@ SpawnManager::~SpawnManager()
 
 void SpawnManager::BeginPlay()
 {
-
 	UContentsHelper::ScreenCol = GetWorld()->SpawnActor<AScreenCollision>();
 	//UContentsHelper::ScreenCol->GetCollider()->ActiveOff();
 
@@ -120,8 +120,7 @@ void SpawnManager::BeginPlay()
 	ACameraModeSwitch* CameraSwitch_7 = GetWorld()->SpawnActor<ACameraModeSwitch>();
 	CameraSwitch_7->SetActorLocation({ 13200,2370 });
 
-	//MissionStart* MS = GetWorld()->SpawnActor<MissionStart>();
-	MissionComplete* MC= GetWorld()->SpawnActor<MissionComplete>();
+	MissionStart* MS = GetWorld()->SpawnActor<MissionStart>();
 
 	ADoctor* Doctor_0 = GetWorld()->SpawnActor<ADoctor>();
 	Doctor_0->SetActorLocation({ 300,1000 }); 

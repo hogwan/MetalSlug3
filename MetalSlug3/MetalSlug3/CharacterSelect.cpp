@@ -2,9 +2,11 @@
 #include <EngineCore\EngineResourcesManager.h>
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
+#include <EnginePlatform/EngineSound.h>
 #include "MarcoPhoto.h"
 #include "P1.h"
 #include "Panel.h"
+#include "ContentsHelper.h"
 
 CharacterSelect::CharacterSelect()
 {
@@ -37,5 +39,10 @@ void CharacterSelect::BeginPlay()
 	SpawnActor<Panel>();
 	SpawnActor<P1>();
 	SpawnActor<MarcoPhoto>();
-
+	
+	NewPath.Move("Sound");
+	UEngineSound::Load(NewPath.AppendPath("BGM.ogg"));
+	UEngineSound::Load(NewPath.AppendPath("Marco.mp3"));
+	UContentsHelper::BGMPlayer = UEngineSound::SoundPlay("BGM.ogg");
+	UContentsHelper::BGMPlayer.Loop();
 }

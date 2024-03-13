@@ -228,6 +228,7 @@ public:
 	static AScreenCollision* ScreenCol;
 	static class Marco* Player;
 	static class CameraManager* CameraManager;
+	static class UEngineSoundPlayer BGMPlayer;
 	static int Life;
 	static int Score;
 private:

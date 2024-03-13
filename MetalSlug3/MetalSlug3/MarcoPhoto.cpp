@@ -2,7 +2,9 @@
 #include <EngineCore\EngineCore.h>
 #include <EngineBase/EngineTime.h>
 #include <EnginePlatform/EngineInput.h>
+#include <EnginePlatform/EngineSound.h>
 #include "Door.h"
+#include "ContentsHelper.h"
 
 MarcoPhoto::MarcoPhoto()
 {
@@ -30,6 +32,9 @@ void MarcoPhoto::Tick(float _DeltaTime)
 	if (NextTime < 0.0f)
 	{
 		GEngine->ChangeLevel("Play");
+		UContentsHelper::BGMPlayer.Off();
+		UContentsHelper::BGMPlayer = UEngineSound::SoundPlay("MainBGM.mp3");
+		UEngineSound::SoundPlay("Mission2Start.mp3");
 	}
 
 	if (isEntered)
@@ -40,6 +45,7 @@ void MarcoPhoto::Tick(float _DeltaTime)
 	{
 		if (true == UEngineInput::IsDown(VK_RETURN))
 		{
+			UEngineSound::SoundPlay("Marco.mp3");
 			ThisRenderer->ChangeAnimation("Marco_Selected");
 			GetWorld()->SpawnActor<Door>();
 			isEntered = true;
