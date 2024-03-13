@@ -34,6 +34,7 @@ void MarcoPhoto::Tick(float _DeltaTime)
 		GEngine->ChangeLevel("Play");
 		UContentsHelper::BGMPlayer.Off();
 		UContentsHelper::BGMPlayer = UEngineSound::SoundPlay("MainBGM.mp3");
+		UContentsHelper::BGMPlayer.Loop();
 		UEngineSound::SoundPlay("Mission2Start.mp3");
 	}
 
