@@ -7,8 +7,7 @@ std::list<AHelicopter*> ALeaderHelicopter::HeliList;
 
 ALeaderHelicopter::ALeaderHelicopter()
 {
-	Sound = UEngineSound::SoundPlay("HelicopterPropeller.mp3");
-	Sound.Loop();
+	
 }
 
 ALeaderHelicopter::~ALeaderHelicopter()
@@ -27,7 +26,6 @@ ALeaderHelicopter::~ALeaderHelicopter()
 	Explosion->SetActorLocation(GetActorLocation());
 	Explosion->SetSize(FVector{ 800,800 });
 
-	Sound.Off();
 }
 
 void ALeaderHelicopter::BeginPlay()

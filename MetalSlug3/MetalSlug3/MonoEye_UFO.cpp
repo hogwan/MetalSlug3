@@ -185,6 +185,7 @@ void AMonoEye_UFO::Destroyed(float _DeltaTime)
 	{
 		AccCoolTime = 0.f;
 		AHugeExplosionEffect* Effect = GetWorld()->SpawnActor<AHugeExplosionEffect>();
+		UEngineSound::SoundPlay("Destroy_0.mp3");
 		
 		float RandomX = UEngineRandom::MainRandom.RandomFloat(-100.f, 100.f);
 		float RandomY = UEngineRandom::MainRandom.RandomFloat(-50.f, 50.f);
