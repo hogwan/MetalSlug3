@@ -2,6 +2,7 @@
 #include "Soldier.h"
 #include "HugeExplosionEffect.h"
 #include "ManZombie3.h"
+#include <EnginePlatform/EngineSound.h>
 
 AVan::AVan()
 {
@@ -15,6 +16,8 @@ AVan::~AVan()
 	AManZombie3* Zombie = GetWorld()->SpawnActor<AManZombie3>();
 	Zombie->SetActorLocation(GetActorLocation());
 	Zombie->StateChange(EnemyZombieState::Idle);
+
+	UEngineSound::SoundPlay("Destroy_0.mp3");
 }
 
 void AVan::BeginPlay()

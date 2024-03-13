@@ -151,6 +151,8 @@ void PlayLevel::BeginPlay()
 	NewPath.Move("Sound");
 	UEngineSound::Load(NewPath.AppendPath("BGM\\MainBGM.mp3"));
 	UEngineSound::Load(NewPath.AppendPath("BGM\\EndBGM.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("BGM\\BossPhase1BGM.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("BGM\\BossPhase2BGM.mp3"));
 	UEngineSound::Load(NewPath.AppendPath("Voice\\Mission2Start.mp3"));
 	UEngineSound::Load(NewPath.AppendPath("Voice\\MissionComplete.mp3"));
 	UEngineSound::Load(NewPath.AppendPath("Voice\\Okey.mp3"));
@@ -185,4 +187,13 @@ void PlayLevel::BeginPlay()
 	UEngineSound::Load(NewPath.AppendPath("Effect\\Zombie_Strong_0.mp3"));
 	UEngineSound::Load(NewPath.AppendPath("Effect\\Zombie_Strong_1.mp3"));
 	UEngineSound::Load(NewPath.AppendPath("Effect\\Zombie_Strong_2.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Effect\\RocketLauncher_Launch.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Effect\\BulletHit.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Effect\\FlameShot_Launch.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Effect\\MonoEyes_Destroy.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Effect\\MonoEyes_Spawn.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Effect\\MonoEyes_UFO_Attack.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Effect\\MonoEyes_UFO_Lazer.mp3"));
+	UEngineSound::Load(NewPath.AppendPath("Effect\\MonoEyes_UnknownSphere.mp3"));
+
 }

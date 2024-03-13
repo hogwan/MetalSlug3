@@ -2,6 +2,7 @@
 #include "ContentsHelper.h"
 #include "Enemy.h"
 #include "ThunderCloudEffect.h"
+#include <EnginePlatform/EngineSound.h>
 
 ThunderGround::ThunderGround()
 {
@@ -23,6 +24,8 @@ void ThunderGround::BeginPlay()
 	Collider = CreateCollision(MT3CollisionOrder::PlayerBullet);
 	Collider->SetTransform({ {0,-25},{75,50} });
 	Collider->SetColType(ECollisionType::Rect);
+
+	UEngineSound::SoundPlay("Thunder.mp3");
 }
 
 void ThunderGround::Tick(float _DeltaTime)

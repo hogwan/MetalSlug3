@@ -1,6 +1,6 @@
 #include "Go.h"
 #include "ContentsHelper.h"
-
+#include <EnginePlatform/EngineSound.h>
 AGo::AGo()
 {
 }
@@ -38,5 +38,16 @@ void AGo::Tick(float _DeltaTime)
 	{
 		Renderer->ActiveOn();
 		Renderer->ChangeAnimation("Go", false, 0, 0.08f);
+
+		if (!Trigger && Renderer->GetCurAnimationFrame() == 0)
+		{
+			UEngineSoundPlayer Sound = UEngineSound::SoundPlay("Go.mp3");
+			Trigger = true;
+		}
+
+		if (Renderer->IsCurAnimationEnd())
+		{
+			Trigger = false;
+		}
 	}
 }

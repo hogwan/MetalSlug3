@@ -21,5 +21,7 @@ protected:
 private:
 	float AccTime = 0.0f;
 	float TurnOnTime = 3.0f;
+
+	bool Trigger = false;
 };
 

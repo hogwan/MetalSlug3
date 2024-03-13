@@ -5,7 +5,7 @@
 #include "Enemy.h"
 #include "ExplosionEffect.h"
 #include "VomitExplosionEffect.h"
-
+#include <EnginePlatform/EngineSound.h>
 AVomitLauncher::AVomitLauncher()
 {
 }
@@ -42,6 +42,8 @@ void AVomitLauncher::BeginPlay()
 	InitialShootVector.Normalize2D();
 	LastShootVector.Normalize2D();
 	ShootVector = InitialShootVector;
+
+	UEngineSound::SoundPlay("Zombie_Marco_Vomit.mp3");
 }
 
 void AVomitLauncher::Tick(float _DeltaTime)

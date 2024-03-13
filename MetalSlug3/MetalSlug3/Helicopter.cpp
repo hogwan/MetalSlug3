@@ -2,6 +2,7 @@
 #include "Marco.h"
 #include "HelicopterBullet.h"
 #include "ExplosionEffect.h"
+#include <EnginePlatform/EngineSound.h>
 
 AHelicopter::AHelicopter()
 {
@@ -12,6 +13,8 @@ AHelicopter::~AHelicopter()
 	AExplosionEffect* Explosion = GetWorld()->SpawnActor<AExplosionEffect>();
 	Explosion->SetActorLocation(GetActorLocation());
 	Explosion->SetSize(FVector{ 800,800 });
+
+	UEngineSound::SoundPlay("Destroy_2.mp3");
 }
 
 

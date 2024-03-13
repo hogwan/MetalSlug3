@@ -4,6 +4,7 @@
 #include "Marco.h"
 #include "Enemy.h"
 #include "BombExplosionEffect.h"
+#include <EnginePlatform/EngineSound.h>
 
 ABomb::ABomb()
 {
@@ -14,6 +15,8 @@ ABomb::~ABomb()
 	++UContentsHelper::Player->RemainBomb;
 	ABombExplosionEffect* Explosion = GetWorld()->SpawnActor<ABombExplosionEffect>();
 	Explosion->SetActorLocation(GetActorLocation());
+
+	UEngineSound::SoundPlay("RocketLauncher_Hit.mp3");
 }
 
 void ABomb::BeginPlay()

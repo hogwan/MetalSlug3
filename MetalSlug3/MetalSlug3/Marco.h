@@ -388,5 +388,7 @@ private:
 
 	bool IsAutoMove = false;
 	void AutoMove(float _DeltaTime);
+
+	bool HeavyTrigger = false;
 };
 

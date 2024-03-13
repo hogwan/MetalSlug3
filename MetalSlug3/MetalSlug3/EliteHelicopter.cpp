@@ -4,6 +4,7 @@
 #include "ContentsHelper.h"
 #include "HugeExplosionEffect.h"
 #include "RocketLauncher.h"
+#include <EnginePlatform/EngineSound.h>
 AEliteHelicopter::AEliteHelicopter()
 {
 }
@@ -15,6 +16,8 @@ AEliteHelicopter::~AEliteHelicopter()
 
 	AHugeExplosionEffect* Effect = GetWorld()->SpawnActor<AHugeExplosionEffect>();
 	Effect->SetActorLocation(GetActorLocation());
+
+	UEngineSound::SoundPlay("Destroy_1.mp3");
 }
 
 void AEliteHelicopter::BeginPlay()

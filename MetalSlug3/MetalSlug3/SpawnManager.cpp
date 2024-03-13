@@ -868,7 +868,8 @@ void SpawnManager::Tick(float _DeltaTime)
 
 	if (TargetPos > 14560.f && SpawnNumber == 31)
 	{
-
+		UContentsHelper::BGMPlayer.Off();
+		UContentsHelper::BGMPlayer = UEngineSound::SoundPlay("BossPhase1BGM.mp3");
 		ABossMap* BossMap = GetWorld()->SpawnActor<ABossMap>();
 		BossMap->SetActorLocation({ 14168, 2127});
 		++SpawnNumber;
@@ -922,7 +923,8 @@ void SpawnManager::Tick(float _DeltaTime)
 
 	if (SpawnNumber == 34)
 	{
-
+		UContentsHelper::BGMPlayer.Off();
+		UContentsHelper::BGMPlayer = UEngineSound::SoundPlay("BossPhase2BGM.mp3");
 		AMonoEye_UFO* UFO = GetWorld()->SpawnActor<AMonoEye_UFO>();
 
 		++SpawnNumber;

@@ -1318,8 +1318,7 @@ void Marco::UpperShoot(float _DeltaTime)
 
 	
 	if (Gun == EGunList::HeavyMachineGun)
-	{
-		
+	{	
 		if (true == UEngineInput::IsPress(VK_UP))
 		{
 			HeavyMachineGun_PrevFrame = -1;
@@ -2487,6 +2486,20 @@ void Marco::UpperShootStart()
 		}
 		BulletSpawn(BulletSpawnLocation, BulletDir);
 	}
+	else
+	{
+		std::vector<UCollision*> Result;
+		if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+			|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
+		{
+			return;
+		}
+		else
+		{
+			UEngineSound::SoundPlay("HeavyMachineGun_Launch.mp3");
+			return;
+		}
+	}
 }
 
 void Marco::UpperForwardJumpShootStart()
@@ -2514,6 +2527,20 @@ void Marco::UpperForwardJumpShootStart()
 		}
 
 		BulletSpawn(BulletSpawnLocation, BulletDir);
+	}
+	else
+	{
+		std::vector<UCollision*> Result;
+		if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result)
+			|| KnifeReach->CollisionCheck(MT3CollisionOrder::TiedNPC, Result))
+		{
+			return;
+		}
+		else
+		{
+			UEngineSound::SoundPlay("HeavyMachineGun_Launch.mp3");
+			return;
+		}
 	}
 }
 
@@ -2641,6 +2668,11 @@ void Marco::UpperAimUpShootStart()
 
 		BulletSpawn(BulletSpawnLocation, BulletDir);
 	}
+	else
+	{
+		UEngineSound::SoundPlay("HeavyMachineGun_Launch.mp3");
+		return;
+	}
 }
 
 void Marco::UpperAimNormalToDownStart()
@@ -2680,6 +2712,11 @@ void Marco::UpperAimDownShootStart()
 		BulletDir = FVector::Down;
 
 		BulletSpawn(BulletSpawnLocation, BulletDir);
+	}
+	else
+	{
+		UEngineSound::SoundPlay("HeavyMachineGun_Launch.mp3");
+		return;
 	}
 }
 
@@ -3509,6 +3546,7 @@ void Marco::AllCrouch_HeavyMachineGun_ShootStart()
 	HeavyMachineGunCheckName(AddedGunTypeName);
 	std::string DirectedName = AddDirectionName(AddedGunTypeName);
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName, true, 0, 0.1f);
+	UEngineSound::SoundPlay("HeavyMachineGun_Launch.mp3");
 }
 
 void Marco::AllCrouch_ThrowStart()
@@ -3544,6 +3582,7 @@ void Marco::AllCrouch_ThrowStart()
 
 void Marco::AllCrouch_KnifeAttack1Start()
 {
+	UEngineSound::SoundPlay("KnifeAttack1.mp3");
 	std::vector<UCollision*> Result;
 	if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
 	{
@@ -3566,6 +3605,7 @@ void Marco::AllCrouch_KnifeAttack1Start()
 
 void Marco::AllCrouch_KnifeAttack2Start()
 {
+	UEngineSound::SoundPlay("KnifeAttack2.mp3");
 	std::vector<UCollision*> Result;
 	if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
 	{
@@ -3593,6 +3633,7 @@ void Marco::AllCeremonyStart()
 
 void Marco::AllDeathStart()
 {
+	UEngineSound::SoundPlay("Marco_Death");
 	//AddForce
 	ManipulateOff();
 	NoHit = true;
@@ -3604,6 +3645,7 @@ void Marco::AllDeathStart()
 
 void Marco::AllDeathInAirStart()
 {
+	UEngineSound::SoundPlay("Marco_Death");
 	//AddForce
 	ManipulateOff();
 	NoHit = true;
@@ -3615,6 +3657,7 @@ void Marco::AllDeathInAirStart()
 
 void Marco::AllDeathByKnifeStart()
 {
+	UEngineSound::SoundPlay("Marco_Death");
 	ManipulateOff();
 	NoHit = true;
 	CurAllBodyName = "AllBody_DeathByKnife";
@@ -3938,6 +3981,7 @@ void Marco::Zombie_AllVomitStart()
 
 void Marco::Zombie_AllDeathStart()
 {
+	UEngineSound::SoundPlay("Zombie_Marco_Death.mp3");
 	ManipulateOff();
 	CurAllBodyName = "Zombie_AllBody_Death";
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
@@ -3946,6 +3990,7 @@ void Marco::Zombie_AllDeathStart()
 
 void Marco::Zombie_AllDeathInAirStart()
 {
+	UEngineSound::SoundPlay("Zombie_Marco_Death.mp3");
 	ManipulateOff();
 	CurAllBodyName = "Zombie_AllBody_DeathInAir";
 	Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
@@ -4467,9 +4512,11 @@ void Marco::BulletSpawn(FVector _SpawnLocation, FVector _BulletDir)
 		break;
 	case EGunList::FlameShot:
 		Bullet = GetWorld()->SpawnActor<AFlameShotBullet>(MT3RenderOrder::Projectile);
+		UEngineSound::SoundPlay("FlameShot_Launch.mp3");
 		break;
 	case EGunList::RocketLauncher:
 		Bullet = GetWorld()->SpawnActor<RocketLauncherBullet>();
+		UEngineSound::SoundPlay("RocketLauncher_Launch.mp3");
 		break;
 	default:
 		break;

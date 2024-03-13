@@ -3,6 +3,7 @@
 #include "Monoliths.h"
 #include "HugeExplosionEffect.h"
 #include "RocketLauncher_LaunchEffect.h"
+#include <EnginePlatform/EngineSound.h>
 
 RocketLauncherBullet::RocketLauncherBullet()
 {
@@ -10,6 +11,7 @@ RocketLauncherBullet::RocketLauncherBullet()
 
 RocketLauncherBullet::~RocketLauncherBullet()
 {
+	UEngineSound::SoundPlay("RocketLauncher_Hit.mp3");
 }
 
 void RocketLauncherBullet::BeginPlay()
