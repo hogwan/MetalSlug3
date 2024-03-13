@@ -76,7 +76,7 @@ void SpawnManager::BeginPlay()
 	F2->SetActorLocation({ 4270,807 });
 
 	UContentsHelper::Player = GetWorld()->SpawnActor<Marco>();
-	UContentsHelper::Player->SetActorLocation({ 13000,2300 });
+	UContentsHelper::Player->SetActorLocation({ 100,900 });
 
 	AGo* Go = GetWorld()->SpawnActor<AGo>();
 	Go->SetActorLocation({ 650,230 });
@@ -930,6 +930,4 @@ void SpawnManager::Tick(float _DeltaTime)
 
 void SpawnManager::TestSpawn()
 {
-	SpawnNumber = 30;
-	UContentsHelper::CameraManager->CameraMode = 11;
 }
