@@ -1,5 +1,6 @@
 #include "Man2.h"
 #include "ManZombie2.h"
+#include "ZombieThunder.h"
 
 AMan2::AMan2()
 {
@@ -118,6 +119,9 @@ void AMan2::Death(float _DeltaTime)
 		AManZombie2* Zombie = GetWorld()->SpawnActor<AManZombie2>();
 		Zombie->SetActorLocation(GetActorLocation());
 		Zombie->StateChange(EnemyZombieState::Lying);
+
+		ZombieThunder* Effect = GetWorld()->SpawnActor<ZombieThunder>();
+		Effect->SetActorLocation(GetActorLocation());
 		Destroy();
 	}
 }

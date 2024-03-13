@@ -15,6 +15,7 @@
 #include "POWs.h"
 #include "FlameShotBullet.h"
 #include "RocketLauncherBullet.h"
+#include "ZombieThunder.h"
 
 
 Marco::Marco()
@@ -3885,6 +3886,8 @@ void Marco::Zombie_AllTransformToZombie_FallingStart()
 void Marco::Zombie_AllTransformToZombie_RisingStart()
 {
 	CurAllBodyName = "Zombie_AllBody_TransformToZombie_Rising";
+	ZombieThunder* Effect = GetWorld()->SpawnActor<ZombieThunder>();
+	Effect->SetActorLocation(GetActorLocation());
 	ZombieStart();
 }
 
@@ -3924,6 +3927,7 @@ void Marco::Zombie_AllJumpStart()
 void Marco::Zombie_AllVomitStart()
 {
 	CurAllBodyName = "Zombie_AllBody_Vomit";
+	BombsCount--;
 	ZombieStart();
 }
 

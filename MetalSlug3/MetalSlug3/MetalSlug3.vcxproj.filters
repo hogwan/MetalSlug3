@@ -286,6 +286,9 @@
     <ClInclude Include="Rubble.h">
       <Filter>Object\Enemy\Boss\Phase2</Filter>
     </ClInclude>
+    <ClInclude Include="ZombieThunder.h">
+      <Filter>Object\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -569,6 +572,9 @@
     </ClCompile>
     <ClCompile Include="Rubble.cpp">
       <Filter>Object\Enemy\Boss\Phase2</Filter>
+    </ClCompile>
+    <ClCompile Include="ZombieThunder.cpp">
+      <Filter>Object\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

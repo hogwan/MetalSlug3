@@ -1,5 +1,6 @@
 #include "Uncle.h"
 #include "UncleZombie.h"
+#include "ZombieThunder.h"
 
 AUncle::AUncle()
 {
@@ -105,6 +106,9 @@ void AUncle::Death(float _DeltaTime)
 		AUncleZombie* Zombie = GetWorld()->SpawnActor<AUncleZombie>();
 		Zombie->SetActorLocation(GetActorLocation());
 		Zombie->StateChange(EnemyZombieState::Lying);
+
+		ZombieThunder* Effect = GetWorld()->SpawnActor<ZombieThunder>();
+		Effect->SetActorLocation(GetActorLocation());
 		Destroy();
 	}
 }

@@ -1,5 +1,6 @@
 #include "Woman.h"
 #include "WomanZombie.h"
+#include "ZombieThunder.h"
 
 AWoman::AWoman()
 {
@@ -116,6 +117,9 @@ void AWoman::Death(float _DeltaTime)
 		AWomanZombie* Zombie = GetWorld()->SpawnActor<AWomanZombie>();
 		Zombie->SetActorLocation(GetActorLocation());
 		Zombie->StateChange(EnemyZombieState::Lying);
+
+		ZombieThunder* Effect = GetWorld()->SpawnActor<ZombieThunder>();
+		Effect->SetActorLocation(GetActorLocation());
 		Destroy();
 	}
 }

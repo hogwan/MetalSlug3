@@ -505,6 +505,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ZombiesProjectile.h" />
+    <ClInclude Include="ZombieThunder.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ZombieVomitProjectile.h">
       <SubType>
       </SubType>
@@ -856,6 +860,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ZombiesProjectile.cpp" />
+    <ClCompile Include="ZombieThunder.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ZombieVomitProjectile.cpp">
       <SubType>
       </SubType>
