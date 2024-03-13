@@ -53,7 +53,7 @@ void AMonoEye_UFO::BeginPlay()
 		int SizeRandom = UEngineRandom::MainRandom.RandomInt(500, 1500);
 		DirVector.RotationZToDeg(static_cast<float>(DirRandom));
 
-		Rub->SetVector(DirVector, ForceRandom);
+		Rub->SetVector(DirVector, static_cast<float>(ForceRandom));
 		Rub->GetRenderer()->SetScale({ SizeRandom, SizeRandom });
 	}
 

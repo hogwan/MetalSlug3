@@ -153,7 +153,7 @@ void ThunderCloudObj::MoveStart()
 
 void ThunderCloudObj::AttackStart()
 {
-	DetectGround = GetActorLocation().Y;
+	DetectGround = static_cast<int>(GetActorLocation().Y);
 	while (true)
 	{
 		Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), DetectGround, Color8Bit::MagentaA);

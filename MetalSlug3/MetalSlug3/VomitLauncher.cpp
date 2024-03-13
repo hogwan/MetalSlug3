@@ -111,7 +111,7 @@ void AVomitLauncher::LaunchLogic()
 
 		FVector ProjectilePosition = FVector::Zero;
 		ProjectilePosition.X = InitialVelocity.X/2.f * (t+1);
-		ProjectilePosition.Y = InitialVelocity.Y/2.f * (t+1) + 0.5f * Gravity * pow((t+1), 2);
+		ProjectilePosition.Y = InitialVelocity.Y/2.f * (t+1) + 0.5f * Gravity * static_cast<float>(pow((t+1), 2));
 
 		VomitProjectile->SetActorLocation(GetActorLocation() + ProjectilePosition);
 		VomitProjectile->SetNumber(t);
