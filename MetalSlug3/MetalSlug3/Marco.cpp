@@ -3662,7 +3662,7 @@ void Marco::AllCeremonyStart()
 
 void Marco::AllDeathStart()
 {
-	UEngineSound::SoundPlay("Marco_Death");
+	UEngineSound::SoundPlay("Marco_Death.mp3");
 	//AddForce
 	ManipulateOff();
 	NoHit = true;
