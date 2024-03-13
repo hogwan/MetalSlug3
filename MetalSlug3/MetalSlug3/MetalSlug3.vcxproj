@@ -349,6 +349,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MissionComplete.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MissionStart.h">
       <SubType>
       </SubType>
@@ -701,6 +705,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MetalSlug3Core.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MissionComplete.cpp">
       <SubType>
       </SubType>
     </ClCompile>

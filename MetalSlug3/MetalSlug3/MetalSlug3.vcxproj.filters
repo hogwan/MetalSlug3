@@ -289,6 +289,9 @@
     <ClInclude Include="ZombieThunder.h">
       <Filter>Object\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="MissionComplete.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -575,6 +578,9 @@
     </ClCompile>
     <ClCompile Include="ZombieThunder.cpp">
       <Filter>Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="MissionComplete.cpp">
+      <Filter>Object\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

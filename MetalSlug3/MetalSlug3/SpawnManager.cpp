@@ -46,6 +46,7 @@
 #include "ThunderCloud.h"
 #include "CEOsecretary.h"
 #include "MissionStart.h"
+#include "MissionComplete.h"
 
 SpawnManager::SpawnManager()
 {
@@ -119,7 +120,8 @@ void SpawnManager::BeginPlay()
 	ACameraModeSwitch* CameraSwitch_7 = GetWorld()->SpawnActor<ACameraModeSwitch>();
 	CameraSwitch_7->SetActorLocation({ 13200,2370 });
 
-	MissionStart* MS = GetWorld()->SpawnActor<MissionStart>();
+	//MissionStart* MS = GetWorld()->SpawnActor<MissionStart>();
+	MissionComplete* MC= GetWorld()->SpawnActor<MissionComplete>();
 
 	ADoctor* Doctor_0 = GetWorld()->SpawnActor<ADoctor>();
 	Doctor_0->SetActorLocation({ 300,1000 }); 

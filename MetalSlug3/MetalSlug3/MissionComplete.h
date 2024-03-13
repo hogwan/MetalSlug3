@@ -1,17 +1,17 @@
 #pragma once
 #include "UIBase.h"
-class MissionStart : public AUIBase
+class MissionComplete : public AUIBase
 {
 public:
 	// constructor destructor
-	MissionStart();
-	~MissionStart();
+	MissionComplete();
+	~MissionComplete();
 
 	// delete Function
-	MissionStart(const MissionStart& _Other) = delete;
-	MissionStart(MissionStart&& _Other) noexcept = delete;
-	MissionStart& operator=(const MissionStart& _Other) = delete;
-	MissionStart& operator=(MissionStart&& _Other) = delete;
+	MissionComplete(const MissionComplete& _Other) = delete;
+	MissionComplete(MissionComplete&& _Other) noexcept = delete;
+	MissionComplete& operator=(const MissionComplete& _Other) = delete;
+	MissionComplete& operator=(MissionComplete&& _Other) = delete;
 
 protected:
 	void BeginPlay() override;
@@ -22,7 +22,7 @@ protected:
 	int RemainBlink = 2;
 
 	void Blink(float _DeltaTime);
-	
+
 	bool TurnOn = true;
 	bool TurnOff = false;
 

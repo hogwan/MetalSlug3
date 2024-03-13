@@ -1,20 +1,20 @@
-#include "MissionStart.h"
+#include "MissionComplete.h"
 #include "MissionStartChar.h"
 
-MissionStart::MissionStart()
+MissionComplete::MissionComplete()
 {
 }
 
-MissionStart::~MissionStart()
+MissionComplete::~MissionComplete()
 {
 }
 
-void MissionStart::BeginPlay()
+void MissionComplete::BeginPlay()
 {
 	{
 		MissionStartChar* ch = GetWorld()->SpawnActor<MissionStartChar>();
 		FVector MoveVector = { -86,-100 };
-		ch->SetActorLocation({200,230});
+		ch->SetActorLocation({ 200,230 });
 		ch->SetChar("M");
 		ch->SetMoveDir(MoveVector);
 		Characters.push_back(ch);
@@ -86,8 +86,8 @@ void MissionStart::BeginPlay()
 	{
 		MissionStartChar* ch = GetWorld()->SpawnActor<MissionStartChar>();
 		FVector MoveVector = { -66,100 };
-		ch->SetActorLocation({ 250,355 });
-		ch->SetChar("S");
+		ch->SetActorLocation({ 165,355 });
+		ch->SetChar("C");
 		ch->SetMoveDir(MoveVector);
 		Characters.push_back(ch);
 	}
@@ -95,8 +95,8 @@ void MissionStart::BeginPlay()
 	{
 		MissionStartChar* ch = GetWorld()->SpawnActor<MissionStartChar>();
 		FVector MoveVector = { -49,100 };
-		ch->SetActorLocation({ 313,355 });
-		ch->SetChar("T");
+		ch->SetActorLocation({ 227,355 });
+		ch->SetChar("O");
 		ch->SetMoveDir(MoveVector);
 		Characters.push_back(ch);
 	}
@@ -104,8 +104,8 @@ void MissionStart::BeginPlay()
 	{
 		MissionStartChar* ch = GetWorld()->SpawnActor<MissionStartChar>();
 		FVector MoveVector = FVector::Down * 100.f;
-		ch->SetActorLocation({ 370,355 });
-		ch->SetChar("A");
+		ch->SetActorLocation({ 289,355 });
+		ch->SetChar("M");
 		ch->SetMoveDir(MoveVector);
 		Characters.push_back(ch);
 	}
@@ -113,8 +113,8 @@ void MissionStart::BeginPlay()
 	{
 		MissionStartChar* ch = GetWorld()->SpawnActor<MissionStartChar>();
 		FVector MoveVector = { 30,100 };
-		ch->SetActorLocation({ 432,355 });
-		ch->SetChar("R");
+		ch->SetActorLocation({ 351,355 });
+		ch->SetChar("P");
 		ch->SetMoveDir(MoveVector);
 		Characters.push_back(ch);
 	}
@@ -122,7 +122,25 @@ void MissionStart::BeginPlay()
 	{
 		MissionStartChar* ch = GetWorld()->SpawnActor<MissionStartChar>();
 		FVector MoveVector = { 49,100 };
-		ch->SetActorLocation({ 492,355 });
+		ch->SetActorLocation({ 407,355 });
+		ch->SetChar("L");
+		ch->SetMoveDir(MoveVector);
+		Characters.push_back(ch);
+	}
+
+	{
+		MissionStartChar* ch = GetWorld()->SpawnActor<MissionStartChar>();
+		FVector MoveVector = { 66, 100 };
+		ch->SetActorLocation({ 467,355 });
+		ch->SetChar("E");
+		ch->SetMoveDir(MoveVector);
+		Characters.push_back(ch);
+	}
+
+	{
+		MissionStartChar* ch = GetWorld()->SpawnActor<MissionStartChar>();
+		FVector MoveVector = { 66, 100 };
+		ch->SetActorLocation({ 527,355 });
 		ch->SetChar("T");
 		ch->SetMoveDir(MoveVector);
 		Characters.push_back(ch);
@@ -131,14 +149,23 @@ void MissionStart::BeginPlay()
 	{
 		MissionStartChar* ch = GetWorld()->SpawnActor<MissionStartChar>();
 		FVector MoveVector = { 66, 100 };
-		ch->SetActorLocation({ 555,355 });
+		ch->SetActorLocation({ 587,355 });
+		ch->SetChar("E");
+		ch->SetMoveDir(MoveVector);
+		Characters.push_back(ch);
+	}
+
+	{
+		MissionStartChar* ch = GetWorld()->SpawnActor<MissionStartChar>();
+		FVector MoveVector = { 66, 100 };
+		ch->SetActorLocation({ 640,355 });
 		ch->SetChar("!");
 		ch->SetMoveDir(MoveVector);
 		Characters.push_back(ch);
 	}
 }
 
-void MissionStart::Tick(float _DeltaTime)
+void MissionComplete::Tick(float _DeltaTime)
 {
 	AccWaitTime += _DeltaTime;
 	if (AccWaitTime < WaitTime) return;
@@ -156,7 +183,7 @@ void MissionStart::Tick(float _DeltaTime)
 	}
 }
 
-void MissionStart::Blink(float _DeltaTime)
+void MissionComplete::Blink(float _DeltaTime)
 {
 	if (TurnOn)
 	{
@@ -190,5 +217,5 @@ void MissionStart::Blink(float _DeltaTime)
 			}
 		}
 	}
-	
+
 }
