@@ -306,6 +306,7 @@ void AHelicopter::Shoot(float _DeltaTime)
 	AccBullet += _DeltaTime;
 	if (AccBullet > BulletCoolDown && Bullet > 0)
 	{
+		UEngineSound::SoundPlay("BulletHit.mp3");
 		AHelicopterBullet* BulletPtr = GetWorld()->SpawnActor<AHelicopterBullet>();
 		BulletPtr->SetDir(ShootVector);
 		BulletPtr->SetActorLocation(GetActorLocation());
