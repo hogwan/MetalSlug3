@@ -34,6 +34,9 @@ void ABullet::Tick(float _DeltaTime)
 		if (true == Collider->CollisionCheck(MT3CollisionOrder::Enemy, Result)
 			|| true == Collider->CollisionCheck(MT3CollisionOrder::Boss, Result))
 		{
+
+			UEngineSound::SoundPlay("BulletHit.mp3");
+
 			AEnemy* Enemy = dynamic_cast<AEnemy*>(Result[0]->GetOwner());
 			Enemy->Damaged(Damage);
 
@@ -50,6 +53,8 @@ void ABullet::Tick(float _DeltaTime)
 		std::vector<UCollision*> Result;
 		if (true == Collider->CollisionCheck(MT3CollisionOrder::Monoliths, Result))
 		{
+			UEngineSound::SoundPlay("BulletHit.mp3");
+
 			AMonoliths* Monoliths = dynamic_cast<AMonoliths*>(Result[0]->GetOwner());
 			Monoliths->GoDown();
 

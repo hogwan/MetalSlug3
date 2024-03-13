@@ -163,6 +163,7 @@ void ASoldierZombie::AttackStart()
 
 void ASoldierZombie::DeathStart()
 {
+	UEngineSound::SoundPlay("Zombie_ManDeath.mp3");
 	CurAnimName = "Death";
 	Collider->ActiveOff();
 	DirCheck(CurAnimName);

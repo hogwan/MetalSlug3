@@ -22,5 +22,7 @@ protected:
 	UImageRenderer* Renderer = nullptr;
 	UImageRenderer* SphereRenderer = nullptr;
 
+	int PrevFrame = -1;
+
 };
 

@@ -3,6 +3,8 @@
 #include "Rubble.h"
 #include <EngineBase/EngineRandom.h>
 #include <EnginePlatform/EngineSound.h>
+#include "HugeExplosionEffect.h"
+#include <EngineBase/EngineRandom.h>
 
 AMonoEye_UFO::AMonoEye_UFO()
 {
@@ -178,6 +180,18 @@ void AMonoEye_UFO::Firing(float _DeltaTime)
 
 void AMonoEye_UFO::Destroyed(float _DeltaTime)
 {
+	AccCoolTime += _DeltaTime;
+	if (AccCoolTime > 0.5f)
+	{
+		AccCoolTime = 0.f;
+		AHugeExplosionEffect* Effect = GetWorld()->SpawnActor<AHugeExplosionEffect>();
+		
+		float RandomX = UEngineRandom::MainRandom.RandomFloat(-100.f, 100.f);
+		float RandomY = UEngineRandom::MainRandom.RandomFloat(-50.f, 50.f);
+
+		FVector EffectLocation = { GetActorLocation().X + RandomX, GetActorLocation().Y + RandomY };
+		Effect->SetActorLocation(EffectLocation);
+	}
 }
 
 void AMonoEye_UFO::IdleStart()
@@ -205,4 +219,7 @@ void AMonoEye_UFO::DestroyedStart()
 	Collider->ActiveOff();
 	Renderer->ActiveOff();
 	AncientCharactor->ActiveOff();
+	AccCoolTime = 0.f;
+
+	UContentsHelper::GameEnd = true;
 }

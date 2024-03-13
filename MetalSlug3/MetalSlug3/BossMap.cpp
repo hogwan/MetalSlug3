@@ -1,5 +1,6 @@
 #include "BossMap.h"
 #include "ContentsHelper.h"
+#include <EnginePlatform/EngineSound.h>
 
 bool ABossMap::LoadComplete = false;
 
@@ -29,6 +30,14 @@ void ABossMap::BeginPlay()
 void ABossMap::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
+
+	int CurFrame = Renderer->GetCurAnimationFrame();
+	if (CurFrame != PrevFrame)
+	{
+		UEngineSound::SoundPlay("LightOff.mp3");
+		PrevFrame = CurFrame;
+	}
+
 
 	if (Renderer->IsCurAnimationEnd())
 	{

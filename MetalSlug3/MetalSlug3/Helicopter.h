@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include <EnginePlatform/EngineSound.h>
 class AHelicopter : public AEnemy
 {
 public:
@@ -67,7 +68,7 @@ protected:
 	float DamagedEffectTime = 0.02f;
 	float DamagedEffectAcc = 0.0f;
 
-
+	UEngineSoundPlayer Sound;
 
 	int PrevHp = -1;
 };

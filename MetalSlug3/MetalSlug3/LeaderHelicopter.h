@@ -1,5 +1,6 @@
 #pragma once
 #include "Helicopter.h"
+#include <EnginePlatform/EngineSound.h>
 class ALeaderHelicopter : public AHelicopter
 {
 public:
@@ -26,5 +27,7 @@ protected:
 
 	float AccAttack = 0.0f;
 	float AttackCoolTime = 3.0f;
+
+	UEngineSoundPlayer Sound;
 };
 

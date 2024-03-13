@@ -96,6 +96,35 @@ void Marco::Tick(float _DeltaTime)
 {
 	CameraUpdate(_DeltaTime);
 
+	if (UContentsHelper::GameEnd)
+	{
+		InAirCheck(_DeltaTime);
+		GravityCheck(_DeltaTime);
+		GroundUp();
+
+		std::string GunName = "None";
+
+		switch (GunType)
+		{
+		case EGunType::Pistol:
+			GunName = "Pistol_";
+			break;
+		case EGunType::Rifle:
+			GunName = "Rifle_";
+			break;
+		}
+
+		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+
+		std::string UpperAnimName = GunName + "AllBody_Ceremony";
+
+		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(UpperAnimName,false,0,0.08f);
+		return;
+	}
+
 	if (IsAutoMove)
 	{
 		AutoMove(_DeltaTime);

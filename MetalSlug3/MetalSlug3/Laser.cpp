@@ -87,7 +87,7 @@ void ALaser::BeginPlay()
 	Collider->SetPosition({ 0,-10 });
 	Collider->SetColType(ECollisionType::Rect);
 
-	Destroy(2.7f);
+	Destroy(2.4f);
 }
 
 void ALaser::Tick(float _DeltaTime)

@@ -923,9 +923,46 @@ void SpawnManager::Tick(float _DeltaTime)
 
 	if (SpawnNumber == 34)
 	{
+		AccTime += _DeltaTime;
+		if (AccTime > 5.0f)
+		{
+			AccTime = 0.f;
+			++SpawnNumber;
+		}
+	}
+
+	if (SpawnNumber == 35)
+	{
 		UContentsHelper::BGMPlayer.Off();
 		UContentsHelper::BGMPlayer = UEngineSound::SoundPlay("BossPhase2BGM.mp3");
 		AMonoEye_UFO* UFO = GetWorld()->SpawnActor<AMonoEye_UFO>();
+
+		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 36)
+	{
+		if (UContentsHelper::GameEnd)
+		{
+			++SpawnNumber;
+		}
+	}
+
+	if (SpawnNumber == 37)
+	{
+		AccTime += _DeltaTime;
+		if (AccTime > 5.0f)
+		{
+			AccTime = 0.f;
+			++SpawnNumber;
+		}
+	}
+
+	if (SpawnNumber == 38)
+	{
+		UContentsHelper::BGMPlayer.Off();
+		UContentsHelper::BGMPlayer = UEngineSound::SoundPlay("EndBGM.mp3");
+		MissionComplete* MC = GetWorld()->SpawnActor<MissionComplete>();
 
 		++SpawnNumber;
 	}

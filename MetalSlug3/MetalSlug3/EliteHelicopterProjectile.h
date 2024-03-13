@@ -1,5 +1,6 @@
 #pragma once
 #include "MT3Object.h"
+#include <EnginePlatform/EngineSound.h>
 class AEliteHelicopterProjectile : public AMT3Object
 {
 public:
@@ -25,5 +26,7 @@ protected:
 
 	void FallCheck();
 	void HitCheck();
+
+	UEngineSoundPlayer Sound;
 };
 

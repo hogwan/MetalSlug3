@@ -6,6 +6,8 @@
 
 AHelicopter::AHelicopter()
 {
+	Sound = UEngineSound::SoundPlay("HelicopterPropeller.mp3");
+	Sound.Loop();
 }
 
 AHelicopter::~AHelicopter()
@@ -15,6 +17,8 @@ AHelicopter::~AHelicopter()
 	Explosion->SetSize(FVector{ 800,800 });
 
 	UEngineSound::SoundPlay("Destroy_2.mp3");
+
+	Sound.Off();
 }
 
 

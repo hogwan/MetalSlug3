@@ -5,6 +5,8 @@
 
 AEliteHelicopterProjectile::AEliteHelicopterProjectile()
 {
+	Sound = UEngineSound::SoundPlay("HelicopterPropeller.mp3");
+	Sound.Loop();
 }
 
 AEliteHelicopterProjectile::~AEliteHelicopterProjectile()
@@ -13,6 +15,8 @@ AEliteHelicopterProjectile::~AEliteHelicopterProjectile()
 	Effect->SetActorLocation(GetActorLocation());
 
 	UEngineSound::SoundPlay("Destroy_0.mp3");
+
+	Sound.Off();
 }
 
 void AEliteHelicopterProjectile::BeginPlay()

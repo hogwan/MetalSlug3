@@ -1,4 +1,7 @@
 #include "Monoliths.h"
+#include <EnginePlatform/EngineSound.h>
+#include <EngineBase/EngineRandom.h>
+#include "Rubble.h"
 
 AMonoliths::AMonoliths()
 {
@@ -96,6 +99,30 @@ void AMonoliths::Gravity(float _DeltaTime)
 	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
 	if (Color == Color8Bit(255, 0, 255, 0))
 	{
+		if (!Trigger)
+		{
+			UEngineSound::SoundPlay("Destroy_0.mp3");
+
+			for (int i = 0; i < 7; i++)
+			{
+				Rubble* Rub = GetWorld()->SpawnActor<Rubble>();
+				Rub->SetActorLocation(GetActorLocation());
+
+				FVector DirVector = FVector::Right;
+				int DirRandom = -(UEngineRandom::MainRandom.RandomInt(30, 150));
+				int ForceRandom = UEngineRandom::MainRandom.RandomInt(100, 500);
+				int SizeRandom = UEngineRandom::MainRandom.RandomInt(300, 700);
+				DirVector.RotationZToDeg(static_cast<float>(DirRandom));
+
+				Rub->SetVector(DirVector, static_cast<float>(ForceRandom));
+				Rub->GetRenderer()->SetScale({ SizeRandom, SizeRandom });
+			}
+
+			Trigger = true;
+		}
+
+
+
 		Speed = 0.0f;
 		Renderer->ChangeAnimation("Smaller", true, 0, 0.4f);
 		CurAnim = "Smaller";

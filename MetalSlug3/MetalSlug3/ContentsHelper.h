@@ -231,6 +231,7 @@ public:
 	static class UEngineSoundPlayer BGMPlayer;
 	static int Life;
 	static int Score;
+	static bool GameEnd;
 private:
 	UContentsHelper();
 	~UContentsHelper();

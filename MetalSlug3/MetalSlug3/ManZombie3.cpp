@@ -156,6 +156,7 @@ void AManZombie3::Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFr
 
 void AManZombie3::DeathStart()
 {
+	UEngineSound::SoundPlay("Zombie_ManDeath.mp3");
 	CurAnimName = "Death";
 	Collider->ActiveOff();
 	DirCheck(CurAnimName);

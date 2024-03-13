@@ -7,6 +7,8 @@
 #include <EnginePlatform/EngineSound.h>
 AEliteHelicopter::AEliteHelicopter()
 {
+	UEngineSoundPlayer Sound = UEngineSound::SoundPlay("HelicopterPropeller.mp3");
+	Sound.Loop();
 }
 
 AEliteHelicopter::~AEliteHelicopter()
@@ -18,6 +20,8 @@ AEliteHelicopter::~AEliteHelicopter()
 	Effect->SetActorLocation(GetActorLocation());
 
 	UEngineSound::SoundPlay("Destroy_1.mp3");
+
+	Sound.Off();
 }
 
 void AEliteHelicopter::BeginPlay()

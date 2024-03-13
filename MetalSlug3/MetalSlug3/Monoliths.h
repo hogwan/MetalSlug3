@@ -37,6 +37,8 @@ protected:
 
 	std::string CurAnim = "None";
 
+	bool Trigger = false;
+
 	UCollision* UpLayCollision = nullptr;
 
 };

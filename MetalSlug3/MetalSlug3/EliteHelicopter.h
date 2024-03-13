@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include <EnginePlatform/EngineSound.h>
 class AEliteHelicopter : public AEnemy
 {
 public:
@@ -31,5 +32,7 @@ protected:
 
 	bool IsShooting = false;
 	int Bullet = 3;
+
+	UEngineSoundPlayer Sound;
 };
 
