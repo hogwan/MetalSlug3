@@ -9,6 +9,7 @@ AManZombie1::AManZombie1()
 
 AManZombie1::~AManZombie1()
 {
+
 }
 
 void AManZombie1::BeginPlay()

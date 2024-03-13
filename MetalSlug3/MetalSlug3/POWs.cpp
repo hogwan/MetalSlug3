@@ -4,6 +4,7 @@
 #include "HeavyMachineGun.h"
 #include "RocketLauncher.h"
 #include "FlameShot.h"
+#include <EnginePlatform/EngineSound.h>
 
 APOWs::APOWs()
 {
@@ -224,6 +225,7 @@ void APOWs::PatrolStart()
 
 void APOWs::CompensationStart()
 {
+	UEngineSound::SoundPlay("Prisioner.mp3");
 	Renderer->ChangeAnimation("Compensation", false, 0, 0.08f);
 }
 

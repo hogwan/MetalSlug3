@@ -26,6 +26,10 @@ void ThunderCloud::Tick(float _DeltaTime)
 void ThunderCloud::Action()
 {
 	AItem:: Action();
+
+	UEngineSound::SoundPlay("WeaponEquip.mp3");
+	UEngineSound::SoundPlay("ThunderCloud.mp3");
+
 	if (!UContentsHelper::Player->IsZombie)
 	{
 		ThunderCloudObj* TCO = GetWorld()->SpawnActor<ThunderCloudObj>();

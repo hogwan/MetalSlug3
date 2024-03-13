@@ -1,4 +1,5 @@
 #pragma once
+#include <EnginePlatform/EngineSound.h>
 #include "MT3Object.h"
 class AItem
 	: public AMT3Object

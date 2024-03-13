@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include <EnginePlatform/EngineSound.h>
 class AZombies : public AEnemy
 {
 public:

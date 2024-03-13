@@ -26,6 +26,9 @@ void FlameShot::Action()
 {
 	AItem::Action();
 
+	UEngineSound::SoundPlay("WeaponEquip.mp3");
+	UEngineSound::SoundPlay("FlameShot.mp3");
+
 	if (!UContentsHelper::Player->IsZombie)
 	{
 		UContentsHelper::Player->ArmsCount = 30;

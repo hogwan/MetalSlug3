@@ -6,6 +6,7 @@ AUncleZombie::AUncleZombie()
 
 AUncleZombie::~AUncleZombie()
 {
+	
 }
 
 void AUncleZombie::BeginPlay()

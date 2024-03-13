@@ -68,3 +68,21 @@ void AWomanZombie::Tick(float _DeltaTime)
 	GroundUp();
 	StateUpdate(_DeltaTime);
 }
+
+void AWomanZombie::DeathStart()
+{
+	UEngineSound::SoundPlay("Zombie_WomanDeath.mp3");
+	std::vector<UCollision*> Result;
+	if (Collider->CollisionCheck(MT3CollisionOrder::Flame, Result))
+	{
+		CurAnimName = "DeathInFlame";
+	}
+	else
+	{
+		CurAnimName = "Death";
+	}
+
+	Collider->ActiveOff();
+	DirCheck(CurAnimName);
+	Renderer->ChangeAnimation(CurAnimName);
+}

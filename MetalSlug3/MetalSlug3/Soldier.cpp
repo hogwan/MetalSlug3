@@ -1,6 +1,8 @@
 #include "Soldier.h"
 #include "Marco.h"
 #include "SoldierBomb.h"
+#include <EnginePlatform/EngineSound.h>
+#include <EngineBase/EngineRandom.h>
 ASoldier::ASoldier()
 {
 }
@@ -352,6 +354,20 @@ void ASoldier::KnifeAttackStart()
 
 void ASoldier::DeathStart()
 {
+	int Random = UEngineRandom::MainRandom.RandomInt(0, 2);
+	switch (Random)
+	{
+	case 0:
+		UEngineSound::SoundPlay("SoldierDeath_0.mp3");
+		break;
+	case 1:
+		UEngineSound::SoundPlay("SoldierDeath_1.mp3");
+		break;
+	case 2:
+		UEngineSound::SoundPlay("SoldierDeath_2.mp3");
+		break;
+	}
+
 	std::vector<UCollision*> Result;
 	if (true == Collider->CollisionCheck(MT3CollisionOrder::PlayerKnife, Result))
 	{
@@ -427,7 +443,7 @@ void ASoldier::GroundUp()
 
 void ASoldier::RandomPattern()
 {
-	int Random = rand() % 3;
+	int Random = UEngineRandom::MainRandom.RandomInt(0, 2);
 	Pattern = SoldierPattern(Random);
 }
 

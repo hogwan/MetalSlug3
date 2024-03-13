@@ -7,6 +7,7 @@ AManZombie3::AManZombie3()
 
 AManZombie3::~AManZombie3()
 {
+
 }
 
 void AManZombie3::BeginPlay()

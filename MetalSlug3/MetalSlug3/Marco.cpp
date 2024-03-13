@@ -2,6 +2,7 @@
 #include <EngineCore\EngineCore.h>
 #include <EngineBase/EngineTime.h>
 #include <EnginePlatform/EngineInput.h>
+#include <EnginePlatform/EngineSound.h>
 #include "Bullet.h"
 #include "PistolBullet.h"
 #include "HeavyMachineGunBullet.h"
@@ -2551,6 +2552,8 @@ void Marco::UpperThrowStart()
 
 void Marco::UpperKnifeAttack1Start()
 {
+	UEngineSound::SoundPlay("KnifeAttack1.mp3");
+
 	std::vector<UCollision*> Result;
 	if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
 	{
@@ -2573,6 +2576,8 @@ void Marco::UpperKnifeAttack1Start()
 
 void Marco::UpperKnifeAttack2Start()
 {
+	UEngineSound::SoundPlay("KnifeAttack2.mp3");
+
 	std::vector<UCollision*> Result;
 	if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
 	{
@@ -4458,6 +4463,7 @@ void Marco::BulletSpawn(FVector _SpawnLocation, FVector _BulletDir)
 	{
 	case EGunList::Pistol:
 		Bullet = GetWorld()->SpawnActor<APistolBullet>(MT3RenderOrder::Projectile);
+		UEngineSound::SoundPlay("Pistol_Launch.mp3");
 		break;
 	case EGunList::FlameShot:
 		Bullet = GetWorld()->SpawnActor<AFlameShotBullet>(MT3RenderOrder::Projectile);

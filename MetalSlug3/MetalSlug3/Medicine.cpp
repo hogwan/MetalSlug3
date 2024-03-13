@@ -27,6 +27,8 @@ void Medicine::Action()
 {
 	AItem::Action();
 
+	UEngineSound::SoundPlay("CollectableGrap.mp3");
+
 	if (UContentsHelper::Player->IsZombie)
 	{
 		UContentsHelper::Player->ZombieToHuman();

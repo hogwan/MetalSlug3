@@ -1,6 +1,7 @@
 #include "CEO.h"
 #include "ContentsHelper.h"
 #include "CEOsecretary.h"
+#include <EnginePlatform/EngineSound.h>
 
 ACEO::ACEO()
 {
@@ -110,6 +111,7 @@ void ACEO::PatrolStart()
 
 void ACEO::CompensationStart()
 {
+	UEngineSound::SoundPlay("President.mp3");
 	Renderer->ChangeAnimation("Compensation", false, 0, 0.08f);
 }
 

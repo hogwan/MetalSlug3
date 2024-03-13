@@ -26,6 +26,9 @@ void HeavyMachineGun::Action()
 {
 	AItem::Action();
 
+	UEngineSound::SoundPlay("WeaponEquip.mp3");
+	UEngineSound::SoundPlay("HeavyMachineGun.mp3");
+
 	if (!UContentsHelper::Player->IsZombie)
 	{
 		UContentsHelper::Player->Gun = EGunList::HeavyMachineGun;

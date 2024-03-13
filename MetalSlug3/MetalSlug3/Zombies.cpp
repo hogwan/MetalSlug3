@@ -296,6 +296,8 @@ void AZombies::Attack(float _DeltaTime, int _LaunchFrame, int _LaunchEffectFrame
 	{
 		if (CurFrame == _LaunchFrame)
 		{
+			UEngineSound::SoundPlay("Zombie_Attack.mp3");
+
 			AZombiesProjectile* Projectile = GetWorld()->SpawnActor<AZombiesProjectile>();
 			FVector SpawnLocation = FVector::Zero;
 			if (DirState == EActorDir::Right)
@@ -393,6 +395,7 @@ void AZombies::AttackStart()
 
 void AZombies::DeathStart()
 {
+	UEngineSound::SoundPlay("Zombie_ManDeath.mp3");
 	std::vector<UCollision*> Result;
 	if (Collider->CollisionCheck(MT3CollisionOrder::Flame, Result))
 	{

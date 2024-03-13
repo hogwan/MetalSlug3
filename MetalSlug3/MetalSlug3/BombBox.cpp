@@ -27,6 +27,7 @@ void BombBox::Action()
 {
 	AItem::Action();
 
+	UEngineSound::SoundPlay("WeaponEquip.mp3");
 	if (!UContentsHelper::Player->IsZombie)
 	{
 		UContentsHelper::Player->BombsCount += 10;
