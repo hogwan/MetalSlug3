@@ -43,6 +43,6 @@ void CharacterSelect::BeginPlay()
 	NewPath.Move("Sound");
 	UEngineSound::Load(NewPath.AppendPath("BGM.ogg"));
 	UEngineSound::Load(NewPath.AppendPath("Marco.mp3"));
-	UContentsHelper::BGMPlayer = UEngineSound::SoundPlay("BGM.ogg");
-	UContentsHelper::BGMPlayer.Loop();
+	UEngineSound::Load(NewPath.AppendPath("Select.ogg"));
+	UEngineSound::Load(NewPath.AppendPath("MS3_Title.ogg"));
 }

@@ -450,7 +450,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TestLevel.h" />
     <ClInclude Include="ThunderCloud.h">
       <SubType>
       </SubType>
@@ -468,6 +467,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Time.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TitleScreen.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -809,7 +816,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="TestLevel.cpp" />
     <ClCompile Include="ThunderCloud.cpp">
       <SubType>
       </SubType>
@@ -827,6 +833,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Time.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TitleScreen.cpp">
       <SubType>
       </SubType>
     </ClCompile>

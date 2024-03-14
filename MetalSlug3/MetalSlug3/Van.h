@@ -29,7 +29,7 @@ protected:
 	float AccSpawnTime = 0.0f;
 	float SpawnCoolTime = 3.0f;
 
-	int MaxHp = 8;
+	int MaxHp = 10;
 
 	int PrevFrame = -1;
 };

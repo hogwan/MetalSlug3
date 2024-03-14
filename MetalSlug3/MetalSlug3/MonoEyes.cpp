@@ -64,6 +64,7 @@ void AMonoEyes::Tick(float _DeltaTime)
 	{
 		CurZPos = ZPos::Back;
 		Renderer->SetTransform({ {0,0},{450,450} });
+		Collider->ActiveOff();
 
 		AttachName = "Back_";
 	}
@@ -71,6 +72,7 @@ void AMonoEyes::Tick(float _DeltaTime)
 	{
 		CurZPos = ZPos::Mid;
 		Renderer->SetTransform({ {0,0},{480,480} });
+		Collider->ActiveOn();
 
 		AttachName = "Mid_";
 	}
@@ -78,6 +80,7 @@ void AMonoEyes::Tick(float _DeltaTime)
 	{
 		CurZPos = ZPos::Front;
 		Renderer->SetTransform({ {0,0},{500,500} });
+		Collider->ActiveOn();
 
 		AttachName = "Front_";
 	}

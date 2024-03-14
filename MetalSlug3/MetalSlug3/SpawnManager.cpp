@@ -574,10 +574,6 @@ void SpawnManager::Tick(float _DeltaTime)
 		UncleZombie_1->SetActorLocation({ 6250,1000 });
 		UncleZombie_1->StateChange(EnemyZombieState::Move);
 
-		ADoctorZombie* DoctorZombie_1 = GetWorld()->SpawnActor<ADoctorZombie>();
-		DoctorZombie_1->SetActorLocation({ 6150,1000 });
-		DoctorZombie_1->StateChange(EnemyZombieState::Move);
-
 		++SpawnNumber;
 	}
 
@@ -905,6 +901,8 @@ void SpawnManager::Tick(float _DeltaTime)
 				AccTime = 0.f;
 				MC->PatternStart = true; 
 				UContentsHelper::Player->AutoMoveOff();
+				FlameShot* FS = GetWorld()->SpawnActor<FlameShot>();
+				FS->SetActorLocation({ 14255,2230 });
 				++SpawnNumber;
 			}
 		}
@@ -936,6 +934,9 @@ void SpawnManager::Tick(float _DeltaTime)
 		UContentsHelper::BGMPlayer.Off();
 		UContentsHelper::BGMPlayer = UEngineSound::SoundPlay("BossPhase2BGM.mp3");
 		AMonoEye_UFO* UFO = GetWorld()->SpawnActor<AMonoEye_UFO>();
+
+		HeavyMachineGun* HMG = GetWorld()->SpawnActor<HeavyMachineGun>();
+		HMG->SetActorLocation({ 14055,2230 });
 
 		++SpawnNumber;
 	}

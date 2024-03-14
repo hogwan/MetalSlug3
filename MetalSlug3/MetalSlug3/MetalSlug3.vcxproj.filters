@@ -28,9 +28,6 @@
     <ClInclude Include="ContentsHelper.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="TestLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Object\Enemy</Filter>
     </ClInclude>
@@ -292,6 +289,12 @@
     <ClInclude Include="MissionComplete.h">
       <Filter>Object\UI</Filter>
     </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScreen.h">
+      <Filter>Object\TitleScreen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -317,9 +320,6 @@
     </ClCompile>
     <ClCompile Include="ContentsHelper.cpp">
       <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="TestLevel.cpp">
-      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Object\Enemy</Filter>
@@ -582,6 +582,12 @@
     <ClCompile Include="MissionComplete.cpp">
       <Filter>Object\UI</Filter>
     </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScreen.cpp">
+      <Filter>Object\TitleScreen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -649,6 +655,9 @@
     </Filter>
     <Filter Include="Object\Weapon">
       <UniqueIdentifier>{6108ae1f-251a-4d99-a08c-8ed3f1abb1de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\TitleScreen">
+      <UniqueIdentifier>{504abf11-2e0d-46b9-bb9a-a3d790f590c0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
