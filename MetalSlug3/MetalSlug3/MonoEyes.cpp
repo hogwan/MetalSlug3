@@ -18,6 +18,8 @@ void AMonoEyes::BeginPlay()
 {
 	AEnemy::BeginPlay();
 
+	Hp = 40;
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ {0,0},{500,500} });
 	Renderer->SetImage("MonoEyes_Death.png");
@@ -32,7 +34,6 @@ void AMonoEyes::BeginPlay()
 
 	Collider = CreateCollision(MT3CollisionOrder::Boss);
 	Collider->SetScale({ 100,300 });
-	Collider->SetPosition({ 0,-150 });
 	Collider->SetColType(ECollisionType::Rect);
 
 	LaunchCoolTime = static_cast<float>(rand() % 20);

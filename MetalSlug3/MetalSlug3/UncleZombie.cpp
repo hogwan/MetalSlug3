@@ -13,6 +13,10 @@ void AUncleZombie::BeginPlay()
 {
 	AZombies::BeginPlay();
 
+	MoveSpeed = 100;
+	Hp = 12;
+	Range = 170.f;
+
 	LaunchFrame = 9;
 	LaunchEffectFrame = 1;
 	LaunchEffectOffset_Up = { 0,0 };

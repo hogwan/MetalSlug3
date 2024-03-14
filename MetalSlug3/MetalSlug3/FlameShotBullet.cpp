@@ -14,6 +14,9 @@ void AFlameShotBullet::BeginPlay()
 {
 	AMT3Object::BeginPlay();
 
+	Speed = 300.0f;
+	Damage = 2;
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
 	Renderer->SetTransform({ {0,0},{500,500} });
 	Renderer->CreateAnimation("Right","FlameShot_Right.png", 0, 25, 0.04f, false);
@@ -24,7 +27,6 @@ void AFlameShotBullet::BeginPlay()
 	Collider = CreateCollision(MT3CollisionOrder::Flame);
 	Collider->SetTransform({ {0,0},{50,50} });
 
-	Speed = 300.0f;
 }
 
 void AFlameShotBullet::Tick(float _DeltaTime)

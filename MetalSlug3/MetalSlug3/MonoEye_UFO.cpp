@@ -18,6 +18,8 @@ void AMonoEye_UFO::BeginPlay()
 {
 	SetActorLocation({ 14150,2350 });
 
+	Hp = 400;
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ {0,0},{800,850} });
 	Renderer->CreateAnimation("Idle", "MonoEye_UFO_Idle.png", 0, 4,0.08f, true);
@@ -42,8 +44,6 @@ void AMonoEye_UFO::BeginPlay()
 	Collider = CreateCollision(MT3CollisionOrder::Boss);
 	Collider->SetTransform({ {0,-100},{300,200} });
 	Collider->SetColType(ECollisionType::Rect);
-
-	Hp = 100;
 
 	for (int i = 0; i < 30; i++)
 	{

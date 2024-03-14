@@ -13,6 +13,10 @@ void AManZombie2::BeginPlay()
 {
 	AZombies::BeginPlay();
 
+	MoveSpeed = 50.f;
+	Hp = 6;
+	Range = 100.f;
+
 	LaunchFrame = 21;
 	LaunchEffectFrame = 8;
 	LaunchEffectOffset_Up = { 0,0 };

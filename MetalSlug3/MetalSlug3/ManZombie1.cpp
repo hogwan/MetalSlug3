@@ -17,6 +17,10 @@ void AManZombie1::BeginPlay()
 	AZombies::BeginPlay();
 	LaunchEffectScale = { 500,500 };
 
+	MoveSpeed = 75;
+	Hp = 10;
+	Range = 200.f;
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetImage("ManZombie1.png");
 	Renderer->SetTransform({ {0,0}, {600,600} });

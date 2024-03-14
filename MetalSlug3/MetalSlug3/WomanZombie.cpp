@@ -12,6 +12,10 @@ void AWomanZombie::BeginPlay()
 {
 	AZombies::BeginPlay();
 
+	MoveSpeed = 50;
+	Hp = 12;
+	Range = 150.f;
+
 	LaunchFrame = 13;
 	LaunchEffectFrame = 11;
 	LaunchEffectOffset_Up = { 0,0 };

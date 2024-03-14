@@ -16,6 +16,8 @@ void ThunderGround::BeginPlay()
 {
 	AActor::BeginPlay();
 
+	Damage = 3;
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::UFO_LazerGroundEffect);
 	Renderer->SetTransform({ {0,0},{500,500} });
 	Renderer->CreateAnimation("ThunderGround", "ThunderCloudObjEffect.png", 0, 10, 0.03f);

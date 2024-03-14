@@ -32,6 +32,8 @@ void ALeaderHelicopter::BeginPlay()
 {
 	AEnemy::BeginPlay();
 
+	Hp = 30;
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ {0,0}, {500,500} });
 	Renderer->SetImage("Helicopter.png");

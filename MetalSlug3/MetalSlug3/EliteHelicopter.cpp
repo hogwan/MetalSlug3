@@ -26,6 +26,8 @@ void AEliteHelicopter::BeginPlay()
 {
 	AEnemy::BeginPlay();
 
+	Hp = 40;
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
 	Renderer->SetTransform({ {0,0},{500,500} });
 	Renderer->SetImage("Flying0.png");

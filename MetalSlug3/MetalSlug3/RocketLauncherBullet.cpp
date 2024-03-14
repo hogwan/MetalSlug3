@@ -18,6 +18,9 @@ void RocketLauncherBullet::BeginPlay()
 {
 	ABullet::BeginPlay();
 
+	Speed = 700.0f;
+	Damage = 5;
+
 	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
 	Renderer->SetTransform({ {0,0},{500,500} });
 	Renderer->CreateAnimation("Right", "RocketLauncher_Right.png", 0, 6, 0.08f, false);
@@ -28,8 +31,6 @@ void RocketLauncherBullet::BeginPlay()
 	Collider = CreateCollision(MT3CollisionOrder::PlayerBullet);
 	Collider->SetTransform({ {0,0},{100,20} });
 
-	Speed = 700.0f;
-	Damage = 10;
 }
 
 void RocketLauncherBullet::Tick(float _DeltaTime)

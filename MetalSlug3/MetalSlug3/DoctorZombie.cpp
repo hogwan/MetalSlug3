@@ -15,6 +15,10 @@ void ADoctorZombie::BeginPlay()
 {
 	AZombies::BeginPlay();
 
+	MoveSpeed = 25.f;
+	Hp = 4;
+	Range = 250.f;
+
 	LaunchFrame = 16;
 	LaunchEffectFrame = 16;
 	LaunchEffectOffset_Up = { 0,0 };
