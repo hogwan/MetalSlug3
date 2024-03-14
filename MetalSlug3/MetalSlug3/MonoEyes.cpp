@@ -24,7 +24,7 @@ void AMonoEyes::BeginPlay()
 	Renderer->SetTransform({ {0,0},{500,500} });
 	Renderer->SetImage("MonoEyes_Death.png");
 	Renderer->CreateAnimation("Spawn", "MonoEyes_Spawn.png", 0, 13, 0.03f, false);
-	Renderer->CreateAnimation("Death", "MonoEyes_Death.png", 0, 7, 0.08, false);
+	Renderer->CreateAnimation("Death", "MonoEyes_Death.png", 0, 7, 0.08f, false);
 
 	LaunchRenderer = CreateImageRenderer(MT3RenderOrder::Particle);
 	LaunchRenderer->SetTransform({ LaunchEffectOffset, { 500,500 } });

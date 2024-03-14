@@ -65,33 +65,27 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	// 상태 보조 함수
-	void GravityCheck(float _DeltaTime);
-	void InAirCheck(float _DeltaTime);
-	void DeathCheck();
-	void ManipulateUpdate(float _DeltaTime);
-
-	// 각 상태마다 언제나 가장 위에 실행되어야 한다.
 	std::string DirCheck(BodyRenderer _BodyRendererType, std::string _Name);
 	std::string GunCheck(BodyRenderer _BodyRendererType, std::string _Name);
-
 	std::string AddDirectionName(std::string _CurAnimName);
 	std::string AddGunTypeName(std::string _CurAnimName);
-	void HeavyMachineGunCheckName(std::string& CurAnimName);
-	void GunTypeShootCheck();
-	void TriggerDirCheck(BodyRenderer _BodyRenderer, std::string _Name);
 	
-
 	UpperBodyState UpperState = UpperBodyState::Idle;
 	LowerBodyState LowerState = LowerBodyState::Idle;
 	AllBodyState AllState = AllBodyState::None;
 	ZombieArmState ZArmState = ZombieArmState::None;
 
+	void GravityCheck(float _DeltaTime);
+	void InAirCheck(float _DeltaTime);
+	void DeathCheck();
+	void ManipulateUpdate(float _DeltaTime);
+	void HeavyMachineGunCheckName(std::string& CurAnimName);
+	void GunTypeShootCheck();
+	void TriggerDirCheck(BodyRenderer _BodyRenderer, std::string _Name);
 	void UpperStateUpdate(float _DeltaTime);
 	void LowerStateUpdate(float _DeltaTime);
 	void AllBodyStateUpdate(float _DeltaTime);
 	void ZombieArmStateUpdate(float _DeltaTime);
-
 
 	void UpperNone(float _DeltaTime);
 	void UpperIdle(float _DeltaTime);
@@ -167,8 +161,6 @@ protected:
 	void AllDeath(float _DeltaTime);
 	void AllDeathInAir(float _DeltaTime);
 	void AllDeathByKnife(float _DeltaTime);
-	void AllElephantSlug_Idle(float _DeltaTime);
-	void AllElephantSlug_Move(float _DeltaTime);
 
 	void AllSpawnStart();
 	void AllNoneStart();
@@ -185,8 +177,6 @@ protected:
 	void AllDeathStart();
 	void AllDeathInAirStart();
 	void AllDeathByKnifeStart();
-	void AllElephantSlug_IdleStart();
-	void AllElephantSlug_MoveStart();
 	void AllStart();
 
 
@@ -254,65 +244,6 @@ private:
 	std::string CurZArmName = "ZombieArm_Idle";
 
 	FVector ShootDir = FVector::Right;
-
-	void Jumping_UpperBodySyncro();
-	void ForwardJumping_UpperBodySyncro();
-	void Reset_UpperBodySyncro();
-	void ZombieArm_Syncro();
-	void CalGravityVector(float _DeltaTime);
-	void GroundUp();
-	void BulletSpawn(FVector _SpawnLocation, FVector _BulletDir);
-
-
-	bool InAir = false;
-	bool IsHeavyMachineGun = false;
-	bool IsCrouching = false;
-	bool CrouchShooting = false;
-	bool Manipulate = true;
-	bool NoHit = true;
-
-	float FreeMoveSpeed = 1000.0f;
-
-	float* AccTime = nullptr;
-	float* CoolTime = nullptr;
-
-	float Move_Speed = 300.0f;
-	float Run_Speed = 300.0f;
-	float Jump_Speed = 150.0f;
-	float ForwardJump_Speed = 200.0f;
-	float Crouch_Speed = 50.0f;
-	float Zombie_Speed = 75.0f;
-	
-	float Pistol_Shoot_CoolTime = 0.1f;
-	float Pistol_Shoot_AccTime = 0.0f;
-
-	float HeavyMachineGun_Shoot_AccTime = 0.0f;
-	float HeavyMachineGun_Shoot_CoolTime = 0.14f;
-
-	float FlameShot_Shoot_AccTime = 0.0f;
-	float FlameShot_Shoot_CoolTime = 0.35f;
-
-	float ShotGun_Shoot_AccTime = 0.0f;
-	float ShotGun_Shoot_CoolTime = 0.3f;
-
-	float RocketLauncher_Shoot_AccTime = 0.0f;
-	float RocketLauncher_Shoot_CoolTime = 0.3f;
-
-	float IronLizard_Shoot_AccTime = 0.0f;
-	float IronLizard_Shoot_CoolTime = 0.3f;
-
-	float Throw_CoolTime = 0.1f;
-	float Throw_AccTime = 0.0f;
-	
-
-	int HeavyMachineGun_PrevFrame = -1;
-	int Vomit_PrevFrame = -1;
-	int Jump_PrevFrame = -1;
-
-	bool IsVomitProjectileCol = false;
-	int iterator = 0;
-	std::vector<AZombieVomitProjectile*> VomitProjectileVec;
-
 	FVector MarcoUpperBodyOffset = { 0.0f, 0.0f };
 	FVector MarcoDefaultUpperBodyOffset = { 0.0f,-23.0f };
 	FVector MarcoSize = { 527.27273f, 527.27273f };
@@ -349,27 +280,15 @@ private:
 	FVector ZombieJumpPower = FVector::Up * 75.0f;
 	FVector JumpVector = FVector::Zero;
 
-
 	FVector HeavyMachineGun_RightArr[5] = { {70,-7},{70,-4},{1,0},{70,4},{70,7} };
 	FVector HeavyMachineGun_LeftArr[5] = { {-70,-7},{-70,-4},{-1,0},{-70,4},{-70,7} };
 	FVector HeavyMachineGun_UpArr[5] = { {-7,-70},{-4,-70},{0,-1},{4,-70},{7,-70} };
 	FVector HeavyMachineGun_DownArr[5] = { {-7,70},{-4,70},{0,1},{4,70},{7,70} };
 
-	FVector VomitProjectileVectorArr[100] = { {48,35},{48,35},{70,41},{70,41},{82,34},
-												{82,34},{87,30},{87,30},{79,19} ,{79,19} ,
-												{82,14} ,{82,14} ,{1,0},{1,0},
-												{65,-13},{65,-13},{43,-16},{43,-16},{52,-21},
-												{52,-21}, {43,-20},{42,-20},{39,-27},{39,-27},
-												{40,-33},{40,-33},{41,-37},{41,-37},{37,-40},
-												{37,-40},{37,-45},{37,-45}, {25,-55}, {25,-55},
-												{16,-66},{16,-66} };
-
 	FVector DefaultCollisionScale = { 50,100 };
 	FVector DefaultCollisionPosition = { 0, -50 };
 	FVector CrouchCollisionScale = { 50,50 };
 	FVector CrouchCollisionPosition = { 0,-25 };
-
-	int KnifeDamage = 2;
 
 	FVector KnifeReachCollisionScale = { 70,80 };
 	FVector KnifeReachCollisionPosition_Right = {35,-50 };
@@ -379,16 +298,57 @@ private:
 	FVector CrouchKnifeReachCollisionPosition_Right = { 35,-25 };
 	FVector CrouchKnifeReachCollisionPosition_Left = { -35,-25 };
 
-	std::vector<UImageRenderer*> VomitRenderer;
-	float AccDeltaTime = 0.0f;
-	void CameraUpdate(float _DeltaTime);
+	bool IsAutoMove = false;
+	bool HeavyTrigger = false;
+	bool InAir = false;
+	bool IsHeavyMachineGun = false;
+	bool IsCrouching = false;
+	bool CrouchShooting = false;
+	bool Manipulate = true;
+	bool NoHit = true;
+	bool IsVomitProjectileCol = false;
 
+	float* AccTime = nullptr;
+	float* CoolTime = nullptr;
+
+	float FreeMoveSpeed = 1000.0f;
+	float Move_Speed = 300.0f;
+	float Run_Speed = 300.0f;
+	float Jump_Speed = 150.0f;
+	float ForwardJump_Speed = 200.0f;
+	float Crouch_Speed = 50.0f;
+	float Zombie_Speed = 75.0f;
+	float Pistol_Shoot_CoolTime = 0.1f;
+	float Pistol_Shoot_AccTime = 0.0f;
+	float HeavyMachineGun_Shoot_AccTime = 0.0f;
+	float HeavyMachineGun_Shoot_CoolTime = 0.14f;
+	float FlameShot_Shoot_AccTime = 0.0f;
+	float FlameShot_Shoot_CoolTime = 0.35f;
+	float RocketLauncher_Shoot_AccTime = 0.0f;
+	float RocketLauncher_Shoot_CoolTime = 0.3f;
+	float Throw_CoolTime = 0.1f;
+	float Throw_AccTime = 0.0f;
+	float AccDeltaTime = 0.0f;
 	float AccInAir = 0.0f;
 	float InAirTime = 0.2f;
+	
+	int HeavyMachineGun_PrevFrame = -1;
+	int Vomit_PrevFrame = -1;
+	int Jump_PrevFrame = -1;
+	int iterator = 0;
+	int KnifeDamage = 2;
 
-	bool IsAutoMove = false;
+	void Jumping_UpperBodySyncro();
+	void ForwardJumping_UpperBodySyncro();
+	void Reset_UpperBodySyncro();
+	void ZombieArm_Syncro();
+	void CalGravityVector(float _DeltaTime);
+	void GroundUp();
+	void BulletSpawn(FVector _SpawnLocation, FVector _BulletDir);
+	void CameraUpdate(float _DeltaTime);
 	void AutoMove(float _DeltaTime);
+	void OutOfControl(float _DeltaTime);
+	void ArmsCheck();
 
-	bool HeavyTrigger = false;
 };
 

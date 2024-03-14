@@ -95,52 +95,18 @@ void Marco::BeginPlay()
 void Marco::Tick(float _DeltaTime)
 {
 	CameraUpdate(_DeltaTime);
+	OutOfControl(_DeltaTime);
+	ArmsCheck();
 
-	if (UContentsHelper::GameEnd)
-	{
-		InAirCheck(_DeltaTime);
-		GravityCheck(_DeltaTime);
-		GroundUp();
-
-		std::string GunName = "None";
-
-		switch (GunType)
-		{
-		case EGunType::Pistol:
-			GunName = "Pistol_";
-			break;
-		case EGunType::Rifle:
-			GunName = "Rifle_";
-			break;
-		}
-
-		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
-		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
-		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
-		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
-
-		std::string UpperAnimName = GunName + "AllBody_Ceremony";
-
-		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(UpperAnimName,false,0,0.08f);
-		return;
-	}
-
-	if (IsAutoMove)
-	{
-		AutoMove(_DeltaTime);
-		return;
-	}
+	InAirCheck(_DeltaTime);
+	GravityCheck(_DeltaTime);
+	GroundUp();
+	DeathCheck();
 
 	if (Manipulate)
 	{
 		ManipulateUpdate(_DeltaTime);
 	}
-
-	InAirCheck(_DeltaTime);
-	GravityCheck(_DeltaTime);
-	GroundUp();
-
-	DeathCheck();
 
 	AllBodyStateUpdate(_DeltaTime);
 	if (!IsZombie)
@@ -153,17 +119,6 @@ void Marco::Tick(float _DeltaTime)
 		ZombieArmStateUpdate(_DeltaTime);
 	}
 
-
-	if (ArmsCount < 0)
-	{
-		ArmsCount = 0;
-	}
-
-	if (ArmsCount == 0)
-	{
-		Gun = EGunList::Pistol;
-		GunType = EGunType::Pistol;
-	}
 }
 
 void Marco::GravityCheck(float _DeltaTime)
@@ -515,17 +470,9 @@ void Marco::GunTypeShootCheck()
 		AccTime = &FlameShot_Shoot_AccTime;
 		CoolTime = &FlameShot_Shoot_CoolTime;
 		break;
-	case EGunList::ShotGun:
-		AccTime = &ShotGun_Shoot_AccTime;
-		CoolTime = &ShotGun_Shoot_CoolTime;
-		break;
 	case EGunList::RocketLauncher:
 		AccTime = &RocketLauncher_Shoot_AccTime;
 		CoolTime = &RocketLauncher_Shoot_CoolTime;
-		break;
-	case EGunList::IronLizard:
-		AccTime = &IronLizard_Shoot_AccTime;
-		CoolTime = &IronLizard_Shoot_CoolTime;
 		break;
 	default:
 		break;
@@ -679,12 +626,6 @@ void Marco::AllBodyStateUpdate(float _DeltaTime)
 		break;
 	case AllBodyState::Ceremony:
 		AllCeremony(_DeltaTime);
-		break;
-	case AllBodyState::ElephantSlug_Idle:
-		AllElephantSlug_Idle(_DeltaTime);
-		break;
-	case AllBodyState::ElephantSlug_Move:
-		AllElephantSlug_Move(_DeltaTime);
 		break;
 	case AllBodyState::Death:
 		AllDeath(_DeltaTime);
@@ -906,12 +847,6 @@ void Marco::AllStateChange(AllBodyState _AllState)
 			break;
 		case AllBodyState::Ceremony:
 			AllCeremonyStart();
-			break;
-		case AllBodyState::ElephantSlug_Idle:
-			AllElephantSlug_IdleStart();
-			break;
-		case AllBodyState::ElephantSlug_Move:
-			AllElephantSlug_MoveStart();
 			break;
 		case AllBodyState::Death:
 			AllDeathStart();
@@ -3460,28 +3395,6 @@ void Marco::AllDeathByKnife(float _DeltaTime)
 	}
 }
 
-void Marco::AllElephantSlug_Idle(float _DeltaTime)
-{
-	if (
-		true == UEngineInput::IsPress(VK_RIGHT) ||
-		true == UEngineInput::IsPress(VK_LEFT)
-		)
-	{
-		AllStateChange(AllBodyState::ElephantSlug_Move);
-	}
-}
-
-void Marco::AllElephantSlug_Move(float _DeltaTime)
-{
-	if (
-		false == UEngineInput::IsPress(VK_RIGHT) &&
-		false == UEngineInput::IsPress(VK_LEFT)
-		)
-	{
-		AllStateChange(AllBodyState::ElephantSlug_Idle);
-	}
-}
-
 void Marco::AllSpawnStart()
 {
 	CurAllBodyName = "AllBody_Spawn";
@@ -3697,18 +3610,6 @@ void Marco::AllDeathByKnifeStart()
 	std::string DirectedName = AddDirectionName(CurAllBodyName);
 	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(DirectedName);
 	DirCheck(BodyRenderer::AllBody, CurAllBodyName);
-}
-
-void Marco::AllElephantSlug_IdleStart()
-{
-	CurAllBodyName = "AllBody_ElephantSlug_Idle";
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(CurAllBodyName);
-}
-
-void Marco::AllElephantSlug_MoveStart()
-{
-	CurAllBodyName = "AllBody_ElephantSlug_Move";
-	Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(CurAllBodyName);
 }
 
 void Marco::AllStart()
@@ -4628,5 +4529,57 @@ void Marco::AutoMove(float _DeltaTime)
 		std::string LowerAnimName = "LowerBody_Idle_Right";
 		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(UpperAnimName);
 		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(LowerAnimName);
+	}
+}
+
+void Marco::OutOfControl(float _DeltaTime)
+{
+	if (UContentsHelper::GameEnd)
+	{
+		InAirCheck(_DeltaTime);
+		GravityCheck(_DeltaTime);
+		GroundUp();
+
+		std::string GunName = "None";
+
+		switch (GunType)
+		{
+		case EGunType::Pistol:
+			GunName = "Pistol_";
+			break;
+		case EGunType::Rifle:
+			GunName = "Rifle_";
+			break;
+		}
+
+		Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOff();
+		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+
+		std::string UpperAnimName = GunName + "AllBody_Ceremony";
+
+		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(UpperAnimName, false, 0, 0.08f);
+		return;
+	}
+
+	if (IsAutoMove)
+	{
+		AutoMove(_DeltaTime);
+		return;
+	}
+}
+
+void Marco::ArmsCheck()
+{
+	if (ArmsCount < 0)
+	{
+		ArmsCount = 0;
+	}
+
+	if (ArmsCount == 0)
+	{
+		Gun = EGunList::Pistol;
+		GunType = EGunType::Pistol;
 	}
 }

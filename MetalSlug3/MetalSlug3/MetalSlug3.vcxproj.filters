@@ -295,6 +295,12 @@
     <ClInclude Include="TitleScreen.h">
       <Filter>Object\TitleScreen</Filter>
     </ClInclude>
+    <ClInclude Include="EndLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="EndScreen.h">
+      <Filter>Object\EndScreen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayLevel.cpp">
@@ -588,6 +594,12 @@
     <ClCompile Include="TitleScreen.cpp">
       <Filter>Object\TitleScreen</Filter>
     </ClCompile>
+    <ClCompile Include="EndLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="EndScreen.cpp">
+      <Filter>Object\EndScreen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -658,6 +670,9 @@
     </Filter>
     <Filter Include="Object\TitleScreen">
       <UniqueIdentifier>{504abf11-2e0d-46b9-bb9a-a3d790f590c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\EndScreen">
+      <UniqueIdentifier>{0e8640e2-73ba-45ca-87b2-7f5b573e35bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

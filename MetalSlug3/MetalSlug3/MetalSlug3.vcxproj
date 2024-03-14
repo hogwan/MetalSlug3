@@ -241,6 +241,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EndLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EndScreen.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ExplosionEffect.h">
       <SubType>
@@ -604,6 +612,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="EliteHelicopterProjectile.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EndLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EndScreen.cpp">
       <SubType>
       </SubType>
     </ClCompile>

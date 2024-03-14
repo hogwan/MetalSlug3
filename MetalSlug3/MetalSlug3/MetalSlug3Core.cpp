@@ -2,6 +2,7 @@
 #include "CharacterSelect.h"
 #include "PlayLevel.h"
 #include "TitleLevel.h"
+#include "EndLevel.h"
 #include <EngineCore\EngineResourcesManager.h>
 
 MetalSlug3Core::MetalSlug3Core()
@@ -18,11 +19,9 @@ void MetalSlug3Core::BeginPlay()
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<CharacterSelect>("CharacterSelect");
 	CreateLevel<PlayLevel>("Play");
-
+	CreateLevel<EndLevel>("End");
 
 	ChangeLevel("Title");
-	
-	
 }
 
 void MetalSlug3Core::Tick(float _DeltaTime)
@@ -33,8 +32,4 @@ void MetalSlug3Core::Tick(float _DeltaTime)
 	{
 		GEngine->EngineDebugSwitch();
 	}
-}
-
-void MetalSlug3Core::End()
-{
 }

@@ -902,7 +902,7 @@ void SpawnManager::Tick(float _DeltaTime)
 				MC->PatternStart = true; 
 				UContentsHelper::Player->AutoMoveOff();
 				FlameShot* FS = GetWorld()->SpawnActor<FlameShot>();
-				FS->SetActorLocation({ 14255,2230 });
+				FS->SetActorLocation({ 14255.f,GetWorld()->GetCameraPos().Y });
 				++SpawnNumber;
 			}
 		}
@@ -936,7 +936,7 @@ void SpawnManager::Tick(float _DeltaTime)
 		AMonoEye_UFO* UFO = GetWorld()->SpawnActor<AMonoEye_UFO>();
 
 		HeavyMachineGun* HMG = GetWorld()->SpawnActor<HeavyMachineGun>();
-		HMG->SetActorLocation({ 14055,2230 });
+		HMG->SetActorLocation({ 14055.f,GetWorld()->GetCameraPos().Y});
 
 		++SpawnNumber;
 	}
@@ -980,6 +980,7 @@ void SpawnManager::Tick(float _DeltaTime)
 
 	if (SpawnNumber == 40)
 	{
+		GEngine->ChangeLevel("End");
 		SpawnNumber++;
 	}
 }
