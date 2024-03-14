@@ -19,12 +19,14 @@ AEliteHelicopter::~AEliteHelicopter()
 	Effect->SetActorLocation(GetActorLocation());
 
 	UEngineSound::SoundPlay("Destroy_1.mp3");
-
+	PropellerSound.Off();
 }
 
 void AEliteHelicopter::BeginPlay()
 {
 	AEnemy::BeginPlay();
+	PropellerSound = UEngineSound::SoundPlay("HelicopterPropeller.mp3");
+	PropellerSound.Loop();
 
 	Hp = 40;
 

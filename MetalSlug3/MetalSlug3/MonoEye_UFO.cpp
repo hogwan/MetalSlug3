@@ -30,6 +30,7 @@ void AMonoEye_UFO::BeginPlay()
 	Body = CreateImageRenderer(MT3RenderOrder::UFO_Body);
 	Body->SetImage("MonoEye_UFO_Body.png");
 	Body->SetTransform({ {0,232},{800,850} });
+	Body->ActiveOff();
 
 	BrokenBackBody = CreateImageRenderer(MT3RenderOrder::UFO_BackBody);
 	BrokenBackBody->SetImage("MonoEye_UFO_DestroyedBack.png");
@@ -45,7 +46,7 @@ void AMonoEye_UFO::BeginPlay()
 	Collider->SetTransform({ {0,-100},{300,200} });
 	Collider->SetColType(ECollisionType::Rect);
 
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 50; i++)
 	{
 		Rubble* Rub = GetWorld()->SpawnActor<Rubble>();
 		Rub->SetActorLocation(GetActorLocation());
@@ -69,6 +70,15 @@ void AMonoEye_UFO::Tick(float _DeltaTime)
 		AddActorLocation(FVector::Up * 1500.f * _DeltaTime);
 		return;
 	}
+	else
+	{
+		if (!Trigger)
+		{
+			Body->ActiveOn();
+			Trigger = true;
+		}
+	}
+
 	SetActorLocation({ 14150,2098 });
 
 	StateUpdate(_DeltaTime);

@@ -2608,6 +2608,7 @@ void Marco::UpperThrowStart()
 
 void Marco::UpperKnifeAttack1Start()
 {
+	UContentsHelper::Score += 100;
 	UEngineSound::SoundPlay("KnifeAttack1.mp3");
 
 	std::vector<UCollision*> Result;
@@ -2632,6 +2633,7 @@ void Marco::UpperKnifeAttack1Start()
 
 void Marco::UpperKnifeAttack2Start()
 {
+	UContentsHelper::Score += 100;
 	UEngineSound::SoundPlay("KnifeAttack2.mp3");
 
 	std::vector<UCollision*> Result;
@@ -3611,6 +3613,7 @@ void Marco::AllCrouch_ThrowStart()
 
 void Marco::AllCrouch_KnifeAttack1Start()
 {
+	UContentsHelper::Score += 100;
 	UEngineSound::SoundPlay("KnifeAttack1.mp3");
 	std::vector<UCollision*> Result;
 	if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))
@@ -3634,6 +3637,7 @@ void Marco::AllCrouch_KnifeAttack1Start()
 
 void Marco::AllCrouch_KnifeAttack2Start()
 {
+	UContentsHelper::Score += 100;
 	UEngineSound::SoundPlay("KnifeAttack2.mp3");
 	std::vector<UCollision*> Result;
 	if (KnifeReach->CollisionCheck(MT3CollisionOrder::Enemy, Result))

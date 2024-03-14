@@ -59,6 +59,7 @@ void ABomb::HitCheck()
 	if (Collider->CollisionCheck(MT3CollisionOrder::Enemy, Result)
 		|| Collider->CollisionCheck(MT3CollisionOrder::Boss, Result))
 	{
+		UContentsHelper::Score += 100;
 		AEnemy* Enemy = dynamic_cast<AEnemy*>(Result[0]->GetOwner());
 		Enemy->Damaged(Damage);
 		Destroy();

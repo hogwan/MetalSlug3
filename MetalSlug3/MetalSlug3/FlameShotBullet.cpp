@@ -17,7 +17,7 @@ void AFlameShotBullet::BeginPlay()
 	Speed = 300.0f;
 	Damage = 2;
 
-	Renderer = CreateImageRenderer(MT3RenderOrder::Projectile);
+	Renderer = CreateImageRenderer(MT3RenderOrder::Particle);
 	Renderer->SetTransform({ {0,0},{500,500} });
 	Renderer->CreateAnimation("Right","FlameShot_Right.png", 0, 25, 0.04f, false);
 	Renderer->CreateAnimation("Left", "FlameShot_Left.png", 0, 25, 0.04f, false);
@@ -61,6 +61,7 @@ void AFlameShotBullet::Tick(float _DeltaTime)
 			if (true == Collider->CollisionCheck(MT3CollisionOrder::Enemy, Result)
 				|| true == Collider->CollisionCheck(MT3CollisionOrder::Boss, Result))
 			{
+				UContentsHelper::Score += 100;
 				AEnemy* Enemy = dynamic_cast<AEnemy*>(Result[0]->GetOwner());
 				Enemy->Damaged(Damage);
 			}

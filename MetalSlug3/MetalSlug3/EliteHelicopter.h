@@ -33,6 +33,6 @@ protected:
 	bool IsShooting = false;
 	int Bullet = 3;
 
-	UEngineSoundPlayer Sound;
+	UEngineSoundPlayer PropellerSound;
 };
 

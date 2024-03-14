@@ -34,7 +34,7 @@ void ABullet::Tick(float _DeltaTime)
 		if (true == Collider->CollisionCheck(MT3CollisionOrder::Enemy, Result)
 			|| true == Collider->CollisionCheck(MT3CollisionOrder::Boss, Result))
 		{
-
+			UContentsHelper::Score += 100;
 			UEngineSound::SoundPlay("BulletHit.mp3");
 
 			AEnemy* Enemy = dynamic_cast<AEnemy*>(Result[0]->GetOwner());

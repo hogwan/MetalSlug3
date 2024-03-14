@@ -43,6 +43,7 @@ void AItem::Tick(float _DeltaTime)
 
 void AItem::Action()
 {
+	UContentsHelper::Score += 500;
 	if (!UContentsHelper::Player->IsZombie)
 	{
 		UContentsHelper::Player->UpperStateChange(UpperBodyState::None);

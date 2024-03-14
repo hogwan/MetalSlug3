@@ -91,7 +91,7 @@ void SpawnManager::BeginPlay()
 
 	AScoreUI* ScoreUI = GetWorld()->SpawnActor<AScoreUI>();
 	ScoreUI->SetActorLocation({ 190,47 });
-	UContentsHelper::Score = 1234567;
+	UContentsHelper::Score = 0;
 
 	ASlugEnergyBar* SlugEnergyBar = GetWorld()->SpawnActor<ASlugEnergyBar>();
 	SlugEnergyBar->SetActorLocation({ 120,67 });
@@ -966,6 +966,21 @@ void SpawnManager::Tick(float _DeltaTime)
 		MissionComplete* MC = GetWorld()->SpawnActor<MissionComplete>();
 
 		++SpawnNumber;
+	}
+
+	if (SpawnNumber == 39)
+	{
+		AccTime += _DeltaTime;
+		if (AccTime > 10.f)
+		{
+			AccTime = 0.f;
+			++SpawnNumber;
+		}
+	}
+
+	if (SpawnNumber == 40)
+	{
+		SpawnNumber++;
 	}
 }
 

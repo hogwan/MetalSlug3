@@ -55,5 +55,7 @@ protected:
 
 	float CharactorMaxSize = 800.f;
 	int MaxYPosition = 700;
+
+	bool Trigger = false;
 };
 

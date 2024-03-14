@@ -16,6 +16,7 @@ AHelicopter::~AHelicopter()
 	Explosion->SetSize(FVector{ 800,800 });
 
 	UEngineSound::SoundPlay("Destroy_2.mp3");
+	PropellerSound.Off();
 
 }
 
@@ -24,6 +25,8 @@ void AHelicopter::BeginPlay()
 {
 	AEnemy::BeginPlay();
 
+	PropellerSound = UEngineSound::SoundPlay("HelicopterPropeller.mp3");
+	PropellerSound.Loop();
 	Hp = 30;
 
 	Renderer = CreateImageRenderer(MT3RenderOrder::Enemy);
