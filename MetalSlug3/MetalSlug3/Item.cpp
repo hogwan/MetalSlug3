@@ -21,6 +21,8 @@ void AItem::BeginPlay()
 	Collider->SetPosition({ 0,-25 });
 	Collider->SetColType(ECollisionType::Rect);
 	Collider->ActiveOff();
+
+	Destroy(20.f);
 }
 
 void AItem::Tick(float _DeltaTime)
