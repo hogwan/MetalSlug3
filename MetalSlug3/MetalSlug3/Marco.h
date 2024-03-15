@@ -347,7 +347,7 @@ private:
 	void BulletSpawn(FVector _SpawnLocation, FVector _BulletDir);
 	void CameraUpdate(float _DeltaTime);
 	void AutoMove(float _DeltaTime);
-	void OutOfControl(float _DeltaTime);
+	bool OutOfControl(float _DeltaTime);
 	void ArmsCheck();
 
 };

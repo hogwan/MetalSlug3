@@ -95,7 +95,11 @@ void Marco::BeginPlay()
 void Marco::Tick(float _DeltaTime)
 {
 	CameraUpdate(_DeltaTime);
-	OutOfControl(_DeltaTime);
+	if (OutOfControl(_DeltaTime))
+	{
+		return;
+	}
+
 	ArmsCheck();
 
 	InAirCheck(_DeltaTime);
@@ -4532,7 +4536,7 @@ void Marco::AutoMove(float _DeltaTime)
 	}
 }
 
-void Marco::OutOfControl(float _DeltaTime)
+bool Marco::OutOfControl(float _DeltaTime)
 {
 	if (UContentsHelper::GameEnd)
 	{
@@ -4560,14 +4564,16 @@ void Marco::OutOfControl(float _DeltaTime)
 		std::string UpperAnimName = GunName + "AllBody_Ceremony";
 
 		Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(UpperAnimName, false, 0, 0.08f);
-		return;
+		return true;
 	}
 
 	if (IsAutoMove)
 	{
 		AutoMove(_DeltaTime);
-		return;
+		return true;
 	}
+
+	return false;
 }
 
 void Marco::ArmsCheck()
