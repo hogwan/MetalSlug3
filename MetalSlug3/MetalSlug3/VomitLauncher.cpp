@@ -26,7 +26,7 @@ void AVomitLauncher::BeginPlay()
 	if (UContentsHelper::Player->DirState == EActorDir::Right)
 	{
 		Renderer->CreateAnimation("Launch_Right", "Marco_VomitLaunchEffect.png", 0, 43, 0.03f, false);
-		InitialShootVector = { 12.f,10.f };
+		InitialShootVector = { 12.f,15.f };
 		LastShootVector = { 12.f,-37.f };
 		Renderer->ChangeAnimation("Launch_Right");
 
@@ -34,7 +34,7 @@ void AVomitLauncher::BeginPlay()
 	else if (UContentsHelper::Player->DirState == EActorDir::Left)
 	{
 		Renderer->CreateAnimation("Launch_Left", "Marco_VomitLaunchEffect.png", 50, 93, 0.03f, false);
-		InitialShootVector = { -12.f,10.f };
+		InitialShootVector = { -12.f,15.f };
 		LastShootVector = { -12.f,-37.f };
 		Renderer->ChangeAnimation("Launch_Left");
 	}
@@ -54,11 +54,11 @@ void AVomitLauncher::Tick(float _DeltaTime)
 	{
 		if (PlayerDir == EActorDir::Right)
 		{
-			ShootVector.RotationZToDeg(-120.f * _DeltaTime);
+			ShootVector.RotationZToDeg(-150.f * _DeltaTime);
 		}
 		else
 		{
-			ShootVector.RotationZToDeg(120.f * _DeltaTime);
+			ShootVector.RotationZToDeg(150.f * _DeltaTime);
 		}
 	}
 	else
