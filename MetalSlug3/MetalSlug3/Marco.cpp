@@ -4524,8 +4524,8 @@ void Marco::AutoMove(float _DeltaTime)
 
 			std::string AllAnimName = "Zombie_AllBody_Idle_Right";
 			std::string ZArmAnimName = "ZombieArm_Idle_Right";
-			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AllAnimName);
-			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ZArmAnimName);
+			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(AllAnimName);
+			Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(ZArmAnimName);
 		}
 
 		return;

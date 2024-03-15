@@ -33,12 +33,12 @@ protected:
 	float Gravity = 9.0f;
 
 	float AccTime = 0.0f;
-	float CoolTime = 0.03f;
+	float CoolTime = 0.04f;
 
 	void LaunchLogic();
 
 	bool IsEnd = false;
 
-	int Damage = 10;
+	int Damage = 15;
 };
 

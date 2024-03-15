@@ -64,6 +64,12 @@ void AVomitLauncher::Tick(float _DeltaTime)
 	else
 	{
 		IsEnd = true;
+
+		for (AZombieVomitProjectile* Projectile : VomitProjectiles)
+		{
+			Projectile->GetCollider()->ActiveOff();
+		}
+
 		if (PlayerDir == EActorDir::Right)
 		{
 			ShootVector.RotationZToDeg(25.f * _DeltaTime);
