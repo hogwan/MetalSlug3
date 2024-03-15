@@ -323,7 +323,7 @@ private:
 	float HeavyMachineGun_Shoot_AccTime = 0.0f;
 	float HeavyMachineGun_Shoot_CoolTime = 0.14f;
 	float FlameShot_Shoot_AccTime = 0.0f;
-	float FlameShot_Shoot_CoolTime = 0.35f;
+	float FlameShot_Shoot_CoolTime = 0.45f;
 	float RocketLauncher_Shoot_AccTime = 0.0f;
 	float RocketLauncher_Shoot_CoolTime = 0.3f;
 	float Throw_CoolTime = 0.1f;
