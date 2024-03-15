@@ -4498,6 +4498,39 @@ void Marco::AutoMove(float _DeltaTime)
 {
 	float TargetX = 13900.f;
 
+	if (IsZombie)
+	{
+		if (GetActorLocation().X > TargetX)
+		{
+			DirState = EActorDir::Left;
+			AddActorLocation(FVector::Left * Zombie_Speed * _DeltaTime);
+			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+			Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
+
+			std::string AllAnimName = "Zombie_AllBody_Move_Left";
+			std::string ZArmAnimName = "ZombieArm_Move_Left";
+			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ChangeAnimation(AllAnimName);
+			Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ChangeAnimation(ZArmAnimName);
+		}
+		else
+		{
+			DirState = EActorDir::Right;
+			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
+			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
+			Renderer[static_cast<int>(BodyRenderer::ZombieArm)]->ActiveOn();
+
+			std::string AllAnimName = "Zombie_AllBody_Idle_Right";
+			std::string ZArmAnimName = "ZombieArm_Idle_Right";
+			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ChangeAnimation(AllAnimName);
+			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ChangeAnimation(ZArmAnimName);
+		}
+
+		return;
+	}
+
 	std::string GunName = "None";
 	switch (GunType)
 	{
