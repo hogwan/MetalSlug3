@@ -201,12 +201,12 @@ void Marco::DeathCheck()
 		return;
 	}
 
-
-	if (NoHit) return;
+	if (NoHitOn) NoHit = true;
 
 	std::vector<UCollision*> Result;
 	if (IsZombie)
 	{
+		if (NoHit) return;
 		//if(좀비 DNA 피격 시) || (TrueDamaged)
 		if (
 			true == Collision->CollisionCheck(MT3CollisionOrder::ZombieProjectile, Result)
@@ -248,6 +248,7 @@ void Marco::DeathCheck()
 			true == Collision->CollisionCheck(MT3CollisionOrder::EnemyProjectile, Result)
 			)
 		{
+			if (NoHit) return;
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
@@ -266,6 +267,7 @@ void Marco::DeathCheck()
 			true == Collision->CollisionCheck(MT3CollisionOrder::EnemyKnife, Result)
 			)
 		{
+			if (NoHit) return;
 			Renderer[static_cast<int>(BodyRenderer::UpperBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::LowerBody)]->ActiveOff();
 			Renderer[static_cast<int>(BodyRenderer::AllBody)]->ActiveOn();
@@ -3595,7 +3597,7 @@ void Marco::AllDeathStart()
 
 void Marco::AllDeathInAirStart()
 {
-	UEngineSound::SoundPlay("Marco_Death");
+	UEngineSound::SoundPlay("Marco_Death.mp3");
 	//AddForce
 	ManipulateOff();
 	NoHit = true;

@@ -305,7 +305,8 @@ private:
 	bool IsCrouching = false;
 	bool CrouchShooting = false;
 	bool Manipulate = true;
-	bool NoHit = true;
+	bool NoHit = false;
+	bool NoHitOn = true;
 	bool IsVomitProjectileCol = false;
 
 	float* AccTime = nullptr;
