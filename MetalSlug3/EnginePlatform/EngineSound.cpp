@@ -4,10 +4,15 @@
 
 // lib를 사용하는법
 
+// 아예 사라져야 한다. 빌드가 되기 전에 아예 사라져야 한다.
+// 이때 보통 사용하는게 ifdef
 
-#ifdef _DEBUG    //DEBUG를 정의했다면
+
+#ifdef _DEBUG
+// Debug 일때는
 #pragma comment(lib, "fmodL_vc.lib")
-#else //DEBUG를 정의하지 않았다면
+#else
+// Release 일때는 
 #pragma comment(lib, "fmod_vc.lib")
 #endif
 
